@@ -47,3 +47,51 @@
 .modal-nav-main .nav-secondary .secondary-menu-link{padding:6px 0;font-size:16px;color:#404040}
 /* Footer de cuenta nativo oculto (usamos el secundario) */
 .modal-nav-main .modal-footer{display:none!important}
+
+
+/* ============================================================
+   MENU — Panel 2 (mega-menú hover, solo desktop)
+   El sub-panel nativo (.modal-nav-hamburger) viene anidado dentro
+   de .nav-item.item-with-subitems. Lo mostramos en hover al lado
+   del Panel 1 (drawer de 480px). Frágil por naturaleza (hackea el
+   drill-down por click nativo) — ver FORK-TODO.md.
+   ============================================================ */
+@media (min-width:768px){
+  /* que el sub-panel pueda verse fuera del drawer de 480 */
+  #nav-hamburger.modal-nav-main{overflow:visible}
+
+  /* Sub-panel: posicionado al lado, OCULTO por defecto.
+     El display:none!important pisa el display:none inline y también
+     el .modal-visible que agrega el click nativo. */
+  .modal-nav-main .nav-item.item-with-subitems>.modal.modal-nav-hamburger{
+    display:none!important;
+    position:absolute;left:480px;top:0;right:auto;bottom:auto;
+    width:480px;max-width:480px;height:100%;max-height:100%;
+    transform:none!important;margin:0;border-radius:0;
+    background:#fff;box-shadow:8px 0 24px rgba(0,0,0,.06);z-index:1;
+  }
+  /* Mostrar cuando se hace hover en el padre (Hombre/Mujer/Teens) */
+  .modal-nav-main .nav-item.item-with-subitems:hover>.modal.modal-nav-hamburger{
+    display:block!important;
+  }
+  /* Puente invisible: cubre el gap padre→panel para no perder el hover */
+  .modal-nav-main .nav-item.item-with-subitems>.modal.modal-nav-hamburger::before{
+    content:"";position:absolute;left:-40px;top:0;width:40px;height:100%;
+  }
+  /* Padre activo: subrayado (como en Figma) */
+  .modal-nav-main .nav-item.item-with-subitems:hover>.nav-list-link{
+    text-decoration:underline;text-underline-offset:4px;
+  }
+  /* Header nativo del sub-panel (atrás/título/cerrar): oculto */
+  .modal-nav-main .nav-item.item-with-subitems>.modal .modal-header{display:none}
+  /* Cuerpo del sub-panel */
+  .modal-nav-main .nav-item.item-with-subitems>.modal .nav-hamburger-body{
+    height:100%;overflow-y:auto;padding:100px 32px 32px;
+  }
+  /* Títulos "New Arrivals" + "Colecciones" (no existen en el nativo) */
+  .modal-nav-main .nav-item.item-with-subitems>.modal .nav-hamburger-body::before{
+    content:"New Arrivals\A\A Colecciones";white-space:pre;display:block;
+    font-family:"Lato",sans-serif;font-weight:700;font-size:16px;line-height:1.3;
+    color:#000;margin-bottom:18px;
+  }
+}
