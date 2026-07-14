@@ -16,9 +16,10 @@
    Panel 1 (480px). Estructura de menu FIJA (ver FORK-TODO.md).
    ============================================================ */
 @media (min-width:768px){
-  /* Drawer izquierdo de 480px, alto completo (desktop) */
-  #nav-hamburger.modal-nav-main{top:0;bottom:0;left:-480px;right:auto;width:480px;max-width:480px;height:100%;max-height:100%;transform:none;border-radius:0}
-  #nav-hamburger.modal-nav-main.modal-visible{left:0;right:auto;transform:none}
+  /* Drawer izquierdo de 480px, alto completo (desktop).
+     El contenedor real es .modal-nav-main.modal-nav-hamburger (sin id). */
+  .modal-nav-main.modal-nav-hamburger{top:0!important;bottom:0!important;left:-480px!important;right:auto!important;width:480px!important;max-width:480px!important;height:100%!important;max-height:100%!important;transform:none!important;border-radius:0!important}
+  .modal-nav-main.modal-nav-hamburger.modal-visible{left:0!important;right:auto!important;transform:none!important}
 }
 /* Overlay 50% negro */
 .modal-overlay[data-target="#nav-hamburger"]{background-color:rgba(0,0,0,0.5)}
@@ -30,8 +31,11 @@
 /* Contenido */
 .modal-nav-main>.modal-body{display:block;padding:16px 32px 24px}
 /* Items base: Lato 16px, filas compactas */
-.modal-nav-main .nav-list-link{min-height:0;padding:6px 0;font-family:"Lato",sans-serif;font-size:16px;font-weight:400;line-height:1.3;color:#000}
-.modal-nav-main .nav-item{margin:0}
+.modal-nav-main .nav-list-link{min-height:0;padding:6px 0;font-family:"Lato",sans-serif;font-size:16px;font-weight:400;line-height:1.3;color:#000;text-transform:none}
+.modal-nav-main .nav-item{margin:0;display:block;width:100%}
+/* Override del layout nativo mega-menu en el sub-panel (horizontal/uppercase/56px/lineas) */
+.modal-nav-main .modal-nav-hamburger .nav-item{display:block!important;width:100%!important;border:none!important;padding:0!important;margin:0!important}
+.modal-nav-main .modal-nav-hamburger .nav-list-link{display:block!important;min-height:0!important;padding:6px 0!important;font-family:"Lato",sans-serif!important;font-size:16px!important;font-weight:400!important;line-height:1.3!important;text-transform:none!important;grid-template-columns:none!important;border:none!important;margin-bottom:0!important}
 .modal-nav-main .nav-list-arrow{color:#000;font-size:16px}
 /* Item 1 = badge "Hasta 30% OFF" (pill negro) */
 .modal-nav-main .nav-list>.nav-item:first-child{margin-bottom:6px}
@@ -58,7 +62,7 @@
    ============================================================ */
 @media (min-width:768px){
   /* que el sub-panel pueda verse fuera del drawer de 480 */
-  #nav-hamburger.modal-nav-main{overflow:visible}
+  .modal-nav-main.modal-nav-hamburger{overflow:visible!important}
 
   /* Sub-panel: posicionado al lado, OCULTO por defecto.
      El display:none!important pisa el display:none inline y también
