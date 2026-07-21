@@ -168,7 +168,16 @@
 /* color/agregar lo inyecta LS.fillQuickshop (.btn-variant, etc.).     */
 /* ================================================================== */
 /* Ancho del panel (Figma ~711px) */
-#quickshop-modal.modal-md-width-large{width:min(760px,calc(100vw - 32px));max-width:760px}
+/* Panel docked a la DERECHA, full-height (Figma: sale de la derecha, no centrado) */
+@media (min-width:768px){
+  #quickshop-modal.modal{
+    top:0!important;right:0!important;bottom:0!important;left:auto!important;
+    width:711px!important;max-width:calc(100vw - 48px)!important;
+    height:100vh!important;max-height:100vh!important;
+    margin:0!important;border-radius:0!important;transform:none!important;
+  }
+  #quickshop-modal .modal-body{max-height:calc(100vh - 56px);overflow-y:auto}
+}
 #quickshop-modal .modal-body{padding:24px}
 #quickshop-modal .js-quickshop-container .grid-md-2{gap:24px;align-items:start}
 #quickshop-modal .quickshop-image-container{border-radius:8px;overflow:hidden}
@@ -210,3 +219,7 @@
 
 /* CTA agregar al carrito: pill negra full-width */
 #quickshop-modal .js-addtocart{border-radius:50px!important;height:44px;min-height:44px;width:100%;background:#000!important;color:#fff!important;border:0!important;font:400 14px/1 "Lato",sans-serif}
+/* Sacar selector de cantidad + stock; CTA a todo el ancho */
+#quickshop-modal .form-quantity-container{display:none!important}
+#quickshop-modal .quickshop-actions{display:block!important}
+#quickshop-modal .buy-button-container{width:100%}
