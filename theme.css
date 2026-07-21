@@ -99,3 +99,27 @@
     color:#000;margin-bottom:18px;
   }
 }
+
+/* ================================================================== */
+/* COLOR PICKER de la card de producto (grilla)                       */
+/* Swatches inyectados por color-picker.js. Producto-color relacionados */
+/* por SKU-5 vía color-map.json. Círculo sólido, activo = producto actual. */
+/* ================================================================== */
+.kv-swatches{
+  display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:10px;
+}
+.kv-swatch{
+  width:14px;height:14px;border-radius:50%;display:block;text-decoration:none;
+  background:var(--kv-swatch-color,#ccc);
+  box-shadow:inset 0 0 0 1px rgba(0,0,0,.15);
+  cursor:pointer;transition:transform .12s ease;
+}
+.kv-swatch:hover{transform:scale(1.15)}
+.kv-swatch.is-active{
+  box-shadow:inset 0 0 0 1px rgba(0,0,0,.15),0 0 0 1px #fff,0 0 0 2px #000;
+  cursor:default;
+}
+.kv-swatch.is-active:hover{transform:none}
+
+/* Ocultar el contenedor del code-block que sólo carga el loader del JS */
+.section-custom-container:has(#kv-cp-loader){display:none!important}
