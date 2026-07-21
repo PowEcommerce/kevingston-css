@@ -139,3 +139,24 @@
 /* ================================================================== */
 .section-footer .footer-menu-title{font-size:14px}
 .section-footer .footer-menu-list{font-size:14px}
+
+/* ================================================================== */
+/* COMPRA RÁPIDA (quick_shop) — botón "+" en la fila del nombre       */
+/* Transforma el botón nativo "Comprar" en el "+" redondo del Figma   */
+/* (node 959-17367 / modal 2649-26523). Abre el #quickshop-modal.     */
+/* ================================================================== */
+.js-item-product .product-item-information{position:relative}
+.js-item-product .product-item-name{padding-right:38px}
+.js-item-product .product-item-quick-shop-container{
+  position:absolute;top:8px;right:8px;margin:0;width:auto;z-index:2;
+}
+.js-item-product .product-item-quick-shop-container .btn{
+  width:32px;height:32px;min-height:0;padding:0;line-height:0;font-size:0;
+  border:0!important;border-radius:50%!important;box-shadow:none!important;
+  color:transparent!important;
+  background:rgba(233,231,226,.5) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round'%3E%3Cpath d='M7 2v10M2 7h10'/%3E%3C/svg%3E") no-repeat center !important;
+  background-size:14px 14px;
+}
+.js-item-product .product-item-quick-shop-container .btn:hover{
+  background-color:rgba(233,231,226,.85)!important;
+}
