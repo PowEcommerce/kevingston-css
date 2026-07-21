@@ -160,3 +160,53 @@
 .js-item-product .product-item-quick-shop-container .btn:hover{
   background-color:rgba(233,231,226,.85)!important;
 }
+
+/* ================================================================== */
+/* QUICK SHOP MODAL — maqueta según Figma (node 2649-26532)           */
+/* Estructura nativa: #quickshop-modal .modal-body .js-quickshop-      */
+/* container .grid-md-2 [imagen | .quickshop-details]. Form de talle/  */
+/* color/agregar lo inyecta LS.fillQuickshop (.btn-variant, etc.).     */
+/* ================================================================== */
+/* Ancho del panel (Figma ~711px) */
+#quickshop-modal.modal-md-width-large{width:min(760px,calc(100vw - 32px));max-width:760px}
+#quickshop-modal .modal-body{padding:24px}
+#quickshop-modal .js-quickshop-container .grid-md-2{gap:24px;align-items:start}
+#quickshop-modal .quickshop-image-container{border-radius:8px;overflow:hidden}
+
+/* Panel derecho: ritmo vertical 24px */
+#quickshop-modal .quickshop-details{display:flex;flex-direction:column;gap:24px}
+
+/* Nombre */
+#quickshop-modal .quickshop-name{font:400 28px/1.15 "Lato",sans-serif;color:#000;margin:0}
+
+/* Precio (compare gris tachado + actual, en fila) */
+#quickshop-modal .quickshop-price-container{display:flex;flex-direction:row;align-items:center;gap:12px;margin:8px 0 0}
+#quickshop-modal .price-compare{font-size:20px;color:#6d6d6d;text-decoration:line-through}
+#quickshop-modal .quickshop-price-row{margin:0}
+#quickshop-modal .quickshop-price{font-size:20px;color:#000;font-weight:400}
+/* Precio en rojo cuando hay precio tachado visible (descuento) */
+#quickshop-modal .quickshop-price-container:has(.price-compare:not(:empty)) .quickshop-price{color:#be0000}
+
+/* Contenedor de variantes: apilar (Color y Talle full-width) */
+#quickshop-modal .js-product-variants{display:flex;flex-direction:column;gap:16px}
+#quickshop-modal .js-product-variants-group{margin:0}
+#quickshop-modal .form-label{font:400 14px/1.3 "Lato",sans-serif;color:#000;margin:0 0 12px;display:block}
+
+/* Botones de TALLE (32x32, borde #737373, seleccionado negro) */
+#quickshop-modal .btn-variant:not(.btn-variant-color){
+  min-width:32px;width:32px;height:32px;padding:0;border-radius:4px;
+  border:1px solid #737373;background:transparent;color:#000;
+  display:inline-flex;align-items:center;justify-content:center;
+  font:400 12px/1 "Lato",sans-serif;
+}
+#quickshop-modal .btn-variant:not(.btn-variant-color) .btn-variant-content{background:none!important;border:0!important;width:auto;height:auto;color:inherit}
+#quickshop-modal .btn-variant:not(.btn-variant-color).selected{background:#000;border-color:#000;color:#fff}
+#quickshop-modal .btn-variant:not(.btn-variant-color).selected .btn-variant-content{color:#fff}
+
+/* Botones de COLOR (54x54 imagen radio 4px; Fase 2 completa los hermanos) */
+#quickshop-modal .btn-variant-color{width:54px;height:54px;padding:0;border-radius:4px;overflow:hidden;border:1px solid transparent}
+#quickshop-modal .btn-variant-color.selected{border-color:#000}
+#quickshop-modal .btn-variant-color .btn-variant-content{width:54px;height:54px;border-radius:4px;background-size:cover;background-position:center}
+
+/* CTA agregar al carrito: pill negra full-width */
+#quickshop-modal .js-addtocart{border-radius:50px!important;height:44px;min-height:44px;width:100%;background:#000!important;color:#fff!important;border:0!important;font:400 14px/1 "Lato",sans-serif}
