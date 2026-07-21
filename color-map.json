@@ -1,15 +1,20 @@
 {
-  "_readme": "Mapa de colores del color picker de Kevingston. Agrupa productos-color por los primeros 5 digitos del SKU. Cada grupo (sku5) lista sus productos hermanos. 'id' = product.id de Tiendanube (el mismo que sale en data-product-id de la card). 'url' = product.url (relativa o absoluta). 'color' = hex del swatch. 'name' = nombre del color (tooltip). Grupos con 1 solo item se ignoran. Editar => git push => visible en ~10 min (o bumpear ?v=N en el <script src> del theme).",
+  "_readme": "Generado por tools/gen-color-map.js. 'color' (hex) sale del diccionario tools/color-names.json; null = falta definir.",
   "version": 1,
   "groups": {
-    "12345": [
-      { "id": 111111111, "url": "/remera-basica-azul", "color": "#1B3A6B", "name": "Azul" },
-      { "id": 222222222, "url": "/remera-basica-roja", "color": "#B12A2A", "name": "Rojo" },
-      { "id": 333333333, "url": "/remera-basica-negra", "color": "#111111", "name": "Negro" }
-    ],
-    "67890": [
-      { "id": 444444444, "url": "/buzo-capucha-gris", "color": "#8A8D91", "name": "Gris" },
-      { "id": 555555555, "url": "/buzo-capucha-verde", "color": "#2E5D3B", "name": "Verde" }
+    "054A3": [
+      {
+        "id": 352299314,
+        "url": "/productos/campera-fighter-test-1luks/",
+        "color": "#1B2A4A",
+        "name": "Azul marino"
+      },
+      {
+        "id": 352299895,
+        "url": "/productos/campera-fighter-test-1bivi/",
+        "color": "#D8C6A8",
+        "name": "Beige"
+      }
     ]
   }
 }

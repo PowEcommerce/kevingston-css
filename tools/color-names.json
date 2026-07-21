@@ -1,0 +1,55 @@
+{
+  "_readme": "Diccionario nombre-de-color -> hex para el color picker. Claves case-insensitive (el generador normaliza a minúsculas). Ajustar los hex contra la paleta real de Figma antes del launch.",
+
+  "negro": "#111111",
+  "blanco": "#FFFFFF",
+  "crudo": "#EFE7D6",
+  "hueso": "#EDE6D6",
+  "gris": "#8A8D91",
+  "gris melange": "#B5B5B5",
+  "gris jaspe": "#B5B5B5",
+  "gris topo": "#8B8178",
+  "gris oscuro": "#4A4A4A",
+  "gris claro": "#C9CBCE",
+  "plomo": "#5A5E63",
+
+  "azul": "#2A4B8D",
+  "azul marino": "#1B2A4A",
+  "azul francia": "#2A5CAA",
+  "celeste": "#7FB2D9",
+  "petroleo": "#1F4E5F",
+  "petróleo": "#1F4E5F",
+
+  "rojo": "#B12A2A",
+  "bordo": "#5E1A24",
+  "bordó": "#5E1A24",
+  "vino": "#5E1A24",
+  "teja": "#B5533B",
+  "coral": "#E2705A",
+
+  "verde": "#2E5D3B",
+  "verde militar": "#4B5320",
+  "verde oliva": "#6B6B3A",
+  "verde ingles": "#1E4231",
+  "verde inglés": "#1E4231",
+  "kaki": "#A39264",
+  "caqui": "#A39264",
+
+  "beige": "#D8C6A8",
+  "arena": "#D8C6A8",
+  "camel": "#C19A6B",
+  "marron": "#6B4A2B",
+  "marrón": "#6B4A2B",
+  "chocolate": "#4A2F21",
+  "tabaco": "#7A4B27",
+
+  "mostaza": "#C9A227",
+  "amarillo": "#F2C12E",
+  "naranja": "#E2621B",
+  "ocre": "#C48A2C",
+
+  "rosa": "#E8A0B4",
+  "fucsia": "#C2286E",
+  "violeta": "#6A4C93",
+  "lila": "#B39DDB"
+}
