@@ -262,3 +262,6 @@
     overflow-y:auto!important;overflow-x:hidden!important;align-self:start;
   }
 }
+
+/* Quick shop modal: Color ANTES que Talle (como el Figma) */
+#quickshop-modal .js-color-variants-container{order:-1}
