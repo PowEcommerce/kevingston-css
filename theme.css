@@ -131,3 +131,11 @@
 
 /* Ocultar el contenedor del code-block que sólo carga el loader del JS */
 .section-custom-container:has(#kv-cp-loader){display:none!important}
+
+/* ================================================================== */
+/* FOOTER — re-fijar tamaños tras font_rest_size 12→14                 */
+/* El footer hereda --font-medium (=rest+2), que pasó de 14 a 16px.    */
+/* El menú del footer (título + links) vuelve a 14px como estaba.      */
+/* ================================================================== */
+.section-footer .footer-menu-title{font-size:14px}
+.section-footer .footer-menu-list{font-size:14px}
