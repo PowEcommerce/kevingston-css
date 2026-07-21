@@ -105,8 +105,12 @@
 /* Swatches inyectados por color-picker.js. Producto-color relacionados */
 /* por SKU-5 vía color-map.json. Círculo sólido, activo = producto actual. */
 /* ================================================================== */
+/* La grilla nativa de colores (item-colors.tpl) queda vacía en el modelo
+   por-SKU (cada color es un producto aparte): se oculta para no meter espacio
+   fantasma debajo del precio/cuotas. Nuestros swatches la reemplazan. */
+.js-item-product .product-item-colors-container{display:none!important}
 .kv-swatches{
-  display:flex;align-items:center;gap:6px;margin-top:4px;
+  display:flex;align-items:center;gap:6px;margin-top:0;
 }
 .kv-swatch{
   width:16px;height:16px;border-radius:50%;flex:none;display:block;text-decoration:none;
