@@ -219,6 +219,62 @@
       group.appendChild(row);
     }
 
+    // Cuotas (copiadas de la card) + precio sin impuestos (fetch al PDP).
+    // El modal nativo no trae ninguno de los dos.
+    var pdpCache = {};
+    function renderInfo(pid) {
+      var details = container.querySelector(".quickshop-details");
+      var priceC = container.querySelector(".quickshop-price-container");
+      if (!details || !priceC) return;
+
+      var prev = details.querySelector(".kv-modal-info");
+      if (prev) prev.parentNode.removeChild(prev);
+
+      var info = document.createElement("div");
+      info.className = "kv-modal-info";
+
+      var card = document.querySelector('.js-item-product[data-product-id="' + pid + '"]');
+
+      // Cuotas: texto de la card, reformateado "N cuotas sin interés de $X"
+      var inst = card && card.querySelector(".product-item-installments");
+      var instText = inst && inst.textContent.trim().replace(/\s+/g, " ");
+      if (instText) {
+        var m = instText.match(/(\d+)\s*x\s*(\$[\d.,]+)/i);
+        var p1 = document.createElement("p");
+        p1.className = "kv-modal-cuotas";
+        p1.textContent = m ? (m[1] + " cuotas sin interés de " + m[2]) : instText;
+        info.appendChild(p1);
+      }
+
+      priceC.parentNode.insertBefore(info, priceC.nextSibling);
+
+      // Precio sin impuestos: desde el PDP (solo si el producto lo tiene)
+      var link = card && card.querySelector("a.product-item-link");
+      var url = link && link.getAttribute("href");
+      if (!url) return;
+
+      var apply = function (text) {
+        if (text && !info.querySelector(".kv-modal-notax")) {
+          var p2 = document.createElement("p");
+          p2.className = "kv-modal-notax";
+          p2.textContent = text;
+          info.appendChild(p2);
+        }
+      };
+      if (pdpCache[url] !== undefined) { apply(pdpCache[url]); return; }
+      fetch(url, { credentials: "same-origin" })
+        .then(function (r) { return r.ok ? r.text() : null; })
+        .then(function (html) {
+          if (!html) return;
+          var doc = new DOMParser().parseFromString(html, "text/html");
+          var nt = doc.querySelector(".price-without-taxes-container");
+          var txt = nt ? nt.textContent.trim().replace(/\s+/g, " ") : "";
+          pdpCache[url] = txt;
+          apply(txt);
+        })
+        .catch(function () {});
+    }
+
     function render() {
       var pid = container.getAttribute("data-product-id");
       if (!pid) return;
@@ -226,6 +282,7 @@
       container.setAttribute("data-kv-modal", pid);
       renderGallery(pid);
       renderColors(pid);
+      renderInfo(pid);
     }
 
     if ("MutationObserver" in window) {

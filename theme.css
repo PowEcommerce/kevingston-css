@@ -314,3 +314,8 @@
   /* Info con su propio padding */
   #quickshop-modal .quickshop-details{padding:24px!important;height:100vh!important;overflow-y:auto}
 }
+
+/* Quick shop modal: cuotas + precio sin impuestos (inyectados por JS) */
+#quickshop-modal .kv-modal-info{display:flex;flex-direction:column;gap:8px;margin:0}
+#quickshop-modal .kv-modal-cuotas{font:400 12px/normal "Lato",sans-serif;color:#000;margin:0}
+#quickshop-modal .kv-modal-notax{font:400 10px/normal "Lato",sans-serif;color:#8f8f8f;margin:0}
