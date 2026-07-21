@@ -223,3 +223,29 @@
 #quickshop-modal .form-quantity-container{display:none!important}
 #quickshop-modal .quickshop-actions{display:block!important}
 #quickshop-modal .buy-button-container{width:100%}
+
+/* ================================================================== */
+/* QUICK SHOP MODAL — overrides forzados (fix ancho/tamaños)          */
+/* Base gana por padding/especificidad -> !important + box-sizing.    */
+/* ================================================================== */
+#quickshop-modal *{box-sizing:border-box}
+@media (min-width:768px){
+  #quickshop-modal.modal{width:711px!important;min-width:711px!important;max-width:711px!important}
+  #quickshop-modal .js-quickshop-container .grid-md-2{grid-template-columns:340px 1fr!important;gap:24px!important}
+  #quickshop-modal .quickshop-image-container{width:340px!important;max-width:340px!important}
+}
+#quickshop-modal .quickshop-image{width:100%!important;height:auto!important;border-radius:8px}
+/* Nombre */
+#quickshop-modal .quickshop-name{font-size:24px!important;line-height:1.15!important;font-weight:400!important}
+/* Precio */
+#quickshop-modal .price-compare{font-size:18px!important}
+#quickshop-modal .quickshop-price{font-size:18px!important}
+/* Talles 32x32 reales */
+#quickshop-modal .btn-variant:not(.btn-variant-color){
+  width:32px!important;height:32px!important;min-width:32px!important;min-height:0!important;
+  padding:0!important;font-size:12px!important;display:inline-flex!important;align-items:center;justify-content:center;
+}
+#quickshop-modal .btn-variant:not(.btn-variant-color) .btn-variant-content{width:auto!important;height:auto!important;padding:0!important;background:none!important;border:0!important}
+/* Color swatch 54x54 */
+#quickshop-modal .btn-variant-color{width:54px!important;height:54px!important;min-width:0!important;padding:0!important}
+#quickshop-modal .btn-variant-color .btn-variant-content{width:100%!important;height:100%!important;border-radius:4px}
