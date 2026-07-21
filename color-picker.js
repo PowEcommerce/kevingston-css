@@ -54,17 +54,32 @@
     var entry = byId[pid];
     if (!entry) return; // producto sin grupo => nada que mostrar
 
+    var sibs = entry.siblings || [];
+    if (sibs.length < 2) return;
+
     card.setAttribute(DONE_ATTR, "1");
+
+    // El swatch del producto actual (seleccionado) va SIEMPRE primero; el resto
+    // en su orden original. Se muestran como máximo MAX; el resto va como "+N".
+    var selected = null;
+    var rest = [];
+    sibs.forEach(function (s) {
+      if (String(s.id) === pid) selected = s; else rest.push(s);
+    });
+    var ordered = (selected ? [selected] : []).concat(rest);
+
+    var MAX = 3;
+    var shown = ordered.slice(0, MAX);
+    var remaining = ordered.length - shown.length;
 
     var list = document.createElement("div");
     list.className = "kv-swatches";
 
-    entry.siblings.forEach(function (sib) {
-      if (!sib || sib.color == null) return;
+    shown.forEach(function (sib) {
       var isActive = String(sib.id) === pid;
       var dot = document.createElement("a");
       dot.className = "kv-swatch" + (isActive ? " is-active" : "");
-      dot.style.setProperty("--kv-swatch-color", sib.color);
+      if (sib.color) dot.style.setProperty("--kv-swatch-color", sib.color);
       dot.setAttribute("title", sib.name || "");
       dot.setAttribute("aria-label", sib.name || "");
       if (isActive) {
@@ -76,6 +91,14 @@
       }
       list.appendChild(dot);
     });
+
+    // Contador "+N" de colores restantes (igual que en Figma)
+    if (remaining > 0) {
+      var more = document.createElement("span");
+      more.className = "kv-swatch-more";
+      more.textContent = "+" + remaining;
+      list.appendChild(more);
+    }
 
     if (!list.children.length) return;
 
