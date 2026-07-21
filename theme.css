@@ -295,3 +295,22 @@
 #quickshop-modal .kv-modal-swatches{margin-top:0!important;gap:16px!important}
 /* Opciones ↔ CTA = 24px */
 #quickshop-modal .quickshop-actions{margin-top:24px!important}
+
+/* ================================================================== */
+/* QUICK SHOP MODAL — galería full-height, flush-left, sin radio/gap  */
+/* ================================================================== */
+.kv-gallery{gap:0!important}
+.kv-gallery-img{border-radius:0!important}
+@media (min-width:768px){
+  /* Cerrar flota arriba a la derecha (no ocupa alto) */
+  #quickshop-modal .modal-header{position:absolute!important;top:0;right:0;left:auto;z-index:5;width:auto;margin:0;padding:16px!important;background:none!important}
+  /* Body sin padding, full-height */
+  #quickshop-modal .modal-body{padding:0!important;height:100vh!important;max-height:100vh!important;overflow:hidden!important}
+  #quickshop-modal .js-quickshop-container,
+  #quickshop-modal .js-quickshop-container>.grid-md-2{height:100vh!important}
+  #quickshop-modal .js-quickshop-container .grid-md-2{grid-template-columns:347px 1fr!important;gap:0!important;align-items:stretch!important}
+  /* Imagen: flush left, full-height, scroll, sin radio ni padding */
+  #quickshop-modal .quickshop-image-container{width:347px!important;max-width:347px!important;height:100vh!important;max-height:100vh!important;overflow-y:auto!important;border-radius:0!important;padding:0!important}
+  /* Info con su propio padding */
+  #quickshop-modal .quickshop-details{padding:24px!important;height:100vh!important;overflow-y:auto}
+}
