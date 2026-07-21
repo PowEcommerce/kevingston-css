@@ -152,8 +152,13 @@ async function generate() {
   const dict = loadColorDict();
   const products = await fetchAllProducts(store, token);
   const groups = {};
+  const imagesMap = {}; // productId -> [src, ...] (TODOS los productos con fotos)
   let skipped = 0;
   for (const p of products) {
+    if (Array.isArray(p.images) && p.images.length) {
+      const srcs = p.images.map((im) => im && im.src).filter(Boolean);
+      if (srcs.length) imagesMap[p.id] = srcs;
+    }
     const sku = productSku(p);
     if (!sku || sku.length < 5) { skipped++; continue; }
     const sku5 = sku.slice(0, 5);
@@ -179,6 +184,16 @@ async function generate() {
   fs.writeFileSync(OUT, JSON.stringify(out, null, 2) + "\n");
   console.log(`Productos: ${products.length} | sin SKU válido: ${skipped} | grupos multi-color: ${Object.keys(finalGroups).length} | items en grupos: ${kept}`);
   console.log(`Escrito: ${OUT}`);
+
+  // Mapa de imágenes para el slider vertical del quick-shop modal
+  const OUT_IMAGES = path.join(__dirname, "..", "product-images.json");
+  const imgOut = {
+    _readme: "Generado por tools/gen-color-map.js. productId -> [urls de imágenes]. Lo usa el slider vertical del quick-shop modal.",
+    version: 1,
+    images: imagesMap,
+  };
+  fs.writeFileSync(OUT_IMAGES, JSON.stringify(imgOut, null, 2) + "\n");
+  console.log(`Escrito: ${OUT_IMAGES} (${Object.keys(imagesMap).length} productos con fotos)`);
 
   // Reporte de colores distintos (para armar/completar el diccionario)
   const items = Object.values(finalGroups).flat();

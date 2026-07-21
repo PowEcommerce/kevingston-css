@@ -249,3 +249,16 @@
 /* Color swatch 54x54 */
 #quickshop-modal .btn-variant-color{width:54px!important;height:54px!important;min-width:0!important;padding:0!important}
 #quickshop-modal .btn-variant-color .btn-variant-content{width:100%!important;height:100%!important;border-radius:4px}
+
+/* ================================================================== */
+/* QUICK SHOP MODAL — slider vertical de imágenes (Parte A)           */
+/* Galería inyectada por color-picker.js (product-images.json).       */
+/* ================================================================== */
+.kv-gallery{display:flex;flex-direction:column;gap:8px}
+.kv-gallery-img{width:100%;height:auto;display:block;border-radius:8px}
+@media (min-width:768px){
+  #quickshop-modal .quickshop-image-container{
+    height:calc(100vh - 96px)!important;max-height:calc(100vh - 96px)!important;
+    overflow-y:auto!important;overflow-x:hidden!important;align-self:start;
+  }
+}

@@ -142,6 +142,56 @@
   }
 
   /* ------------------------------------------------------------------ */
+  /* Quick-shop modal: slider vertical de TODAS las imágenes del producto */
+  /* Datos: product-images.json (productId -> [urls]). El modal nativo    */
+  /* trae 1 sola imagen; se oculta y se apilan todas en scroll vertical.  */
+  /* ------------------------------------------------------------------ */
+  var IMAGES_URL = "https://powecommerce.github.io/kevingston-css/product-images.json";
+
+  function setupQuickshopGallery(imagesMap) {
+    var container = document.querySelector("#quickshop-modal .js-quickshop-container");
+    if (!container) return;
+
+    function render() {
+      var pid = container.getAttribute("data-product-id");
+      if (!pid) return;
+      if (container.getAttribute("data-kv-gallery") === pid) return; // ya hecho
+      var imgs = imagesMap[pid];
+      var wrap = container.querySelector(".quickshop-image-container");
+      if (!wrap || !imgs || !imgs.length) return;
+      container.setAttribute("data-kv-gallery", pid);
+
+      // Ocultar la imagen nativa (LS.fillQuickshop la sigue actualizando, oculta)
+      var native = wrap.querySelector(".js-quickshop-image-padding") ||
+                   wrap.querySelector(".js-quickshop-img");
+      if (native) native.style.display = "none";
+
+      var prev = wrap.querySelector(".kv-gallery");
+      if (prev) prev.parentNode.removeChild(prev);
+
+      var gallery = document.createElement("div");
+      gallery.className = "kv-gallery";
+      imgs.forEach(function (src) {
+        var im = document.createElement("img");
+        im.className = "kv-gallery-img";
+        im.loading = "lazy";
+        im.alt = "";
+        im.src = src;
+        gallery.appendChild(im);
+      });
+      wrap.appendChild(gallery);
+    }
+
+    if ("MutationObserver" in window) {
+      new MutationObserver(render).observe(container, {
+        attributes: true,
+        attributeFilter: ["data-product-id"],
+      });
+    }
+    render();
+  }
+
+  /* ------------------------------------------------------------------ */
   /* Init                                                                */
   /* ------------------------------------------------------------------ */
   function init() {
@@ -154,6 +204,13 @@
         observe();
       })
       .catch(function () { /* silencioso: sin mapa, no hay swatches */ });
+
+    fetch(IMAGES_URL, { cache: "no-cache" })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (data) {
+        if (data && data.images) setupQuickshopGallery(data.images);
+      })
+      .catch(function () { /* silencioso: sin mapa de imágenes, queda la nativa */ });
   }
 
   if (document.readyState === "loading") {

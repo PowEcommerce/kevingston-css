@@ -1,0 +1,28 @@
+{
+  "_readme": "Generado por tools/gen-color-map.js. productId -> [urls de imágenes]. Lo usa el slider vertical del quick-shop modal.",
+  "version": 1,
+  "images": {
+    "352299314": [
+      "https://dcdn-us.mitiendanube.com/stores/007/669/516/products/054a3011_3-fighter-campera-azul-nuevo-kvn-hombres-b4c2576c345fd9849e17823242381967-1024-1024.jpg",
+      "https://dcdn-us.mitiendanube.com/stores/007/669/516/products/054a3011_2-fighter-campera-azul-nuevo-kvn-hombres-969621696613988a3517823242379267-1024-1024.jpg",
+      "https://dcdn-us.mitiendanube.com/stores/007/669/516/products/054a3011_1-fighter-campera-azul-nuevo-kvn-hombres-29cf342a48c9e6cc9917823242376640-1024-1024.jpg"
+    ],
+    "352299895": [
+      "https://dcdn-us.mitiendanube.com/stores/007/669/516/products/054a3079_3-campera-fighter-beige-lisas-nueva-8ed19aed4174274b7117823245015190-1024-1024.jpg",
+      "https://dcdn-us.mitiendanube.com/stores/007/669/516/products/054a3079_2-campera-fighter-beige-lisa-nueva-8338f3d8e2fe8e48cd17823245016596-1024-1024.jpg",
+      "https://dcdn-us.mitiendanube.com/stores/007/669/516/products/054a3079_1-campera-fighter-beige-lisa-nueva-3ef6998aa53b97a34917823245013288-1024-1024.jpg"
+    ],
+    "352300439": [
+      "https://dcdn-us.mitiendanube.com/stores/007/669/516/products/053c0077_3-campera-himalaya-z-marron-nuevo-hombres-eab3343cd6ba12e45417823245908404-1024-1024.jpg",
+      "https://dcdn-us.mitiendanube.com/stores/007/669/516/products/053c0077_2-campera-himalaya-marron-z-nuevo-hombres-67aa9eb809c7f6520217823245909244-1024-1024.jpg",
+      "https://dcdn-us.mitiendanube.com/stores/007/669/516/products/053c0077_1-campera-himalaya-z-marron-nuevo-hombres-4669f34b28f443326717823245907859-1024-1024.jpg"
+    ],
+    "355535710": [
+      "https://dcdn-us.mitiendanube.com/stores/007/669/516/products/054a8002_5-7b7c4f13419755c5c117840507426365-1024-1024.webp",
+      "https://dcdn-us.mitiendanube.com/stores/007/669/516/products/054a8002_4-38f0eeb6dc6f24ffef17840507426171-1024-1024.webp",
+      "https://dcdn-us.mitiendanube.com/stores/007/669/516/products/054a8002_3-c79e1e5b7fb50f774c17840507428016-1024-1024.webp",
+      "https://dcdn-us.mitiendanube.com/stores/007/669/516/products/054a8002_2-e84ee7142ad772d85217840507425254-1024-1024.webp",
+      "https://dcdn-us.mitiendanube.com/stores/007/669/516/products/054a8002_1-12d28e74f828252f3d17840507429096-1024-1024.webp"
+    ]
+  }
+}
