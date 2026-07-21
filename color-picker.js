@@ -152,23 +152,16 @@
     var container = document.querySelector("#quickshop-modal .js-quickshop-container");
     if (!container) return;
 
-    function render() {
-      var pid = container.getAttribute("data-product-id");
-      if (!pid) return;
-      if (container.getAttribute("data-kv-gallery") === pid) return; // ya hecho
+    // Slider vertical con TODAS las imágenes del producto
+    function renderGallery(pid) {
       var imgs = imagesMap[pid];
       var wrap = container.querySelector(".quickshop-image-container");
       if (!wrap || !imgs || !imgs.length) return;
-      container.setAttribute("data-kv-gallery", pid);
-
-      // Ocultar la imagen nativa (LS.fillQuickshop la sigue actualizando, oculta)
       var native = wrap.querySelector(".js-quickshop-image-padding") ||
                    wrap.querySelector(".js-quickshop-img");
       if (native) native.style.display = "none";
-
       var prev = wrap.querySelector(".kv-gallery");
       if (prev) prev.parentNode.removeChild(prev);
-
       var gallery = document.createElement("div");
       gallery.className = "kv-gallery";
       imgs.forEach(function (src) {
@@ -180,6 +173,59 @@
         gallery.appendChild(im);
       });
       wrap.appendChild(gallery);
+    }
+
+    // Swatches de color = productos hermanos (SKU-5). Cada swatch = 1ra imagen
+    // del producto. El actual va marcado; los demás linkean al hermano.
+    function renderColors(pid) {
+      var entry = byId && byId[pid];
+      if (!entry || !entry.siblings || entry.siblings.length < 2) return;
+      var group = container.querySelector(".js-color-variants-container");
+      if (!group) return;
+
+      // Ocultar los swatches nativos del color propio
+      var natives = group.querySelectorAll(".btn-variant, .js-variant-button");
+      for (var i = 0; i < natives.length; i++) natives[i].style.display = "none";
+
+      var prev = group.querySelector(".kv-modal-swatches");
+      if (prev) prev.parentNode.removeChild(prev);
+
+      var row = document.createElement("div");
+      row.className = "kv-modal-swatches";
+      entry.siblings.forEach(function (sib) {
+        var imgs = imagesMap[String(sib.id)];
+        var src = imgs && imgs[0];
+        var isActive = String(sib.id) === pid;
+        var a = document.createElement("a");
+        a.className = "kv-modal-swatch" + (isActive ? " is-active" : "");
+        a.setAttribute("title", sib.name || "");
+        a.setAttribute("aria-label", sib.name || "");
+        if (isActive) {
+          a.setAttribute("aria-current", "true");
+          a.setAttribute("href", "javascript:void(0)");
+          a.addEventListener("click", function (e) { e.preventDefault(); });
+        } else {
+          a.setAttribute("href", sib.url || "#");
+        }
+        if (src) {
+          var im = document.createElement("img");
+          im.src = src; im.alt = ""; im.loading = "lazy";
+          a.appendChild(im);
+        } else if (sib.color) {
+          a.style.background = sib.color; // fallback si el hermano no tiene foto
+        }
+        row.appendChild(a);
+      });
+      group.appendChild(row);
+    }
+
+    function render() {
+      var pid = container.getAttribute("data-product-id");
+      if (!pid) return;
+      if (container.getAttribute("data-kv-modal") === pid) return; // ya procesado
+      container.setAttribute("data-kv-modal", pid);
+      renderGallery(pid);
+      renderColors(pid);
     }
 
     if ("MutationObserver" in window) {

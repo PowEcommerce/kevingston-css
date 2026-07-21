@@ -265,3 +265,9 @@
 
 /* Quick shop modal: Color ANTES que Talle (como el Figma) */
 #quickshop-modal .js-color-variants-container{order:-1}
+
+/* Quick shop modal: swatches de color = 1ra imagen del hermano (Fase 2, 54x54) */
+.kv-modal-swatches{display:flex;flex-wrap:wrap;gap:16px;align-items:center;margin-top:0}
+.kv-modal-swatch{width:54px;height:54px;border-radius:4px;overflow:hidden;display:block;border:1px solid transparent;box-sizing:border-box;background:#f6f5f3}
+.kv-modal-swatch img{width:100%;height:100%;object-fit:cover;display:block}
+.kv-modal-swatch.is-active{border-color:#000}
