@@ -480,3 +480,9 @@
 .kv-topbar{position:relative;overflow:hidden;height:16px;width:100%}
 .kv-topbar-track{display:flex;flex-direction:column;will-change:transform}
 .kv-topbar-msg{height:16px;line-height:16px;display:flex;align-items:center;justify-content:center;white-space:nowrap;flex:none;width:100%}
+
+/* Flechas del primer slider (hero slideshow) ocultas solo en mobile */
+@media (max-width:767px){
+  #ns-section-hero_slideshow .swiper-button-prev,
+  #ns-section-hero_slideshow .swiper-button-next{display:none!important}
+}
