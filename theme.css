@@ -328,7 +328,7 @@
 #quickshop-modal .js-insta-variation-label{font-weight:400!important}
 
 /* Ajustes: padding info 16px + form sin margin-right */
-#quickshop-modal .quickshop-details{padding:32px 16px!important}
+#quickshop-modal .quickshop-details{padding:64px 16px!important}
 #quickshop-modal #quickshop-form{margin-right:0!important}
 
 /* Ajustes (batch, sin pushear aún) */
@@ -388,3 +388,7 @@
 /* Cucardas modal: colores de envío gratis (negro) y agotado (EECBCB/BE0000) */
 #quickshop-modal .kv-modal-badges .kv-badge-shipping{background:#000}
 #quickshop-modal .kv-modal-badges .kv-badge-stock{background:#EECBCB;color:#BE0000!important}
+
+/* Ajustes finos modal */
+#quickshop-modal .kv-modal-badges{margin-bottom:5px!important}
+#quickshop-modal .quickshop-price-container{margin-top:2px!important}
