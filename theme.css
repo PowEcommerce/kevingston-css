@@ -458,3 +458,10 @@
     width:24px!important;height:24px!important;background-size:24px 24px!important;
   }
 }
+
+/* Header mobile — ajustes finos (Figma) */
+@media (max-width:767px){
+  .js-head-main .head-row:not(.container){padding-left:16px!important;padding-right:16px!important}
+  .js-head-main .logo-img-container img,.js-head-main .logo-img{width:140px!important;height:auto!important;max-width:140px!important}
+  .js-head-main .head-row.logo-center{column-gap:8px!important}
+}
