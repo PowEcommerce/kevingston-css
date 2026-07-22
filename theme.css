@@ -359,3 +359,15 @@
 .js-item-product .js-promotion-label-private{background:#ff8000!important} /* SALE/promo -> naranja */
 .js-item-product .js-shipping-label-private{background:#000!important}     /* envío gratis -> negro */
 .js-item-product .js-shipping-label-private .label-icon{display:none!important}
+
+/* Badges card: overrides de texto/estado (Figma) */
+/* Opacidad full en todas las cucardas */
+.js-item-product .labels .label{opacity:1!important}
+/* Envío gratis -> "ENVÍO GRATIS" (texto viene de traducción, se reemplaza por CSS) */
+.js-item-product .js-shipping-label-private{font-size:0!important}
+.js-item-product .js-shipping-label-private>*{display:none!important}
+.js-item-product .js-shipping-label-private::before{content:"ENVÍO GRATIS";font-size:10px;color:#fff}
+/* Sin stock -> "AGOTADO", bg #EECBCB, texto #BE0000 */
+.js-item-product .js-stock-label-private{background:#EECBCB!important;color:#BE0000!important;font-size:0!important}
+.js-item-product .js-stock-label-private>*{display:none!important}
+.js-item-product .js-stock-label-private::before{content:"AGOTADO";font-size:10px;color:#BE0000}
