@@ -392,3 +392,16 @@
 /* Ajustes finos modal */
 #quickshop-modal .kv-modal-badges{margin-bottom:5px!important}
 #quickshop-modal .quickshop-price-container{margin-top:2px!important}
+
+/* ================================================================== */
+/* QUICK SHOP MODAL — MOBILE: galería vertical (no scroll horizontal)  */
+/* ================================================================== */
+@media (max-width:767px){
+  #quickshop-modal .js-quickshop-container .grid-md-2{display:block!important}
+  #quickshop-modal .quickshop-image-container{
+    width:100%!important;max-width:100%!important;height:auto!important;max-height:none!important;
+    overflow-x:hidden!important;overflow-y:visible!important;
+  }
+  #quickshop-modal .kv-gallery{flex-direction:column!important;flex-wrap:nowrap!important}
+  #quickshop-modal .kv-gallery-img{width:100%!important;height:auto!important;flex:none!important}
+}
