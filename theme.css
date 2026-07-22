@@ -319,3 +319,6 @@
 #quickshop-modal .kv-modal-info{display:flex;flex-direction:column;gap:8px;margin:0}
 #quickshop-modal .kv-modal-cuotas{font:400 12px/normal "Lato",sans-serif;color:#000;margin:0}
 #quickshop-modal .kv-modal-notax{font:400 10px/normal "Lato",sans-serif;color:#8f8f8f;margin:0}
+
+/* grid del quickshop sin border-radius */
+#quickshop-modal .js-quickshop-container .grid-md-2{border-radius:0!important}
