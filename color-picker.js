@@ -284,18 +284,25 @@
 
       var card = document.querySelector('.js-item-product[data-product-id="' + pid + '"]');
       if (!card) return;
-      var src = card.querySelectorAll(".js-offer-label-private, .js-promotion-label-private");
+      var src = card.querySelectorAll(
+        ".js-offer-label-private, .js-promotion-label-private, .js-shipping-label-private, .js-stock-label-private"
+      );
       var row = document.createElement("div");
       row.className = "kv-modal-badges";
       for (var i = 0; i < src.length; i++) {
         var b = src[i];
         if (window.getComputedStyle(b).display === "none") continue; // no aplica
-        var isOffer = b.classList.contains("js-offer-label-private");
+        var cls, text = null;
+        if (b.classList.contains("js-offer-label-private")) cls = "kv-badge-offer";
+        else if (b.classList.contains("js-promotion-label-private")) cls = "kv-badge-promo";
+        else if (b.classList.contains("js-shipping-label-private")) { cls = "kv-badge-shipping"; text = "ENVÍO GRATIS"; }
+        else { cls = "kv-badge-stock"; text = "AGOTADO"; }
+        // Clases propias: el estilo de la card está scopeado a .js-item-product
+        // y no aplica en el modal.
         var clone = b.cloneNode(true);
-        // Clases propias para estilar el badge dentro del modal (el estilo de la
-        // card está scopeado a .js-item-product y no aplica acá).
-        clone.className = "kv-badge " + (isOffer ? "kv-badge-offer" : "kv-badge-promo");
+        clone.className = "kv-badge " + cls;
         clone.removeAttribute("style");
+        if (text !== null) clone.textContent = text; // reemplaza texto (traducción no editable)
         row.appendChild(clone);
       }
       if (row.children.length) name.parentNode.insertBefore(row, name);

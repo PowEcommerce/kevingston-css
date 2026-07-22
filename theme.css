@@ -384,3 +384,7 @@
 #quickshop-modal .kv-modal-badges .kv-badge *{color:#fff!important;font-size:10px!important}
 #quickshop-modal .kv-modal-badges .kv-badge-offer{background:#be0000}
 #quickshop-modal .kv-modal-badges .kv-badge-promo{background:#ff8000}
+
+/* Cucardas modal: colores de envío gratis (negro) y agotado (EECBCB/BE0000) */
+#quickshop-modal .kv-modal-badges .kv-badge-shipping{background:#000}
+#quickshop-modal .kv-modal-badges .kv-badge-stock{background:#EECBCB;color:#BE0000!important}
