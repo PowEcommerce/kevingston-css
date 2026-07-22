@@ -495,6 +495,20 @@
 #ns-section-hero_slideshow .font-small{font-size:12px!important;line-height:normal!important}   /* legal "Hasta 3 cuotas..." */
 
 /* ================================================================== */
+/* Segundo bloque de banners (facilitadores) en mobile — node 3573-35012 */
+/* Carrusel con peek: banner 285x90, radius 16, gap 16, py 24, px 16.     */
+/* El JS (initFacilitatorsSlider) reconfigura el swiper a auto+centered.  */
+/* ================================================================== */
+@media (max-width:767px){
+  #ns-section-facilitators{padding-top:24px!important;padding-bottom:24px!important}
+  #ns-section-facilitators .container{padding-left:16px!important;padding-right:16px!important}
+  #ns-section-facilitators .swiper-slide{width:285px!important;height:auto!important}
+  #ns-section-facilitators .banner-image-container-cropped-custom{padding-bottom:90px!important}
+  #ns-section-facilitators .banner-item,
+  #ns-section-facilitators .banner-image-container{border-radius:16px!important;overflow:hidden!important}
+}
+
+/* ================================================================== */
 /* HEADER MOBILE STICKY — al scrollear: barra de búsqueda -> lupa      */
 /* al lado del menú (nodo 959-19571)                                   */
 /* ================================================================== */

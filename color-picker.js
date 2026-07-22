@@ -489,10 +489,56 @@
     upd();
   }
 
+  /* Segundo bloque de banners (facilitadores) en mobile: carrusel con "peek"
+     de los vecinos (node Figma 3573-35012). El theme lo inicializa como slider
+     slidesPerView:1 (ancho completo); lo reconfiguramos a slidesPerView:'auto'
+     + centeredSlides + loop para que el banner de 285px quede centrado y asomen
+     los laterales. Solo mobile: en desktop la seccion es grid (sin swiper). */
+  function initFacilitatorsSlider() {
+    var container = document.querySelector("#ns-section-facilitators .js-banners-slider");
+    if (!container) return;
+    var wrapper = container.closest(".js-banners-slider-container");
+    var pag = wrapper ? wrapper.querySelector(".js-swiper-banners-pagination") : null;
+    var mine = false;
+
+    function isMobile() { return window.innerWidth < 768; }
+
+    function apply() {
+      if (!isMobile() || typeof Swiper === "undefined") return;
+      if (mine && container.swiper) return; // ya reconfigurado
+      if (container.swiper) { try { container.swiper.destroy(true, true); } catch (e) {} }
+      /* global Swiper */
+      new Swiper(container, {
+        slidesPerView: "auto",
+        centeredSlides: true,
+        spaceBetween: 16,
+        loop: true,
+        pagination: pag ? { el: pag, clickable: true } : false
+      });
+      mine = true;
+    }
+
+    // Esperar a que el theme cree su swiper (lo hace con setTimeout 0) y reconfigurar.
+    var tries = 0;
+    (function wait() {
+      if (!isMobile()) return;
+      if (container.swiper || tries > 30) { apply(); return; }
+      tries++;
+      setTimeout(wait, 50);
+    })();
+
+    // Al cruzar a desktop, soltar nuestra instancia para que quede el grid nativo.
+    window.addEventListener("resize", function () {
+      if (isMobile()) { apply(); }
+      else if (mine && container.swiper) { try { container.swiper.destroy(true, true); } catch (e) {} mine = false; }
+    }, { passive: true });
+  }
+
   function init() {
     var adbarClosed = initAdbarClose();
     if (!adbarClosed) initTopbarCarousel();
     initStickyHeader();
+    initFacilitatorsSlider();
 
     fetch(MAP_URL, { cache: "no-cache" })
       .then(function (r) { return r.ok ? r.json() : null; })
