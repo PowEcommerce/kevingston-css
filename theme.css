@@ -429,3 +429,12 @@
 
 /* Adbar (barra de anuncios) a 12px (base usa --font-small=14) */
 .adbar{font-size:12px!important}
+
+/* ================================================================== */
+/* FIX logo mobile: el filtro que lo pinta blanco (para el header      */
+/* transparente del desktop) quedó global y en mobile lo hacía         */
+/* invisible sobre fondo blanco. Se anula en mobile.                   */
+/* ================================================================== */
+@media (max-width:767px){
+  .template-home .js-header .logo-img-container img{filter:none!important}
+}
