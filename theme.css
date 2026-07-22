@@ -110,7 +110,7 @@
    fantasma debajo del precio/cuotas. Nuestros swatches la reemplazan. */
 .js-item-product .product-item-colors-container{display:none!important}
 .kv-swatches{
-  display:flex;align-items:center;gap:12px;margin-top:0;
+  display:flex;align-items:center;gap:12px;margin-top:0;margin-left:3px;
 }
 .kv-swatch{
   width:10px;height:10px;border-radius:50%;flex:none;display:block;text-decoration:none;
@@ -148,7 +148,7 @@
 .js-item-product .product-item-information{position:relative}
 .js-item-product .product-item-name{padding-right:38px}
 .js-item-product .product-item-quick-shop-container{
-  position:absolute;top:8px;right:8px;margin:0;width:auto;z-index:2;
+  position:absolute;top:8px;right:0;margin:0;width:auto;z-index:2;
 }
 .js-item-product .product-item-quick-shop-container .btn{
   display:block!important;width:24px;height:24px;min-height:0;padding:0;line-height:0;font-size:0;
