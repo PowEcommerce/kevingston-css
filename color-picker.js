@@ -275,6 +275,29 @@
         .catch(function () {});
     }
 
+    // Cucardas/badges (descuento + promo) copiadas de la card, ARRIBA del título
+    function renderBadges(pid) {
+      var name = container.querySelector(".quickshop-name");
+      if (!name || !name.parentNode) return;
+      var prev = name.parentNode.querySelector(".kv-modal-badges");
+      if (prev) prev.parentNode.removeChild(prev);
+
+      var card = document.querySelector('.js-item-product[data-product-id="' + pid + '"]');
+      if (!card) return;
+      var src = card.querySelectorAll(".js-offer-label-private, .js-promotion-label-private");
+      var row = document.createElement("div");
+      row.className = "kv-modal-badges";
+      for (var i = 0; i < src.length; i++) {
+        var b = src[i];
+        if (window.getComputedStyle(b).display === "none") continue; // no aplica
+        var clone = b.cloneNode(true);
+        clone.classList.remove("js-offer-label-private", "js-promotion-label-private");
+        clone.style.display = "";
+        row.appendChild(clone);
+      }
+      if (row.children.length) name.parentNode.insertBefore(row, name);
+    }
+
     function render() {
       var pid = container.getAttribute("data-product-id");
       if (!pid) return;
@@ -283,6 +306,7 @@
       renderGallery(pid);
       renderColors(pid);
       renderInfo(pid);
+      renderBadges(pid);
     }
 
     if ("MutationObserver" in window) {
