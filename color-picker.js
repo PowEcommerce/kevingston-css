@@ -405,11 +405,17 @@
     vp.appendChild(track);
     bar.insertBefore(vp, bar.firstChild);
 
+    // Altura de UN mensaje (el % en translateY sería relativo al track entero,
+    // por eso se mueve en píxeles: 1 mensaje por paso).
+    function msgH() {
+      return (track.children[0] && track.children[0].getBoundingClientRect().height) ||
+             vp.getBoundingClientRect().height || 16;
+    }
     var i = 0;
     function step() {
       i++;
       track.style.transition = "transform 800ms ease-out";
-      track.style.transform = "translateY(" + (-i * 100) + "%)";
+      track.style.transform = "translateY(" + (-i * msgH()) + "px)";
     }
     track.addEventListener("transitionend", function () {
       if (i >= msgs.length) { // llegó al duplicado del primero
