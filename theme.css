@@ -426,3 +426,6 @@
   #quickshop-modal .quickshop-price-container{margin-top:0!important}
   #quickshop-modal .modal-header-close-only{top:0!important;right:0!important}
 }
+
+/* Adbar (barra de anuncios) a 12px (base usa --font-small=14) */
+.adbar{font-size:12px!important}
