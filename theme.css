@@ -322,3 +322,7 @@
 
 /* grid del quickshop sin border-radius */
 #quickshop-modal .js-quickshop-container .grid-md-2{border-radius:0!important}
+
+/* Valor seleccionado de color/talle en peso regular (no strong) */
+#quickshop-modal .form-label strong,
+#quickshop-modal .js-insta-variation-label{font-weight:400!important}
