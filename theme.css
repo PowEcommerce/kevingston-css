@@ -326,3 +326,7 @@
 /* Valor seleccionado de color/talle en peso regular (no strong) */
 #quickshop-modal .form-label strong,
 #quickshop-modal .js-insta-variation-label{font-weight:400!important}
+
+/* Ajustes: padding info 16px + form sin margin-right */
+#quickshop-modal .quickshop-details{padding:16px!important}
+#quickshop-modal #quickshop-form{margin-right:0!important}
