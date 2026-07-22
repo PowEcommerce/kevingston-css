@@ -429,9 +429,38 @@
     setTimeout(step, 3000);
   }
 
+  // Header sticky en mobile + al scrollear: se oculta la barra "Buscar
+  // productos" y aparece una lupa al lado del menú (inyectada dentro del
+  // menu-container para no romper el grid del header).
+  function initStickyHeader() {
+    var head = document.querySelector(".js-head-main");
+    if (!head) return;
+    var menu = document.querySelector(".js-head-main .menu-container");
+    var trigger = document.querySelector(".js-head-main .search-trigger");
+    if (menu && trigger && !menu.querySelector(".kv-scroll-search")) {
+      var b = document.createElement("button");
+      b.className = "kv-scroll-search";
+      b.type = "button";
+      b.setAttribute("aria-label", "Buscar");
+      b.addEventListener("click", function (e) { e.preventDefault(); trigger.click(); });
+      menu.appendChild(b);
+    }
+    var ticking = false;
+    function upd() {
+      ticking = false;
+      if ((window.pageYOffset || document.documentElement.scrollTop) > 40) head.classList.add("kv-scrolled");
+      else head.classList.remove("kv-scrolled");
+    }
+    window.addEventListener("scroll", function () {
+      if (!ticking) { ticking = true; requestAnimationFrame(upd); }
+    }, { passive: true });
+    upd();
+  }
+
   function init() {
     var adbarClosed = initAdbarClose();
     if (!adbarClosed) initTopbarCarousel();
+    initStickyHeader();
 
     fetch(MAP_URL, { cache: "no-cache" })
       .then(function (r) { return r.ok ? r.json() : null; })
