@@ -394,14 +394,21 @@
 #quickshop-modal .quickshop-price-container{margin-top:2px!important}
 
 /* ================================================================== */
-/* QUICK SHOP MODAL — MOBILE: galería vertical (no scroll horizontal)  */
+/* QUICK SHOP MODAL — MOBILE: galería HORIZONTAL (swipe entre fotos)   */
 /* ================================================================== */
 @media (max-width:767px){
   #quickshop-modal .js-quickshop-container .grid-md-2{display:block!important}
   #quickshop-modal .quickshop-image-container{
     width:100%!important;max-width:100%!important;height:auto!important;max-height:none!important;
-    overflow-x:hidden!important;overflow-y:visible!important;
+    overflow:hidden!important;
   }
-  #quickshop-modal .kv-gallery{flex-direction:column!important;flex-wrap:nowrap!important}
-  #quickshop-modal .kv-gallery-img{width:100%!important;height:auto!important;flex:none!important}
+  #quickshop-modal .kv-gallery{
+    flex-direction:row!important;flex-wrap:nowrap!important;
+    overflow-x:auto!important;overflow-y:hidden!important;
+    scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;
+  }
+  #quickshop-modal .kv-gallery-img{
+    width:100%!important;flex:0 0 100%!important;height:auto!important;
+    scroll-snap-align:start;
+  }
 }
