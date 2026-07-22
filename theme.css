@@ -303,7 +303,7 @@
 .kv-gallery-img{border-radius:0!important}
 @media (min-width:768px){
   /* Cerrar flota arriba a la derecha (no ocupa alto) */
-  #quickshop-modal .modal-header{position:absolute!important;top:0;right:0;left:auto;z-index:5;width:auto;margin:0;padding:16px!important;background:none!important}
+  #quickshop-modal .modal-header{position:absolute!important;top:0;right:0;left:auto;z-index:5;width:auto;margin:0;padding:0!important;background:none!important}
   /* Body sin padding, full-height */
   #quickshop-modal .modal-body{padding:0!important;height:100vh!important;max-height:100vh!important;overflow:hidden!important}
   #quickshop-modal .js-quickshop-container,
@@ -335,7 +335,7 @@
 #quickshop-modal .product-detail-variants{margin-bottom:0!important}
 #quickshop-modal .quickshop-actions{margin-top:8px!important}
 /* X de cerrar del modal a la mitad (original --icon-size-2x = 2em -> 1em) */
-#quickshop-modal .modal-close-icon{font-size:1em!important}
+#quickshop-modal .modal-close-icon{font-size:1.3em!important}
 
 /* Cucardas/badges arriba del título en el modal (clonadas de la card) */
 #quickshop-modal .kv-modal-badges{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 8px}
