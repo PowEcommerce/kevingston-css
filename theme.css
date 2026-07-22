@@ -475,3 +475,8 @@
   width:14px;height:14px;padding:0;border:0;cursor:pointer;z-index:2;
   background:transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round'%3E%3Cpath d='M2.5 2.5l9 9M11.5 2.5l-9 9'/%3E%3C/svg%3E") no-repeat center/14px 14px;
 }
+
+/* Top bar: carrusel vertical de mensajes (animación custom por JS) */
+.kv-topbar{position:relative;overflow:hidden;height:16px;width:100%}
+.kv-topbar-track{display:flex;flex-direction:column;will-change:transform}
+.kv-topbar-msg{height:16px;line-height:16px;display:flex;align-items:center;justify-content:center;white-space:nowrap;flex:none;width:100%}

@@ -338,11 +338,11 @@
     var section = document.querySelector(".section-announcement-bar");
     var bar = document.querySelector(".adbar");
     var target = section || bar;
-    if (!target || !bar) return;
+    if (!target || !bar) return false;
     try {
-      if (localStorage.getItem("kv-adbar-closed") === "1") { target.style.display = "none"; return; }
+      if (sessionStorage.getItem("topbar_closed") === "true") { target.style.display = "none"; return true; }
     } catch (e) {}
-    if (bar.querySelector(".kv-adbar-close")) return;
+    if (bar.querySelector(".kv-adbar-close")) return false;
     var btn = document.createElement("button");
     btn.className = "kv-adbar-close";
     btn.type = "button";
@@ -350,14 +350,82 @@
     btn.addEventListener("click", function (e) {
       e.preventDefault();
       e.stopPropagation();
-      target.style.display = "none";
-      try { localStorage.setItem("kv-adbar-closed", "1"); } catch (e2) {}
+      // Slide-up 300ms ease-in (colapsa la barra)
+      var h = target.offsetHeight;
+      target.style.overflow = "hidden";
+      target.style.maxHeight = h + "px";
+      void target.offsetHeight; // reflow
+      target.style.transition = "max-height 300ms ease-in, opacity 300ms ease-in";
+      target.style.maxHeight = "0";
+      target.style.opacity = "0";
+      setTimeout(function () { target.style.display = "none"; }, 320);
+      try { sessionStorage.setItem("topbar_closed", "true"); } catch (e2) {}
     });
     bar.appendChild(btn);
+    return false;
+  }
+
+  // Carrusel VERTICAL de mensajes del top bar (reemplaza el swiper nativo).
+  // Sale hacia arriba y entra desde abajo simultáneamente. 800ms ease-out,
+  // pausa 3000ms, loop infinito.
+  function initTopbarCarousel() {
+    var bar = document.querySelector(".adbar");
+    if (!bar || bar.getAttribute("data-kv-topbar")) return;
+    var slider = bar.querySelector(".js-adbar-slider, .adbar-slider, .js-adbar-marquee");
+    var itemEls = bar.querySelectorAll(".adbar-item");
+    if (!itemEls.length) return;
+    // Mensajes únicos (el swiper duplica slides en modo loop)
+    var seen = {}, msgs = [];
+    for (var k = 0; k < itemEls.length; k++) {
+      var key = itemEls[k].textContent.replace(/\s+/g, " ").trim();
+      if (!key || seen[key]) continue;
+      seen[key] = 1;
+      msgs.push(itemEls[k].innerHTML);
+    }
+    if (msgs.length < 2) return; // un solo mensaje: nada que rotar
+    bar.setAttribute("data-kv-topbar", "1");
+
+    // Destruir/ocultar el slider nativo
+    if (slider) {
+      try { if (slider.swiper) slider.swiper.destroy(true, true); } catch (e) {}
+      slider.style.display = "none";
+    }
+
+    var vp = document.createElement("div");
+    vp.className = "kv-topbar";
+    var track = document.createElement("div");
+    track.className = "kv-topbar-track";
+    var all = msgs.concat([msgs[0]]); // duplicado del primero => loop seamless
+    all.forEach(function (html) {
+      var m = document.createElement("div");
+      m.className = "kv-topbar-msg";
+      m.innerHTML = html;
+      track.appendChild(m);
+    });
+    vp.appendChild(track);
+    bar.insertBefore(vp, bar.firstChild);
+
+    var i = 0;
+    function step() {
+      i++;
+      track.style.transition = "transform 800ms ease-out";
+      track.style.transform = "translateY(" + (-i * 100) + "%)";
+    }
+    track.addEventListener("transitionend", function () {
+      if (i >= msgs.length) { // llegó al duplicado del primero
+        track.style.transition = "none";
+        i = 0;
+        track.style.transform = "translateY(0)";
+        void track.offsetHeight; // reflow (evita animar el salto)
+      }
+      setTimeout(step, 3000); // pausa entre slides
+    });
+    setTimeout(step, 3000);
   }
 
   function init() {
-    initAdbarClose();
+    var adbarClosed = initAdbarClose();
+    if (!adbarClosed) initTopbarCarousel();
 
     fetch(MAP_URL, { cache: "no-cache" })
       .then(function (r) { return r.ok ? r.json() : null; })
