@@ -469,8 +469,9 @@
 /* Menú a 16px + X de cerrar en el adbar (Figma) */
 .js-head-main .menu-container .js-modal-open-private{background-size:16px 16px!important}
 .adbar{position:relative}
-.adbar::after{
-  content:"";position:absolute;right:16px;top:50%;transform:translateY(-50%);
-  width:14px;height:14px;cursor:pointer;z-index:2;
-  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round'%3E%3Cpath d='M2.5 2.5l9 9M11.5 2.5l-9 9'/%3E%3C/svg%3E") no-repeat center/14px 14px;
+/* Botón X de cerrar el adbar (inyectado por color-picker.js) */
+.kv-adbar-close{
+  position:absolute;right:16px;top:50%;transform:translateY(-50%);
+  width:14px;height:14px;padding:0;border:0;cursor:pointer;z-index:2;
+  background:transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round'%3E%3Cpath d='M2.5 2.5l9 9M11.5 2.5l-9 9'/%3E%3C/svg%3E") no-repeat center/14px 14px;
 }

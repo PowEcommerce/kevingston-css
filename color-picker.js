@@ -331,7 +331,34 @@
   /* ------------------------------------------------------------------ */
   /* Init                                                                */
   /* ------------------------------------------------------------------ */
+  // Cerrar el adbar (barra de anuncios) con una X inyectada. localStorage
+  // recuerda el estado cerrado. El botón se inyecta solo donde corre el script,
+  // así no queda una X "muerta" en páginas sin JS.
+  function initAdbarClose() {
+    var section = document.querySelector(".section-announcement-bar");
+    var bar = document.querySelector(".adbar");
+    var target = section || bar;
+    if (!target || !bar) return;
+    try {
+      if (localStorage.getItem("kv-adbar-closed") === "1") { target.style.display = "none"; return; }
+    } catch (e) {}
+    if (bar.querySelector(".kv-adbar-close")) return;
+    var btn = document.createElement("button");
+    btn.className = "kv-adbar-close";
+    btn.type = "button";
+    btn.setAttribute("aria-label", "Cerrar");
+    btn.addEventListener("click", function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      target.style.display = "none";
+      try { localStorage.setItem("kv-adbar-closed", "1"); } catch (e2) {}
+    });
+    bar.appendChild(btn);
+  }
+
   function init() {
+    initAdbarClose();
+
     fetch(MAP_URL, { cache: "no-cache" })
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (map) {
