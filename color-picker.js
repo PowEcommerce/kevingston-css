@@ -290,9 +290,12 @@
       for (var i = 0; i < src.length; i++) {
         var b = src[i];
         if (window.getComputedStyle(b).display === "none") continue; // no aplica
+        var isOffer = b.classList.contains("js-offer-label-private");
         var clone = b.cloneNode(true);
-        clone.classList.remove("js-offer-label-private", "js-promotion-label-private");
-        clone.style.display = "";
+        // Clases propias para estilar el badge dentro del modal (el estilo de la
+        // card está scopeado a .js-item-product y no aplica acá).
+        clone.className = "kv-badge " + (isOffer ? "kv-badge-offer" : "kv-badge-promo");
+        clone.removeAttribute("style");
         row.appendChild(clone);
       }
       if (row.children.length) name.parentNode.insertBefore(row, name);

@@ -372,3 +372,15 @@
 .js-item-product .labels .label.js-stock-label-private{background:#EECBCB!important;color:#BE0000!important;font-size:0!important}
 .js-item-product .labels .label.js-stock-label-private>*{display:none!important}
 .js-item-product .labels .label.js-stock-label-private::before{content:"AGOTADO";font-size:10px!important;color:#BE0000}
+
+/* Cucardas en el modal (clonadas de la card, estilo Figma pill) */
+#quickshop-modal .kv-modal-badges{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 8px}
+#quickshop-modal .kv-modal-badges .kv-badge{
+  border-radius:50px;padding:4px 8px;min-height:0;
+  font:400 10px/normal "Lato",sans-serif;color:#fff;
+  display:inline-flex;align-items:center;justify-content:center;
+  text-align:center;white-space:nowrap;text-transform:uppercase;opacity:1;
+}
+#quickshop-modal .kv-modal-badges .kv-badge *{color:#fff!important;font-size:10px!important}
+#quickshop-modal .kv-modal-badges .kv-badge-offer{background:#be0000}
+#quickshop-modal .kv-modal-badges .kv-badge-promo{background:#ff8000}
