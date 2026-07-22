@@ -417,3 +417,12 @@
   /* Colores repartidos a lo ancho */
   #quickshop-modal .kv-modal-swatches{justify-content:space-between!important;width:100%!important;gap:8px!important}
 }
+
+/* Batch fixes chiquitos (sin pushear aún) */
+#quickshop-modal .quickshop-image-container{border-radius:0!important}
+#quickshop-modal .quickshop-image{border-radius:0!important}
+@media (max-width:767px){
+  #quickshop-modal .kv-modal-badges{margin-bottom:1px!important}
+  #quickshop-modal .quickshop-price-container{margin-top:0!important}
+  #quickshop-modal .modal-header-close-only{top:0!important;right:0!important}
+}
