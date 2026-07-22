@@ -154,8 +154,8 @@
   width:24px;height:24px;min-height:0;padding:0;line-height:0;font-size:0;
   border:0!important;border-radius:50%!important;box-shadow:none!important;
   color:transparent!important;
-  background:rgba(233,231,226,.5) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round'%3E%3Cpath d='M7 2v10M2 7h10'/%3E%3C/svg%3E") no-repeat center !important;
-  background-size:14px 14px;
+  background:rgba(233,231,226,.5) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 11.25 11.25' fill='none' stroke='%23000' stroke-width='0.75' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5.91667 0.375L5.91667 10.875M10.875 5.91657L0.375 5.91657'/%3E%3C/svg%3E") no-repeat center !important;
+  background-size:12px 12px;
 }
 .js-item-product .product-item-quick-shop-container .btn:hover{
   background-color:rgba(233,231,226,.85)!important;
