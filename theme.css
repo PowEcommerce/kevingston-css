@@ -500,12 +500,15 @@
 /* El JS (initFacilitatorsSlider) reconfigura el swiper a auto+centered.  */
 /* ================================================================== */
 @media (max-width:767px){
-  #ns-section-facilitators{padding-top:24px!important;padding-bottom:24px!important}
+  /* padding 24/24 en el contenedor interno (trae 32px inline) — sin paginador el bloque mide 24+90+24=138px (alto del frame Figma) */
+  #ns-section-facilitators .banners-section{padding-top:24px!important;padding-bottom:24px!important;margin-top:0!important;margin-bottom:0!important}
   #ns-section-facilitators .container{padding-left:16px!important;padding-right:16px!important}
   #ns-section-facilitators .swiper-slide{width:285px!important;height:auto!important}
   #ns-section-facilitators .banner-image-container-cropped-custom{padding-bottom:90px!important}
   #ns-section-facilitators .banner-item,
   #ns-section-facilitators .banner-image-container{border-radius:16px!important;overflow:hidden!important}
+  /* sin paginador en mobile */
+  #ns-section-facilitators .swiper-pagination{display:none!important}
 }
 
 /* ================================================================== */
