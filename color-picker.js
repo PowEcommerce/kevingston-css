@@ -445,15 +445,39 @@
       b.addEventListener("click", function (e) { e.preventDefault(); trigger.click(); });
       menu.appendChild(b);
     }
+    // Spacer para evitar el salto cuando el header pasa a position:fixed.
+    var spacer = document.createElement("div");
+    spacer.className = "kv-head-spacer";
+    spacer.style.display = "none";
+    head.parentNode.insertBefore(spacer, head.nextSibling);
+
+    var adbar = document.querySelector(".section-announcement-bar, .adbar");
+    var isMobile = function () { return window.matchMedia("(max-width:767px)").matches; };
     var ticking = false;
     function upd() {
       ticking = false;
-      if ((window.pageYOffset || document.documentElement.scrollTop) > 40) head.classList.add("kv-scrolled");
-      else head.classList.remove("kv-scrolled");
+      if (!isMobile()) { // el sticky custom es solo mobile
+        head.classList.remove("kv-scrolled");
+        spacer.style.display = "none";
+        return;
+      }
+      var threshold = (adbar && adbar.offsetParent !== null) ? adbar.offsetHeight : 0;
+      var y = window.pageYOffset || document.documentElement.scrollTop;
+      if (y > threshold + 4) {
+        if (!head.classList.contains("kv-scrolled")) {
+          head.classList.add("kv-scrolled"); // -> position:fixed (CSS mobile)
+          spacer.style.height = head.offsetHeight + "px"; // alto del header fijo
+          spacer.style.display = "block";
+        }
+      } else if (head.classList.contains("kv-scrolled")) {
+        head.classList.remove("kv-scrolled");
+        spacer.style.display = "none";
+      }
     }
     window.addEventListener("scroll", function () {
       if (!ticking) { ticking = true; requestAnimationFrame(upd); }
     }, { passive: true });
+    window.addEventListener("resize", upd, { passive: true });
     upd();
   }
 

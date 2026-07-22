@@ -492,7 +492,7 @@
 /* al lado del menú (nodo 959-19571)                                   */
 /* ================================================================== */
 @media (max-width:767px){
-  .js-head-main{position:sticky!important;top:0;z-index:1000;background:#fff}
+  .js-head-main.kv-scrolled{position:fixed!important;top:0;left:0;right:0;width:100%;z-index:1000;background:#fff;box-shadow:0 1px 6px rgba(0,0,0,.06)}
   .kv-scroll-search{
     display:none;width:24px;height:24px;padding:0;border:0;cursor:pointer;flex:none;
     background:transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M10.5185 17.037C14.1186 17.037 17.037 14.1186 17.037 10.5185C17.037 6.91844 14.1186 4 10.5185 4C6.91844 4 4 6.91844 4 10.5185C4 14.1186 6.91844 17.037 10.5185 17.037Z'/%3E%3Cpath d='M15.2598 15.2593L20.0005 20'/%3E%3C/svg%3E") no-repeat center/20px 20px;
