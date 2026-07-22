@@ -151,7 +151,7 @@
   position:absolute;top:8px;right:8px;margin:0;width:auto;z-index:2;
 }
 .js-item-product .product-item-quick-shop-container .btn{
-  width:24px;height:24px;min-height:0;padding:0;line-height:0;font-size:0;
+  display:block!important;width:24px;height:24px;min-height:0;padding:0;line-height:0;font-size:0;
   border:0!important;border-radius:50%!important;box-shadow:none!important;
   color:transparent!important;
   background:rgba(233,231,226,.5) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 11.25 11.25' fill='none' stroke='%23000' stroke-width='0.75' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5.91667 0.375L5.91667 10.875M10.875 5.91657L0.375 5.91657'/%3E%3C/svg%3E") no-repeat center !important;
