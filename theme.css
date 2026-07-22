@@ -397,18 +397,21 @@
 /* QUICK SHOP MODAL — MOBILE: galería HORIZONTAL (swipe entre fotos)   */
 /* ================================================================== */
 @media (max-width:767px){
+  /* modal-body sin padding (el padding vive en el info container) */
+  #quickshop-modal .modal-body{padding:0!important}
   #quickshop-modal .js-quickshop-container .grid-md-2{display:block!important}
+  /* Imágenes: fila horizontal, 181px cada una (se ven ~2 y se scrollea) */
   #quickshop-modal .quickshop-image-container{
-    width:100%!important;max-width:100%!important;height:auto!important;max-height:none!important;
-    overflow:hidden!important;
+    width:100%!important;max-width:100%!important;height:181px!important;max-height:181px!important;
+    overflow-x:auto!important;overflow-y:hidden!important;-webkit-overflow-scrolling:touch;
   }
-  #quickshop-modal .kv-gallery{
-    flex-direction:row!important;flex-wrap:nowrap!important;
-    overflow-x:auto!important;overflow-y:hidden!important;
-    scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;
-  }
-  #quickshop-modal .kv-gallery-img{
-    width:100%!important;flex:0 0 100%!important;height:auto!important;
-    scroll-snap-align:start;
-  }
+  #quickshop-modal .kv-gallery{flex-direction:row!important;flex-wrap:nowrap!important;height:181px!important}
+  #quickshop-modal .kv-gallery-img{width:auto!important;height:181px!important;flex:0 0 auto!important}
+  /* Info container: padding 16, altura auto */
+  #quickshop-modal .quickshop-details{padding:16px!important;height:auto!important;overflow:visible!important}
+  /* Tamaños mobile: nombre 32, precio 18 */
+  #quickshop-modal .quickshop-name{font-size:32px!important}
+  #quickshop-modal .price-compare,#quickshop-modal .quickshop-price{font-size:18px!important}
+  /* Colores repartidos a lo ancho */
+  #quickshop-modal .kv-modal-swatches{justify-content:space-between!important;width:100%!important;gap:8px!important}
 }
