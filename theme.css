@@ -493,11 +493,16 @@
 /* ================================================================== */
 @media (max-width:767px){
   .js-head-main.kv-scrolled{position:fixed!important;top:0;left:0;right:0;width:100%;z-index:1000;background:#fff;box-shadow:0 1px 6px rgba(0,0,0,.06)}
+  .js-head-main.kv-scrolled{transition:box-shadow .3s ease}
+  /* Barra "Buscar productos": colapso suave (no display:none de golpe) */
+  .js-head-main .search-container{overflow:hidden;max-height:48px;opacity:1;transition:max-height .3s ease, opacity .25s ease, margin .3s ease}
+  .js-head-main.kv-scrolled .search-container{max-height:0!important;opacity:0!important;margin:0!important}
+  /* Menú siempre flex para animar la lupa */
+  .js-head-main .menu-container{display:flex!important;align-items:center;width:auto!important}
   .kv-scroll-search{
-    display:none;width:24px;height:24px;padding:0;border:0;cursor:pointer;flex:none;
+    width:0;opacity:0;margin-left:0;height:24px;padding:0;border:0;cursor:pointer;flex:none;overflow:hidden;
     background:transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M10.5185 17.037C14.1186 17.037 17.037 14.1186 17.037 10.5185C17.037 6.91844 14.1186 4 10.5185 4C6.91844 4 4 6.91844 4 10.5185C4 14.1186 6.91844 17.037 10.5185 17.037Z'/%3E%3Cpath d='M15.2598 15.2593L20.0005 20'/%3E%3C/svg%3E") no-repeat center/20px 20px;
+    transition:width .3s ease, opacity .3s ease, margin-left .3s ease;
   }
-  .js-head-main.kv-scrolled .menu-container{display:flex!important;align-items:center;gap:8px;width:auto!important}
-  .js-head-main.kv-scrolled .kv-scroll-search{display:block}
-  .js-head-main.kv-scrolled .search-container{display:none!important}
+  .js-head-main.kv-scrolled .kv-scroll-search{width:24px;opacity:1;margin-left:8px}
 }

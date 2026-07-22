@@ -452,6 +452,7 @@
     head.parentNode.insertBefore(spacer, head.nextSibling);
 
     var adbar = document.querySelector(".section-announcement-bar, .adbar");
+    var searchC = document.querySelector(".js-head-main .search-container");
     var isMobile = function () { return window.matchMedia("(max-width:767px)").matches; };
     var ticking = false;
     function upd() {
@@ -463,14 +464,21 @@
       }
       var threshold = (adbar && adbar.offsetParent !== null) ? adbar.offsetHeight : 0;
       var y = window.pageYOffset || document.documentElement.scrollTop;
-      if (y > threshold + 4) {
+      if (y > threshold) {
         if (!head.classList.contains("kv-scrolled")) {
-          head.classList.add("kv-scrolled"); // -> position:fixed (CSS mobile)
-          spacer.style.height = head.offsetHeight + "px"; // alto del header fijo
+          var full = head.offsetHeight;                    // alto CON la barra de búsqueda
+          var searchH = searchC ? searchC.offsetHeight : 0;
+          head.classList.add("kv-scrolled");               // fijo + arranca el colapso (CSS)
+          spacer.style.transition = "none";
+          spacer.style.height = full + "px";               // sin salto: ocupa el alto previo
           spacer.style.display = "block";
+          void spacer.offsetHeight;                        // reflow
+          spacer.style.transition = "height .3s ease";
+          spacer.style.height = (full - searchH) + "px";   // colapsa suave junto con la búsqueda
         }
       } else if (head.classList.contains("kv-scrolled")) {
         head.classList.remove("kv-scrolled");
+        spacer.style.transition = "none";
         spacer.style.display = "none";
       }
     }
