@@ -397,6 +397,8 @@
 /* QUICK SHOP MODAL — MOBILE: galería HORIZONTAL (swipe entre fotos)   */
 /* ================================================================== */
 @media (max-width:767px){
+  /* Modal a lo sumo 100% del ancho de pantalla (evita que quede gigante) */
+  #quickshop-modal.modal{width:100%!important;max-width:100vw!important;min-width:0!important;box-sizing:border-box;overflow-x:hidden!important}
   /* modal-body sin padding (el padding vive en el info container) */
   #quickshop-modal .modal-body{padding:0!important}
   #quickshop-modal .js-quickshop-container .grid-md-2{display:block!important}
