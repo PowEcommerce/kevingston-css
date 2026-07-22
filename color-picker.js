@@ -534,11 +534,60 @@
     }, { passive: true });
   }
 
+  /* "Nueva Coleccion" (new_collection_1) en mobile: carrusel de cards con "peek"
+     del siguiente (node 959-19494). El theme lo inicializa slidesPerView:1 (mobile)
+     / 4 (desktop). Lo reconfiguramos a slidesPerView:'auto' (card de 283px por CSS)
+     manteniendo el 4-up de desktop via breakpoint 768. Solo actua en mobile. */
+  function initNewCollectionSlider() {
+    var section = document.querySelector("#ns-section-new_collection_1");
+    if (!section) return;
+    var container = section.querySelector(".js-products-list-swiper");
+    if (!container) return;
+    var parent = container.closest(".js-products-list-slider-container");
+    var wrapper = container.querySelector(".js-swiper-products-slider");
+    var cols = wrapper && wrapper.dataset.desktopColumns ? (parseInt(wrapper.dataset.desktopColumns, 10) || 4) : 4;
+    var slideCount = container.querySelectorAll(".swiper-slide").length;
+    var mine = false;
+
+    function isMobile() { return window.innerWidth < 768; }
+
+    function apply() {
+      if (!isMobile() || typeof Swiper === "undefined") return;
+      if (mine && container.swiper) return;
+      if (container.swiper) { try { container.swiper.destroy(true, true); } catch (e) {} }
+      /* global Swiper */
+      new Swiper(container, {
+        slidesPerView: "auto",
+        spaceBetween: 16,
+        loop: slideCount > cols,
+        watchOverflow: true,
+        navigation: parent ? {
+          nextEl: parent.querySelector(".js-swiper-products-list-next"),
+          prevEl: parent.querySelector(".js-swiper-products-list-prev")
+        } : false,
+        pagination: false,
+        breakpoints: { 768: { slidesPerView: cols, slidesPerGroup: cols } }
+      });
+      mine = true;
+    }
+
+    var tries = 0;
+    (function wait() {
+      if (!isMobile()) return;
+      if (container.swiper || tries > 30) { apply(); return; }
+      tries++;
+      setTimeout(wait, 50);
+    })();
+
+    window.addEventListener("resize", function () { if (isMobile()) apply(); }, { passive: true });
+  }
+
   function init() {
     var adbarClosed = initAdbarClose();
     if (!adbarClosed) initTopbarCarousel();
     initStickyHeader();
     initFacilitatorsSlider();
+    initNewCollectionSlider();
 
     fetch(MAP_URL, { cache: "no-cache" })
       .then(function (r) { return r.ok ? r.json() : null; })

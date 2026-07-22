@@ -512,6 +512,26 @@
 }
 
 /* ================================================================== */
+/* "Nueva Colección" (new_collection_1) en mobile — node 959-19494     */
+/* Carrusel de cards con peek: card 283, gap 16, radius 8, py24 px16.   */
+/* El JS (initNewCollectionSlider) reconfigura el swiper a auto.        */
+/* ================================================================== */
+@media (max-width:767px){
+  /* padding de la seccion: 24 vertical / 16 horizontal (Figma) — sobreescribe el inline 48/32 */
+  #ns-section-new_collection_1 .js-products-list-slider{padding:24px 16px!important}
+  /* card con peek: ancho fijo 283 + radius 8 */
+  #ns-section-new_collection_1 .swiper-slide{width:283px!important}
+  #ns-section-new_collection_1 .product-item{border-radius:8px!important;overflow:hidden!important}
+  /* flechas overlaid sobre la imagen: circulo 36, bg claro 50% */
+  #ns-section-new_collection_1 .swiper-button-outside{width:36px!important;height:36px!important;border-radius:50%;background:rgba(233,231,226,.5);display:flex;align-items:center;justify-content:center;top:50%;margin-top:0;transform:translateY(-50%)}
+  #ns-section-new_collection_1 .swiper-button-outside.swiper-button-prev{left:16px!important;right:auto!important}
+  #ns-section-new_collection_1 .swiper-button-outside.swiper-button-next{right:16px!important;left:auto!important}
+  #ns-section-new_collection_1 .swiper-button-outside .slider-arrow{width:20px!important;height:20px!important}
+  /* sin paginador en mobile (el carrusel se navega por swipe/flechas) */
+  #ns-section-new_collection_1 .js-swiper-products-list-pagination{display:none!important}
+}
+
+/* ================================================================== */
 /* HEADER MOBILE STICKY — al scrollear: barra de búsqueda -> lupa      */
 /* al lado del menú (nodo 959-19571)                                   */
 /* ================================================================== */
