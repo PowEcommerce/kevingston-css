@@ -341,3 +341,21 @@
 #quickshop-modal .kv-modal-badges{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 8px}
 #quickshop-modal .kv-modal-badges .label,
 #quickshop-modal .kv-modal-badges .labels{position:static!important;margin:0!important;top:auto!important;left:auto!important;right:auto!important;bottom:auto!important;display:inline-flex!important}
+
+/* ================================================================== */
+/* BADGES de la card — estilo Figma (node 959-17368)                  */
+/* Pill 10px blanco, padding 4/8, rounded 50px, uppercase             */
+/* ================================================================== */
+.js-item-product .labels .label{
+  border-radius:50px!important;padding:4px 8px!important;min-height:0!important;
+  font:400 10px/normal "Lato",sans-serif!important;color:#fff!important;
+  display:inline-flex!important;align-items:center;justify-content:center;
+  text-align:center;white-space:nowrap;text-transform:uppercase;letter-spacing:0;
+  width:auto!important;
+}
+.js-item-product .labels .label *{color:#fff!important;font-size:10px!important}
+/* Colores por tipo */
+.js-item-product .js-offer-label-private{background:#be0000!important}     /* % OFF -> rojo */
+.js-item-product .js-promotion-label-private{background:#ff8000!important} /* SALE/promo -> naranja */
+.js-item-product .js-shipping-label-private{background:#000!important}     /* envío gratis -> negro */
+.js-item-product .js-shipping-label-private .label-icon{display:none!important}
