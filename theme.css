@@ -173,7 +173,7 @@
 .js-item-product .product-item-information{position:relative}
 .js-item-product .product-item-name{padding-right:38px}
 .js-item-product .product-item-quick-shop-container{
-  position:absolute;top:8px;right:0;margin:0;width:auto;z-index:2;
+  position:absolute;top:8px;right:8px;margin:0;width:auto;z-index:2;
 }
 .js-item-product .product-item-quick-shop-container .btn{
   display:block!important;width:24px;height:24px;min-height:0;padding:0;line-height:0;font-size:0;
