@@ -571,6 +571,9 @@
   /* el texto respeta 16px a la derecha (el carrusel si hace bleed hasta el borde) */
   :is(#ns-section-editorial_products,#ns-section-editorial_products_mujer) #ns-block-tabs_row,
   :is(#ns-section-editorial_products,#ns-section-editorial_products_mujer) #ns-block-editorial_text{padding-right:16px!important}
+  /* tabs Hombre/Mujer a la izquierda en mobile (el group tiene alignment:end para desktop) */
+  :is(#ns-section-editorial_products,#ns-section-editorial_products_mujer) #ns-block-tabs_row,
+  :is(#ns-section-editorial_products,#ns-section-editorial_products_mujer) #ns-block-tabs_row .group-content{justify-content:flex-start!important}
 }
 /* boton "Ver Coleccion": pill outline compacto (Figma: border .75 negro, radius 50, px24 py8, 12px, fit)
    — sobreescribe el min-width:218px que hereda de los botones del hero (css_code .btn-secondary) */
