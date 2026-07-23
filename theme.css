@@ -517,8 +517,8 @@
 /* El JS (initNewCollectionSlider) reconfigura el swiper a auto.        */
 /* ================================================================== */
 @media (max-width:767px){
-  /* padding de la seccion: 24 vertical / 16 horizontal (Figma) — sobreescribe el inline 48/32 */
-  #ns-section-new_collection_1 .js-products-list-slider{padding:24px 16px!important}
+  /* padding de la seccion: 24 vertical, 16 izquierda, 0 derecha (bleed) — el carrusel llega al borde derecho */
+  #ns-section-new_collection_1 .js-products-list-slider{padding:24px 0 24px 16px!important}
   /* card con peek: ancho fijo 283 + radius 8 */
   #ns-section-new_collection_1 .swiper-slide{width:283px!important}
   #ns-section-new_collection_1 .product-item{border-radius:8px!important;overflow:hidden!important}
