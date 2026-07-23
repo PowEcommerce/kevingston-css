@@ -489,12 +489,13 @@
   #ns-section-full_banner_carousel .swiper-button-next{display:none!important}
 }
 
-/* Hero slideshow — tamaños de texto exactos segun Figma (nodes 959-18445 desktop / 959-19567 mobile),
-   pineados para que no dependan de font_rest_size. Iguales en desktop y mobile. */
-#ns-section-hero_slideshow .font-big{font-size:18px!important;line-height:1.3!important}      /* kicker "Nueva coleccion" */
-#ns-section-hero_slideshow .h1{font-size:40px!important;line-height:normal!important}          /* titulo "Winter Archive" */
-#ns-section-hero_slideshow .btn-medium{font-size:14px!important}                                /* botones "Comprar ..." */
-#ns-section-hero_slideshow .font-small{font-size:12px!important;line-height:normal!important}   /* legal "Hasta 3 cuotas..." */
+/* Slideshows (hero + full_banner_carousel) — tamaños de texto exactos segun Figma
+   (nodes 959-18445 desktop / 959-19567 mobile), pineados para que no dependan de
+   font_rest_size. Iguales en desktop y mobile, y en ambos carruseles. */
+:is(#ns-section-hero_slideshow,#ns-section-full_banner_carousel) .font-big{font-size:18px!important;line-height:1.3!important}      /* kicker "Nueva coleccion" */
+:is(#ns-section-hero_slideshow,#ns-section-full_banner_carousel) .h1{font-size:40px!important;line-height:normal!important}          /* titulo "Winter Archive" */
+:is(#ns-section-hero_slideshow,#ns-section-full_banner_carousel) .btn-medium{font-size:14px!important}                                /* botones "Comprar ..." */
+:is(#ns-section-hero_slideshow,#ns-section-full_banner_carousel) .font-small{font-size:12px!important;line-height:normal!important}   /* legal "Hasta 3 cuotas..." */
 
 /* ================================================================== */
 /* Segundo bloque de banners (facilitadores) en mobile — node 3573-35012 */
