@@ -17,14 +17,18 @@
   .footer-content .newsletter-form-button.btn{width:218px!important;max-width:100%!important}
   /* menus: titulo 14px medium + chevron down (oculta el span del +/- y lo reemplaza) */
   .footer-content .footer-menu-title{font-size:14px!important;font-weight:500!important}
-  .footer-content .footer-menu-toggle-title{display:flex!important;align-items:center;justify-content:space-between}
+  .footer-content .footer-menu-toggle-title{display:flex!important;align-items:center;justify-content:space-between;padding:13px 0!important}
   .footer-content .footer-menu-toggle-title .d-md-none{display:none!important}
-  .footer-content .footer-menu-toggle-title::after{content:"";flex:none;width:20px;height:20px;background:url("data:image/svg+xml,%3Csvg%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M6%209L12%2015L18%209%22%20stroke%3D%22black%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E") no-repeat center/12px 12px}
+  .footer-content .footer-menu-toggle-title::after{content:"";flex:none;width:24px;height:24px;background:url("data:image/svg+xml,%3Csvg%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M6%209L12%2015L18%209%22%20stroke%3D%22black%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E") no-repeat center/24px 24px}
   /* acordeon: SIN lineas por item (Figma). Solo queda la de arriba del 1ero; la de abajo del grupo la da .footer-secondary-info */
-  .footer-content .footer-menu-accordion{border-bottom:none!important;margin-left:0!important;margin-right:0!important}
-  .footer-content .footer-menu-accordion + .footer-menu-accordion{border-top:none!important}
+  .footer-content .footer-menu-accordion{border-bottom:none!important;margin-left:0!important;margin-right:0!important;padding-top:20px!important}
+  .footer-content .footer-menu-accordion + .footer-menu-accordion{border-top:none!important;padding-top:0!important}
+  .footer-content .footer-menu-accordion-content{padding-left:0!important;padding-right:0!important}
   /* "Seguinos" 14px (Figma) */
   .footer-content .footer-social-container::before{font-size:14px!important}
+  /* ajustes de espaciado (Figma) */
+  .footer-content .footer-contact-info-container{margin-top:0!important}
+  .footer-content .footer-social-container{margin-bottom:20px!important}
 }
 /* facebook mas fino: stroke 1.5 en vez de 2 (Figma) — GLOBAL (mobile + desktop) */
 .footer-content .footer-social-link[href*="facebook"]{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2218%22%20height%3D%2218%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M18%202h-3a5%205%200%200%200-5%205v3H7v4h3v8h4v-8h3l1-4h-4V7a1%201%200%200%201%201-1h3z%22%2F%3E%3C%2Fsvg%3E")!important}
