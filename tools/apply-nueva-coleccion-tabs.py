@@ -1,24 +1,40 @@
 #!/usr/bin/env python3
-# Idempotente: reaplica la estructura de tabs Hombre/Mujer en "Nueva Coleccion".
+# Idempotente + GENERICO: aplica el formato de tabs Hombre/Mujer a TODAS las
+# secciones product-list que tengan tabs (soporta duplicados hechos en el admin).
+# Marca cada header con data-kv-role="hombre|mujer"; el CSS/JS emparejan por DOM.
 # Correr desde la raiz del theme kevingston despues de cada `theme pull`.
-import json, copy, collections, sys
+import json, copy, collections, re
 
 P = 'templates/pages/home.json'
 
-TAB_H = ('<span data-kv-tab="hombre" style="color:#000000;border-bottom:1px solid #000000;'
-         'padding-bottom:2px;cursor:pointer">Hombre</span>'
-         '<span data-kv-tab="mujer" style="color:#737373;margin-left:24px;cursor:pointer">Mujer</span>')
-TAB_M = ('<span data-kv-tab="hombre" style="color:#737373;cursor:pointer">Hombre</span>'
-         '<span data-kv-tab="mujer" style="color:#000000;border-bottom:1px solid #000000;'
-         'padding-bottom:2px;margin-left:24px;cursor:pointer">Mujer</span>')
+# Nuevo formato: wrapper con data-kv-role + los dos tabs con data-kv-tab
+TAB_H = ('<span data-kv-role="hombre">'
+         '<span data-kv-tab="hombre" style="color:#000000;border-bottom:1px solid #000000;padding-bottom:2px;cursor:pointer">Hombre</span>'
+         '<span data-kv-tab="mujer" style="color:#737373;margin-left:24px;cursor:pointer">Mujer</span>'
+         '</span>')
+TAB_M = ('<span data-kv-role="mujer">'
+         '<span data-kv-tab="hombre" style="color:#737373;cursor:pointer">Hombre</span>'
+         '<span data-kv-tab="mujer" style="color:#000000;border-bottom:1px solid #000000;padding-bottom:2px;margin-left:24px;cursor:pointer">Mujer</span>'
+         '</span>')
 MUJER_CAT = '39815676'
 
 d = json.load(open(P, encoding='utf-8'), object_pairs_hook=collections.OrderedDict)
 secs = d['sections']
+
+
+def iter_blocks(blocks):
+    """Recorre recursivamente los blocks (dict o list) devolviendo cada bloque."""
+    items = blocks.items() if isinstance(blocks, dict) else (enumerate(blocks) if isinstance(blocks, list) else [])
+    for _, bv in items:
+        if isinstance(bv, dict):
+            yield bv
+            if isinstance(bv.get('blocks'), (dict, list)):
+                yield from iter_blocks(bv['blocks'])
+
+
+# 1) SEED: new_collection_1 con mobile_direction + su gemela _mujer
 h = secs['new_collection_1']
 hr = h['blocks']['header_row']
-
-# 1) mobile_direction column (idempotente)
 st = hr['settings']
 if not st.get('mobile_direction_enabled'):
     ns = collections.OrderedDict()
@@ -29,10 +45,6 @@ if not st.get('mobile_direction_enabled'):
             ns['mobile_direction'] = 'column'
     hr['settings'] = ns
 
-# 2) tabs Hombre con data-kv-tab
-hr['blocks']['tabs']['settings']['text'] = TAB_H
-
-# 3) seccion Mujer (crear si no existe)
 if 'new_collection_1_mujer' not in secs:
     m = copy.deepcopy(h)
     hrb = m['blocks'].pop('header_row'); m['blocks']['header_row_m'] = hrb
@@ -42,7 +54,6 @@ if 'new_collection_1_mujer' not in secs:
     t = inner.pop('title'); inner['title_m'] = t
     tb = inner.pop('tabs'); inner['tabs_m'] = tb
     m['blocks']['header_row_m']['block_order'] = ['title_m', 'tabs_m']
-    inner['tabs_m']['settings']['text'] = TAB_M
     m['blocks']['products_m']['settings']['products_source'] = collections.OrderedDict(
         [('kind', 'category'), ('id', MUJER_CAT)])
     new = collections.OrderedDict()
@@ -50,18 +61,31 @@ if 'new_collection_1_mujer' not in secs:
         new[k] = v
         if k == 'new_collection_1':
             new['new_collection_1_mujer'] = m
-    d['sections'] = new
+    d['sections'] = secs = new
     if 'new_collection_1_mujer' not in d['order']:
         i = d['order'].index('new_collection_1')
         d['order'].insert(i + 1, 'new_collection_1_mujer')
-else:
-    m = secs['new_collection_1_mujer']
-    m['blocks']['header_row_m']['blocks']['tabs_m']['settings']['text'] = TAB_M
-    m['blocks']['products_m']['settings']['products_source'] = collections.OrderedDict(
-        [('kind', 'category'), ('id', MUJER_CAT)])
+
+# 2) GENERICO: reescribir el formato de tabs en toda seccion product-list con tabs
+count = 0
+for k, sec in secs.items():
+    if sec.get('type') != 'product-list':
+        continue
+    for bv in iter_blocks(sec.get('blocks', {})):
+        if bv.get('type') != 'text':
+            continue
+        s = bv.get('settings', {})
+        txt = str(s.get('text', ''))
+        if 'data-kv-tab' not in txt:
+            continue
+        # rol = quien tiene el border-bottom (tab activo)
+        if re.search(r'data-kv-tab="mujer"[^>]*border-bottom', txt):
+            s['text'] = TAB_M
+        else:
+            s['text'] = TAB_H
+        count += 1
 
 json.dump(d, open(P, 'w', encoding='utf-8'), ensure_ascii=False, indent=2)
 open(P, 'a', encoding='utf-8').write('\n')
 json.load(open(P, encoding='utf-8'))  # valida
-print('OK: tabs Hombre/Mujer aplicados. sections:', len(d['sections']),
-      '| mujer en order:', 'new_collection_1_mujer' in d['order'])
+print(f'OK: {count} bloques de tabs actualizados al formato con data-kv-role. sections: {len(d["sections"])}')

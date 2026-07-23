@@ -534,18 +534,16 @@
     }, { passive: true });
   }
 
-  /* "Nueva Coleccion": tabs Hombre/Mujer que alternan dos secciones-carrusel
-     (#ns-section-new_collection_1 = Hombre visible, #..._mujer = Mujer oculta).
-     Al tocar un tab se muestra su seccion y se oculta la otra. Ademas cada
-     carrusel se reconfigura a peek (slidesPerView:'auto', card 283px por CSS)
-     en mobile, preservando el 4-up de desktop via breakpoint 768 (node 959-19494). */
+  /* "Nueva Coleccion" con tabs Hombre/Mujer — GENERICO. Cada seccion product-list
+     con tabs lleva en su header un marcador data-kv-role="hombre|mujer". Empareja
+     cada seccion Mujer con la seccion Hombre inmediatamente anterior (orden del DOM),
+     asi soporta N bloques duplicados desde el admin. Al tocar un tab muestra su
+     seccion del par y oculta la otra; reconfigura peek (slidesPerView:'auto',
+     card 283px por CSS) en mobile, preservando el 4-up de desktop (node 959-19494). */
   function initNewCollectionTabs() {
-    var hombre = document.querySelector("#ns-section-new_collection_1");
-    var mujer = document.querySelector("#ns-section-new_collection_1_mujer");
-    if (!hombre) return;
-
     function isMobile() { return window.innerWidth < 768; }
     function swiperEl(section) { return section ? section.querySelector(".js-products-list-swiper") : null; }
+    function roleOf(section) { var el = section.querySelector("[data-kv-role]"); return el ? el.getAttribute("data-kv-role") : null; }
 
     /* Reconfigura el swiper de una seccion a peek en mobile; si ya esta hecho, solo update() */
     function peek(section) {
@@ -576,38 +574,52 @@
       container._kvPeek = true;
     }
 
-    function show(which) {
-      var showEl = which === "mujer" ? mujer : hombre;
-      var hideEl = which === "mujer" ? hombre : mujer;
-      if (!showEl) return;
-      if (hideEl) hideEl.style.display = "none";
-      // "block" explicito: la Mujer tiene display:none por CSS, y "" no lo pisa (el inline si)
+    // Armar pares por orden del DOM: cada Mujer con el Hombre anterior mas cercano.
+    var sections = Array.prototype.slice.call(document.querySelectorAll('[id^="ns-section-"]'))
+      .filter(function (s) { return s.querySelector("[data-kv-role]"); });
+    var pairs = [], lastHombre = null;
+    sections.forEach(function (s) {
+      var r = roleOf(s);
+      if (r === "hombre") { lastHombre = s; }
+      else if (r === "mujer" && lastHombre) { pairs.push({ hombre: lastHombre, mujer: s }); lastHombre = null; }
+    });
+    if (!pairs.length) return;
+
+    function show(pair, which) {
+      var showEl = which === "mujer" ? pair.mujer : pair.hombre;
+      var hideEl = which === "mujer" ? pair.hombre : pair.mujer;
+      hideEl.style.display = "none";
+      // "block" explicito: la Mujer tiene display:none por CSS y "" no lo pisa (el inline si)
       showEl.style.display = "block";
-      // el swiper estaba oculto (0px) o sin reconfigurar: peek + update ahora que es visible
       peek(showEl);
       var c = swiperEl(showEl);
       if (c && c.swiper) { c.swiper.update(); }
     }
 
-    // Tabs clickeables (presentes en ambas cabeceras)
-    var tabs = document.querySelectorAll("#ns-section-new_collection_1 [data-kv-tab], #ns-section-new_collection_1_mujer [data-kv-tab]");
-    tabs.forEach(function (el) {
-      el.style.cursor = "pointer";
-      el.addEventListener("click", function (e) { e.preventDefault(); show(el.getAttribute("data-kv-tab")); });
+    pairs.forEach(function (pair) {
+      // Mujer oculta desde JS tambien (fallback si el navegador no soporta :has)
+      pair.mujer.style.display = "none";
+      [pair.hombre, pair.mujer].forEach(function (sec) {
+        sec.querySelectorAll("[data-kv-tab]").forEach(function (el) {
+          el.style.cursor = "pointer";
+          el.addEventListener("click", function (e) { e.preventDefault(); show(pair, el.getAttribute("data-kv-tab")); });
+        });
+      });
+      // Init: peek de la seccion visible (Hombre) cuando el theme cree su swiper
+      var tries = 0;
+      (function wait() {
+        var c = swiperEl(pair.hombre);
+        if ((c && c.swiper) || tries > 30) { peek(pair.hombre); return; }
+        tries++;
+        setTimeout(wait, 50);
+      })();
     });
 
-    // Init: reconfigurar peek de la seccion visible (Hombre) cuando el theme cree su swiper
-    var tries = 0;
-    (function wait() {
-      var c = swiperEl(hombre);
-      if ((c && c.swiper) || tries > 30) { peek(hombre); return; }
-      tries++;
-      setTimeout(wait, 50);
-    })();
-
     window.addEventListener("resize", function () {
-      var visible = (mujer && getComputedStyle(mujer).display !== "none") ? mujer : hombre;
-      peek(visible);
+      pairs.forEach(function (pair) {
+        var visible = (getComputedStyle(pair.mujer).display !== "none") ? pair.mujer : pair.hombre;
+        peek(visible);
+      });
     }, { passive: true });
   }
 

@@ -512,22 +512,23 @@
 }
 
 /* ================================================================== */
-/* "Nueva Colección" (new_collection_1 Hombre / _mujer) — node 959-19494 */
-/* Tabs Hombre/Mujer alternan dos carruseles (JS initNewCollectionTabs). */
+/* "Nueva Colección" con tabs Hombre/Mujer — GENERICO (node 959-19494)  */
+/* Cualquier seccion product-list con tabs (data-kv-role) — soporta      */
+/* duplicados del admin. JS: initNewCollectionTabs (empareja por DOM).   */
 /* Mobile: cards con peek 283, gap 16, radius 8, py24 px16 (bleed dcha). */
 /* ================================================================== */
-/* Mujer oculta por defecto (todos los viewports); el JS la muestra al tocar el tab */
-#ns-section-new_collection_1_mujer{display:none}
+/* Mujer oculta por defecto: toda seccion cuyo header sea data-kv-role="mujer" */
+[id^="ns-section-"]:has([data-kv-role="mujer"]){display:none}
 @media (max-width:767px){
-  :is(#ns-section-new_collection_1,#ns-section-new_collection_1_mujer) .js-products-list-slider{padding:24px 0 24px 16px!important}
-  :is(#ns-section-new_collection_1,#ns-section-new_collection_1_mujer) .swiper-slide{width:283px!important}
-  :is(#ns-section-new_collection_1,#ns-section-new_collection_1_mujer) .product-item{border-radius:8px!important;overflow:hidden!important}
-  :is(#ns-section-new_collection_1,#ns-section-new_collection_1_mujer) .swiper-button-outside{display:flex!important;align-items:center;justify-content:center;width:36px!important;height:36px!important;border-radius:50%;background-color:rgba(233,231,226,.5);background-repeat:no-repeat;background-position:center;background-size:20px 20px;top:36%!important;margin-top:0;transform:translateY(-50%)}
+  [id^="ns-section-"]:has([data-kv-role]) .js-products-list-slider{padding:24px 0 24px 16px!important}
+  [id^="ns-section-"]:has([data-kv-role]) .swiper-slide{width:283px!important}
+  [id^="ns-section-"]:has([data-kv-role]) .product-item{border-radius:8px!important;overflow:hidden!important}
+  [id^="ns-section-"]:has([data-kv-role]) .swiper-button-outside{display:flex!important;align-items:center;justify-content:center;width:36px!important;height:36px!important;border-radius:50%;background-color:rgba(233,231,226,.5);background-repeat:no-repeat;background-position:center;background-size:20px 20px;top:36%!important;margin-top:0;transform:translateY(-50%)}
   /* chevron exacto del Figma (mismo que el hero), ocultando el sprite nativo #arrow-long */
-  :is(#ns-section-new_collection_1,#ns-section-new_collection_1_mujer) .swiper-button-outside .slider-arrow{display:none!important}
-  :is(#ns-section-new_collection_1,#ns-section-new_collection_1_mujer) .swiper-button-outside.swiper-button-prev{left:16px!important;right:auto!important;background-image:url("data:image/svg+xml,%3Csvg%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M14.5996%204.7998L7.39961%2011.9998L14.5996%2019.1998%22%20stroke%3D%22black%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E")}
-  :is(#ns-section-new_collection_1,#ns-section-new_collection_1_mujer) .swiper-button-outside.swiper-button-next{right:16px!important;left:auto!important;background-image:url("data:image/svg+xml,%3Csvg%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M9.40039%2019.2002L16.6004%2012.0002L9.40039%204.8002%22%20stroke%3D%22black%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E")}
-  :is(#ns-section-new_collection_1,#ns-section-new_collection_1_mujer) .js-swiper-products-list-pagination{display:none!important}
+  [id^="ns-section-"]:has([data-kv-role]) .swiper-button-outside .slider-arrow{display:none!important}
+  [id^="ns-section-"]:has([data-kv-role]) .swiper-button-outside.swiper-button-prev{left:16px!important;right:auto!important;background-image:url("data:image/svg+xml,%3Csvg%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M14.5996%204.7998L7.39961%2011.9998L14.5996%2019.1998%22%20stroke%3D%22black%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E")}
+  [id^="ns-section-"]:has([data-kv-role]) .swiper-button-outside.swiper-button-next{right:16px!important;left:auto!important;background-image:url("data:image/svg+xml,%3Csvg%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M9.40039%2019.2002L16.6004%2012.0002L9.40039%204.8002%22%20stroke%3D%22black%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E")}
+  [id^="ns-section-"]:has([data-kv-role]) .js-swiper-products-list-pagination{display:none!important}
 }
 
 /* ================================================================== */
