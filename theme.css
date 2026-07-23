@@ -481,10 +481,12 @@
 .kv-topbar-track{display:flex;flex-direction:column;will-change:transform}
 .kv-topbar-msg{height:16px;line-height:16px;display:flex;align-items:center;justify-content:center;white-space:nowrap;flex:none;width:100%}
 
-/* Flechas del primer slider (hero slideshow) ocultas solo en mobile */
+/* Flechas ocultas en mobile: hero_slideshow + full_banner_carousel (mismos estilos que el primer carousel) */
 @media (max-width:767px){
   #ns-section-hero_slideshow .swiper-button-prev,
-  #ns-section-hero_slideshow .swiper-button-next{display:none!important}
+  #ns-section-hero_slideshow .swiper-button-next,
+  #ns-section-full_banner_carousel .swiper-button-prev,
+  #ns-section-full_banner_carousel .swiper-button-next{display:none!important}
 }
 
 /* Hero slideshow — tamaños de texto exactos segun Figma (nodes 959-18445 desktop / 959-19567 mobile),
