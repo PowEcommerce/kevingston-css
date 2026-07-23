@@ -623,12 +623,22 @@
     }, { passive: true });
   }
 
+  /* Footer newsletter: textos del Figma. Las translations requieren fork, asi que
+     por ahora los seteamos por JS (solo aplica en las 5 paginas donde carga este script). */
+  function initFooterText() {
+    var input = document.querySelector(".footer-content .newsletter-form-input");
+    if (input) { input.placeholder = "Ingresá tu email"; input.setAttribute("aria-label", "Ingresá tu email"); }
+    var btn = document.querySelector(".footer-content .newsletter-form-button");
+    if (btn) { btn.value = "Suscribirme"; }
+  }
+
   function init() {
     var adbarClosed = initAdbarClose();
     if (!adbarClosed) initTopbarCarousel();
     initStickyHeader();
     initFacilitatorsSlider();
     initNewCollectionTabs();
+    initFooterText();
 
     fetch(MAP_URL, { cache: "no-cache" })
       .then(function (r) { return r.ok ? r.json() : null; })
