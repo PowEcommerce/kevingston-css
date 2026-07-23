@@ -543,13 +543,13 @@
   #ns-section-shop_the_look .banner-image-container-cropped-custom{padding-bottom:650px!important}
 }
 @media (max-width:767px){
-  /* header mobile: py24 / px16 */
-  #ns-section-shop_the_look_header .rich-text-section{padding:24px 16px!important}
+  /* header mobile: 32px arriba (tope del bloque, antes del titulo) / 16 lados / 24 abajo (al look) */
+  #ns-section-shop_the_look_header .rich-text-section{padding:32px 16px 24px 16px!important}
   /* looks apilados: gap 8 + alto exacto 420px */
   #ns-section-shop_the_look .flex-grid{gap:8px!important}
   #ns-section-shop_the_look .banner-image-container-cropped-custom{padding-bottom:420px!important}
-  /* mismo padding vertical que banners_duo (32px) en mobile */
-  #ns-section-shop_the_look .banners-section{padding-top:32px!important;padding-bottom:32px!important}
+  /* 32px abajo del ultimo look (cierre del bloque, igual que banners_duo) */
+  #ns-section-shop_the_look .banners-section{padding-bottom:32px!important}
 }
 
 /* ================================================================== */
