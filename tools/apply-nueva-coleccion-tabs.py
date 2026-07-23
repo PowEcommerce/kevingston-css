@@ -66,6 +66,26 @@ if 'new_collection_1_mujer' not in secs:
         i = d['order'].index('new_collection_1')
         d['order'].insert(i + 1, 'new_collection_1_mujer')
 
+# 1b) SEED editorial_products: gemelo Mujer. Mantiene los mismos block keys que el
+# base (para reusar el CSS de layout scopeado; el CSS se extiende con :is a las 2 secciones).
+if 'editorial_products' in secs:
+    ed = secs['editorial_products']
+    ed['blocks']['tabs_row']['blocks']['tabs']['settings']['text'] = TAB_H
+    if 'editorial_products_mujer' not in secs:
+        em = copy.deepcopy(ed)
+        em['blocks']['tabs_row']['blocks']['tabs']['settings']['text'] = TAB_M
+        em['blocks']['products']['settings']['products_source'] = collections.OrderedDict(
+            [('kind', 'category'), ('id', MUJER_CAT)])
+        new = collections.OrderedDict()
+        for k, v in secs.items():
+            new[k] = v
+            if k == 'editorial_products':
+                new['editorial_products_mujer'] = em
+        d['sections'] = secs = new
+        if 'editorial_products_mujer' not in d['order']:
+            i = d['order'].index('editorial_products')
+            d['order'].insert(i + 1, 'editorial_products_mujer')
+
 # 2) GENERICO: reescribir el formato de tabs en toda seccion product-list con tabs
 count = 0
 for k, sec in secs.items():

@@ -548,6 +548,27 @@
 }
 
 /* ================================================================== */
+/* EDITORIAL PRODUCTS (+ gemelo Mujer) — tabs Hombre/Mujer.             */
+/* Layout grid (texto 332 + productos) SOLO desktop; mobile apilado     */
+/* (carrusel normal; hereda peek/flechas via data-kv-role).             */
+/* ================================================================== */
+@media (min-width:768px){
+  :is(#ns-section-editorial_products,#ns-section-editorial_products_mujer) .js-products-list-slider > .d-flex.flex-column{display:grid!important;grid-template-columns:332px minmax(0,1fr);column-gap:16px}
+  :is(#ns-section-editorial_products,#ns-section-editorial_products_mujer) #ns-block-tabs_row{grid-column:1 / -1}
+  :is(#ns-section-editorial_products,#ns-section-editorial_products_mujer) #ns-block-editorial_text{grid-column:1;grid-row:2}
+  :is(#ns-section-editorial_products,#ns-section-editorial_products_mujer) .products-list-slider{grid-column:2;grid-row:2;min-width:0}
+  :is(#ns-section-editorial_products,#ns-section-editorial_products_mujer) #ns-block-editorial_text .heading-block{max-width:308px}
+  :is(#ns-section-editorial_products,#ns-section-editorial_products_mujer) #ns-block-editorial_text .btn{margin-top:12px}
+}
+@media (max-width:767px){
+  /* mobile: resetear el grid global (linea 7 lo pone en todas las resoluciones) -> apilado */
+  :is(#ns-section-editorial_products,#ns-section-editorial_products_mujer) .js-products-list-slider > .d-flex.flex-column{display:flex!important}
+}
+/* tipografia editorial (el css_code solo cubre el base; la extiendo al gemelo) */
+:is(#ns-section-editorial_products,#ns-section-editorial_products_mujer) .heading-block{font-weight:400!important;line-height:normal;color:#050505}
+:is(#ns-section-editorial_products,#ns-section-editorial_products_mujer) .text-content{font-weight:400;font-size:14px;line-height:1.3;color:#000}
+
+/* ================================================================== */
 /* SHOP THE LOOK — layout (imagenes + titulo). Sin hotspots (esperan fork). */
 /* Nodes 1223-29710 (mobile) / 1223-28843 (desktop).                       */
 /* Header desktop ya es py48/px32 nativo; gap looks desktop 16 nativo.      */
