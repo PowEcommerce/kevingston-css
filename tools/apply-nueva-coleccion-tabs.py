@@ -45,6 +45,9 @@ if not st.get('mobile_direction_enabled'):
             ns['mobile_direction'] = 'column'
     hr['settings'] = ns
 
+# tabs base -> TAB_H (explicito, para que funcione tambien desde un baseline sin data-kv-tab)
+h['blocks']['header_row']['blocks']['tabs']['settings']['text'] = TAB_H
+
 if 'new_collection_1_mujer' not in secs:
     m = copy.deepcopy(h)
     hrb = m['blocks'].pop('header_row'); m['blocks']['header_row_m'] = hrb
@@ -54,6 +57,7 @@ if 'new_collection_1_mujer' not in secs:
     t = inner.pop('title'); inner['title_m'] = t
     tb = inner.pop('tabs'); inner['tabs_m'] = tb
     m['blocks']['header_row_m']['block_order'] = ['title_m', 'tabs_m']
+    m['blocks']['header_row_m']['blocks']['tabs_m']['settings']['text'] = TAB_M
     m['blocks']['products_m']['settings']['products_source'] = collections.OrderedDict(
         [('kind', 'category'), ('id', MUJER_CAT)])
     new = collections.OrderedDict()
