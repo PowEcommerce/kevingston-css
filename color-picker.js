@@ -581,7 +581,8 @@
       var hideEl = which === "mujer" ? hombre : mujer;
       if (!showEl) return;
       if (hideEl) hideEl.style.display = "none";
-      showEl.style.display = "";
+      // "block" explicito: la Mujer tiene display:none por CSS, y "" no lo pisa (el inline si)
+      showEl.style.display = "block";
       // el swiper estaba oculto (0px) o sin reconfigurar: peek + update ahora que es visible
       peek(showEl);
       var c = swiperEl(showEl);
