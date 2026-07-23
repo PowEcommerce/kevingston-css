@@ -563,8 +563,7 @@
   /* looks apilados: gap 8 + alto exacto 420px */
   #ns-section-shop_the_look .flex-grid{gap:8px!important}
   #ns-section-shop_the_look .banner-image-container-cropped-custom{padding-bottom:420px!important}
-  /* 32px abajo del ultimo look (cierre del bloque, igual que banners_duo) */
-  #ns-section-shop_the_look .banners-section{padding-bottom:32px!important}
+  /* padding-bottom: SIN override — lo maneja el vertical_padding nativo (editable desde el admin) */
 }
 
 /* ================================================================== */
