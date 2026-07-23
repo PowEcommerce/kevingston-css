@@ -502,8 +502,7 @@
 /* El JS (initFacilitatorsSlider) reconfigura el swiper a auto+centered.  */
 /* ================================================================== */
 @media (max-width:767px){
-  /* padding 24/24 en el contenedor interno (trae 32px inline) — sin paginador el bloque mide 24+90+24=138px (alto del frame Figma) */
-  #ns-section-facilitators .banners-section{padding-top:24px!important;padding-bottom:24px!important;margin-top:0!important;margin-bottom:0!important}
+  /* padding vertical: SIN override — lo maneja el vertical_padding nativo (editable desde el admin) */
   #ns-section-facilitators .container{padding-left:16px!important;padding-right:16px!important}
   #ns-section-facilitators .swiper-slide{width:285px!important;height:auto!important}
   #ns-section-facilitators .banner-image-container-cropped-custom{padding-bottom:90px!important}
