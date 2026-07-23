@@ -532,6 +532,25 @@
 }
 
 /* ================================================================== */
+/* SHOP THE LOOK — layout (imagenes + titulo). Sin hotspots (esperan fork). */
+/* Nodes 1223-29710 (mobile) / 1223-28843 (desktop).                       */
+/* Header desktop ya es py48/px32 nativo; gap looks desktop 16 nativo.      */
+/* ================================================================== */
+/* "Ver Coleccion" subrayado (link-button del Figma) */
+#ns-section-shop_the_look_header .btn-tertiary{text-decoration:underline!important}
+@media (min-width:768px){
+  /* look desktop: alto exacto 650px */
+  #ns-section-shop_the_look .banner-image-container-cropped-custom{padding-bottom:650px!important}
+}
+@media (max-width:767px){
+  /* header mobile: py24 / px16 */
+  #ns-section-shop_the_look_header .rich-text-section{padding:24px 16px!important}
+  /* looks apilados: gap 8 + alto exacto 420px */
+  #ns-section-shop_the_look .flex-grid{gap:8px!important}
+  #ns-section-shop_the_look .banner-image-container-cropped-custom{padding-bottom:420px!important}
+}
+
+/* ================================================================== */
 /* HEADER MOBILE STICKY — al scrollear: barra de búsqueda -> lupa      */
 /* al lado del menú (nodo 959-19571)                                   */
 /* ================================================================== */
