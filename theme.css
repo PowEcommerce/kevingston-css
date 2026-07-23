@@ -512,23 +512,21 @@
 }
 
 /* ================================================================== */
-/* "Nueva Colección" (new_collection_1) en mobile — node 959-19494     */
-/* Carrusel de cards con peek: card 283, gap 16, radius 8, py24 px16.   */
-/* El JS (initNewCollectionSlider) reconfigura el swiper a auto.        */
+/* "Nueva Colección" (new_collection_1 Hombre / _mujer) — node 959-19494 */
+/* Tabs Hombre/Mujer alternan dos carruseles (JS initNewCollectionTabs). */
+/* Mobile: cards con peek 283, gap 16, radius 8, py24 px16 (bleed dcha). */
 /* ================================================================== */
+/* Mujer oculta por defecto (todos los viewports); el JS la muestra al tocar el tab */
+#ns-section-new_collection_1_mujer{display:none}
 @media (max-width:767px){
-  /* padding de la seccion: 24 vertical, 16 izquierda, 0 derecha (bleed) — el carrusel llega al borde derecho */
-  #ns-section-new_collection_1 .js-products-list-slider{padding:24px 0 24px 16px!important}
-  /* card con peek: ancho fijo 283 + radius 8 */
-  #ns-section-new_collection_1 .swiper-slide{width:283px!important}
-  #ns-section-new_collection_1 .product-item{border-radius:8px!important;overflow:hidden!important}
-  /* flechas overlaid sobre la imagen: circulo 36, bg claro 50% */
-  #ns-section-new_collection_1 .swiper-button-outside{width:36px!important;height:36px!important;border-radius:50%;background:rgba(233,231,226,.5);display:flex;align-items:center;justify-content:center;top:50%;margin-top:0;transform:translateY(-50%)}
-  #ns-section-new_collection_1 .swiper-button-outside.swiper-button-prev{left:16px!important;right:auto!important}
-  #ns-section-new_collection_1 .swiper-button-outside.swiper-button-next{right:16px!important;left:auto!important}
-  #ns-section-new_collection_1 .swiper-button-outside .slider-arrow{width:20px!important;height:20px!important}
-  /* sin paginador en mobile (el carrusel se navega por swipe/flechas) */
-  #ns-section-new_collection_1 .js-swiper-products-list-pagination{display:none!important}
+  :is(#ns-section-new_collection_1,#ns-section-new_collection_1_mujer) .js-products-list-slider{padding:24px 0 24px 16px!important}
+  :is(#ns-section-new_collection_1,#ns-section-new_collection_1_mujer) .swiper-slide{width:283px!important}
+  :is(#ns-section-new_collection_1,#ns-section-new_collection_1_mujer) .product-item{border-radius:8px!important;overflow:hidden!important}
+  :is(#ns-section-new_collection_1,#ns-section-new_collection_1_mujer) .swiper-button-outside{width:36px!important;height:36px!important;border-radius:50%;background:rgba(233,231,226,.5);display:flex;align-items:center;justify-content:center;top:50%;margin-top:0;transform:translateY(-50%)}
+  :is(#ns-section-new_collection_1,#ns-section-new_collection_1_mujer) .swiper-button-outside.swiper-button-prev{left:16px!important;right:auto!important}
+  :is(#ns-section-new_collection_1,#ns-section-new_collection_1_mujer) .swiper-button-outside.swiper-button-next{right:16px!important;left:auto!important}
+  :is(#ns-section-new_collection_1,#ns-section-new_collection_1_mujer) .swiper-button-outside .slider-arrow{width:20px!important;height:20px!important}
+  :is(#ns-section-new_collection_1,#ns-section-new_collection_1_mujer) .js-swiper-products-list-pagination{display:none!important}
 }
 
 /* ================================================================== */

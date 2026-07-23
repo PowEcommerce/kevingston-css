@@ -534,26 +534,31 @@
     }, { passive: true });
   }
 
-  /* "Nueva Coleccion" (new_collection_1) en mobile: carrusel de cards con "peek"
-     del siguiente (node 959-19494). El theme lo inicializa slidesPerView:1 (mobile)
-     / 4 (desktop). Lo reconfiguramos a slidesPerView:'auto' (card de 283px por CSS)
-     manteniendo el 4-up de desktop via breakpoint 768. Solo actua en mobile. */
-  function initNewCollectionSlider() {
-    var section = document.querySelector("#ns-section-new_collection_1");
-    if (!section) return;
-    var container = section.querySelector(".js-products-list-swiper");
-    if (!container) return;
-    var parent = container.closest(".js-products-list-slider-container");
-    var wrapper = container.querySelector(".js-swiper-products-slider");
-    var cols = wrapper && wrapper.dataset.desktopColumns ? (parseInt(wrapper.dataset.desktopColumns, 10) || 4) : 4;
-    var slideCount = container.querySelectorAll(".swiper-slide").length;
-    var mine = false;
+  /* "Nueva Coleccion": tabs Hombre/Mujer que alternan dos secciones-carrusel
+     (#ns-section-new_collection_1 = Hombre visible, #..._mujer = Mujer oculta).
+     Al tocar un tab se muestra su seccion y se oculta la otra. Ademas cada
+     carrusel se reconfigura a peek (slidesPerView:'auto', card 283px por CSS)
+     en mobile, preservando el 4-up de desktop via breakpoint 768 (node 959-19494). */
+  function initNewCollectionTabs() {
+    var hombre = document.querySelector("#ns-section-new_collection_1");
+    var mujer = document.querySelector("#ns-section-new_collection_1_mujer");
+    if (!hombre) return;
 
     function isMobile() { return window.innerWidth < 768; }
+    function swiperEl(section) { return section ? section.querySelector(".js-products-list-swiper") : null; }
 
-    function apply() {
-      if (!isMobile() || typeof Swiper === "undefined") return;
-      if (mine && container.swiper) return;
+    /* Reconfigura el swiper de una seccion a peek en mobile; si ya esta hecho, solo update() */
+    function peek(section) {
+      if (!section) return;
+      var container = swiperEl(section);
+      if (!container) return;
+      if (container._kvPeek) { if (container.swiper) container.swiper.update(); return; }
+      if (!isMobile()) { if (container.swiper) container.swiper.update(); return; }
+      if (typeof Swiper === "undefined") return;
+      var parent = container.closest(".js-products-list-slider-container");
+      var wrapper = container.querySelector(".js-swiper-products-slider");
+      var cols = wrapper && wrapper.dataset.desktopColumns ? (parseInt(wrapper.dataset.desktopColumns, 10) || 4) : 4;
+      var slideCount = container.querySelectorAll(".swiper-slide").length;
       if (container.swiper) { try { container.swiper.destroy(true, true); } catch (e) {} }
       /* global Swiper */
       new Swiper(container, {
@@ -568,18 +573,41 @@
         pagination: false,
         breakpoints: { 768: { slidesPerView: cols, slidesPerGroup: cols } }
       });
-      mine = true;
+      container._kvPeek = true;
     }
 
+    function show(which) {
+      var showEl = which === "mujer" ? mujer : hombre;
+      var hideEl = which === "mujer" ? hombre : mujer;
+      if (!showEl) return;
+      if (hideEl) hideEl.style.display = "none";
+      showEl.style.display = "";
+      // el swiper estaba oculto (0px) o sin reconfigurar: peek + update ahora que es visible
+      peek(showEl);
+      var c = swiperEl(showEl);
+      if (c && c.swiper) { c.swiper.update(); }
+    }
+
+    // Tabs clickeables (presentes en ambas cabeceras)
+    var tabs = document.querySelectorAll("#ns-section-new_collection_1 [data-kv-tab], #ns-section-new_collection_1_mujer [data-kv-tab]");
+    tabs.forEach(function (el) {
+      el.style.cursor = "pointer";
+      el.addEventListener("click", function (e) { e.preventDefault(); show(el.getAttribute("data-kv-tab")); });
+    });
+
+    // Init: reconfigurar peek de la seccion visible (Hombre) cuando el theme cree su swiper
     var tries = 0;
     (function wait() {
-      if (!isMobile()) return;
-      if (container.swiper || tries > 30) { apply(); return; }
+      var c = swiperEl(hombre);
+      if ((c && c.swiper) || tries > 30) { peek(hombre); return; }
       tries++;
       setTimeout(wait, 50);
     })();
 
-    window.addEventListener("resize", function () { if (isMobile()) apply(); }, { passive: true });
+    window.addEventListener("resize", function () {
+      var visible = (mujer && getComputedStyle(mujer).display !== "none") ? mujer : hombre;
+      peek(visible);
+    }, { passive: true });
   }
 
   function init() {
@@ -587,7 +615,7 @@
     if (!adbarClosed) initTopbarCarousel();
     initStickyHeader();
     initFacilitatorsSlider();
-    initNewCollectionSlider();
+    initNewCollectionTabs();
 
     fetch(MAP_URL, { cache: "no-cache" })
       .then(function (r) { return r.ok ? r.json() : null; })
