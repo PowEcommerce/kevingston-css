@@ -548,6 +548,8 @@
   /* looks apilados: gap 8 + alto exacto 420px */
   #ns-section-shop_the_look .flex-grid{gap:8px!important}
   #ns-section-shop_the_look .banner-image-container-cropped-custom{padding-bottom:420px!important}
+  /* mismo padding vertical que banners_duo (32px) en mobile */
+  #ns-section-shop_the_look .banners-section{padding-top:32px!important;padding-bottom:32px!important}
 }
 
 /* ================================================================== */
