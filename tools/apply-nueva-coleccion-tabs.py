@@ -85,6 +85,10 @@ if 'editorial_products' in secs:
         if 'editorial_products_mujer' not in d['order']:
             i = d['order'].index('editorial_products')
             d['order'].insert(i + 1, 'editorial_products_mujer')
+    # gap texto<->boton = 24 (node 959-19537) en ambas
+    for ek in ('editorial_products', 'editorial_products_mujer'):
+        if ek in secs:
+            secs[ek]['blocks']['editorial_text']['settings']['gap'] = 24
 
 # 2) GENERICO: reescribir el formato de tabs en toda seccion product-list con tabs
 count = 0

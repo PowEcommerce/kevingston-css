@@ -559,14 +559,27 @@
   :is(#ns-section-editorial_products,#ns-section-editorial_products_mujer) .products-list-slider{grid-column:2;grid-row:2;min-width:0}
   :is(#ns-section-editorial_products,#ns-section-editorial_products_mujer) #ns-block-editorial_text .heading-block{max-width:308px}
   :is(#ns-section-editorial_products,#ns-section-editorial_products_mujer) #ns-block-editorial_text .btn{margin-top:12px}
+  /* sin flechas en desktop (en mobile quedan las chevron) */
+  :is(#ns-section-editorial_products,#ns-section-editorial_products_mujer) .swiper-button-outside{display:none!important}
 }
 @media (max-width:767px){
   /* mobile: resetear el grid global (linea 7 lo pone en todas las resoluciones) -> apilado */
-  :is(#ns-section-editorial_products,#ns-section-editorial_products_mujer) .js-products-list-slider > .d-flex.flex-column{display:flex!important}
+  /* gap 0 + margenes explicitos: tabs -> texto 16, texto -> carrusel 32 (node 959-19537) */
+  :is(#ns-section-editorial_products,#ns-section-editorial_products_mujer) .js-products-list-slider > .d-flex.flex-column{display:flex!important;gap:0!important}
+  :is(#ns-section-editorial_products,#ns-section-editorial_products_mujer) #ns-block-editorial_text{margin-top:16px!important}
+  :is(#ns-section-editorial_products,#ns-section-editorial_products_mujer) .products-list-slider{margin-top:32px!important}
+  /* el texto respeta 16px a la derecha (el carrusel si hace bleed hasta el borde) */
+  :is(#ns-section-editorial_products,#ns-section-editorial_products_mujer) #ns-block-tabs_row,
+  :is(#ns-section-editorial_products,#ns-section-editorial_products_mujer) #ns-block-editorial_text{padding-right:16px!important}
 }
+/* boton "Ver Coleccion": pill outline compacto (Figma: border .75 negro, radius 50, px24 py8, 12px, fit)
+   — sobreescribe el min-width:218px que hereda de los botones del hero (css_code .btn-secondary) */
+:is(#ns-section-editorial_products,#ns-section-editorial_products_mujer) #ns-block-editorial_text .btn{min-width:0!important;min-height:0!important;width:auto!important;padding:8px 24px!important;border-radius:50px!important;border:0.75px solid #000!important;font-size:12px!important;line-height:normal!important;background:transparent!important;color:#000!important}
 /* tipografia editorial (el css_code solo cubre el base; la extiendo al gemelo) */
 :is(#ns-section-editorial_products,#ns-section-editorial_products_mujer) .heading-block{font-weight:400!important;line-height:normal;color:#050505}
 :is(#ns-section-editorial_products,#ns-section-editorial_products_mujer) .text-content{font-weight:400;font-size:14px;line-height:1.3;color:#000}
+/* sin paginador (mobile ya lo oculta la regla generica; esto lo saca tambien en desktop) */
+:is(#ns-section-editorial_products,#ns-section-editorial_products_mujer) .js-swiper-products-list-pagination{display:none!important}
 
 /* ================================================================== */
 /* SHOP THE LOOK — layout (imagenes + titulo). Sin hotspots (esperan fork). */
