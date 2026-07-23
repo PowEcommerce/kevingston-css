@@ -513,6 +513,12 @@
   #ns-section-facilitators .swiper-pagination{display:none!important}
 }
 
+/* banners_duo: sin gap entre banners en DESKTOP (mobile mantiene el gap nativo de 8px).
+   El gap nativo es un solo valor; desktop=0 no se puede expresar nativo -> override CSS. */
+@media (min-width:768px){
+  #ns-section-banners_duo .flex-grid{--grid-gap:0px!important;gap:0!important}
+}
+
 /* ================================================================== */
 /* "Nueva Colección" con tabs Hombre/Mujer — GENERICO (node 959-19494)  */
 /* Cualquier seccion product-list con tabs (data-kv-role) — soporta      */
