@@ -520,6 +520,11 @@
   #ns-section-banners_duo .flex-grid{--grid-gap:0px!important;gap:0!important}
 }
 
+/* banners_trio (3 banners final): gap 8px entre banners SOLO en mobile (desktop queda con su gap nativo). */
+@media (max-width:767px){
+  #ns-section-banners_trio .flex-grid{--grid-gap:8px!important}
+}
+
 /* ================================================================== */
 /* "Nueva Colección" con tabs Hombre/Mujer — GENERICO (node 959-19494)  */
 /* Cualquier seccion product-list con tabs (data-kv-role) — soporta      */
