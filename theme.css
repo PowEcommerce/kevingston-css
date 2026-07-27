@@ -284,7 +284,8 @@ body.modal-show{overflow:hidden!important}
 @media (max-width:767px){
   #quickshop-modal .modal-header{display:flex!important;flex-direction:row!important;align-items:center;justify-content:space-between;gap:48px;padding:8px 16px!important;min-height:44px;border-bottom:1px solid #d9d9d9;background:#fff;position:sticky;top:0;z-index:3}
   #quickshop-modal .modal-header::before{content:"Vista rápida";font:500 16px/1.2 "Lato",sans-serif;color:#000;white-space:nowrap}
-  #quickshop-modal .modal-header .modal-close{position:relative!important;top:auto!important;right:auto!important;margin:0!important}
+  #quickshop-modal .modal-header .modal-close{position:relative!important;top:auto!important;right:auto!important;margin:0!important;padding:0!important;width:20px!important;height:20px!important;min-height:0!important;flex:0 0 auto;display:flex!important;align-items:center;justify-content:center}
+  #quickshop-modal .modal-header .modal-close svg,#quickshop-modal .modal-header .modal-close .modal-close-icon{width:20px!important;height:20px!important;font-size:20px!important}
 }
 #quickshop-modal .modal-body{padding:24px}
 #quickshop-modal .js-quickshop-container .grid-md-2{gap:24px;align-items:start}
