@@ -122,6 +122,32 @@
     for (var i = 0; i < cards.length; i++) renderCard(cards[i]);
     // Si root ES una card (nodo agregado por infinite scroll)
     if (root && root.matches && root.matches(CARD_SELECTOR)) renderCard(root);
+    initCardImageSpinners(scope);
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* Spinner por card mientras carga la imagen del producto              */
+  /* Pone .kv-img-loading en el contenedor hasta el load del <img>.      */
+  /* ------------------------------------------------------------------ */
+  function initCardImageSpinners(scope) {
+    var containers = (scope || document).querySelectorAll(
+      ".product-item-image-container"
+    );
+    for (var i = 0; i < containers.length; i++) {
+      (function (c) {
+        if (c._kvSpin) return;
+        c._kvSpin = true;
+        var img = c.querySelector("img");
+        if (!img) return;
+        if (img.complete && img.naturalWidth > 0) return; // ya cargada
+        c.classList.add("kv-img-loading");
+        var done = function () {
+          c.classList.remove("kv-img-loading");
+        };
+        img.addEventListener("load", done, { once: true });
+        img.addEventListener("error", done, { once: true });
+      })(containers[i]);
+    }
   }
 
   /* ------------------------------------------------------------------ */
