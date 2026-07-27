@@ -158,9 +158,13 @@
           );
           if (!isEditorial) {
             var bp = sw.params.breakpoints;
-            if (bp && bp["768"]) bp["768"].slidesPerView = 4.2;
+            if (bp && bp["768"]) {
+              bp["768"].slidesPerView = 4.2;
+              bp["768"].slidesOffsetBefore = 32; // arranca alineado; al scrollear sangra al borde
+            }
             if (window.innerWidth >= 768) {
               sw.params.slidesPerView = 4.2;
+              sw.params.slidesOffsetBefore = 32;
               sw.update();
             }
           }

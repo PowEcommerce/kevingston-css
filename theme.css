@@ -707,9 +707,10 @@ body.modal-show{overflow:hidden!important}
    (el peek del 5to sangra hasta el borde). Editorial excluido (tiene layout grid propio). */
 @media (min-width:768px){
   [id^="ns-section-"]:has([data-kv-role]) .js-swiper-products-list-pagination{display:none!important}
-  [id^="ns-section-"]:has([data-kv-role]):not(#ns-section-editorial_products):not(#ns-section-editorial_products_mujer) .js-products-list-slider{padding-right:0!important}
-  /* pero el header (titulo + tabs Hombre/Mujer) conserva el padding derecho del admin */
-  [id^="ns-section-"]:has([data-kv-role]):not(#ns-section-editorial_products):not(#ns-section-editorial_products_mujer) .js-products-list-slider > .d-flex.flex-column > *:has([data-kv-role]){padding-right:32px!important}
+  [id^="ns-section-"]:has([data-kv-role]):not(#ns-section-editorial_products):not(#ns-section-editorial_products_mujer) .js-products-list-slider{padding-left:0!important;padding-right:0!important}
+  /* pero el header (titulo + tabs Hombre/Mujer) conserva el padding del admin a ambos lados.
+     El carrusel arranca alineado via slidesOffsetBefore:32 (JS) y al scrollear sangra al borde. */
+  [id^="ns-section-"]:has([data-kv-role]):not(#ns-section-editorial_products):not(#ns-section-editorial_products_mujer) .js-products-list-slider > .d-flex.flex-column > *:has([data-kv-role]){padding-left:32px!important;padding-right:32px!important}
 }
 
 /* ================================================================== */
