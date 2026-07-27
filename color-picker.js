@@ -1135,14 +1135,27 @@
         '<p class="kv-sub-success-text">Revisá tu casilla de email y enterate de todas las novedades.</p>';
       content.appendChild(sb);
     }
+    // Marca el newsletter como cerrado/enviado en la sesión → el modal de promos
+    // respeta la prioridad del newsletter (spec 07-C/M06-C).
+    function markNewsletterDone() { try { sessionStorage.setItem("kv-newsletter-done", "1"); } catch (e) {} }
+
     var successAlert = form.querySelector(".js-newsletter-success-alert");
     if (successAlert) {
       var show = function () {
         var vis = getComputedStyle(successAlert).display !== "none";
         modal.classList.toggle("kv-sub-success", vis);
+        if (vis) markNewsletterDone();
       };
       new MutationObserver(show).observe(successAlert, { attributes: true, attributeFilter: ["style", "class"] });
     }
+    // cierre por ×, overlay o Escape → el modal pierde .modal-show
+    var closeBtn = modal.querySelector(".modal-close");
+    if (closeBtn) closeBtn.addEventListener("click", markNewsletterDone);
+    var wasShown = false;
+    new MutationObserver(function () {
+      if (modal.classList.contains("modal-show")) wasShown = true;
+      else if (wasShown) markNewsletterDone();
+    }).observe(modal, { attributes: true, attributeFilter: ["class"] });
   }
 
   /* ------------------------------------------------------------------ */
@@ -1168,13 +1181,19 @@
     var f = ms(from), t = ms(to);
     if ((f !== null && now < f) || (t !== null && now > t)) return; // fuera de ventana
 
-    // cap 1/sesión
+    // cap 1/sesión: una vez cerrado no vuelve a aparecer
     var seen = false;
     try { seen = sessionStorage.getItem("kv-offers-seen") === "1"; } catch (e) {}
     if (seen) return;
 
-    // exclusión mutua: suprimir el popup nativo de suscripción (antes de que TN lo muestre)
-    document.documentElement.classList.add("kv-offers-active");
+    // Prioridad del newsletter: la promo NO aparece si el newsletter sigue activo
+    // (habilitado y no cerrado/enviado en la sesión).
+    function newsletterActive() {
+      if (!document.getElementById("promotional-modal")) return false; // newsletter no habilitado
+      var done = false;
+      try { done = sessionStorage.getItem("kv-newsletter-done") === "1"; } catch (e) {}
+      return !done;
+    }
 
     function close() {
       ov.classList.remove("f2tn-open");
@@ -1187,11 +1206,13 @@
       if (e.key === "Escape" && ov.classList.contains("f2tn-open")) close();
     });
 
+    // Automático 5s después de entrar al sitio
     setTimeout(function () {
+      if (newsletterActive()) return; // el newsletter tiene prioridad → no mostramos
       ov.classList.add("f2tn-open");
       document.documentElement.classList.add("f2tn-lock");
       try { sessionStorage.setItem("kv-offers-seen", "1"); } catch (e) {}
-    }, 1500);
+    }, 5000);
   }
 
   function init() {
