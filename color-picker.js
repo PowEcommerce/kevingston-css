@@ -1077,7 +1077,9 @@
       return f;
     }
 
-    // Email: envolver el input nativo con su label
+    // Email: envolver el input nativo con su label (placeholder exacto Figma)
+    emailInput.placeholder = "Ingresa tu email";
+    emailInput.setAttribute("aria-label", "Email");
     var emailField = field("Email", emailInput);
     emailField.classList.add("kv-sub-field-email");
 
