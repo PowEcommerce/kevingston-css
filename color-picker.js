@@ -828,11 +828,10 @@
         for (var k = 0; k < contents.length; k++) {
           if ((contents[k].textContent || "").trim()) { hasText = true; break; }
         }
-        // Con texto: anima el contenido (imagen estatica). Solo-imagen (carrusel/banner
-        // de imagenes): anima la imagen misma. Asi cubre hero, full_banner y los de imagen.
-        var targets = hasText
-          ? contents
-          : sec.querySelectorAll(".banner-image-container");
+        // Solo anima los BLOQUES DE TEXTO (.media-content). Las imagenes NO animan:
+        // los banners solo-imagen (facilitators, etc.) quedan estaticos.
+        if (!hasText) return;
+        var targets = contents;
         if (!targets.length) return;
         sec._kvReveal = true;
         for (var j = 0; j < targets.length; j++)
