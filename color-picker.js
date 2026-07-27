@@ -151,6 +151,20 @@
             sw.slideTo(0, 0); // reset al inicio (loopDestroy deja un indice intermedio)
           } catch (e) {}
         }
+        // Desktop: 4 productos + peek del 5to (slidesPerView 4.2). Editorial NO (layout propio).
+        try {
+          var isEditorial = el.closest(
+            "#ns-section-editorial_products, #ns-section-editorial_products_mujer"
+          );
+          if (!isEditorial) {
+            var bp = sw.params.breakpoints;
+            if (bp && bp["768"]) bp["768"].slidesPerView = 4.2;
+            if (window.innerWidth >= 768) {
+              sw.params.slidesPerView = 4.2;
+              sw.update();
+            }
+          }
+        } catch (e) {}
       })(swipers[i]);
     }
   }
