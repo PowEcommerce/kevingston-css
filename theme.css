@@ -327,6 +327,7 @@ body.modal-show{overflow:hidden!important}
 /* Talle SIN STOCK (Figma 1411-30316 / property disabled): borde y texto #8f8f8f, tachado */
 #quickshop-modal .btn-variant-no-stock:not(.btn-variant-color){border-color:#8f8f8f!important;background:transparent!important;color:#8f8f8f!important;text-decoration:line-through!important}
 #quickshop-modal .btn-variant-no-stock:not(.btn-variant-color) .btn-variant-content{color:#8f8f8f!important;text-decoration:line-through!important}
+#quickshop-modal .btn-variant-no-stock::after{display:none!important}
 
 /* Botones de COLOR (54x54 imagen radio 4px; Fase 2 completa los hermanos) */
 #quickshop-modal .btn-variant-color{width:54px;height:54px;padding:0;border-radius:4px;overflow:hidden;border:1px solid transparent}
