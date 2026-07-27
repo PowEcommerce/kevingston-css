@@ -125,6 +125,33 @@
     initCardImageSpinners(scope);
     initInstallmentsText(scope);
     initCardPaginators(scope);
+    disableProductLoops();
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* Sin loop infinito en los carruseles de productos de la home.        */
+  /* El slider nativo (.js-products-list-swiper) arranca con loop:true;   */
+  /* lo apagamos en runtime (loopDestroy saca los slides duplicados).     */
+  /* Se dispara desde renderAll: el MutationObserver ve cuando el swiper   */
+  /* agrega sus slides al inicializarse (lazy / cambio de tab).           */
+  /* ------------------------------------------------------------------ */
+  function disableProductLoops() {
+    var swipers = document.querySelectorAll(".js-products-list-swiper");
+    for (var i = 0; i < swipers.length; i++) {
+      (function (el) {
+        if (el._kvNoLoop) return;
+        var sw = el.swiper;
+        if (!sw || !sw.params) return;
+        el._kvNoLoop = true;
+        if (sw.params.loop) {
+          try {
+            sw.params.loop = false;
+            if (sw.loopDestroy) sw.loopDestroy();
+            sw.update();
+          } catch (e) {}
+        }
+      })(swipers[i]);
+    }
   }
 
   /* ------------------------------------------------------------------ */
