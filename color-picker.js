@@ -796,6 +796,61 @@
     if (btn) { btn.value = "Suscribirme"; }
   }
 
+  /* ------------------------------------------------------------------ */
+  /* Banners: animacion de entrada del contenido (spec 03).              */
+  /* Reveal por seccion: si esta en el viewport inicial -> delay 1600ms  */
+  /* (banner principal, 03-A); si no -> IntersectionObserver (03-B).     */
+  /* Una sola vez. Solo secciones con contenido de texto (no solo-imagen).*/
+  /* ------------------------------------------------------------------ */
+  function initBannerReveal() {
+    var io =
+      "IntersectionObserver" in window
+        ? new IntersectionObserver(
+            function (entries) {
+              entries.forEach(function (e) {
+                if (e.isIntersecting && e.target._kvRevealFn) {
+                  e.target._kvRevealFn();
+                  io.unobserve(e.target);
+                }
+              });
+            },
+            { threshold: 0.15 }
+          )
+        : null;
+    var secs = document.querySelectorAll(
+      ".section-banners, .js-slideshow-container"
+    );
+    for (var i = 0; i < secs.length; i++) {
+      (function (sec) {
+        if (sec._kvReveal) return;
+        var contents = sec.querySelectorAll(".media-content");
+        if (!contents.length) return;
+        var hasText = false;
+        for (var k = 0; k < contents.length; k++) {
+          if ((contents[k].textContent || "").trim()) { hasText = true; break; }
+        }
+        if (!hasText) return; // banners solo-imagen no animan
+        sec._kvReveal = true;
+        for (var j = 0; j < contents.length; j++)
+          contents[j].classList.add("kv-reveal");
+        var reveal = function () {
+          for (var m = 0; m < contents.length; m++)
+            contents[m].classList.add("kv-revealed");
+        };
+        var r = sec.getBoundingClientRect();
+        var vh = window.innerHeight || document.documentElement.clientHeight;
+        if (r.top < vh && r.bottom > 0) {
+          setTimeout(reveal, 1600); // 03-A: banner principal, delay tras cargar
+        } else if (io) {
+          sec._kvRevealFn = reveal;
+          io.observe(sec); // 03-B: al entrar en el viewport
+        } else {
+          reveal();
+        }
+      })(secs[i]);
+    }
+  }
+
   function init() {
     var adbarClosed = initAdbarClose();
     if (!adbarClosed) initTopbarCarousel();
@@ -803,6 +858,7 @@
     initFacilitatorsSlider();
     initNewCollectionTabs();
     initFooterText();
+    initBannerReveal();
 
     fetch(MAP_URL, { cache: "no-cache" })
       .then(function (r) { return r.ok ? r.json() : null; })

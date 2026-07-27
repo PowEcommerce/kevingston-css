@@ -42,6 +42,11 @@
    Wordmark KEVINGSTON animado (GIF, loop infinito) centrado. */
 .product-item-image-container.kv-img-loading::after{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:60%;max-width:180px;aspect-ratio:1628/196;background:url(https://powecommerce.github.io/kevingston-css/card-loader.gif) center/contain no-repeat;z-index:5;pointer-events:none}
 
+/* Banners — animacion de entrada del contenido (spec 03). El JS agrega .kv-reveal (oculto)
+   y luego .kv-revealed (visible). opacity 0->1 + translateY 20px->0, 600ms ease-out. La imagen NO anima. */
+.media-content.kv-reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease-out,transform .6s ease-out;will-change:opacity,transform}
+.media-content.kv-reveal.kv-revealed{opacity:1;transform:none}
+
 /* PLP: flechas del slider de imagenes de la card (Swiper nativo, solo category/search).
    Estilo Figma (node 959-17578): circulo 36px cream translucido + chevron, VISIBLES SOLO EN HOVER.
    Todo dentro de min-768: en mobile el theme las oculta (d-none) y usa swipe + paginacion. */
