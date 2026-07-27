@@ -161,10 +161,12 @@
             if (bp && bp["768"]) {
               bp["768"].slidesPerView = 4.2;
               bp["768"].slidesOffsetBefore = 32; // arranca alineado; al scrollear sangra al borde
+              bp["768"].slidesOffsetAfter = 32; // al final, el ultimo producto no queda pegado al borde
             }
             if (window.innerWidth >= 768) {
               sw.params.slidesPerView = 4.2;
               sw.params.slidesOffsetBefore = 32;
+              sw.params.slidesOffsetAfter = 32;
               sw.update();
             }
           }
