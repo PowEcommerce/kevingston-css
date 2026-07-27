@@ -993,9 +993,13 @@
           if (input.value.trim() !== q) return; // el query cambio, descartar
           var doc = new DOMParser().parseFromString(html, "text/html");
           var items = doc.querySelectorAll(".js-item-product");
+          // TN muestra productos de fallback aunque no haya match -> el "sin resultados"
+          // se detecta por el titulo "No encontramos nada para ...".
+          var hdr = doc.querySelector(".page-header-title");
+          var noResults = hdr ? /no\s+encontr/i.test(hdr.textContent || "") : false;
           if (cols) cols.style.display = "none";
           results.style.display = "";
-          if (!items.length) { results.innerHTML = ""; return; } // estado vacio
+          if (noResults || !items.length) { results.innerHTML = ""; return; } // estado vacio
           var out = "";
           for (var i = 0; i < Math.min(items.length, 6); i++) {
             var it = items[i];
