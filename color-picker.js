@@ -123,6 +123,35 @@
     // Si root ES una card (nodo agregado por infinite scroll)
     if (root && root.matches && root.matches(CARD_SELECTOR)) renderCard(root);
     initCardImageSpinners(scope);
+    initInstallmentsText(scope);
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* Cuotas en la card: reformatear a "N cuotas s/interés de $XXX"        */
+  /* (el theme arma "N x $XXX sin interés"; no editable sin fork/traduc). */
+  /* ------------------------------------------------------------------ */
+  function initInstallmentsText(scope) {
+    var conts = (scope || document).querySelectorAll(
+      ".product-item-installments"
+    );
+    for (var i = 0; i < conts.length; i++) {
+      (function (c) {
+        if (c._kvInst) return;
+        var inner =
+          c.querySelector(".js-max-installments.product-installments") || c;
+        var amt = c.querySelector(".js-installment-amount");
+        var val = c.querySelector(".js-installment-price");
+        if (!amt || !val) return;
+        var n = (amt.textContent || "").trim();
+        var v = (val.textContent || "").trim();
+        if (!n || !v) return;
+        c._kvInst = true;
+        var noInterest = inner.classList.contains("installment-no-interest");
+        inner.textContent = noInterest
+          ? n + " cuotas s/interés de " + v
+          : n + " cuotas de " + v;
+      })(conts[i]);
+    }
   }
 
   /* ------------------------------------------------------------------ */
