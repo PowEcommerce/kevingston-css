@@ -818,24 +818,28 @@
           )
         : null;
     var secs = document.querySelectorAll(
-      ".section-banners, .js-slideshow-container"
+      ".section-banners, .js-slideshow-container, .section-hero"
     );
     for (var i = 0; i < secs.length; i++) {
       (function (sec) {
         if (sec._kvReveal) return;
         var contents = sec.querySelectorAll(".media-content");
-        if (!contents.length) return;
         var hasText = false;
         for (var k = 0; k < contents.length; k++) {
           if ((contents[k].textContent || "").trim()) { hasText = true; break; }
         }
-        if (!hasText) return; // banners solo-imagen no animan
+        // Con texto: anima el contenido (imagen estatica). Solo-imagen (carrusel/banner
+        // de imagenes): anima la imagen misma. Asi cubre hero, full_banner y los de imagen.
+        var targets = hasText
+          ? contents
+          : sec.querySelectorAll(".banner-image-container");
+        if (!targets.length) return;
         sec._kvReveal = true;
-        for (var j = 0; j < contents.length; j++)
-          contents[j].classList.add("kv-reveal");
+        for (var j = 0; j < targets.length; j++)
+          targets[j].classList.add("kv-reveal");
         var reveal = function () {
-          for (var m = 0; m < contents.length; m++)
-            contents[m].classList.add("kv-revealed");
+          for (var m = 0; m < targets.length; m++)
+            targets[m].classList.add("kv-revealed");
         };
         var r = sec.getBoundingClientRect();
         var vh = window.innerHeight || document.documentElement.clientHeight;
