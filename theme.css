@@ -231,16 +231,16 @@
    El "+" vive en .product-item-information (relative); bottom:100% lo lleva al borde
    superior de la info (= borde inferior de la imagen) y margin-bottom lo mete 8px dentro. */
 @media (max-width:767px){
-  .js-item-product .product-item-quick-shop-container{
+  body .js-item-product .product-item-quick-shop-container{
     top:auto;bottom:100%;right:8px;left:auto;margin:0 0 8px 0;
   }
-  .js-item-product .product-item-name{padding-right:0;font-size:12px!important;margin:0 0 5px!important}
-  .js-item-product .product-item-information{padding:4px 8px 10px 8px!important}
-  .js-item-product .product-item-price,
-  .product-item .product-item-price-compare{font-size:12px!important}
-  .product-item .product-installments{font-size:10px!important}
-  .js-item-product .product-item-price-container{margin:0 0 5px!important}
-  .js-item-product .product-item-installments{margin:0 0 9px!important}
+  body .js-item-product .product-item-name{padding-right:0;font-size:12px!important;margin:0 0 5px!important}
+  body .js-item-product .product-item-information{padding:4px 8px 10px 8px!important}
+  body .js-item-product .product-item-price,
+  body .product-item .product-item-price-compare{font-size:12px!important}
+  body .product-item .product-installments{font-size:10px!important}
+  body .js-item-product .product-item-price-container{margin:0 0 5px!important}
+  body .js-item-product .product-item-installments{margin:0 0 9px!important}
 }
 
 /* ================================================================== */
