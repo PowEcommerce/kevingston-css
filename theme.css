@@ -234,7 +234,13 @@
   .js-item-product .product-item-quick-shop-container{
     top:auto;bottom:100%;right:8px;left:auto;margin:0 0 8px 0;
   }
-  .js-item-product .product-item-name{padding-right:0}
+  .js-item-product .product-item-name{padding-right:0;font-size:12px!important;margin:0 0 5px!important}
+  .js-item-product .product-item-information{padding:4px 8px!important}
+  .js-item-product .product-item-price,
+  .product-item .product-item-price-compare{font-size:12px!important}
+  .product-item .product-installments{font-size:10px!important}
+  .js-item-product .product-item-price-container{margin:0 0 5px!important}
+  .js-item-product .product-item-installments{margin:0 0 9px!important}
 }
 
 /* ================================================================== */
