@@ -820,6 +820,7 @@
     var secs = document.querySelectorAll(
       ".section-banners, .js-slideshow-container, .section-hero"
     );
+    var firstBanner = true; // el primer banner con texto = "banner principal" (delay al cargar)
     for (var i = 0; i < secs.length; i++) {
       (function (sec) {
         if (sec._kvReveal) return;
@@ -840,13 +841,15 @@
           for (var m = 0; m < targets.length; m++)
             targets[m].classList.add("kv-revealed");
         };
-        var r = sec.getBoundingClientRect();
-        var vh = window.innerHeight || document.documentElement.clientHeight;
-        if (r.top < vh && r.bottom > 0) {
-          setTimeout(reveal, 1600); // 03-A: banner principal, delay tras cargar
+        if (firstBanner) {
+          // 03-A: SOLO el banner principal (primer bloque con texto) -> delay al cargar
+          firstBanner = false;
+          setTimeout(reveal, 1600);
         } else if (io) {
+          // 03-B: el resto SIEMPRE por scroll (entrar al viewport). No confiar en la
+          // posicion al cargar (las imagenes de arriba aun no cargaron -> layout corto).
           sec._kvRevealFn = reveal;
-          io.observe(sec); // 03-B: al entrar en el viewport
+          io.observe(sec);
         } else {
           reveal();
         }
