@@ -1125,6 +1125,20 @@
     wrapper.insertBefore(emailField, button);
     wrapper.insertBefore(box, button);
 
+    // Botón deshabilitado hasta completar nombre (si visible) + email (spec 07-B/M06-B)
+    function refreshBtn() {
+      var emailOk = emailInput.value.trim().length > 0;
+      var nombreVisible = getComputedStyle(nombreField).display !== "none";
+      var nombreOk = !nombreVisible || nombreInput.value.trim().length > 0;
+      var ok = emailOk && nombreOk;
+      button.disabled = !ok;
+      button.classList.toggle("kv-sub-disabled", !ok);
+    }
+    emailInput.addEventListener("input", refreshBtn);
+    nombreInput.addEventListener("input", refreshBtn);
+    window.addEventListener("resize", refreshBtn);
+    refreshBtn();
+
     // Mensaje de éxito (banner + texto centrado, reemplaza el form)
     var content = modal.querySelector(".promotional-modal-content");
     if (content && !content.querySelector(".kv-sub-successbox")) {
