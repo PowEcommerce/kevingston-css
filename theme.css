@@ -257,7 +257,7 @@
 /* ================================================================== */
 #quickshop-modal *{border-radius:0px!important}
 /* Excepcion: las cucardas/badges del modal SI llevan pill 50px (mas especifico que el * de arriba) */
-#quickshop-modal .kv-modal-badges .label,#quickshop-modal .kv-modal-badges .labels .label{border-radius:50px!important}
+#quickshop-modal .kv-modal-badges .label,#quickshop-modal .kv-modal-badges .labels .label,#quickshop-modal .kv-modal-badges .kv-badge{border-radius:50px!important}
 /* Excepcion: selectores de color y talle llevan radius 4px */
 #quickshop-modal .btn-variant,#quickshop-modal .btn-variant-color,#quickshop-modal .btn-variant .btn-variant-content,#quickshop-modal .kv-modal-swatch,#quickshop-modal .kv-modal-swatch *,#quickshop-modal .kv-modal-swatch-more{border-radius:4px!important}
 /* Nombre a 1 sola linea con ellipsis */
