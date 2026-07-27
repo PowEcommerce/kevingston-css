@@ -247,7 +247,7 @@
   .product-item-slider-container .kv-cardbar i.is-active{background:#000}
 }
 /* Barra oculta en desktop (ahi se usan las flechas) */
-.product-item-slider-container .kv-cardbar{display:none}
+@media (min-width:768px){.product-item-slider-container .kv-cardbar{display:none}}
 
 /* ================================================================== */
 /* QUICK SHOP MODAL — maqueta según Figma (node 2649-26532)           */
