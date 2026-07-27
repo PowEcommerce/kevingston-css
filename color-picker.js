@@ -419,6 +419,11 @@
       renderColors(pid);
       renderInfo(pid);
       renderBadges(pid);
+      // Label de precio sin impuestos -> "nacionales" (traduccion, no editable por compose)
+      var taxLabel = document.querySelector(
+        "#quickshop-modal .price-without-taxes-label"
+      );
+      if (taxLabel) taxLabel.textContent = "Precio sin impuestos nacionales";
     }
 
     if ("MutationObserver" in window) {

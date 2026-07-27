@@ -255,16 +255,36 @@
 /* container .grid-md-2 [imagen | .quickshop-details]. Form de talle/  */
 /* color/agregar lo inyecta LS.fillQuickshop (.btn-variant, etc.).     */
 /* ================================================================== */
-/* Ancho del panel (Figma ~711px) */
-/* Panel docked a la DERECHA, full-height (Figma: sale de la derecha, no centrado) */
+#quickshop-modal *{border-radius:0px!important}
+/* Modal vista rapida: comun (spring 450ms, sin radius). Spec 07-Modales. */
+#quickshop-modal.modal{margin:0!important;border-radius:0!important;will-change:transform;transition:transform 450ms cubic-bezier(.16,1,.3,1)!important}
+
+/* DESKTOP: panel docked a la DERECHA, full-height, entra deslizando desde la derecha */
 @media (min-width:768px){
-  #quickshop-modal.modal{
-    top:0!important;right:0!important;bottom:0!important;left:auto!important;
-    width:711px!important;max-width:calc(100vw - 48px)!important;
-    height:100vh!important;max-height:100vh!important;
-    margin:0!important;border-radius:0!important;transform:none!important;
-  }
+  #quickshop-modal.modal{top:0!important;right:0!important;bottom:0!important;left:auto!important;width:711px!important;max-width:calc(100vw - 48px)!important;height:100vh!important;max-height:100vh!important;transform:translateX(100%)}
+  #quickshop-modal.modal.modal-show{transform:translateX(0)!important}
   #quickshop-modal .modal-body{max-height:calc(100vh - 56px);overflow-y:auto}
+}
+
+/* MOBILE: bottom sheet — sube desde abajo, alto = contenido con un maximo (Figma 1424-18860).
+   No fuerza full-height: height auto + max-height deja un gap arriba (se ve el overlay). */
+@media (max-width:767px){
+  #quickshop-modal.modal{top:auto!important;bottom:0!important;left:0!important;right:0!important;width:100vw!important;max-width:100vw!important;height:auto!important;max-height:calc(100dvh - 56px)!important;flex-direction:column!important;transform:translateY(100%)}
+  #quickshop-modal.modal.modal-show{transform:translateY(0)!important}
+  #quickshop-modal .modal-body{max-height:calc(100dvh - 100px);overflow-y:auto}
+}
+
+/* Backdrop del modal: se funde 0 -> 0.4 junto con el panel */
+#quickshop-modal.modal::before{content:"";position:fixed;inset:0;background:#000;opacity:0;transition:opacity 450ms cubic-bezier(.16,1,.3,1);pointer-events:none;z-index:-1}
+#quickshop-modal.modal.modal-show::before{opacity:.4}
+/* Scroll del body bloqueado mientras hay un modal abierto (spec) */
+body.modal-show{overflow:hidden!important}
+/* Header del modal en mobile: titulo "Vista rapida" + X (Figma 1411-30316).
+   El header nativo (.modal-header-close-only) trae solo la X; agregamos el titulo por ::before. */
+@media (max-width:767px){
+  #quickshop-modal .modal-header{display:flex!important;flex-direction:row!important;align-items:center;justify-content:space-between;gap:48px;padding:8px 16px!important;min-height:44px;border-bottom:1px solid #d9d9d9;background:#fff;position:sticky;top:0;z-index:3}
+  #quickshop-modal .modal-header::before{content:"Vista rápida";font:500 16px/1.2 "Lato",sans-serif;color:#000;white-space:nowrap}
+  #quickshop-modal .modal-header .modal-close{position:relative!important;top:auto!important;right:auto!important;margin:0!important}
 }
 #quickshop-modal .modal-body{padding:24px}
 #quickshop-modal .js-quickshop-container .grid-md-2{gap:24px;align-items:start}
@@ -299,6 +319,9 @@
 #quickshop-modal .btn-variant:not(.btn-variant-color) .btn-variant-content{background:none!important;border:0!important;width:auto;height:auto;color:inherit}
 #quickshop-modal .btn-variant:not(.btn-variant-color).selected{background:#000;border-color:#000;color:#fff}
 #quickshop-modal .btn-variant:not(.btn-variant-color).selected .btn-variant-content{color:#fff}
+/* Talle SIN STOCK (Figma 1411-30316 / property disabled): borde y texto #8f8f8f, tachado */
+#quickshop-modal .btn-variant-no-stock:not(.btn-variant-color){border-color:#8f8f8f!important;background:transparent!important;color:#8f8f8f!important;text-decoration:line-through!important}
+#quickshop-modal .btn-variant-no-stock:not(.btn-variant-color) .btn-variant-content{color:#8f8f8f!important;text-decoration:line-through!important}
 
 /* Botones de COLOR (54x54 imagen radio 4px; Fase 2 completa los hermanos) */
 #quickshop-modal .btn-variant-color{width:54px;height:54px;padding:0;border-radius:4px;overflow:hidden;border:1px solid transparent}
@@ -512,8 +535,8 @@
   /* Tamaños mobile: nombre 32, precio 18 */
   #quickshop-modal .quickshop-name{font-size:32px!important}
   #quickshop-modal .price-compare,#quickshop-modal .quickshop-price{font-size:18px!important}
-  /* Colores repartidos a lo ancho */
-  #quickshop-modal .kv-modal-swatches{justify-content:space-between!important;width:100%!important;gap:8px!important}
+  /* Colores siempre alineados a la izquierda */
+  #quickshop-modal .kv-modal-swatches{justify-content:flex-start!important;width:100%!important;gap:16px!important}
 }
 
 /* Batch fixes chiquitos (sin pushear aún) */
