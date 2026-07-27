@@ -641,6 +641,30 @@ body.modal-show{overflow:hidden!important}
   #ns-section-facilitators .banner-image-container{border-radius:16px!important;overflow:hidden!important}
   /* sin paginador en mobile */
   #ns-section-facilitators .swiper-pagination{display:none!important}
+  /* sin flechas en mobile (peek + swipe) */
+  #ns-section-facilitators .js-swiper-banners-prev,
+  #ns-section-facilitators .js-swiper-banners-next{display:none!important}
+}
+/* Facilitators DESKTOP: flechas del slider (format=slider). Aparecen SOLO con 4+ banners
+   (Swiper agrega .swiper-button-lock cuando entran todas). Figma 3573-34891:
+   circulo gris + chevron, en los bordes, centradas vertical; disabled/lock ocultas. */
+@media (min-width:768px){
+  #ns-section-facilitators .js-swiper-banners-prev,
+  #ns-section-facilitators .js-swiper-banners-next{
+    display:flex!important;align-items:center;justify-content:center;width:30px;height:30px;
+    border-radius:50%;background:#e9e7e2;border:0;top:50%;transform:translateY(-50%);z-index:5;cursor:pointer;margin:0
+  }
+  #ns-section-facilitators .js-swiper-banners-prev{left:8px;right:auto}
+  #ns-section-facilitators .js-swiper-banners-next{right:8px;left:auto}
+  #ns-section-facilitators .js-swiper-banners-prev svg,
+  #ns-section-facilitators .js-swiper-banners-next svg{display:none}
+  #ns-section-facilitators .js-swiper-banners-prev::after,
+  #ns-section-facilitators .js-swiper-banners-next::after{content:"";width:7px;height:7px;background:none;border-top:1.5px solid #000;border-right:1.5px solid #000}
+  #ns-section-facilitators .js-swiper-banners-prev::after{transform:rotate(-135deg);margin-left:3px}
+  #ns-section-facilitators .js-swiper-banners-next::after{transform:rotate(45deg);margin-right:3px}
+  #ns-section-facilitators .swiper-button-lock,
+  #ns-section-facilitators .swiper-button-disabled{display:none!important}
+  #ns-section-facilitators .swiper-pagination{display:none!important}
 }
 
 /* banners_duo: sin gap entre banners en DESKTOP (mobile mantiene el gap nativo de 8px).
