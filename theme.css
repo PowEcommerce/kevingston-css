@@ -227,6 +227,15 @@
 .js-item-product .product-item-quick-shop-container .btn:hover{
   background-color:rgba(233,231,226,.85)!important;
 }
+/* Mobile: el "+" de vista rapida va DENTRO de la imagen, esquina inferior derecha.
+   El "+" vive en .product-item-information (relative); bottom:100% lo lleva al borde
+   superior de la info (= borde inferior de la imagen) y margin-bottom lo mete 8px dentro. */
+@media (max-width:767px){
+  .js-item-product .product-item-quick-shop-container{
+    top:auto;bottom:100%;right:8px;left:auto;margin:0 0 8px 0;
+  }
+  .js-item-product .product-item-name{padding-right:0}
+}
 
 /* ================================================================== */
 /* QUICK SHOP MODAL — maqueta según Figma (node 2649-26532)           */
