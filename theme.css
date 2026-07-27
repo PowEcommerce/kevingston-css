@@ -747,16 +747,18 @@ body.modal-show{overflow:hidden!important}
 @media (min-width:768px){
   .js-products-list-slider .swiper-button-prev,
   .js-products-list-slider .swiper-button-next{
-    width:36px!important;height:36px!important;border-radius:50%;background:rgba(233,231,226,.5);
+    width:36px!important;height:36px!important;border-radius:50%;background-color:rgba(233,231,226,.5);
+    background-repeat:no-repeat;background-position:center;background-size:20px 20px;
     display:flex;align-items:center;justify-content:center;margin:0;
     top:calc(50% - 78px);transform:translateY(-50%);z-index:5;
   }
+  .js-products-list-slider .swiper-button-prev .slider-arrow,
+  .js-products-list-slider .swiper-button-next .slider-arrow,
   .js-products-list-slider .swiper-button-prev svg,
-  .js-products-list-slider .swiper-button-next svg{display:none}
-  .js-products-list-slider .swiper-button-prev::after,
-  .js-products-list-slider .swiper-button-next::after{content:"";width:8px;height:8px;background:none;border-top:1.5px solid #000;border-right:1.5px solid #000}
-  .js-products-list-slider .swiper-button-prev::after{transform:rotate(-135deg);margin-left:3px}
-  .js-products-list-slider .swiper-button-next::after{transform:rotate(45deg);margin-right:3px}
+  .js-products-list-slider .swiper-button-next svg{display:none!important}
+  /* mismo chevron SVG que las flechas de mobile */
+  .js-products-list-slider .swiper-button-prev{background-image:url("data:image/svg+xml,%3Csvg%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M14.5996%204.7998L7.39961%2011.9998L14.5996%2019.1998%22%20stroke%3D%22black%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E")}
+  .js-products-list-slider .swiper-button-next{background-image:url("data:image/svg+xml,%3Csvg%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M9.40039%2019.2002L16.6004%2012.0002L9.40039%204.8002%22%20stroke%3D%22black%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E")}
   /* al inicio solo la derecha (izquierda deshabilitada oculta); sin scroll, ninguna (lock) */
   .js-products-list-slider .swiper-button-disabled,
   .js-products-list-slider .swiper-button-lock{display:none!important}
