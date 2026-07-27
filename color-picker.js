@@ -1011,8 +1011,18 @@
             var img = it.querySelector("img");
             var src = "";
             if (img) {
-              var ss = img.getAttribute("srcset") || "";
-              src = ss ? ss.trim().split(/[\s,]+/)[0] : (img.getAttribute("data-src") || img.getAttribute("src") || "");
+              // en el HTML crudo la URL real esta en data-srcset/data-src (lazy);
+              // el srcset y el src son placeholders vacios/base64.
+              var firstUrl = function (s) {
+                return s ? s.trim().split(/[\s,]+/)[0] : "";
+              };
+              src =
+                firstUrl(img.getAttribute("data-srcset")) ||
+                img.getAttribute("data-src") ||
+                firstUrl(img.getAttribute("srcset")) ||
+                "";
+              var raw = img.getAttribute("src") || "";
+              if (!src && raw.indexOf("data:") !== 0) src = raw;
               if (src.indexOf("//") === 0) src = "https:" + src;
             }
             out +=
