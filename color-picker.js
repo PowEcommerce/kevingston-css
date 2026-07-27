@@ -984,7 +984,7 @@
     function resetDefault() {
       results.style.display = "none";
       results.innerHTML = "";
-      if (cols) cols.style.display = "";
+      if (cols) cols.style.removeProperty("display"); // vuelve al display del CSS
     }
     function doSearch(q) {
       fetch("/search?q=" + encodeURIComponent(q))
@@ -997,7 +997,8 @@
           // se detecta por el titulo "No encontramos nada para ...".
           var hdr = doc.querySelector(".page-header-title");
           var noResults = hdr ? /no\s+encontr/i.test(hdr.textContent || "") : false;
-          if (cols) cols.style.display = "none";
+          // !important para ganarle al display:flex!important del CSS del layout
+          if (cols) cols.style.setProperty("display", "none", "important");
           results.style.display = "";
           if (noResults || !items.length) { results.innerHTML = ""; return; } // estado vacio
           var out = "";
