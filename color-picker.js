@@ -920,9 +920,9 @@
     '<li><a href="/search?q=Remeras">Remeras</a></li><li><a href="/search?q=Chombas">Chombas</a></li>' +
     '<li><a href="/search?q=Camisas">Camisas</a></li><li><a href="/search?q=Jeans">Jeans</a></li></ul></div>' +
     '<div class="f2tn-col-banners"><h3 class="f2tn-h">Te puede interesar</h3><div class="f2tn-banners">' +
-    '<a class="f2tn-bcard" href="#"><span class="f2tn-bimg"></span><span class="f2tn-blabel">Mochilas</span></a>' +
-    '<a class="f2tn-bcard" href="#"><span class="f2tn-bimg"></span><span class="f2tn-blabel">Camperas</span></a>' +
-    '<a class="f2tn-bcard" href="#"><span class="f2tn-bimg"></span><span class="f2tn-blabel">Buzos</span></a>' +
+    '<a class="f2tn-bcard" href="/search?q=Mochilas"><span class="f2tn-bimg"></span><span class="f2tn-blabel">Mochilas</span></a>' +
+    '<a class="f2tn-bcard" href="/search?q=Camperas"><span class="f2tn-bimg"></span><span class="f2tn-blabel">Camperas</span></a>' +
+    '<a class="f2tn-bcard" href="/search?q=Buzos"><span class="f2tn-bimg"></span><span class="f2tn-blabel">Buzos</span></a>' +
     '</div></div></div></div></div></div>';
 
   function initSearchPanel() {
