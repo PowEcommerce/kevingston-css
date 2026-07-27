@@ -1145,6 +1145,55 @@
     }
   }
 
+  /* ------------------------------------------------------------------ */
+  /* Modal de PROMOCIONES (custom, .f2tn-offers-ov) — home. Figma        */
+  /* 3004-25747 / 2828-30293. Banner+texto+link/CTA editables en el      */
+  /* bloque HTML. Control por atributos del ov:                          */
+  /*   data-active="true|false"  -> encender/apagar                       */
+  /*   data-from / data-to (ISO)  -> ventana opcional (workaround schedule)*/
+  /* Exclusión mutua: si está activo, oculta la suscripción nativa        */
+  /* (clase html.kv-offers-active). Cap 1/sesión.                        */
+  /* ------------------------------------------------------------------ */
+  function initOffersModal() {
+    var ov = document.querySelector(".f2tn-offers-ov");
+    if (!ov || ov.getAttribute("data-kv-off") === "1") return;
+    ov.setAttribute("data-kv-off", "1");
+    if (ov.getAttribute("data-active") !== "true") return; // apagado -> no toca la suscripción
+
+    // ventana de fechas opcional (hora local; migrable a hora de servidor)
+    var from = ov.getAttribute("data-from");
+    var to = ov.getAttribute("data-to");
+    var now = Date.now();
+    function ms(s) { var t = s ? Date.parse(s) : NaN; return isNaN(t) ? null : t; }
+    var f = ms(from), t = ms(to);
+    if ((f !== null && now < f) || (t !== null && now > t)) return; // fuera de ventana
+
+    // cap 1/sesión
+    var seen = false;
+    try { seen = sessionStorage.getItem("kv-offers-seen") === "1"; } catch (e) {}
+    if (seen) return;
+
+    // exclusión mutua: suprimir el popup nativo de suscripción (antes de que TN lo muestre)
+    document.documentElement.classList.add("kv-offers-active");
+
+    function close() {
+      ov.classList.remove("f2tn-open");
+      document.documentElement.classList.remove("f2tn-lock");
+    }
+    var closeBtn = ov.querySelector(".f2tn-offers-close");
+    if (closeBtn) closeBtn.addEventListener("click", close);
+    ov.addEventListener("click", function (e) { if (e.target === ov) close(); });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && ov.classList.contains("f2tn-open")) close();
+    });
+
+    setTimeout(function () {
+      ov.classList.add("f2tn-open");
+      document.documentElement.classList.add("f2tn-lock");
+      try { sessionStorage.setItem("kv-offers-seen", "1"); } catch (e) {}
+    }, 1500);
+  }
+
   function init() {
     var adbarClosed = initAdbarClose();
     if (!adbarClosed) initTopbarCarousel();
@@ -1156,6 +1205,7 @@
     initSeoHeadings();
     initSearchPanel();
     initPromoModal();
+    initOffersModal();
 
     fetch(MAP_URL, { cache: "no-cache" })
       .then(function (r) { return r.ok ? r.json() : null; })
