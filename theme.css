@@ -708,6 +708,8 @@ body.modal-show{overflow:hidden!important}
 @media (min-width:768px){
   [id^="ns-section-"]:has([data-kv-role]) .js-swiper-products-list-pagination{display:none!important}
   [id^="ns-section-"]:has([data-kv-role]):not(#ns-section-editorial_products):not(#ns-section-editorial_products_mujer) .js-products-list-slider{padding-right:0!important}
+  /* pero el header (titulo + tabs Hombre/Mujer) conserva el padding derecho del admin */
+  [id^="ns-section-"]:has([data-kv-role]):not(#ns-section-editorial_products):not(#ns-section-editorial_products_mujer) .js-products-list-slider > .d-flex.flex-column > *:has([data-kv-role]){padding-right:32px!important}
 }
 
 /* ================================================================== */
