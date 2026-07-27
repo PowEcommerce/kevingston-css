@@ -751,7 +751,11 @@ body.modal-show{overflow:hidden!important}
     background-repeat:no-repeat;background-position:center;background-size:20px 20px;
     display:flex;align-items:center;justify-content:center;margin:0;
     top:calc(50% - 78px);transform:translateY(-50%);z-index:5;
+    opacity:0;pointer-events:none;transition:opacity .2s ease;
   }
+  /* aparecen solo al hacer hover sobre el carrusel */
+  .js-products-list-slider:hover .swiper-button-prev,
+  .js-products-list-slider:hover .swiper-button-next{opacity:1;pointer-events:auto}
   .js-products-list-slider .swiper-button-prev .slider-arrow,
   .js-products-list-slider .swiper-button-next .slider-arrow,
   .js-products-list-slider .swiper-button-prev svg,
