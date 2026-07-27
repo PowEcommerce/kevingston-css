@@ -49,6 +49,10 @@
 .kv-reveal{opacity:0;transform:translateY(20px);will-change:opacity,transform}
 .kv-reveal.kv-revealed{opacity:1;transform:none;transition:opacity .6s ease-out,transform .6s ease-out}
 
+/* SEO headings: el heading-block se convierte por JS de <div> a <h1/h2/h3> (etiquetas SEO).
+   Neutralizamos los defaults del navegador para que el estilo NO cambie (el font-size lo dan las clases). */
+h1.heading-block,h2.heading-block,h3.heading-block,h4.heading-block,h5.heading-block,h6.heading-block{margin:0;font-weight:inherit;line-height:inherit}
+
 /* PLP: flechas del slider de imagenes de la card (Swiper nativo, solo category/search).
    Estilo Figma (node 959-17578): circulo 36px cream translucido + chevron, VISIBLES SOLO EN HOVER.
    Todo dentro de min-768: en mobile el theme las oculta (d-none) y usa swipe + paginacion. */

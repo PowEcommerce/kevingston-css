@@ -857,6 +857,51 @@
     }
   }
 
+  /* ------------------------------------------------------------------ */
+  /* SEO headings: el heading-block del theme siempre es <div> (nota SEO  */
+  /* del theme). Lo convertimos al tag semantico segun el Figma 3665-15447:*/
+  /* hero -> H1 (solo el 1ro), titulos de banner -> H2, titulos de         */
+  /* seccion/carrusel -> H3. Conserva clases -> mismos estilos.            */
+  /* ------------------------------------------------------------------ */
+  function swapTag(el, tag) {
+    if (!el || el.tagName.toLowerCase() === tag) return el;
+    var n = document.createElement(tag);
+    for (var i = 0; i < el.attributes.length; i++)
+      n.setAttribute(el.attributes[i].name, el.attributes[i].value);
+    n.innerHTML = el.innerHTML;
+    el.parentNode.replaceChild(n, el);
+    return n;
+  }
+  function initSeoHeadings() {
+    // Hero: SOLO el primer titulo (no duplicado) -> H1 (un unico H1 por pagina)
+    var heroTitles = [].slice.call(
+      document.querySelectorAll(
+        "#ns-section-hero_slideshow .media-content .heading-block"
+      )
+    ).filter(function (h) { return !h.closest(".swiper-slide-duplicate"); });
+    if (heroTitles[0]) swapTag(heroTitles[0], "h1");
+    // Titulos dentro de banners (fuera del hero) -> H2
+    var bannerTitles = document.querySelectorAll(".media-content .heading-block");
+    for (var i = 0; i < bannerTitles.length; i++) {
+      var h = bannerTitles[i];
+      if (h.closest("#ns-section-hero_slideshow")) continue;
+      if (h.closest(".swiper-slide-duplicate")) continue;
+      swapTag(h, "h2");
+    }
+    // Titulos de seccion/carrusel (fuera de media-content y de cards) -> H3
+    var secTitles = document.querySelectorAll(".heading-block");
+    for (var j = 0; j < secTitles.length; j++) {
+      var s = secTitles[j];
+      if (
+        s.closest(".media-content") ||
+        s.closest(".product-item") ||
+        s.closest(".swiper-slide-duplicate")
+      )
+        continue;
+      swapTag(s, "h3");
+    }
+  }
+
   function init() {
     var adbarClosed = initAdbarClose();
     if (!adbarClosed) initTopbarCarousel();
@@ -865,6 +910,7 @@
     initNewCollectionTabs();
     initFooterText();
     initBannerReveal();
+    initSeoHeadings();
 
     fetch(MAP_URL, { cache: "no-cache" })
       .then(function (r) { return r.ok ? r.json() : null; })
