@@ -44,8 +44,10 @@
 
 /* Banners — animacion de entrada del contenido (spec 03). El JS agrega .kv-reveal (oculto)
    y luego .kv-revealed (visible). opacity 0->1 + translateY 20px->0, 600ms ease-out. La imagen NO anima. */
-.kv-reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease-out,transform .6s ease-out;will-change:opacity,transform}
-.kv-reveal.kv-revealed{opacity:1;transform:none}
+/* Oculto INSTANTANEO (sin transicion) para que no haya fade-out al cargar (solo imagen).
+   La transicion va solo en el reveal -> fade+slide de entrada. */
+.kv-reveal{opacity:0;transform:translateY(20px);will-change:opacity,transform}
+.kv-reveal.kv-revealed{opacity:1;transform:none;transition:opacity .6s ease-out,transform .6s ease-out}
 
 /* PLP: flechas del slider de imagenes de la card (Swiper nativo, solo category/search).
    Estilo Figma (node 959-17578): circulo 36px cream translucido + chevron, VISIBLES SOLO EN HOVER.
