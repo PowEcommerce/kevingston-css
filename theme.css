@@ -256,6 +256,10 @@
 /* color/agregar lo inyecta LS.fillQuickshop (.btn-variant, etc.).     */
 /* ================================================================== */
 #quickshop-modal *{border-radius:0px!important}
+/* Excepcion: las cucardas/badges del modal SI llevan pill 50px (mas especifico que el * de arriba) */
+#quickshop-modal .kv-modal-badges .label,#quickshop-modal .kv-modal-badges .labels .label{border-radius:50px!important}
+/* Nombre a 1 sola linea con ellipsis */
+#quickshop-modal .quickshop-name{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;display:block}
 /* Modal vista rapida: comun (spring 450ms, sin radius). Spec 07-Modales. */
 #quickshop-modal.modal{margin:0!important;border-radius:0!important;will-change:transform;transition:transform 450ms cubic-bezier(.16,1,.3,1)!important}
 
