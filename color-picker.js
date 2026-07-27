@@ -148,6 +148,7 @@
             sw.params.loop = false;
             if (sw.loopDestroy) sw.loopDestroy();
             sw.update();
+            sw.slideTo(0, 0); // reset al inicio (loopDestroy deja un indice intermedio)
           } catch (e) {}
         }
       })(swipers[i]);
