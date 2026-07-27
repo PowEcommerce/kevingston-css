@@ -968,6 +968,65 @@
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape" && ov.classList.contains("f2tn-open")) close();
     });
+
+    /* Resultados en vivo: al escribir, fetch a /search y reemplaza el contenido
+       por una lista (thumbnail + nombre) + "Ver todos". Sin resultados -> vacio. */
+    var cols = panel.querySelector(".f2tn-search-cols"); // contenido default (mas buscados + banners)
+    var results = document.createElement("div");
+    results.className = "f2tn-results";
+    results.style.display = "none";
+    if (cols) cols.parentNode.insertBefore(results, cols.nextSibling);
+    function esc(s) {
+      return String(s).replace(/[<>&"]/g, function (c) {
+        return { "<": "&lt;", ">": "&gt;", "&": "&amp;", '"': "&quot;" }[c];
+      });
+    }
+    function resetDefault() {
+      results.style.display = "none";
+      results.innerHTML = "";
+      if (cols) cols.style.display = "";
+    }
+    function doSearch(q) {
+      fetch("/search?q=" + encodeURIComponent(q))
+        .then(function (r) { return r.text(); })
+        .then(function (html) {
+          if (input.value.trim() !== q) return; // el query cambio, descartar
+          var doc = new DOMParser().parseFromString(html, "text/html");
+          var items = doc.querySelectorAll(".js-item-product");
+          if (cols) cols.style.display = "none";
+          results.style.display = "";
+          if (!items.length) { results.innerHTML = ""; return; } // estado vacio
+          var out = "";
+          for (var i = 0; i < Math.min(items.length, 6); i++) {
+            var it = items[i];
+            var a = it.querySelector("a[href]");
+            var url = a ? a.getAttribute("href") : "#";
+            var n = it.querySelector(".js-item-name, .product-item-name");
+            var name = n ? n.textContent.trim() : "";
+            var img = it.querySelector("img");
+            var src = "";
+            if (img) {
+              var ss = img.getAttribute("srcset") || "";
+              src = ss ? ss.trim().split(/[\s,]+/)[0] : (img.getAttribute("data-src") || img.getAttribute("src") || "");
+              if (src.indexOf("//") === 0) src = "https:" + src;
+            }
+            out +=
+              '<a class="f2tn-result" href="' + url + '">' +
+              '<span class="f2tn-result-img" style="background-image:url(\'' + src + "')\"></span>" +
+              '<span class="f2tn-result-name">' + esc(name) + "</span></a>";
+          }
+          out += '<a class="f2tn-result-all" href="/search?q=' + encodeURIComponent(q) + '">Ver todos los resultados</a>';
+          results.innerHTML = out;
+        })
+        .catch(function () {});
+    }
+    var deb;
+    input.addEventListener("input", function () {
+      clearTimeout(deb);
+      var q = input.value.trim();
+      if (q.length < 2) { resetDefault(); return; }
+      deb = setTimeout(function () { doSearch(q); }, 350);
+    });
   }
 
   function init() {

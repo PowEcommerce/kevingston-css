@@ -60,6 +60,12 @@ h1.heading-block,h2.heading-block,h3.heading-block,h4.heading-block,h5.heading-b
 @media (max-width:767px){
   .f2tn-search-panel{height:100dvh!important;max-height:100dvh!important}
 }
+/* Resultados en vivo del buscador: lista thumbnail + nombre + "Ver todos" */
+.f2tn-results{max-width:664px;width:100%;margin:0 auto;display:flex;flex-direction:column;gap:20px}
+.f2tn-result{display:flex;align-items:center;gap:16px;text-decoration:none;color:#000}
+.f2tn-result-img{width:48px;height:60px;flex:none;background:#f6f5f3 center/cover no-repeat}
+.f2tn-result-name{font:400 14px/1.3 "Lato",sans-serif;color:#000}
+.f2tn-result-all{font:400 14px/1.3 "Lato",sans-serif;color:#000;text-decoration:underline;margin-top:12px}
 
 /* PLP: flechas del slider de imagenes de la card (Swiper nativo, solo category/search).
    Estilo Figma (node 959-17578): circulo 36px cream translucido + chevron, VISIBLES SOLO EN HOVER.
