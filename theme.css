@@ -703,6 +703,12 @@ body.modal-show{overflow:hidden!important}
   :is([id^="ns-section-"]:has([data-kv-role]),#ns-section-editorial_products) .swiper-button-outside.swiper-button-next{right:16px!important;left:auto!important;background-image:url("data:image/svg+xml,%3Csvg%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M9.40039%2019.2002L16.6004%2012.0002L9.40039%204.8002%22%20stroke%3D%22black%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E")}
   [id^="ns-section-"]:has([data-kv-role]) .js-swiper-products-list-pagination{display:none!important}
 }
+/* Carruseles de productos de la home en DESKTOP: sin paginador + sin padding a la derecha
+   (el peek del 5to sangra hasta el borde). Editorial excluido (tiene layout grid propio). */
+@media (min-width:768px){
+  [id^="ns-section-"]:has([data-kv-role]) .js-swiper-products-list-pagination{display:none!important}
+  [id^="ns-section-"]:has([data-kv-role]):not(#ns-section-editorial_products):not(#ns-section-editorial_products_mujer) .js-products-list-slider{padding-right:0!important}
+}
 
 /* ================================================================== */
 /* EDITORIAL PRODUCTS (+ gemelo Mujer) — tabs Hombre/Mujer.             */
