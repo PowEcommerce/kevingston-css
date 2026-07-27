@@ -907,9 +907,34 @@
   /* home). Cableamos abrir (click en el icono del header) / cerrar       */
   /* (X o Escape) / foco automatico / scroll-lock.                        */
   /* ------------------------------------------------------------------ */
+  var SEARCH_PANEL_HTML =
+    '<div class="f2tn-search-ov"><div class="f2tn-search-panel">' +
+    '<button type="button" class="f2tn-x f2tn-search-close" aria-label="Cerrar"></button>' +
+    '<div class="f2tn-search-inner">' +
+    '<form class="f2tn-search-form" action="/search" method="get" role="search">' +
+    '<span class="f2tn-search-ico" aria-hidden="true"></span>' +
+    '<input type="search" name="q" placeholder="Buscar" aria-label="Buscar" autocomplete="off"></form>' +
+    '<div class="f2tn-search-cols"><div class="f2tn-col-links"><h3 class="f2tn-h">Más buscados</h3>' +
+    '<ul class="f2tn-links">' +
+    '<li><a href="/search?q=Boxers">Boxers</a></li><li><a href="/search?q=Calzado">Calzado</a></li>' +
+    '<li><a href="/search?q=Remeras">Remeras</a></li><li><a href="/search?q=Chombas">Chombas</a></li>' +
+    '<li><a href="/search?q=Camisas">Camisas</a></li><li><a href="/search?q=Jeans">Jeans</a></li></ul></div>' +
+    '<div class="f2tn-col-banners"><h3 class="f2tn-h">Te puede interesar</h3><div class="f2tn-banners">' +
+    '<a class="f2tn-bcard" href="#"><span class="f2tn-bimg"></span><span class="f2tn-blabel">Mochilas</span></a>' +
+    '<a class="f2tn-bcard" href="#"><span class="f2tn-bimg"></span><span class="f2tn-blabel">Camperas</span></a>' +
+    '<a class="f2tn-bcard" href="#"><span class="f2tn-bimg"></span><span class="f2tn-blabel">Buzos</span></a>' +
+    '</div></div></div></div></div></div>';
+
   function initSearchPanel() {
     var panel = document.querySelector(".f2tn-search-panel");
-    if (!panel) return; // solo donde exista el panel (home por ahora)
+    if (!panel) {
+      // pagina sin panel (no-home): lo inyectamos (el CSS del css_code es global)
+      var wrap = document.createElement("div");
+      wrap.innerHTML = SEARCH_PANEL_HTML;
+      document.body.appendChild(wrap.firstChild);
+      panel = document.querySelector(".f2tn-search-panel");
+    }
+    if (!panel) return;
     var ov = panel.parentElement;
     if (!ov) return;
     ov.classList.add("f2tn-search-ov");
