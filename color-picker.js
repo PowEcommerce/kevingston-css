@@ -606,39 +606,48 @@
     if (!container) return;
     var wrapper = container.closest(".js-banners-slider-container");
     var pag = wrapper ? wrapper.querySelector(".js-swiper-banners-pagination") : null;
-    var mine = false;
+    var prevEl = wrapper ? wrapper.querySelector(".js-swiper-banners-prev") : null;
+    var nextEl = wrapper ? wrapper.querySelector(".js-swiper-banners-next") : null;
+    var mode = null; // 'mobile' | 'desktop'
 
     function isMobile() { return window.innerWidth < 768; }
 
+    // Reconfiguramos el swiper nativo (que viene con loop:true) SIN loop, en ambos
+    // breakpoints. Mobile: peek auto+centered. Desktop: 3 por vista + flechas nativas.
     function apply() {
-      if (!isMobile() || typeof Swiper === "undefined") return;
-      if (mine && container.swiper) return; // ya reconfigurado
+      if (typeof Swiper === "undefined") return;
+      var target = isMobile() ? "mobile" : "desktop";
+      if (mode === target && container.swiper) return; // ya en el modo correcto
       if (container.swiper) { try { container.swiper.destroy(true, true); } catch (e) {} }
       /* global Swiper */
-      new Swiper(container, {
-        slidesPerView: "auto",
-        centeredSlides: true,
-        spaceBetween: 16,
-        loop: false,
-        pagination: pag ? { el: pag, clickable: true } : false
-      });
-      mine = true;
+      var cfg = isMobile()
+        ? {
+            slidesPerView: "auto",
+            centeredSlides: true,
+            spaceBetween: 16,
+            loop: false,
+            pagination: pag ? { el: pag, clickable: true } : false,
+          }
+        : {
+            slidesPerView: 3,
+            spaceBetween: 16,
+            loop: false,
+            watchOverflow: true,
+            navigation: prevEl && nextEl ? { prevEl: prevEl, nextEl: nextEl } : false,
+          };
+      new Swiper(container, cfg);
+      mode = target;
     }
 
-    // Esperar a que el theme cree su swiper (lo hace con setTimeout 0) y reconfigurar.
+    // Esperar a que el theme cree su swiper (setTimeout 0) y reconfigurar.
     var tries = 0;
     (function wait() {
-      if (!isMobile()) return;
       if (container.swiper || tries > 30) { apply(); return; }
       tries++;
       setTimeout(wait, 50);
     })();
 
-    // Al cruzar a desktop, soltar nuestra instancia para que quede el grid nativo.
-    window.addEventListener("resize", function () {
-      if (isMobile()) { apply(); }
-      else if (mine && container.swiper) { try { container.swiper.destroy(true, true); } catch (e) {} mine = false; }
-    }, { passive: true });
+    window.addEventListener("resize", apply, { passive: true });
   }
 
   /* "Nueva Coleccion" con tabs Hombre/Mujer — GENERICO. Cada seccion product-list
