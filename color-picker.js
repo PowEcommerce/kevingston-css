@@ -1044,6 +1044,105 @@
     });
   }
 
+  /* ------------------------------------------------------------------ */
+  /* Modal de suscripción (#promotional-modal newsletter)                */
+  /* Inyecta Nombre (mobile) + checkboxes de intereses funcionales, y    */
+  /* maneja el estado de éxito (banner + mensaje, sin form). Figma        */
+  /* desktop 1981-25825 / mobile 1982-27317 / éxito 1981-26151.          */
+  /* ------------------------------------------------------------------ */
+  function initPromoModal() {
+    var modal = document.getElementById("promotional-modal");
+    if (!modal || modal.getAttribute("data-kv-sub") === "1") return;
+    var form = modal.querySelector(".js-newsletter-form-ajax, .newsletter-form");
+    if (!form) return; // popup sin newsletter (modo CTA) -> no tocamos
+    modal.setAttribute("data-kv-sub", "1");
+
+    var wrapper = form.querySelector(".newsletter-form-wrapper") || form;
+    var emailInput = wrapper.querySelector('input[name="email"]');
+    var button = wrapper.querySelector('button[type="submit"], .newsletter-form-button');
+    var hiddenName = form.querySelector('input[name="name"]');
+    var hiddenMsg = form.querySelector('input[name="message"]');
+    var baseMsg = (hiddenMsg && hiddenMsg.value) || "Pedido de inscripción a newsletter";
+    if (!emailInput || !button) return;
+
+    function field(labelText, input) {
+      var f = document.createElement("div");
+      f.className = "kv-sub-field";
+      var l = document.createElement("label");
+      l.className = "kv-sub-label";
+      l.innerHTML = labelText + ' <span>*</span>';
+      if (input.id) l.setAttribute("for", input.id);
+      f.appendChild(l);
+      f.appendChild(input);
+      return f;
+    }
+
+    // Email: envolver el input nativo con su label
+    var emailField = field("Email", emailInput);
+    emailField.classList.add("kv-sub-field-email");
+
+    // Nombre (visible solo en mobile por CSS) -> escribe en el hidden name
+    var nombreInput = document.createElement("input");
+    nombreInput.type = "text";
+    nombreInput.className = "kv-sub-input kv-sub-nombre";
+    nombreInput.placeholder = "Ingresa tu nombre";
+    nombreInput.setAttribute("aria-label", "Nombre");
+    var nombreField = field("Nombre", nombreInput);
+    nombreField.classList.add("kv-sub-field-nombre");
+    nombreInput.addEventListener("input", function () {
+      if (hiddenName) hiddenName.value = nombreInput.value.trim() || "Sin nombre";
+    });
+
+    // Checkboxes de intereses -> se guardan en el hidden message
+    var interests = [
+      { v: "Hombre", t: "HOMBRE" },
+      { v: "Mujer", t: "MUJER" },
+      { v: "Teens & Kids", t: "TEENS & KIDS" },
+    ];
+    var box = document.createElement("div");
+    box.className = "kv-sub-interests";
+    var boxes = [];
+    interests.forEach(function (it) {
+      var lab = document.createElement("label");
+      var cb = document.createElement("input");
+      cb.type = "checkbox";
+      cb.value = it.v;
+      boxes.push(cb);
+      lab.appendChild(cb);
+      lab.appendChild(document.createTextNode(it.t));
+      box.appendChild(lab);
+    });
+    function syncMsg() {
+      var sel = boxes.filter(function (c) { return c.checked; }).map(function (c) { return c.value; });
+      if (hiddenMsg) hiddenMsg.value = sel.length ? baseMsg + " — Intereses: " + sel.join(", ") : baseMsg;
+    }
+    boxes.forEach(function (c) { c.addEventListener("change", syncMsg); });
+
+    // Ordenar dentro del wrapper: Nombre, Email, Intereses, Botón
+    wrapper.insertBefore(nombreField, button);
+    wrapper.insertBefore(emailField, button);
+    wrapper.insertBefore(box, button);
+
+    // Mensaje de éxito (banner + texto centrado, reemplaza el form)
+    var content = modal.querySelector(".promotional-modal-content");
+    if (content && !content.querySelector(".kv-sub-successbox")) {
+      var sb = document.createElement("div");
+      sb.className = "kv-sub-successbox";
+      sb.innerHTML =
+        '<p class="kv-sub-success-title">¡Ya te suscribiste a nuestro newsletter!</p>' +
+        '<p class="kv-sub-success-text">Revisá tu casilla de email y enterate de todas las novedades.</p>';
+      content.appendChild(sb);
+    }
+    var successAlert = form.querySelector(".js-newsletter-success-alert");
+    if (successAlert) {
+      var show = function () {
+        var vis = getComputedStyle(successAlert).display !== "none";
+        modal.classList.toggle("kv-sub-success", vis);
+      };
+      new MutationObserver(show).observe(successAlert, { attributes: true, attributeFilter: ["style", "class"] });
+    }
+  }
+
   function init() {
     var adbarClosed = initAdbarClose();
     if (!adbarClosed) initTopbarCarousel();
@@ -1054,6 +1153,7 @@
     initBannerReveal();
     initSeoHeadings();
     initSearchPanel();
+    initPromoModal();
 
     fetch(MAP_URL, { cache: "no-cache" })
       .then(function (r) { return r.ok ? r.json() : null; })

@@ -872,3 +872,80 @@ body.modal-show{overflow:hidden!important}
   }
   .js-head-main.kv-scrolled .kv-scroll-search{width:24px;opacity:1;margin-left:8px}
 }
+
+/* ================================================================== */
+/* MODAL DE SUSCRIPCIÓN (newsletter) — #promotional-modal (nativo TN)   */
+/* Figma desktop 1981-25825 / mobile 1982-27317 / éxito 1981-26151      */
+/* Desktop: dock derecha 450px, banner 430px, slide desde la derecha.   */
+/* Mobile: bottom-sheet, slide desde abajo. Campos Nombre+checkboxes    */
+/* inyectados por color-picker.js (initPromoModal).                     */
+/* ================================================================== */
+#promotional-modal.modal{margin:0!important;padding:0!important;border-radius:0!important;background:#fff;will-change:transform;transition:transform 450ms cubic-bezier(.16,1,.3,1)!important}
+#promotional-modal .modal-body{padding:0!important}
+#promotional-modal.modal::before{content:"";position:fixed;inset:0;background:#000;opacity:0;transition:opacity 450ms cubic-bezier(.16,1,.3,1);pointer-events:none;z-index:-1}
+#promotional-modal.modal.modal-show::before{opacity:.4}
+
+/* banner arriba + contenido abajo (columna en ambos breakpoints) */
+#promotional-modal .media-grid{display:flex!important;flex-direction:column!important;gap:0!important;align-items:stretch!important;padding:0!important;margin:0!important;width:100%}
+#promotional-modal .media-visual{position:relative;width:100%!important;margin:0!important;padding:0!important;overflow:hidden;flex:none}
+#promotional-modal .media-visual img{display:block;width:100%;height:100%;object-fit:cover}
+#promotional-modal .promotional-modal-image-link{position:absolute;inset:0}
+
+/* cierre: círculo crema 36px sobre el banner (inset 24px) */
+#promotional-modal .modal-header{position:absolute!important;top:24px;right:24px;left:auto;z-index:5;padding:0!important;margin:0!important;border:0!important;background:none!important;min-height:0!important;display:block!important}
+#promotional-modal .modal-close{position:relative!important;top:auto!important;right:auto!important;margin:0!important;padding:0!important;width:36px!important;height:36px!important;min-height:0!important;border-radius:50px!important;background:rgba(233,231,226,.5)!important;display:flex!important;align-items:center;justify-content:center;cursor:pointer}
+#promotional-modal .modal-close-icon,#promotional-modal .modal-close svg{width:20px!important;height:20px!important;font-size:20px!important;color:#000}
+
+/* contenido */
+#promotional-modal .promotional-modal-content{padding:24px!important;display:flex;flex-direction:column;gap:0;text-align:center;width:100%}
+#promotional-modal .promotional-modal-title,
+#promotional-modal .promotional-modal-title.h4{font:500 24px/1.2 "Lato",sans-serif!important;color:#000;margin:0}
+#promotional-modal .promotional-modal-description{font:400 16px/1.3 "Lato",sans-serif!important;color:#000;margin:8px 0 0}
+#promotional-modal .js-newsletter-form-wrapper{width:100%;margin:24px 0 0}
+#promotional-modal .newsletter-form{width:100%}
+#promotional-modal .newsletter-form-wrapper{display:flex!important;flex-direction:column!important;gap:16px!important;align-items:stretch!important;width:100%}
+
+/* labels + campos inyectados */
+#promotional-modal .kv-sub-field{display:flex;flex-direction:column;text-align:left;width:100%}
+#promotional-modal .kv-sub-label{font:400 14px/1.3 "Lato",sans-serif;color:#000;text-align:left;margin:0 0 8px;display:block}
+#promotional-modal .kv-sub-label span{color:#a00e1d;margin-left:2px}
+#promotional-modal .newsletter-form-input,#promotional-modal .kv-sub-input{width:100%;height:40px;border:1px solid #ccc!important;border-radius:4px!important;padding:0 13px!important;font:400 14px/1.3 "Lato",sans-serif;color:#000;background:#fff;box-shadow:none!important}
+#promotional-modal .newsletter-form-input::placeholder,#promotional-modal .kv-sub-input::placeholder{color:#737373}
+
+/* checkboxes intereses */
+#promotional-modal .kv-sub-interests{display:flex;flex-direction:row;flex-wrap:wrap;gap:24px;justify-content:flex-start;align-items:center;margin:0}
+#promotional-modal .kv-sub-interests label{display:flex;align-items:center;gap:8px;font:400 12px/1 "Lato",sans-serif;color:#000;cursor:pointer;margin:0}
+#promotional-modal .kv-sub-interests input[type=checkbox]{-webkit-appearance:none;appearance:none;width:14px;height:14px;border:1px solid #000;border-radius:2px;margin:0;cursor:pointer;flex:none;position:relative;background:#fff}
+#promotional-modal .kv-sub-interests input[type=checkbox]:checked{background:#000}
+#promotional-modal .kv-sub-interests input[type=checkbox]:checked::after{content:"";position:absolute;left:4px;top:1px;width:3.5px;height:7.5px;border:solid #fff;border-width:0 1.5px 1.5px 0;transform:rotate(45deg)}
+
+/* botón Suscribirme (pill negro) */
+#promotional-modal .newsletter-form-button.btn{width:100%!important;height:44px!important;min-height:44px;margin:8px 0 0!important;border-radius:50px!important;font:400 14px/1 "Lato",sans-serif!important;background:#000!important;color:#fff!important;border:0!important;display:inline-flex;align-items:center;justify-content:center}
+#promotional-modal .newsletter-form-alert{display:none!important}
+
+/* estado ÉXITO: banner + mensaje centrado, sin form */
+#promotional-modal .kv-sub-successbox{display:none;flex-direction:column;gap:8px;text-align:center;padding:24px}
+#promotional-modal .kv-sub-successbox .kv-sub-success-title{font:500 24px/1.2 "Lato",sans-serif;color:#000;margin:0}
+#promotional-modal .kv-sub-successbox .kv-sub-success-text{font:400 16px/1.3 "Lato",sans-serif;color:#000;margin:0}
+#promotional-modal.kv-sub-success .promotional-modal-title,
+#promotional-modal.kv-sub-success .promotional-modal-description,
+#promotional-modal.kv-sub-success .js-newsletter-form-wrapper{display:none!important}
+#promotional-modal.kv-sub-success .kv-sub-successbox{display:flex}
+
+/* Nombre: oculto en desktop (Figma desktop = solo Email), visible en mobile */
+#promotional-modal .kv-sub-field-nombre{display:none}
+
+@media (min-width:768px){
+  #promotional-modal.modal{top:0!important;right:0!important;bottom:0!important;left:auto!important;width:450px!important;max-width:calc(100vw - 48px)!important;height:100vh!important;max-height:100vh!important;transform:translateX(100%);display:flex!important;flex-direction:column!important}
+  #promotional-modal.modal.modal-show{transform:translateX(0)!important}
+  #promotional-modal .modal-body{flex:1 1 auto;overflow-y:auto}
+  #promotional-modal .media-visual{height:430px}
+}
+
+@media (max-width:767px){
+  #promotional-modal.modal{top:auto!important;bottom:0!important;left:0!important;right:0!important;width:100vw!important;max-width:100vw!important;height:auto!important;max-height:calc(100dvh - 40px)!important;transform:translateY(100%);display:flex!important;flex-direction:column!important}
+  #promotional-modal.modal.modal-show{transform:translateY(0)!important}
+  #promotional-modal .modal-body{flex:1 1 auto;overflow-y:auto}
+  #promotional-modal .media-visual{height:260px}
+  #promotional-modal .kv-sub-field-nombre{display:flex}
+}
