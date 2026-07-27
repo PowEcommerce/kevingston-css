@@ -119,7 +119,15 @@ function loadColorDict() {
 }
 function hexFor(dict, name) {
   if (!name) return null;
-  return dict[String(name).trim().toLowerCase()] || null;
+  const key = String(name).trim().toLowerCase();
+  if (dict[key]) return dict[key];
+  // Compuestos ("azul-blanco", "azul - blanco", "rojo-blanco-azul"):
+  // usar el hex del primer token que exista en el diccionario.
+  const tokens = key.split(/\s*-\s*/).map((t) => t.trim()).filter(Boolean);
+  if (tokens.length > 1) {
+    for (const t of tokens) if (dict[t]) return dict[t];
+  }
+  return null;
 }
 
 async function probe() {
