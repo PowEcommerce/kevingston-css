@@ -619,7 +619,7 @@
         slidesPerView: "auto",
         centeredSlides: true,
         spaceBetween: 16,
-        loop: true,
+        loop: false,
         pagination: pag ? { el: pag, clickable: true } : false
       });
       mine = true;
