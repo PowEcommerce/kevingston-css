@@ -902,6 +902,49 @@
     }
   }
 
+  /* ------------------------------------------------------------------ */
+  /* Buscador: panel que baja desde arriba (HTML+CSS ya existen en el     */
+  /* home). Cableamos abrir (click en el icono del header) / cerrar       */
+  /* (X o Escape) / foco automatico / scroll-lock.                        */
+  /* ------------------------------------------------------------------ */
+  function initSearchPanel() {
+    var panel = document.querySelector(".f2tn-search-panel");
+    if (!panel) return; // solo donde exista el panel (home por ahora)
+    var ov = panel.parentElement;
+    if (!ov) return;
+    ov.classList.add("f2tn-search-ov");
+    var input = panel.querySelector('input[type="search"], input[name="q"]');
+    var closeBtn = panel.querySelector(".f2tn-search-close");
+    function open() {
+      ov.classList.add("f2tn-open");
+      document.body.style.overflow = "hidden";
+      setTimeout(function () { if (input) input.focus(); }, 120);
+    }
+    function close() {
+      ov.classList.remove("f2tn-open");
+      document.body.style.overflow = "";
+    }
+    // Trigger del header (capture + stop para bloquear el buscador nativo)
+    var trigs = document.querySelectorAll(
+      ".js-search-trigger, .search-trigger"
+    );
+    for (var i = 0; i < trigs.length; i++) {
+      trigs[i].addEventListener(
+        "click",
+        function (e) {
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          open();
+        },
+        true
+      );
+    }
+    if (closeBtn) closeBtn.addEventListener("click", function (e) { e.preventDefault(); close(); });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && ov.classList.contains("f2tn-open")) close();
+    });
+  }
+
   function init() {
     var adbarClosed = initAdbarClose();
     if (!adbarClosed) initTopbarCarousel();
@@ -911,6 +954,7 @@
     initFooterText();
     initBannerReveal();
     initSeoHeadings();
+    initSearchPanel();
 
     fetch(MAP_URL, { cache: "no-cache" })
       .then(function (r) { return r.ok ? r.json() : null; })
