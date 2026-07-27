@@ -241,7 +241,13 @@
   body .product-item .product-installments{font-size:10px!important}
   body .js-item-product .product-item-price-container{margin:0 0 5px!important}
   body .js-item-product .product-item-installments{margin:0 0 9px!important}
+  /* Paginador de la card (barra segmentada): track gris + segmento activo negro */
+  .product-item-slider-container .kv-cardbar{position:absolute;left:0;right:0;bottom:0;z-index:4;display:flex;height:3px;background:#ccc;pointer-events:none}
+  .product-item-slider-container .kv-cardbar i{flex:1 1 0;height:100%;background:transparent}
+  .product-item-slider-container .kv-cardbar i.is-active{background:#000}
 }
+/* Barra oculta en desktop (ahi se usan las flechas) */
+.product-item-slider-container .kv-cardbar{display:none}
 
 /* ================================================================== */
 /* QUICK SHOP MODAL — maqueta según Figma (node 2649-26532)           */

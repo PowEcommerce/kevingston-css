@@ -124,6 +124,53 @@
     if (root && root.matches && root.matches(CARD_SELECTOR)) renderCard(root);
     initCardImageSpinners(scope);
     initInstallmentsText(scope);
+    initCardPaginators(scope);
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* Paginador de la card (mobile): barra segmentada abajo de la imagen. */
+  /* El paginador nativo es 'fraction' (vacio). Armamos una barra con N   */
+  /* segmentos y marcamos el activo segun .swiper-slide-active.           */
+  /* ------------------------------------------------------------------ */
+  function initCardPaginators(scope) {
+    var conts = (scope || document).querySelectorAll(
+      ".product-item-slider-container"
+    );
+    for (var i = 0; i < conts.length; i++) {
+      (function (cont) {
+        if (cont._kvBar) return;
+        var wrap = cont.querySelector(".swiper-wrapper");
+        if (!wrap) return;
+        var slides = cont.querySelectorAll(
+          ".product-item-slider-slide, .swiper-slide"
+        );
+        if (slides.length < 2) return;
+        cont._kvBar = true;
+        var bar = document.createElement("div");
+        bar.className = "kv-cardbar";
+        for (var s = 0; s < slides.length; s++)
+          bar.appendChild(document.createElement("i"));
+        cont.appendChild(bar);
+        var segs = bar.children;
+        var update = function () {
+          var idx = 0;
+          for (var k = 0; k < slides.length; k++) {
+            if (slides[k].classList.contains("swiper-slide-active")) {
+              idx = k;
+              break;
+            }
+          }
+          for (var j = 0; j < segs.length; j++)
+            segs[j].classList.toggle("is-active", j === idx);
+        };
+        update();
+        new MutationObserver(update).observe(wrap, {
+          attributes: true,
+          attributeFilter: ["class"],
+          subtree: true,
+        });
+      })(conts[i]);
+    }
   }
 
   /* ------------------------------------------------------------------ */
