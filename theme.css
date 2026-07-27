@@ -656,8 +656,8 @@ body.modal-show{overflow:hidden!important}
     border-radius:50%;background:#e9e7e2;border:0;top:50%;transform:translateY(-50%);z-index:5;cursor:pointer;margin:0
   }
   /* mostrar SOLO cuando hay un 4to banner (Swiper no agrega swiper-button-lock aca) */
-  #ns-section-facilitators .js-banners-slider:has(.swiper-slide:nth-child(4)) .js-swiper-banners-prev,
-  #ns-section-facilitators .js-banners-slider:has(.swiper-slide:nth-child(4)) .js-swiper-banners-next{display:flex}
+  #ns-section-facilitators .js-banners-slider-container:has(.swiper-slide:nth-child(4)) .js-swiper-banners-prev,
+  #ns-section-facilitators .js-banners-slider-container:has(.swiper-slide:nth-child(4)) .js-swiper-banners-next{display:flex}
   #ns-section-facilitators .js-swiper-banners-prev{left:8px;right:auto}
   #ns-section-facilitators .js-swiper-banners-next{right:8px;left:auto}
   #ns-section-facilitators .js-swiper-banners-prev svg,
