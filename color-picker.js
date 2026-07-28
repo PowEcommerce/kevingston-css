@@ -1488,19 +1488,15 @@
     if (slider.swiper) { try { slider.swiper.destroy(true, true); } catch (e) {} }
     slider.classList.add("kv-gallery-stacked");
     slides.forEach(function (s) { s.classList.add("kv-gslide"); s.classList.remove("kv-gfull", "kv-ghalf"); });
-    // Reglas del Figma: <4 = todas full (una debajo de otra); 4 = 1-2-1;
-    // >4 = 1ª y última full + medio en pares (medio impar → última del medio full) = 1-2-2-1.
-    if (slides.length < 4) {
-      slides.forEach(function (s) { s.classList.add("kv-gfull"); });
-    } else {
-      slides[0].classList.add("kv-gfull");
-      slides[slides.length - 1].classList.add("kv-gfull");
-      var mids = slides.slice(1, -1);
-      mids.forEach(function (s, i) {
-        if (i === mids.length - 1 && mids.length % 2 === 1) s.classList.add("kv-gfull");
-        else s.classList.add("kv-ghalf");
-      });
-    }
+    // 1ª imagen SIEMPRE full; el resto en pares de 2 chicas; si al final quedaría
+    // una sola chica, esa va full (nunca una chica sola en la última fila).
+    // 1=1 · 2=1-1 · 3=1-2 · 4=1-2-1 · 5=1-2-2 · 6=1-2-2-1 · 7=1-2-2-2 ...
+    slides[0].classList.add("kv-gfull");
+    var rest = slides.slice(1);
+    rest.forEach(function (s, i) {
+      if (i === rest.length - 1 && rest.length % 2 === 1) s.classList.add("kv-gfull");
+      else s.classList.add("kv-ghalf");
+    });
   }
 
   /* ------------------------------------------------------------------ */
