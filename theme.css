@@ -1150,7 +1150,10 @@ html.kv-menu-open .js-head-main .menu-container .js-modal-open-private::after{op
   .container:has(.product-columns){max-width:none!important;width:100%!important;margin:0!important;padding-left:32px!important;padding-right:32px!important}
   /* imagen 677 + gap 134 + info 448 (Figma 2340-20220) */
   .product-columns{align-items:flex-start;column-gap:134px!important;justify-content:flex-start}
-  .product-columns .js-product-images{flex:0 0 677px;max-width:677px;min-width:0}
+  /* display:block para que el slider (kv-gallery-stacked) NO tome su ancho    */
+  /* intrínseco (601px del slide viejo de Swiper) y llene los 677 de columna.  */
+  .product-columns .js-product-images{flex:0 0 677px;max-width:677px;min-width:0;display:block!important}
+  .product-columns .js-product-slider.kv-gallery-stacked{width:100%!important;max-width:none!important}
   .product-columns .js-product-info{flex:0 0 448px;max-width:448px;position:sticky;top:100px;align-self:flex-start}
   /* galería en grid vertical */
   .kv-gallery-stacked{width:100%!important;height:auto!important;overflow:visible!important}
