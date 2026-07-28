@@ -1177,3 +1177,26 @@ html.kv-menu-open .js-head-main .menu-container .js-modal-open-private::after{op
 .kv-pdp-tab-inner{padding:0 0 20px 36px;font:400 14px/1.5 "Lato",sans-serif;color:#333}
 .kv-pdp-tab-inner p{margin:0 0 8px}
 .kv-pdp-tab-inner .product-description-heading{display:none}
+
+/* ================================================================== */
+/* PDP — Bloque 8: carrusel de recomendados (Figma 1320-16463)         */
+/* Mismo estilo que los carruseles de la home: header, sin puntos,     */
+/* flechas crema en hover.                                             */
+/* ================================================================== */
+.section-related-products{padding:48px 0 56px}
+.section-related-products .section-title,.section-related-products h2,.section-related-products .products-list-title,.section-related-products [class*="header"] .heading-block{font:400 24px/1.2 "Lato",sans-serif!important;color:#000!important;text-transform:none!important;margin:0 0 24px!important}
+/* ocultar el paginador de puntos */
+.section-related-products .swiper-pagination,.section-related-products .swiper-pagination-outside,.section-related-products .swiper-fractions{display:none!important}
+@media (min-width:768px){
+  .section-related-products .swiper-button-prev,.section-related-products .swiper-button-next{
+    width:36px!important;height:36px!important;border-radius:50%;background-color:rgba(233,231,226,.5)!important;
+    background-repeat:no-repeat;background-position:center;background-size:20px 20px;
+    display:flex;align-items:center;justify-content:center;margin:0;top:calc(50% - 78px);transform:translateY(-50%);z-index:5;
+    opacity:0!important;pointer-events:none;transition:opacity .2s ease}
+  .section-related-products:hover .swiper-button-prev,.section-related-products:hover .swiper-button-next{opacity:1!important;pointer-events:auto}
+  .section-related-products .swiper-button-prev .slider-arrow,.section-related-products .swiper-button-next .slider-arrow,
+  .section-related-products .swiper-button-prev svg,.section-related-products .swiper-button-next svg,
+  .section-related-products .swiper-button-prev::after,.section-related-products .swiper-button-next::after{display:none!important}
+  .section-related-products .swiper-button-prev{background-image:url("data:image/svg+xml,%3Csvg%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M14.5996%204.7998L7.39961%2011.9998L14.5996%2019.1998%22%20stroke%3D%22black%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E")!important}
+  .section-related-products .swiper-button-next{background-image:url("data:image/svg+xml,%3Csvg%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M9.40039%2019.2002L16.6004%2012.0002L9.40039%204.8002%22%20stroke%3D%22black%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E")!important}
+}
