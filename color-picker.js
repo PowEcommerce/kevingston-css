@@ -1342,6 +1342,14 @@
     trunc();
     // el SKU se re-renderiza al cambiar de variante → re-truncar
     new MutationObserver(function () { trunc(); }).observe(skuEl, { childList: true, characterData: true, subtree: true });
+
+    // Reordenar: el nativo pone "Precio sin impuestos" arriba de las cuotas;
+    // el Figma lo quiere DEBAJO (cuotas → precio sin impuestos).
+    var inst = document.querySelector(".js-max-installments-container");
+    var noTax = document.querySelector(".js-price-without-taxes-container,.price-without-taxes-container");
+    if (inst && noTax && inst.parentNode && noTax.compareDocumentPosition(inst) & Node.DOCUMENT_POSITION_FOLLOWING) {
+      inst.parentNode.insertBefore(noTax, inst.nextSibling);
+    }
   }
 
   /* ------------------------------------------------------------------ */
@@ -1550,8 +1558,7 @@
 
     // 3 · Tiempos de entrega (calculador de envío nativo)
     var b3 = makeTab(IC.delivery, "Tiempos de entrega y medios de envío");
-    var shipHeading = [].slice.call(det.querySelectorAll("h2,h3,h4,strong,label,.form-label,div")).filter(function (e) { return e.children.length <= 3 && /medios de env/i.test((e.textContent || "").trim().slice(0, 22)); })[0];
-    var shipBox = shipHeading ? shipHeading.parentElement : null;
+    var shipBox = document.querySelector(".product-shipping-wrapper") || document.querySelector(".shipping-calculator");
     if (shipBox) b3.appendChild(shipBox); else b3.innerHTML = "<p>Ingresá tu código postal para calcular los medios de envío y tiempos de entrega.</p>";
 
     // 4 · Cambios y devoluciones (editable — texto por defecto)
