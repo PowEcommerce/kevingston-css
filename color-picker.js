@@ -1454,6 +1454,7 @@
   /* 2 grandes (2). El CSS fuerza el grid; acá asignamos full/half.       */
   /* ------------------------------------------------------------------ */
   function initPdpGallery() {
+    if (window.innerWidth < 768) return; // mobile: se deja el Swiper (slider), no stacked
     var slider = document.querySelector(".js-product-slider.swiper-container");
     if (!slider || slider.getAttribute("data-kv-gallery") === "1") return;
     var wrapper = slider.querySelector(".swiper-wrapper");
