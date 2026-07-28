@@ -1124,3 +1124,24 @@ html.kv-menu-open .js-head-main .menu-container .js-modal-open-private::after{op
 .kv-pdp-modal-thumb{width:100%;aspect-ratio:1;border-radius:4px;background:#f6f5f3 no-repeat center/cover;border:1px solid #e5e5e5}
 .kv-pdp-modal-color.is-active .kv-pdp-modal-thumb{border-color:#000;box-shadow:0 0 0 1px #000}
 .kv-pdp-modal-name{font:400 12px/1.2 "Lato",sans-serif;text-align:center}
+
+/* ================================================================== */
+/* PDP — Bloque 1: galería stacked (1-2-2-1) + columna de info fija     */
+/* Figma 1184-24198. JS initPdpGallery asigna .kv-gfull/.kv-ghalf.      */
+/* ================================================================== */
+@media (min-width:768px){
+  .product-columns{align-items:flex-start;gap:48px}
+  .product-columns .js-product-images{flex:1 1 auto;min-width:0}
+  .product-columns .js-product-info{flex:0 0 448px;max-width:448px;position:sticky;top:100px;align-self:flex-start}
+  /* galería en grid vertical */
+  .kv-gallery-stacked{width:100%!important;height:auto!important;overflow:visible!important}
+  .kv-gallery-stacked>.swiper-wrapper{display:grid!important;grid-template-columns:1fr 1fr;gap:16px;transform:none!important;height:auto!important;width:100%!important}
+  .kv-gallery-stacked .kv-gslide{width:auto!important;height:auto!important;margin:0!important;opacity:1!important;transform:none!important;flex:none}
+  .kv-gallery-stacked .kv-gfull{grid-column:1 / -1}
+  .kv-gallery-stacked .kv-ghalf{grid-column:span 1}
+  .kv-gallery-stacked .kv-gslide img{width:100%!important;height:auto!important;display:block;border-radius:8px;aspect-ratio:auto}
+  /* ocultar thumbnails + flechas + paginación (galería ahora stacked) */
+  .js-product-images-thumbs{display:none!important}
+  .kv-gallery-stacked .swiper-button-prev,.kv-gallery-stacked .swiper-button-next,
+  .kv-gallery-stacked .swiper-pagination,.kv-gallery-stacked .js-product-slider-thumbs{display:none!important}
+}

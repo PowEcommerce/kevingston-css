@@ -1448,6 +1448,35 @@
     document.documentElement.classList.add("f2tn-lock");
   }
 
+  /* ------------------------------------------------------------------ */
+  /* PDP — bloque 1: galería stacked (Figma). El nativo es un Swiper;    */
+  /* lo pasamos a grid vertical con la lógica 1-2-2-1 (5+), 1-2-1 (4),    */
+  /* 2 grandes (2). El CSS fuerza el grid; acá asignamos full/half.       */
+  /* ------------------------------------------------------------------ */
+  function initPdpGallery() {
+    var slider = document.querySelector(".js-product-slider.swiper-container");
+    if (!slider || slider.getAttribute("data-kv-gallery") === "1") return;
+    var wrapper = slider.querySelector(".swiper-wrapper");
+    if (!wrapper) return;
+    var slides = [].slice.call(wrapper.children).filter(function (s) { return s.querySelector && s.querySelector("img"); });
+    if (!slides.length) return;
+    slider.setAttribute("data-kv-gallery", "1");
+    if (slider.swiper) { try { slider.swiper.destroy(true, true); } catch (e) {} }
+    slider.classList.add("kv-gallery-stacked");
+    slides.forEach(function (s) { s.classList.add("kv-gslide"); s.classList.remove("kv-gfull", "kv-ghalf"); });
+    if (slides.length <= 2) {
+      slides.forEach(function (s) { s.classList.add("kv-gfull"); });
+    } else {
+      slides[0].classList.add("kv-gfull");
+      slides[slides.length - 1].classList.add("kv-gfull");
+      var mids = slides.slice(1, -1);
+      mids.forEach(function (s, i) {
+        if (i === mids.length - 1 && mids.length % 2 === 1) s.classList.add("kv-gfull");
+        else s.classList.add("kv-ghalf");
+      });
+    }
+  }
+
   function init() {
     var adbarClosed = initAdbarClose();
     if (!adbarClosed) initTopbarCarousel();
@@ -1465,6 +1494,8 @@
     initMenuVerTodo();
     initMobileMenuLogo();
     initPdp();
+    initPdpGallery();
+    setTimeout(initPdpGallery, 900); // el Swiper puede inicializar después del DOMContentLoaded
 
     fetch(MAP_URL, { cache: "no-cache" })
       .then(function (r) { return r.ok ? r.json() : null; })
