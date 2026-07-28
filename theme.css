@@ -1083,12 +1083,16 @@ html.kv-menu-open .js-head-main .menu-container .js-modal-open-private::after{op
 /* Nombre 32px Lato Regular, sin uppercase, espacio a la derecha para favoritos (app) */
 .js-product-detail .js-product-name.product-name{font:400 32px/1.05 "Lato",sans-serif!important;color:#000;text-transform:none!important;margin:0 0 16px!important;padding-right:48px;letter-spacing:0}
 /* Precio: compare gris tachado + main rojo (si hay descuento), en línea, 20px */
-.js-product-detail .product-price-main{display:flex;flex-direction:row;align-items:baseline;gap:12px;flex-wrap:wrap;font:400 20px/1 "Lato",sans-serif;color:#000}
-.js-product-detail .product-price-compare,.js-product-detail .js-compare-price-display{order:-1;color:#737373!important;text-decoration:line-through;font-size:20px;font-weight:400}
-.js-product-detail:has(.js-compare-price-display:not([style*="none"])) .product-price-main .js-price-display,
-.js-product-detail:has(.js-compare-price-display:not([style*="none"])) .product-price-main>.js-price{color:#be0000}
-/* ocultar el badge de % inline y disclaimers dentro del precio (las cucardas van aparte) */
-.js-product-detail .product-price-main .js-product-discount,.js-product-detail .product-price-main [class*="discount-badge"],.js-product-detail .js-price-discount-disclaimer-private{display:none!important}
+.js-product-detail .product-price-main{display:flex;flex-direction:row;align-items:baseline;gap:12px;flex-wrap:nowrap;font:400 20px/1 "Lato",sans-serif;color:#000}
+.js-product-detail .product-price-main .product-price-row{display:flex;align-items:baseline;gap:8px}
+.js-product-detail .product-price-compare,.js-product-detail .js-compare-price-display{color:#737373!important;text-decoration:line-through;font-size:20px;font-weight:400}
+/* precio actual: rojo si hay descuento */
+.js-product-detail:has(.js-compare-price-display:not([style*="none"])) .product-price-main .js-price-display{color:#be0000}
+/* ocultar el badge % inline, disclaimers y "Ahorrás" (las cucardas van aparte) */
+.js-product-detail .product-price-main .js-offer-label,
+.js-product-detail .product-price-main .product-offer-label,
+.js-product-detail .js-price-discount-disclaimer-private,
+.js-product-detail .js-saved-money-message{display:none!important}
 /* Cuotas 14px negro + precio sin impuestos 12px gris */
 .js-product-detail .js-max-installments-container{font:400 14px/1.3 "Lato",sans-serif;color:#000;margin:8px 0 0}
 .js-product-detail .price-without-taxes-container,.js-product-detail .js-price-without-taxes-container{font:400 12px/1.3 "Lato",sans-serif;color:#737373;margin:2px 0 0}
