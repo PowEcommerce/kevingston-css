@@ -237,13 +237,14 @@ h1.heading-block,h2.heading-block,h3.heading-block,h4.heading-block,h5.heading-b
   .modal-nav-main .nav-item.item-with-subitems>.modal .modal-header{display:none}
   /* Cuerpo del sub-panel */
   .modal-nav-main .nav-item.item-with-subitems>.modal .nav-hamburger-body{
-    height:100%;overflow-y:auto;padding:100px 32px 32px;
+    height:100%;overflow-y:auto;padding:100px 32px 24px;
   }
-  /* Títulos "New Arrivals" + "Colecciones" (no existen en el nativo) */
+  /* Títulos "New Arrivals" + "Colecciones" (no existen en el nativo) + LÍNEA divisora
+     entre los títulos y la lista de subcategorías (Figma 2128-13490). */
   .modal-nav-main .nav-item.item-with-subitems>.modal .nav-hamburger-body::before{
     content:"New Arrivals\A\A Colecciones";white-space:pre;display:block;
     font-family:"Lato",sans-serif;font-weight:700;font-size:16px;line-height:1.3;
-    color:#000;margin-bottom:18px;
+    color:#000;border-bottom:1px solid #F0F0F0;padding-bottom:18px;margin-bottom:12px;
   }
 }
 
