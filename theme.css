@@ -152,7 +152,9 @@ h1.heading-block,h2.heading-block,h3.heading-block,h4.heading-block,h5.heading-b
 .modal-nav-main .modal-close{padding:0}
 .modal-nav-main .modal-close-icon{font-size:20px;color:#000}
 /* Contenido: header 84px + content pt-16 px-32 pb-32 (Figma 959-19260) */
-.modal-nav-main>.modal-body{display:block;padding:16px 32px 32px}
+/* Fondo blanco del drawer (Panel 1) */
+.modal-nav-main.modal-nav-hamburger{background:#fff!important}
+.modal-nav-main>.modal-body{display:block;padding:16px 32px 32px;background:#fff}
 /* nav-list = flex column, gap 12px DENTRO de cada grupo (Figma) */
 .modal-nav-main .nav-list{display:flex;flex-direction:column;gap:12px}
 /* Items base: Lato Regular 16px/1.3 */
@@ -220,7 +222,7 @@ h1.heading-block,h2.heading-block,h3.heading-block,h4.heading-block,h5.heading-b
     position:absolute;left:480px;top:0;right:auto;bottom:auto;
     width:480px;max-width:480px;height:100%;max-height:100%;
     margin:0;border-radius:0;
-    background:#fff;box-shadow:8px 0 24px rgba(0,0,0,.06);z-index:1;
+    background:#fff;border-left:1px solid #F0F0F0;box-shadow:8px 0 24px rgba(0,0,0,.04);z-index:1;
     opacity:0;visibility:hidden;pointer-events:none;transform:none!important;
     transition:opacity .3s ease-out,visibility .3s;
   }
