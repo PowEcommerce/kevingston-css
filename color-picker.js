@@ -1470,8 +1470,13 @@
       var img = s.querySelector("img");
       if (!img) return;
       var real = img.getAttribute("srcset") || img.getAttribute("data-srcset") || img.getAttribute("data-src") || "";
-      var url = real.split(",")[0].trim().split(/\s+/)[0];
-      if (url && !/^data:/.test(url)) {
+      var parts = real.split(",").map(function (c) { var sp = c.trim().split(/\s+/); return { url: sp[0], w: parseInt(sp[1], 10) || 0 }; })
+        .filter(function (x) { return x.url && !/^data:/.test(x.url); });
+      parts.sort(function (a, b) { return a.w - b.w; });
+      // elegir la más chica que sea >=800w (buena para el display), o la más grande
+      var pick = parts.filter(function (x) { return x.w >= 800; })[0] || parts[parts.length - 1];
+      var url = pick && pick.url;
+      if (url) {
         if (url.indexOf("//") === 0) url = "https:" + url;
         img.removeAttribute("srcset");
         img.removeAttribute("data-srcset");
