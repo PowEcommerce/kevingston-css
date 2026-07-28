@@ -1644,11 +1644,13 @@
     }
 
     apply();
-    // El nativo re-renderiza el grupo de variantes (Nube SDK, async) → borra mis
-    // links / revierte el label. Observo .js-product-detail (contenedor estable que
-    // el nativo NO reemplaza) + reintentos por si el render llega tarde.
+    // El nativo (Nube SDK) re-renderiza el grupo de variantes de forma async y en
+    // momentos variables (hidratación, cambio de variante) → borra mis links y
+    // revierte el label. El MutationObserver solo no alcanza (race). Un interval
+    // idempotente y barato garantiza que se re-aplique siempre. apply() no muta
+    // nada si ya está aplicado, así que no pelea con el nativo salvo para corregir.
     new MutationObserver(function () { apply(); }).observe(det, { childList: true, subtree: true });
-    [300, 1000, 2500].forEach(function (ms) { setTimeout(apply, ms); });
+    setInterval(apply, 500);
   }
 
   /* ------------------------------------------------------------------ */
