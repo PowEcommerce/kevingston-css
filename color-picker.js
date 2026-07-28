@@ -1487,17 +1487,14 @@
     if (slider.swiper) { try { slider.swiper.destroy(true, true); } catch (e) {} }
     slider.classList.add("kv-gallery-stacked");
     slides.forEach(function (s) { s.classList.add("kv-gslide"); s.classList.remove("kv-gfull", "kv-ghalf"); });
-    if (slides.length <= 2) {
-      slides.forEach(function (s) { s.classList.add("kv-gfull"); });
-    } else {
-      slides[0].classList.add("kv-gfull");
-      slides[slides.length - 1].classList.add("kv-gfull");
-      var mids = slides.slice(1, -1);
-      mids.forEach(function (s, i) {
-        if (i === mids.length - 1 && mids.length % 2 === 1) s.classList.add("kv-gfull");
-        else s.classList.add("kv-ghalf");
-      });
-    }
+    // 1ª imagen full; el resto en pares (2-col); si queda una sola al final (resto impar),
+    // esa va full → 2=1-1, 3=1-2, 4=1-2-1, 5=1-2-2, 6=1-2-2-1.
+    slides[0].classList.add("kv-gfull");
+    var rest = slides.slice(1);
+    rest.forEach(function (s, i) {
+      if (i === rest.length - 1 && rest.length % 2 === 1) s.classList.add("kv-gfull");
+      else s.classList.add("kv-ghalf");
+    });
   }
 
   function init() {
