@@ -1609,43 +1609,45 @@
   /* ------------------------------------------------------------------ */
   function initPdpSizeLinks() {
     var det = document.querySelector(".js-product-detail");
-    if (!det || det.getAttribute("data-kv-sizelinks") === "1") return;
-    var groups = det.querySelectorAll(".js-product-variants-group");
-    if (!groups.length) return;
-    var talle = null;
-    [].forEach.call(groups, function (g) {
-      if (/talle/i.test((g.textContent || "").slice(0, 40)) && g.querySelector(".js-variant-button")) talle = g;
-    });
-    if (!talle) return;
-    det.setAttribute("data-kv-sizelinks", "1");
+    if (!det) return;
+    var container = det.querySelector(".js-product-variants") || det;
 
-    // Label de talle: el nativo muestra "Talle: {seleccionado}"; el Figma quiere
-    // sólo "Talles". El nativo re-renderiza el label al cambiar de variante →
-    // observo el GRUPO y re-busco el label en cada mutación (robusto a reemplazos).
-    (function () {
-      function fixTalle() {
-        var lbl = talle.querySelector(":scope > .form-label") || talle.querySelector(".form-label:not(.d-none .form-label)");
-        if (lbl && (lbl.textContent || "").trim() !== "Talles") lbl.textContent = "Talles";
+    function findTalle() {
+      var talle = null;
+      [].forEach.call(det.querySelectorAll(".js-product-variants-group"), function (g) {
+        if (/talle/i.test((g.textContent || "").slice(0, 40)) && g.querySelector(".js-variant-button")) talle = g;
+      });
+      return talle;
+    }
+
+    function apply() {
+      var talle = findTalle();
+      if (!talle) return;
+      // (1) Label "Talle: X" → "Talles" (Figma).
+      var lbl = talle.querySelector(":scope > .form-label");
+      if (lbl && (lbl.textContent || "").trim() !== "Talles") lbl.textContent = "Talles";
+      // (2) Links "Guía de talles"/"Conocé tu talle" (si no están ya).
+      if (!talle.querySelector(".kv-pdp-sizelinks")) {
+        var row = document.createElement("div");
+        row.className = "kv-pdp-sizelinks";
+        var guia = document.createElement("button");
+        guia.type = "button"; guia.className = "kv-sizelink kv-sizeguide-open"; guia.textContent = "Guía de talles";
+        var fit = document.createElement("button");
+        fit.type = "button"; fit.className = "kv-sizelink kv-fitting-open"; fit.textContent = "Conocé tu talle";
+        row.appendChild(guia); row.appendChild(fit);
+        talle.appendChild(row);
+        guia.addEventListener("click", function () { openSizeGuide(); });
+        fit.addEventListener("click", function () {
+          var app = document.querySelector('[class*="ready-size"],[id*="ready-size"],[class*="readysize"],[data-app*="size"]');
+          if (app) { app.click(); }
+        });
       }
-      fixTalle();
-      new MutationObserver(fixTalle).observe(talle, { childList: true, characterData: true, subtree: true });
-    })();
+    }
 
-    var row = document.createElement("div");
-    row.className = "kv-pdp-sizelinks";
-    var guia = document.createElement("button");
-    guia.type = "button"; guia.className = "kv-sizelink kv-sizeguide-open"; guia.textContent = "Guía de talles";
-    var fit = document.createElement("button");
-    fit.type = "button"; fit.className = "kv-sizelink kv-fitting-open"; fit.textContent = "Conocé tu talle";
-    row.appendChild(guia); row.appendChild(fit);
-    talle.appendChild(row);
-
-    guia.addEventListener("click", function () { openSizeGuide(); });
-    // "Conocé tu talle": si la app Ready Size dejó un trigger, lo clickeamos.
-    fit.addEventListener("click", function () {
-      var app = document.querySelector('[class*="ready-size"],[id*="ready-size"],[class*="readysize"],[data-app*="size"]');
-      if (app) { app.click(); }
-    });
+    apply();
+    // El nativo re-renderiza el grupo de variantes (borra mis links / revierte el
+    // label) → re-aplico en cada mutación del contenedor de variantes.
+    new MutationObserver(function () { apply(); }).observe(container, { childList: true, subtree: true });
   }
 
   /* ------------------------------------------------------------------ */
