@@ -1153,6 +1153,7 @@ html.kv-menu-open .js-head-main .menu-container .js-modal-open-private::after{op
   /* display:block para que el slider (kv-gallery-stacked) NO tome su ancho    */
   /* intrínseco (601px del slide viejo de Swiper) y llene los 677 de columna.  */
   .product-columns .js-product-images{flex:0 0 677px;max-width:677px;min-width:0;display:block!important}
+  .product-columns .product-images-slider,
   .product-columns .js-product-slider.kv-gallery-stacked{width:100%!important;max-width:none!important}
   .product-columns .js-product-info{flex:0 0 448px;max-width:448px;position:sticky;top:100px;align-self:flex-start}
   /* galería en grid vertical */
