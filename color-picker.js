@@ -1323,6 +1323,25 @@
     if (close) header.insertBefore(logo, close); else header.appendChild(logo);
   }
 
+  /* ------------------------------------------------------------------ */
+  /* PDP — bloque 2: SKU a 8 dígitos (Figma). El nativo muestra el SKU    */
+  /* completo de la variante; mostramos solo los primeros 8 chars.        */
+  /* ------------------------------------------------------------------ */
+  function initPdp() {
+    var skuEl = document.querySelector(".js-product-sku");
+    if (!skuEl) return;
+    function trunc() {
+      var cur = (skuEl.textContent || "").trim();
+      var raw = cur.replace(/[^a-z0-9]/gi, "");
+      if (raw.length <= 8) return; // ya corto → no tocar (evita loop)
+      skuEl.setAttribute("data-kv-full", cur);
+      skuEl.textContent = raw.slice(0, 8);
+    }
+    trunc();
+    // el SKU se re-renderiza al cambiar de variante → re-truncar
+    new MutationObserver(function () { trunc(); }).observe(skuEl, { childList: true, characterData: true, subtree: true });
+  }
+
   function init() {
     var adbarClosed = initAdbarClose();
     if (!adbarClosed) initTopbarCarousel();
@@ -1339,6 +1358,7 @@
     initMenuClickNav();
     initMenuVerTodo();
     initMobileMenuLogo();
+    initPdp();
 
     fetch(MAP_URL, { cache: "no-cache" })
       .then(function (r) { return r.ok ? r.json() : null; })

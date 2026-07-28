@@ -1068,3 +1068,27 @@ body.modal-show{overflow:hidden!important}
 .js-head-main .menu-container .js-modal-open-private::after{background-image:url("data:image/svg+xml,%3Csvg%20width%3D%2220%22%20height%3D%2220%22%20viewBox%3D%220%200%2020%2020%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M4%204L16%2016M16%204L4%2016%22%20stroke%3D%22black%22%20stroke-linecap%3D%22round%22%2F%3E%3C%2Fsvg%3E");opacity:0;transform:rotate(-90deg)}
 html.kv-menu-open .js-head-main .menu-container .js-modal-open-private::before{opacity:0;transform:rotate(90deg)}
 html.kv-menu-open .js-head-main .menu-container .js-modal-open-private::after{opacity:1;transform:rotate(0)}
+
+/* ================================================================== */
+/* PDP — Bloque 2: Info del producto (Figma 1184-24198)                */
+/* Breadcrumbs+SKU en línea, nombre 32px, precio (tachado gris +        */
+/* descuento rojo), cuotas + precio sin impuestos.                     */
+/* ================================================================== */
+.js-product-detail .product-content{position:relative}
+/* Breadcrumbs (izq) 12px gris + SKU (der, absolute) 12px gris — misma altura */
+.js-product-detail .product-content>.breadcrumbs{font:400 12px/1.3 "Lato",sans-serif;color:#737373;margin:0 0 20px;padding-right:96px}
+.js-product-detail .breadcrumbs a,.js-product-detail .breadcrumbs .crumb,.js-product-detail .breadcrumbs .separator{color:#737373!important;text-decoration:none;font-size:12px}
+.js-product-detail .product-content>.product-sku{position:absolute;top:0;right:0;font-size:0;color:#737373;margin:0}
+.js-product-detail .product-content>.product-sku .js-product-sku{font:400 12px/1.3 "Lato",sans-serif;color:#737373}
+/* Nombre 32px Lato Regular, sin uppercase, espacio a la derecha para favoritos (app) */
+.js-product-detail .js-product-name.product-name{font:400 32px/1.05 "Lato",sans-serif!important;color:#000;text-transform:none!important;margin:0 0 16px!important;padding-right:48px;letter-spacing:0}
+/* Precio: compare gris tachado + main rojo (si hay descuento), en línea, 20px */
+.js-product-detail .product-price-main{display:flex;flex-direction:row;align-items:baseline;gap:12px;flex-wrap:wrap;font:400 20px/1 "Lato",sans-serif;color:#000}
+.js-product-detail .product-price-compare,.js-product-detail .js-compare-price-display{order:-1;color:#737373!important;text-decoration:line-through;font-size:20px;font-weight:400}
+.js-product-detail:has(.js-compare-price-display:not([style*="none"])) .product-price-main .js-price-display,
+.js-product-detail:has(.js-compare-price-display:not([style*="none"])) .product-price-main>.js-price{color:#be0000}
+/* ocultar el badge de % inline y disclaimers dentro del precio (las cucardas van aparte) */
+.js-product-detail .product-price-main .js-product-discount,.js-product-detail .product-price-main [class*="discount-badge"],.js-product-detail .js-price-discount-disclaimer-private{display:none!important}
+/* Cuotas 14px negro + precio sin impuestos 12px gris */
+.js-product-detail .js-max-installments-container{font:400 14px/1.3 "Lato",sans-serif;color:#000;margin:8px 0 0}
+.js-product-detail .price-without-taxes-container,.js-product-detail .js-price-without-taxes-container{font:400 12px/1.3 "Lato",sans-serif;color:#737373;margin:2px 0 0}
