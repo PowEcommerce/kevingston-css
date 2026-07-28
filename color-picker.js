@@ -1356,7 +1356,7 @@
   function normURL(u) { return (u || "").replace(/^https?:\/\/[^/]+/, "").replace(/\/$/, ""); }
 
   function initPdpColors() {
-    if (!pdpMap) return;
+    if (!pdpMap || !pdpImagesById) return; // espera color-map Y las imágenes (para los thumbs)
     var det = document.querySelector(".js-product-detail");
     if (!det || det.getAttribute("data-kv-pdpcolors") === "1") return;
     var skuEl = document.querySelector(".js-product-sku");
