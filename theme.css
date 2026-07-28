@@ -191,11 +191,11 @@ h1.heading-block,h2.heading-block,h3.heading-block,h4.heading-block,h5.heading-b
 .modal-nav-main .nav-list>.nav-item:nth-child(3),
 .modal-nav-main .nav-list>.nav-item:nth-child(6),
 .modal-nav-main .nav-list>.nav-item:nth-child(10),
-.modal-nav-main .nav-list>.nav-item:nth-child(11){margin-top:6px;border-top:1px solid #DCDAD6;padding-top:18px}
+.modal-nav-main .nav-list>.nav-item:nth-child(11){margin-top:6px;border-top:1px solid #F0F0F0;padding-top:18px}
 /* Cuenta/Locales/Franquicia (11-13): gris #404040 (Figma primary/800) */
 .modal-nav-main .nav-list>.nav-item:nth-child(n+11)>.nav-list-link{color:#404040}
 /* Seccion inferior: menu secundario en gris #404040 */
-.modal-nav-main .nav-secondary{background:#fff;border:none;border-top:1px solid #DCDAD6;margin-top:12px;padding-top:18px}
+.modal-nav-main .nav-secondary{background:#fff;border:none;border-top:1px solid #F0F0F0;margin-top:12px;padding-top:18px}
 .modal-nav-main .nav-secondary .secondary-menu-link{padding:6px 0;font-size:16px;color:#404040}
 /* Footer de cuenta nativo oculto (usamos el secundario) */
 .modal-nav-main .modal-footer{display:none!important}
