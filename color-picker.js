@@ -1497,6 +1497,72 @@
     });
   }
 
+  /* ------------------------------------------------------------------ */
+  /* PDP — bloque 6: 4 solapas descriptivas (accordion). Figma 1184-24198.*/
+  /* 1 Descripción (real) · 2 Formas de pago (editable) · 3 Tiempos de     */
+  /* entrega (calculador nativo) · 4 Cambios y devoluciones (editable).    */
+  /* ------------------------------------------------------------------ */
+  function initPdpTabs() {
+    var det = document.querySelector(".js-product-detail");
+    if (!det || det.getAttribute("data-kv-tabs") === "1") return;
+    var descBox = document.querySelector(".product-info-description");
+    if (!descBox) return;
+    det.setAttribute("data-kv-tabs", "1");
+
+    var IC = {
+      desc: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M8.5 4 4 6.8v3l2 .6V20h12v-9.6l2-.6v-3L15.5 4 12 6 8.5 4Z"/></svg>',
+      pay: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2.5" y="5.5" width="19" height="13" rx="2"/><path d="M2.5 9.5h19"/></svg>',
+      delivery: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 6.5h11v9H3zM14 9.5h4l3 3v3h-7z"/><circle cx="7" cy="17.5" r="1.6"/><circle cx="17.5" cy="17.5" r="1.6"/></svg>',
+      returns: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 9a8 8 0 0 1 14-3M4 5.5V9h3.5"/><path d="M20 15a8 8 0 0 1-14 3M20 18.5V15h-3.5"/></svg>'
+    };
+    var CHEV = '<svg class="kv-tab-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 6l6 6-6 6"/></svg>';
+
+    var wrap = document.createElement("div");
+    wrap.className = "kv-pdp-tabs";
+
+    function makeTab(icon, title) {
+      var tab = document.createElement("div"); tab.className = "kv-pdp-tab";
+      var head = document.createElement("button"); head.type = "button"; head.className = "kv-pdp-tab-head";
+      head.innerHTML = '<span class="kv-tab-ico">' + icon + "</span><span class=\"kv-tab-title\">" + title + "</span>" + CHEV;
+      var body = document.createElement("div"); body.className = "kv-pdp-tab-body";
+      var inner = document.createElement("div"); inner.className = "kv-pdp-tab-inner";
+      body.appendChild(inner);
+      head.addEventListener("click", function () {
+        var open = tab.classList.contains("open");
+        wrap.querySelectorAll(".kv-pdp-tab.open").forEach(function (t) { t.classList.remove("open"); });
+        if (!open) tab.classList.add("open");
+      });
+      tab.appendChild(head); tab.appendChild(body);
+      wrap.appendChild(tab);
+      return inner;
+    }
+
+    // 1 · Descripción y cuidados (texto real del producto)
+    var b1 = makeTab(IC.desc, "Descripción y cuidados");
+    var descText = descBox.querySelector(".js-product-description");
+    if (descText) b1.appendChild(descText); else b1.textContent = (descBox.textContent || "").trim();
+
+    // 2 · Formas de pago (editable — texto por defecto)
+    var b2 = makeTab(IC.pay, "Formas de pago, promociones y reintegros");
+    b2.innerHTML = "<p>Aceptamos todas las tarjetas de crédito y débito, transferencia bancaria y efectivo. Consultá las promociones y reintegros bancarios vigentes.</p>";
+
+    // 3 · Tiempos de entrega (calculador de envío nativo)
+    var b3 = makeTab(IC.delivery, "Tiempos de entrega y medios de envío");
+    var shipHeading = [].slice.call(det.querySelectorAll("h2,h3,h4,strong,label,.form-label,div")).filter(function (e) { return e.children.length <= 3 && /medios de env/i.test((e.textContent || "").trim().slice(0, 22)); })[0];
+    var shipBox = shipHeading ? shipHeading.parentElement : null;
+    if (shipBox) b3.appendChild(shipBox); else b3.innerHTML = "<p>Ingresá tu código postal para calcular los medios de envío y tiempos de entrega.</p>";
+
+    // 4 · Cambios y devoluciones (editable — texto por defecto)
+    var b4 = makeTab(IC.returns, "Cambios y devoluciones");
+    b4.innerHTML = "<p>Tenés hasta 30 días para cambios y devoluciones. La primera devolución es gratis. Los productos deben estar sin uso y con su etiqueta.</p>";
+
+    // insertar el accordion donde estaba la descripción y ocultar lo suelto
+    descBox.parentNode.insertBefore(wrap, descBox);
+    descBox.style.display = "none";
+    var purchase = document.querySelector(".product-purchase-info");
+    if (purchase) purchase.style.setProperty("display", "none", "important");
+  }
+
   function init() {
     var adbarClosed = initAdbarClose();
     if (!adbarClosed) initTopbarCarousel();
@@ -1514,6 +1580,7 @@
     initMenuVerTodo();
     initMobileMenuLogo();
     initPdp();
+    initPdpTabs();
     initPdpGallery();
     setTimeout(initPdpGallery, 900); // el Swiper puede inicializar después del DOMContentLoaded
 
