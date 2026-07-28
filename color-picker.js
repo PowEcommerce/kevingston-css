@@ -1565,8 +1565,13 @@
     var b4 = makeTab(IC.returns, "Cambios y devoluciones");
     b4.innerHTML = "<p>Tenés hasta 30 días para cambios y devoluciones. La primera devolución es gratis. Los productos deben estar sin uso y con su etiqueta.</p>";
 
-    // insertar el accordion donde estaba la descripción y ocultar lo suelto
-    descBox.parentNode.insertBefore(wrap, descBox);
+    // insertar el accordion DENTRO de .product-content (después del form) para
+    // que no le aplique el gap:40 flex de .js-product-info; el ritmo botón→solapas
+    // lo controla el margin-top de .kv-pdp-tabs (24, Figma).
+    var pc = det.querySelector(".product-content");
+    var form = det.querySelector(".js-product-form");
+    if (pc && form) pc.insertBefore(wrap, form.nextSibling);
+    else descBox.parentNode.insertBefore(wrap, descBox);
     descBox.style.display = "none";
     var purchase = document.querySelector(".product-purchase-info");
     if (purchase) purchase.style.setProperty("display", "none", "important");
