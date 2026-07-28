@@ -1083,8 +1083,9 @@ html.kv-menu-open .js-head-main .menu-container .js-modal-open-private::after{op
 /* Nombre 32px Lato Regular, sin uppercase, espacio a la derecha para favoritos (app) */
 .js-product-detail .js-product-name.product-name{font:400 32px/1.05 "Lato",sans-serif!important;color:#000;text-transform:none!important;margin:0 0 16px!important;padding-right:48px;letter-spacing:0}
 /* Precio: compare gris tachado + main rojo (si hay descuento), en línea, 20px */
-.js-product-detail .product-price-main{display:flex;flex-direction:row;align-items:baseline;gap:12px;flex-wrap:nowrap;font:400 20px/1 "Lato",sans-serif;color:#000}
-.js-product-detail .product-price-main .product-price-row{display:flex;align-items:baseline;gap:8px}
+.js-product-detail .product-price-main{display:flex!important;flex-direction:row;align-items:baseline;justify-content:flex-start;gap:12px;flex-wrap:nowrap;font:400 20px/1 "Lato",sans-serif;color:#000}
+.js-product-detail .product-price-main .product-price-row{display:flex;align-items:baseline;gap:8px;flex:0 0 auto;margin:0}
+.js-product-detail .product-price-main .js-price-display{font:400 20px/1 "Lato",sans-serif}
 .js-product-detail .product-price-compare,.js-product-detail .js-compare-price-display{color:#737373!important;text-decoration:line-through;font-size:20px;font-weight:400}
 /* precio actual: rojo si hay descuento */
 .js-product-detail:has(.js-compare-price-display:not([style*="none"])) .product-price-main .js-price-display{color:#be0000}
