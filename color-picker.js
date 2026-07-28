@@ -1293,6 +1293,36 @@
     });
   }
 
+  /* Menú mobile: inyecta el logo centrado en el header del drawer (Figma 959-19822).
+     Se oculta en desktop por CSS. La X queda a la derecha. */
+  function initMobileMenuLogo() {
+    var ham = document.getElementById("nav-hamburger");
+    if (!ham) return;
+    var header = ham.querySelector(".modal-header");
+    if (!header || header.querySelector(".kv-menu-logo")) return;
+    var close = header.querySelector(".modal-close");
+    var logo = document.createElement("a");
+    logo.className = "kv-menu-logo";
+    logo.href = "/";
+    logo.setAttribute("aria-label", "Kevingston");
+    var siteImg = document.querySelector(".js-head-main .logo-img-container img, .js-head-main .logo img");
+    var siteTxt = document.querySelector(".js-head-main .logo-text");
+    if (siteImg && siteImg.getAttribute("src")) {
+      var im = document.createElement("img");
+      im.src = siteImg.getAttribute("src");
+      im.alt = "Kevingston";
+      logo.appendChild(im);
+    } else if (siteTxt) {
+      logo.textContent = (siteTxt.textContent || "KEVINGSTON").trim();
+    } else {
+      logo.textContent = "KEVINGSTON";
+    }
+    var spacer = document.createElement("span");
+    spacer.className = "kv-menu-hspacer";
+    header.insertBefore(spacer, header.firstChild);
+    if (close) header.insertBefore(logo, close); else header.appendChild(logo);
+  }
+
   function init() {
     var adbarClosed = initAdbarClose();
     if (!adbarClosed) initTopbarCarousel();
@@ -1308,6 +1338,7 @@
     initMenuIcon();
     initMenuClickNav();
     initMenuVerTodo();
+    initMobileMenuLogo();
 
     fetch(MAP_URL, { cache: "no-cache" })
       .then(function (r) { return r.ok ? r.json() : null; })

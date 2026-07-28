@@ -248,6 +248,33 @@ h1.heading-block,h2.heading-block,h3.heading-block,h4.heading-block,h5.heading-b
   }
 }
 
+/* ============================================================
+   MENÚ MOBILE (Figma 959-19822) — header logo+X, gap 16, px 16
+   ============================================================ */
+/* Logo del menú (inyectado por color-picker.js) oculto en desktop */
+@media (min-width:768px){
+  .modal-nav-main .modal-header .kv-menu-logo,
+  .modal-nav-main .modal-header .kv-menu-hspacer{display:none!important}
+}
+@media (max-width:767px){
+  /* Header: flecha-atrás(oculta) + logo centrado + X a la derecha */
+  .modal-nav-main .modal-header{padding:18px 16px!important;height:auto!important;display:flex!important;flex-direction:row!important;align-items:center;justify-content:space-between;gap:8px;border-bottom:none}
+  .modal-nav-main .modal-header .kv-menu-hspacer{width:24px;height:24px;flex:none;order:1}
+  .modal-nav-main .modal-header .kv-menu-logo{flex:1 1 auto;display:flex;align-items:center;justify-content:center;order:2}
+  .modal-nav-main .modal-header .kv-menu-logo img{height:17px;width:auto;max-width:180px;filter:none}
+  .modal-nav-main .modal-header .kv-menu-logo .logo-text,.modal-nav-main .modal-header .kv-menu-logo{font:700 18px/1 "Lato",sans-serif;color:#000;text-decoration:none;letter-spacing:.02em}
+  .modal-nav-main .modal-header .modal-close{order:3;margin:0!important;flex:none}
+  .modal-nav-main .modal-header .modal-close-icon{width:24px!important;height:24px!important;font-size:24px!important}
+  /* Content: px-16 py-24, gap 16 uniforme entre ítems (mobile) */
+  .modal-nav-main>.modal-body{padding:24px 16px!important}
+  .modal-nav-main .nav-list{gap:16px}
+  .modal-nav-main .nav-list>.nav-item:nth-child(2){margin-top:0}
+  .modal-nav-main .nav-list>.nav-item:nth-child(3),
+  .modal-nav-main .nav-list>.nav-item:nth-child(6),
+  .modal-nav-main .nav-list>.nav-item:nth-child(10),
+  .modal-nav-main .nav-list>.nav-item:nth-child(11){margin-top:0;padding-top:16px}
+}
+
 /* ================================================================== */
 /* COLOR PICKER de la card de producto (grilla)                       */
 /* Swatches inyectados por color-picker.js. Producto-color relacionados */
