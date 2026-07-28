@@ -1245,6 +1245,44 @@
     sync();
   }
 
+  /* ------------------------------------------------------------------ */
+  /* Menú: abrir Nivel 2 por CLICK (desktop). El click nativo abre el     */
+  /* sub-modal reparentándolo al body (rompe el side-by-side), así que lo  */
+  /* bloqueamos y togglamos .kv-l2-open en el padre (el CSS lo muestra al  */
+  /* lado con fade). En mobile se deja el drill-down nativo (stack).       */
+  /* ------------------------------------------------------------------ */
+  function initMenuClickNav() {
+    var ham = document.getElementById("nav-hamburger");
+    if (!ham || ham.getAttribute("data-kv-nav") === "1") return;
+    ham.setAttribute("data-kv-nav", "1");
+
+    ham.addEventListener("click", function (e) {
+      if (window.innerWidth < 768) return; // mobile: drill-down nativo
+      var link = e.target.closest && e.target.closest(".nav-list-link");
+      if (!link) return;
+      var item = link.parentElement;
+      if (!item || !item.classList.contains("item-with-subitems")) return;
+      // solo Nivel 1 (hijo directo de .nav-list); los subitems de Panel 2 no
+      if (!item.parentElement || !item.parentElement.classList.contains("nav-list")) return;
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      var wasOpen = item.classList.contains("kv-l2-open");
+      ham.querySelectorAll(".nav-list > .nav-item.item-with-subitems.kv-l2-open").forEach(function (o) {
+        o.classList.remove("kv-l2-open");
+      });
+      if (!wasOpen) item.classList.add("kv-l2-open");
+    }, true); // capture: corre antes que el handler nativo
+
+    // Al cerrar el drawer, resetear el estado de Nivel 2
+    new MutationObserver(function () {
+      if (!ham.classList.contains("modal-visible") && !ham.classList.contains("modal-show")) {
+        ham.querySelectorAll(".nav-list > .nav-item.item-with-subitems.kv-l2-open").forEach(function (o) {
+          o.classList.remove("kv-l2-open");
+        });
+      }
+    }).observe(ham, { attributes: true, attributeFilter: ["class"] });
+  }
+
   function init() {
     var adbarClosed = initAdbarClose();
     if (!adbarClosed) initTopbarCarousel();
@@ -1258,6 +1296,7 @@
     initPromoModal();
     initOffersModal();
     initMenuIcon();
+    initMenuClickNav();
 
     fetch(MAP_URL, { cache: "no-cache" })
       .then(function (r) { return r.ok ? r.json() : null; })

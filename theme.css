@@ -224,14 +224,13 @@ h1.heading-block,h2.heading-block,h3.heading-block,h4.heading-block,h5.heading-b
     opacity:0;visibility:hidden;pointer-events:none;transform:none!important;
     transition:opacity .3s ease-out,visibility .3s;
   }
-  /* Nivel 2 aparece con FADE en su lugar (dissolve, como el prototipo real), NO slide */
-  .modal-nav-main .nav-item.item-with-subitems:hover>.modal.modal-nav-hamburger{
+  /* Nivel 2 se abre por CLICK (color-picker.js togglea .kv-l2-open en el padre y
+     bloquea el modal nativo, que si no reparenta el sub-modal al body). FADE, no slide. */
+  .modal-nav-main .nav-item.item-with-subitems.kv-l2-open>.modal.modal-nav-hamburger{
     opacity:1;visibility:visible;pointer-events:auto;
   }
-  /* Puente invisible: cubre el gap padre→panel para no perder el hover */
-  .modal-nav-main .nav-item.item-with-subitems:hover>.modal.modal-nav-hamburger::before{
-    content:"";position:absolute;left:-40px;top:0;width:40px;height:100%;
-  }
+  /* Padre con Panel 2 abierto: subrayado activo */
+  .modal-nav-main .nav-item.item-with-subitems.kv-l2-open>.nav-list-link{text-decoration-color:currentColor}
   /* Header nativo del sub-panel (atrás/título/cerrar): oculto */
   .modal-nav-main .nav-item.item-with-subitems>.modal .modal-header{display:none}
   /* Cuerpo del sub-panel */
