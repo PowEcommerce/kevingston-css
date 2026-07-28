@@ -1564,6 +1564,41 @@
     if (purchase) purchase.style.setProperty("display", "none", "important");
   }
 
+  /* ------------------------------------------------------------------ */
+  /* PDP mobile — galería: flechas laterales + barra de progreso (Figma). */
+  /* Se mantiene el Swiper nativo; agregamos las flechas (slidePrev/Next) */
+  /* y una barra segmentada que sigue el slide activo.                    */
+  /* ------------------------------------------------------------------ */
+  function initPdpMobileGallery() {
+    if (window.innerWidth >= 768) return;
+    var slider = document.querySelector(".js-product-slider.swiper-container");
+    if (!slider || slider.getAttribute("data-kv-mobgal") === "1") return;
+    var sw = slider.swiper;
+    if (!sw) return; // el swiper aún no inicializó
+    slider.setAttribute("data-kv-mobgal", "1");
+    var media = slider.closest(".product-images-slider") || slider.parentElement;
+    media.classList.add("kv-mob-media");
+
+    var prev = document.createElement("button"); prev.type = "button"; prev.className = "kv-mob-arrow kv-mob-prev"; prev.setAttribute("aria-label", "Anterior");
+    var next = document.createElement("button"); next.type = "button"; next.className = "kv-mob-arrow kv-mob-next"; next.setAttribute("aria-label", "Siguiente");
+    prev.addEventListener("click", function () { sw.slidePrev(); });
+    next.addEventListener("click", function () { sw.slideNext(); });
+    media.appendChild(prev); media.appendChild(next);
+
+    var bar = document.createElement("div"); bar.className = "kv-mob-bar";
+    var fill = document.createElement("div"); fill.className = "kv-mob-bar-fill";
+    bar.appendChild(fill); media.appendChild(bar);
+    function realCount() { return slider.querySelectorAll(".swiper-slide:not(.swiper-slide-duplicate)").length || 1; }
+    function update() {
+      var n = realCount();
+      var idx = sw.realIndex != null ? sw.realIndex : (sw.activeIndex || 0);
+      fill.style.width = (100 / n) + "%";
+      fill.style.transform = "translateX(" + (idx * 100) + "%)";
+    }
+    sw.on("slideChange", update);
+    update();
+  }
+
   function init() {
     var adbarClosed = initAdbarClose();
     if (!adbarClosed) initTopbarCarousel();
@@ -1583,7 +1618,8 @@
     initPdp();
     initPdpTabs();
     initPdpGallery();
-    setTimeout(initPdpGallery, 900); // el Swiper puede inicializar después del DOMContentLoaded
+    initPdpMobileGallery();
+    setTimeout(function () { initPdpGallery(); initPdpMobileGallery(); }, 900); // el Swiper puede inicializar después del DOMContentLoaded
 
     fetch(MAP_URL, { cache: "no-cache" })
       .then(function (r) { return r.ok ? r.json() : null; })
