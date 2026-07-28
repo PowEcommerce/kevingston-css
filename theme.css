@@ -1000,3 +1000,17 @@ body.modal-show{overflow:hidden!important}
   .f2tn-offers-ov.f2tn-open .f2tn-offers{opacity:1}
   .f2tn-offers-media{aspect-ratio:343/360}
 }
+
+/* ================================================================== */
+/* MENÚ — morph ícono hamburguesa → X (spec 05, 250ms ease-out)        */
+/* JS (initMenuIcon) togglea html.kv-menu-open al abrir #nav-hamburger. */
+/* Cross-fade: ::before = hamburguesa, ::after = X. El filter:invert    */
+/* del hero transparente sigue funcionando (invierte ambos a blanco).   */
+/* ================================================================== */
+.js-head-main .menu-container .js-modal-open-private{background-image:none!important;position:relative!important}
+.js-head-main .menu-container .js-modal-open-private::before,
+.js-head-main .menu-container .js-modal-open-private::after{content:"";position:absolute;inset:0;background:no-repeat center/20px 20px;transition:opacity .25s ease-out,transform .25s ease-out;pointer-events:none}
+.js-head-main .menu-container .js-modal-open-private::before{background-image:url("data:image/svg+xml,%3Csvg%20width%3D%2220%22%20height%3D%2220%22%20viewBox%3D%220%200%2020%2020%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M1%203.3999H19M1%209.9999H19M1%2016.5999H19%22%20stroke%3D%22black%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E");opacity:1}
+.js-head-main .menu-container .js-modal-open-private::after{background-image:url("data:image/svg+xml,%3Csvg%20width%3D%2220%22%20height%3D%2220%22%20viewBox%3D%220%200%2020%2020%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M4%204L16%2016M16%204L4%2016%22%20stroke%3D%22black%22%20stroke-linecap%3D%22round%22%2F%3E%3C%2Fsvg%3E");opacity:0;transform:rotate(-90deg)}
+html.kv-menu-open .js-head-main .menu-container .js-modal-open-private::before{opacity:0;transform:rotate(90deg)}
+html.kv-menu-open .js-head-main .menu-container .js-modal-open-private::after{opacity:1;transform:rotate(0)}

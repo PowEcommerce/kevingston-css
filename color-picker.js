@@ -1229,6 +1229,22 @@
     }, 5000);
   }
 
+  /* ------------------------------------------------------------------ */
+  /* Menú: morph ícono hamburguesa → X. Togglea html.kv-menu-open cuando  */
+  /* el drawer #nav-hamburger se abre/cierra (el CSS hace el cross-fade). */
+  /* ------------------------------------------------------------------ */
+  function initMenuIcon() {
+    var ham = document.getElementById("nav-hamburger");
+    if (!ham) return;
+    var root = document.documentElement;
+    var sync = function () {
+      var open = ham.classList.contains("modal-visible") || ham.classList.contains("modal-show");
+      root.classList.toggle("kv-menu-open", open);
+    };
+    new MutationObserver(sync).observe(ham, { attributes: true, attributeFilter: ["class"] });
+    sync();
+  }
+
   function init() {
     var adbarClosed = initAdbarClose();
     if (!adbarClosed) initTopbarCarousel();
@@ -1241,6 +1257,7 @@
     initSearchPanel();
     initPromoModal();
     initOffersModal();
+    initMenuIcon();
 
     fetch(MAP_URL, { cache: "no-cache" })
       .then(function (r) { return r.ok ? r.json() : null; })
