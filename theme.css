@@ -1100,8 +1100,8 @@ html.kv-menu-open .js-head-main .menu-container .js-modal-open-private::after{op
 /* El wrapper .js-fullscreen-modal-open es flex-column: controlo el ritmo   */
 /* con gap:8 (cuotas→sin impuestos) y márgenes 8 arriba / 24 abajo (Figma). */
 .js-product-detail .product-content>.js-fullscreen-modal-open{display:flex!important;flex-direction:column;align-items:flex-start;gap:8px!important;margin:8px 0 24px!important}
-.js-product-detail .js-max-installments-container{font:400 14px/1.3 "Lato",sans-serif;color:#000;margin:0}
-.js-product-detail .price-without-taxes-container,.js-product-detail .js-price-without-taxes-container{font:400 12px/1.3 "Lato",sans-serif;color:#737373;margin:0}
+.js-product-detail .js-max-installments-container{font:400 12px/1.3 "Lato",sans-serif;color:#000;margin:0}
+.js-product-detail .price-without-taxes-container,.js-product-detail .js-price-without-taxes-container{font:400 10px/1.3 "Lato",sans-serif;color:#8f8f8f;margin:0}
 /* precio (sin margen abajo: el gap lo da el wrapper de cuotas) */
 .js-product-detail .product-content>.js-price-container{margin-bottom:0!important}
 /* "Ver más detalles" y el "0% descuento" no van en el Figma */
@@ -1121,12 +1121,12 @@ html.kv-menu-open .js-head-main .menu-container .js-modal-open-private::after{op
 /* Inyectado por color-picker.js (initPdpColors). Figma 1184-24198.    */
 /* ================================================================== */
 .kv-pdp-colors{margin:24px 0 0}
-.kv-pdp-colors-title{font:400 16px/1.3 "Lato",sans-serif;color:#000;margin:0 0 16px}
+.kv-pdp-colors-title{font:400 14px/1.3 "Lato",sans-serif;color:#000;margin:0 0 16px}
 .kv-pdp-colors-list{display:flex;flex-wrap:wrap;gap:16px;align-items:stretch}
 .kv-pdp-color{display:block;width:54px;height:54px;border-radius:4px;background:#f6f5f3 no-repeat center/cover;border:1px solid #e5e5e5;overflow:hidden;flex:none}
 .kv-pdp-color.is-active{border-color:#000;box-shadow:0 0 0 1px #000}
-.kv-pdp-colors-more{min-width:54px;height:54px;padding:0 10px;border:1px solid #cccccc;border-radius:4px;background:#f6f5f3;cursor:pointer;font:400 12px/1.1 "Lato",sans-serif;color:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
-.kv-pdp-colors-more span{color:#737373}
+.kv-pdp-colors-more{min-width:54px;height:54px;padding:0 6px;border:1px solid #cccccc;border-radius:4px;background:#f6f5f3;cursor:pointer;font:400 12px/1.1 "Lato",sans-serif;color:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px}
+.kv-pdp-colors-more span{font-size:8px;color:#000}
 
 /* Modal de colores (todas las opciones) */
 .kv-pdp-colors-modal-ov{position:fixed;inset:0;z-index:2100;background:rgba(0,0,0,.4);opacity:0;visibility:hidden;transition:opacity .3s ease,visibility .3s ease;display:flex;align-items:center;justify-content:center;padding:16px}
@@ -1179,7 +1179,7 @@ html.kv-menu-open .js-head-main .menu-container .js-modal-open-private::after{op
 /* Botones 32px; seleccionado negro/blanco; sin stock gris.            */
 /* ================================================================== */
 .js-product-detail .js-product-variants-group{display:flex!important;flex-wrap:wrap;gap:16px;align-items:center;margin:16px 0 0}
-.js-product-detail .js-product-variants-group>.form-label,.js-product-detail .js-product-variants-group>.product-detail-variants-title{flex:1 0 100%;margin:0 0 16px!important;font:400 16px/1.3 "Lato",sans-serif;color:#000;padding:0}
+.js-product-detail .js-product-variants-group>.form-label,.js-product-detail .js-product-variants-group>.product-detail-variants-title{flex:1 0 100%;margin:0 0 16px!important;font:400 14px/1.3 "Lato",sans-serif;color:#000;padding:0}
 .js-product-detail .js-product-variants-group>.form-group{flex:0 0 100%}
 .js-product-detail .btn-variant{width:auto;min-width:32px;height:32px;min-height:32px;padding:0 6px;border:1px solid #737373;border-radius:4px;background:#fff;color:#000;font:400 12px/1 "Lato",sans-serif;display:inline-flex;align-items:center;justify-content:center;margin:0!important;flex:none}
 .js-product-detail .btn-variant.selected{background:#000!important;color:#fff!important;border-color:#000!important}
