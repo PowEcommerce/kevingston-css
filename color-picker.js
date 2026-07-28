@@ -1610,7 +1610,6 @@
   function initPdpSizeLinks() {
     var det = document.querySelector(".js-product-detail");
     if (!det) return;
-    var container = det.querySelector(".js-product-variants") || det;
 
     function findTalle() {
       var talle = null;
@@ -1645,9 +1644,11 @@
     }
 
     apply();
-    // El nativo re-renderiza el grupo de variantes (borra mis links / revierte el
-    // label) → re-aplico en cada mutación del contenedor de variantes.
-    new MutationObserver(function () { apply(); }).observe(container, { childList: true, subtree: true });
+    // El nativo re-renderiza el grupo de variantes (Nube SDK, async) → borra mis
+    // links / revierte el label. Observo .js-product-detail (contenedor estable que
+    // el nativo NO reemplaza) + reintentos por si el render llega tarde.
+    new MutationObserver(function () { apply(); }).observe(det, { childList: true, subtree: true });
+    [300, 1000, 2500].forEach(function (ms) { setTimeout(apply, ms); });
   }
 
   /* ------------------------------------------------------------------ */
