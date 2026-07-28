@@ -136,11 +136,16 @@ h1.heading-block,h2.heading-block,h3.heading-block,h4.heading-block,h5.heading-b
 @media (min-width:768px){
   /* Drawer izquierdo de 480px, alto completo (desktop).
      El contenedor real es .modal-nav-main.modal-nav-hamburger (sin id). */
-  .modal-nav-main.modal-nav-hamburger{top:0!important;bottom:0!important;left:-480px!important;right:auto!important;width:480px!important;max-width:480px!important;height:100%!important;max-height:100%!important;transform:none!important;border-radius:0!important}
-  .modal-nav-main.modal-nav-hamburger.modal-visible{left:0!important;right:auto!important;transform:none!important}
+  .modal-nav-main.modal-nav-hamburger{top:0!important;bottom:0!important;left:0!important;right:auto!important;width:480px!important;max-width:480px!important;height:100%!important;max-height:100%!important;transform:translateX(-100%)!important;transition:transform 583ms cubic-bezier(.22,1,.36,1)!important;border-radius:0!important}
+  .modal-nav-main.modal-nav-hamburger.modal-visible{transform:translateX(0)!important}
 }
-/* Overlay 50% negro */
-.modal-overlay[data-target="#nav-hamburger"]{background-color:rgba(0,0,0,0.5)}
+/* Mobile (M04): panel full-width, mismo move-in desde la izquierda + spring 583ms */
+@media (max-width:767px){
+  .modal-nav-main.modal-nav-hamburger{left:0!important;right:auto!important;width:100%!important;max-width:100%!important;transform:translateX(-100%)!important;transition:transform 583ms cubic-bezier(.22,1,.36,1)!important}
+  .modal-nav-main.modal-nav-hamburger.modal-visible{transform:translateX(0)!important}
+}
+/* Overlay negro 50%, aparece simultáneo con el panel */
+.modal-overlay[data-target="#nav-hamburger"]{background-color:rgba(0,0,0,0.5);transition:opacity 583ms cubic-bezier(.22,1,.36,1)}
 /* Header blanco, X a la izquierda, 84px */
 .modal-nav-main .modal-header{background:#fff;height:84px;padding:8px 32px;border-bottom:none}
 .modal-nav-main .modal-header.no-title{justify-content:flex-start}
@@ -160,7 +165,10 @@ h1.heading-block,h2.heading-block,h3.heading-block,h4.heading-block,h5.heading-b
    divisores en 3/6/10) se REACTIVA cuando el admin cargue el árbol completo del Figma en ese orden.
    Con el árbol actual (solo Hombre/Mujer/Teens) misfireaba (pintaba "Hombres" como pill negro). */
 .modal-nav-main .nav-list>.nav-item>.nav-list-link{display:flex!important;align-items:center;justify-content:space-between;gap:12px;width:100%}
-.modal-nav-main .nav-list>.nav-item>.nav-list-link:hover{text-decoration:underline;text-underline-offset:4px}
+/* Subrayado progresivo (width 0->100%, 200ms ease-out) — spec "Hover sobre ítems" */
+.modal-nav-main .nav-list-link{position:relative;text-decoration:none!important}
+.modal-nav-main .nav-list-link::after{content:"";position:absolute;left:0;bottom:2px;height:1px;width:0;background:currentColor;transition:width .2s ease-out;pointer-events:none}
+.modal-nav-main .nav-list-link:hover::after{width:100%}
 /* Seccion inferior: menu secundario en gris #404040 */
 .modal-nav-main .nav-secondary{background:#fff;border:none;border-top:1px solid #DCDAD6;margin-top:12px;padding-top:18px}
 .modal-nav-main .nav-secondary .secondary-menu-link{padding:6px 0;font-size:16px;color:#404040}
@@ -183,23 +191,21 @@ h1.heading-block,h2.heading-block,h3.heading-block,h4.heading-block,h5.heading-b
      El display:none!important pisa el display:none inline y también
      el .modal-visible que agrega el click nativo. */
   .modal-nav-main .nav-item.item-with-subitems>.modal.modal-nav-hamburger{
-    display:none!important;
+    display:block!important;
     position:absolute;left:480px;top:0;right:auto;bottom:auto;
     width:480px;max-width:480px;height:100%;max-height:100%;
-    transform:none!important;margin:0;border-radius:0;
+    margin:0;border-radius:0;
     background:#fff;box-shadow:8px 0 24px rgba(0,0,0,.06);z-index:1;
+    opacity:0;visibility:hidden;pointer-events:none;transform:translateX(100%)!important;
+    transition:opacity .3s ease-out,transform .3s ease-out,visibility .3s;
   }
-  /* Mostrar cuando se hace hover en el padre (Hombre/Mujer/Teens) */
+  /* Nivel 2 entra desde la derecha al hacer hover en el padre (Hombre/Mujer/Teens) */
   .modal-nav-main .nav-item.item-with-subitems:hover>.modal.modal-nav-hamburger{
-    display:block!important;
+    opacity:1;visibility:visible;pointer-events:auto;transform:translateX(0)!important;
   }
   /* Puente invisible: cubre el gap padre→panel para no perder el hover */
-  .modal-nav-main .nav-item.item-with-subitems>.modal.modal-nav-hamburger::before{
+  .modal-nav-main .nav-item.item-with-subitems:hover>.modal.modal-nav-hamburger::before{
     content:"";position:absolute;left:-40px;top:0;width:40px;height:100%;
-  }
-  /* Padre activo: subrayado (como en Figma) */
-  .modal-nav-main .nav-item.item-with-subitems:hover>.nav-list-link{
-    text-decoration:underline;text-underline-offset:4px;
   }
   /* Header nativo del sub-panel (atrás/título/cerrar): oculto */
   .modal-nav-main .nav-item.item-with-subitems>.modal .modal-header{display:none}
