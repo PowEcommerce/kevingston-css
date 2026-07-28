@@ -1465,14 +1465,18 @@
     if (slider.swiper && slider.swiper.lazy && slider.swiper.lazy.loadInSlide) {
       try { for (var li = 0; li < slides.length; li++) slider.swiper.lazy.loadInSlide(li); } catch (e) {}
     }
-    // fallback: forzar src desde data-src/data-srcset en cada img lazy
+    // forzar la imagen real: la URL vive en srcset/data-srcset/data-src (el src es un placeholder)
     slides.forEach(function (s) {
-      var img = s.querySelector("img.swiper-lazy, img[data-src], img[data-srcset]");
+      var img = s.querySelector("img");
       if (!img) return;
-      var ds = img.getAttribute("data-src");
-      var dss = img.getAttribute("data-srcset");
-      if (ds) img.src = ds;
-      if (dss) { img.srcset = dss; img.removeAttribute("data-srcset"); }
+      var real = img.getAttribute("srcset") || img.getAttribute("data-srcset") || img.getAttribute("data-src") || "";
+      var url = real.split(",")[0].trim().split(/\s+/)[0];
+      if (url && !/^data:/.test(url)) {
+        if (url.indexOf("//") === 0) url = "https:" + url;
+        img.removeAttribute("srcset");
+        img.removeAttribute("data-srcset");
+        img.src = url;
+      }
       img.classList.remove("swiper-lazy");
     });
     if (slider.swiper) { try { slider.swiper.destroy(true, true); } catch (e) {} }
