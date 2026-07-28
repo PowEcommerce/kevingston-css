@@ -1130,8 +1130,11 @@ html.kv-menu-open .js-head-main .menu-container .js-modal-open-private::after{op
 /* Figma 1184-24198. JS initPdpGallery asigna .kv-gfull/.kv-ghalf.      */
 /* ================================================================== */
 @media (min-width:768px){
-  .product-columns{align-items:flex-start;gap:96px}
-  .product-columns .js-product-images{flex:1 1 auto;min-width:0;max-width:677px}
+  /* container a ancho completo con 32px de padding (Figma: imagen a 32 del borde) */
+  .container:has(.product-columns){max-width:none!important;width:100%!important;margin:0!important;padding-left:32px!important;padding-right:32px!important}
+  /* imagen 677 + gap 134 + info 448 (Figma 2340-20220) */
+  .product-columns{align-items:flex-start;column-gap:134px!important;justify-content:flex-start}
+  .product-columns .js-product-images{flex:0 0 677px;max-width:677px;min-width:0}
   .product-columns .js-product-info{flex:0 0 448px;max-width:448px;position:sticky;top:100px;align-self:flex-start}
   /* galería en grid vertical */
   .kv-gallery-stacked{width:100%!important;height:auto!important;overflow:visible!important}
