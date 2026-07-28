@@ -154,16 +154,13 @@ h1.heading-block,h2.heading-block,h3.heading-block,h4.heading-block,h5.heading-b
 /* Override del layout nativo mega-menu en el sub-panel (horizontal/uppercase/56px/lineas) */
 .modal-nav-main .modal-nav-hamburger .nav-item{display:block!important;width:100%!important;border:none!important;padding:0!important;margin:0!important}
 .modal-nav-main .modal-nav-hamburger .nav-list-link{display:block!important;min-height:0!important;padding:6px 0!important;font-family:"Lato",sans-serif!important;font-size:16px!important;font-weight:400!important;line-height:1.3!important;text-transform:none!important;grid-template-columns:none!important;border:none!important;margin-bottom:0!important}
-.modal-nav-main .nav-list-arrow{color:#000;font-size:16px}
-/* Item 1 = badge "Hasta 30% OFF" (pill negro) */
-.modal-nav-main .nav-list>.nav-item:first-child{margin-bottom:6px}
-.modal-nav-main .nav-list>.nav-item:first-child .nav-list-link{display:inline-flex;width:auto;background:#000;color:#fff;font-weight:700;font-size:14px;border-radius:4px;padding:4px 8px}
-/* Item 2 = "New Arrivals" (bold) */
-.modal-nav-main .nav-list>.nav-item:nth-child(2) .nav-list-link{font-weight:700}
-/* Divisores antes de Hombre(3), Boxers(6), Promociones(10) */
-.modal-nav-main .nav-list>.nav-item:nth-child(3),
-.modal-nav-main .nav-list>.nav-item:nth-child(6),
-.modal-nav-main .nav-list>.nav-item:nth-child(10){border-top:1px solid #DCDAD6;margin-top:12px;padding-top:18px}
+.modal-nav-main .nav-list-arrow{color:#000;font-size:16px;display:inline-flex;align-items:center}
+/* Panel 1: filas de categoría (Figma) — nombre a la izq, chevron a la der, hover subraya.
+   NOTA: el styling especial por posición (badge "Hasta 30% OFF" = item1, "New Arrivals" = item2,
+   divisores en 3/6/10) se REACTIVA cuando el admin cargue el árbol completo del Figma en ese orden.
+   Con el árbol actual (solo Hombre/Mujer/Teens) misfireaba (pintaba "Hombres" como pill negro). */
+.modal-nav-main .nav-list>.nav-item>.nav-list-link{display:flex!important;align-items:center;justify-content:space-between;gap:12px;width:100%}
+.modal-nav-main .nav-list>.nav-item>.nav-list-link:hover{text-decoration:underline;text-underline-offset:4px}
 /* Seccion inferior: menu secundario en gris #404040 */
 .modal-nav-main .nav-secondary{background:#fff;border:none;border-top:1px solid #DCDAD6;margin-top:12px;padding-top:18px}
 .modal-nav-main .nav-secondary .secondary-menu-link{padding:6px 0;font-size:16px;color:#404040}
