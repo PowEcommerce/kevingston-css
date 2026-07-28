@@ -1620,13 +1620,16 @@
     det.setAttribute("data-kv-sizelinks", "1");
 
     // Label de talle: el nativo muestra "Talle: {seleccionado}"; el Figma quiere
-    // sólo "Talles" (sin el valor elegido).
-    var talleLabel = talle.querySelector(":scope > .form-label") || talle.querySelector(".form-label");
-    if (talleLabel) {
-      function fixTalle() { if ((talleLabel.textContent || "").trim() !== "Talles") talleLabel.textContent = "Talles"; }
+    // sólo "Talles". El nativo re-renderiza el label al cambiar de variante →
+    // observo el GRUPO y re-busco el label en cada mutación (robusto a reemplazos).
+    (function () {
+      function fixTalle() {
+        var lbl = talle.querySelector(":scope > .form-label") || talle.querySelector(".form-label:not(.d-none .form-label)");
+        if (lbl && (lbl.textContent || "").trim() !== "Talles") lbl.textContent = "Talles";
+      }
       fixTalle();
-      new MutationObserver(fixTalle).observe(talleLabel, { childList: true, characterData: true, subtree: true });
-    }
+      new MutationObserver(fixTalle).observe(talle, { childList: true, characterData: true, subtree: true });
+    })();
 
     var row = document.createElement("div");
     row.className = "kv-pdp-sizelinks";
