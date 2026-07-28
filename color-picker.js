@@ -1350,6 +1350,30 @@
     if (inst && noTax && inst.parentNode && noTax.compareDocumentPosition(inst) & Node.DOCUMENT_POSITION_FOLLOWING) {
       inst.parentNode.insertBefore(noTax, inst.nextSibling);
     }
+
+    // "Precio sin impuestos" → "Precio sin impuestos nacionales" (Figma).
+    var noTaxLabel = document.querySelector(".price-without-taxes-label");
+    if (noTaxLabel) {
+      function fixLabel() {
+        var t = (noTaxLabel.textContent || "").replace(/\s+/g, " ").trim();
+        if (/nacionales/i.test(t)) return;
+        noTaxLabel.textContent = t.replace(/precio sin impuestos/i, "Precio sin impuestos nacionales");
+      }
+      fixLabel();
+      new MutationObserver(fixLabel).observe(noTaxLabel, { childList: true, characterData: true, subtree: true });
+    }
+
+    // Breadcrumbs: quitar "Inicio" (1er crumb + su separador) y pasar ">" a "/".
+    var bc = document.querySelector(".js-product-detail .breadcrumbs");
+    if (bc) {
+      var first = bc.querySelector(".crumb");
+      if (first && /inicio/i.test((first.textContent || "").trim())) {
+        var sep = first.nextElementSibling;
+        first.remove();
+        if (sep && sep.classList.contains("separator")) sep.remove();
+      }
+      [].forEach.call(bc.querySelectorAll(".separator"), function (s) { s.textContent = "/"; });
+    }
   }
 
   /* ------------------------------------------------------------------ */
@@ -1595,6 +1619,15 @@
     if (!talle) return;
     det.setAttribute("data-kv-sizelinks", "1");
 
+    // Label de talle: el nativo muestra "Talle: {seleccionado}"; el Figma quiere
+    // sólo "Talles" (sin el valor elegido).
+    var talleLabel = talle.querySelector(":scope > .form-label") || talle.querySelector(".form-label");
+    if (talleLabel) {
+      function fixTalle() { if ((talleLabel.textContent || "").trim() !== "Talles") talleLabel.textContent = "Talles"; }
+      fixTalle();
+      new MutationObserver(fixTalle).observe(talleLabel, { childList: true, characterData: true, subtree: true });
+    }
+
     var row = document.createElement("div");
     row.className = "kv-pdp-sizelinks";
     var guia = document.createElement("button");
@@ -1610,6 +1643,24 @@
       var app = document.querySelector('[class*="ready-size"],[id*="ready-size"],[class*="readysize"],[data-app*="size"]');
       if (app) { app.click(); }
     });
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* PDP — texto del botón: "Agregar al carrito" → "Agregar al Carrito"   */
+  /* (Figma). Sólo toca el texto por defecto; respeta estados nativos     */
+  /* ("Agregando...", "Sin stock", etc.) porque matchea exacto.           */
+  /* ------------------------------------------------------------------ */
+  function initPdpBtnText() {
+    var cont = document.querySelector(".js-product-detail .buy-button-container");
+    if (!cont) return;
+    function fix() {
+      [].forEach.call(cont.querySelectorAll("input.js-addtocart,button.js-addtocart,.js-addtocart"), function (b) {
+        if (b.tagName === "INPUT") { if (b.value === "Agregar al carrito") b.value = "Agregar al Carrito"; }
+        else if (!b.children.length && (b.textContent || "").trim() === "Agregar al carrito") b.textContent = "Agregar al Carrito";
+      });
+    }
+    fix();
+    new MutationObserver(fix).observe(cont, { childList: true, subtree: true });
   }
 
   function openSizeGuide() {
@@ -1683,6 +1734,7 @@
     initPdp();
     initPdpTabs();
     initPdpSizeLinks();
+    initPdpBtnText();
     initPdpGallery();
     initPdpMobileGallery();
     setTimeout(function () { initPdpGallery(); initPdpMobileGallery(); }, 900); // el Swiper puede inicializar después del DOMContentLoaded
