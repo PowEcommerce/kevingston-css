@@ -1578,6 +1578,58 @@
   }
 
   /* ------------------------------------------------------------------ */
+  /* PDP — bloque 4: links "Guía de talles" (izq) + "Conocé tu talle"     */
+  /* (der) debajo de los botones de talle (Figma 2340:20266).             */
+  /* Guía de talles abre un modal (contenido lo carga el cliente).        */
+  /* Conocé tu talle = app Ready Size (dispara su trigger si existe).      */
+  /* ------------------------------------------------------------------ */
+  function initPdpSizeLinks() {
+    var det = document.querySelector(".js-product-detail");
+    if (!det || det.getAttribute("data-kv-sizelinks") === "1") return;
+    var groups = det.querySelectorAll(".js-product-variants-group");
+    if (!groups.length) return;
+    var talle = null;
+    [].forEach.call(groups, function (g) {
+      if (/talle/i.test((g.textContent || "").slice(0, 40)) && g.querySelector(".js-variant-button")) talle = g;
+    });
+    if (!talle) return;
+    det.setAttribute("data-kv-sizelinks", "1");
+
+    var row = document.createElement("div");
+    row.className = "kv-pdp-sizelinks";
+    var guia = document.createElement("button");
+    guia.type = "button"; guia.className = "kv-sizelink kv-sizeguide-open"; guia.textContent = "Guía de talles";
+    var fit = document.createElement("button");
+    fit.type = "button"; fit.className = "kv-sizelink kv-fitting-open"; fit.textContent = "Conocé tu talle";
+    row.appendChild(guia); row.appendChild(fit);
+    talle.appendChild(row);
+
+    guia.addEventListener("click", function () { openSizeGuide(); });
+    // "Conocé tu talle": si la app Ready Size dejó un trigger, lo clickeamos.
+    fit.addEventListener("click", function () {
+      var app = document.querySelector('[class*="ready-size"],[id*="ready-size"],[class*="readysize"],[data-app*="size"]');
+      if (app) { app.click(); }
+    });
+  }
+
+  function openSizeGuide() {
+    var ov = document.querySelector(".kv-sizeguide-ov");
+    if (!ov) {
+      ov = document.createElement("div");
+      ov.className = "kv-sizeguide-ov";
+      ov.innerHTML =
+        '<div class="kv-sizeguide" role="dialog" aria-label="Guía de talles">' +
+        '<button type="button" class="kv-sizeguide-close" aria-label="Cerrar"></button>' +
+        '<h3 class="kv-sizeguide-title">Guía de talles</h3>' +
+        '<div class="kv-sizeguide-body"><p>Próximamente vas a poder ver acá la tabla de talles.</p></div>' +
+        "</div>";
+      document.body.appendChild(ov);
+      ov.addEventListener("click", function (e) { if (e.target === ov || e.target.classList.contains("kv-sizeguide-close")) ov.classList.remove("open"); });
+    }
+    ov.classList.add("open");
+  }
+
+  /* ------------------------------------------------------------------ */
   /* PDP mobile — galería: flechas laterales + barra de progreso (Figma). */
   /* Se mantiene el Swiper nativo; agregamos las flechas (slidePrev/Next) */
   /* y una barra segmentada que sigue el slide activo.                    */
@@ -1630,6 +1682,7 @@
     initMobileMenuLogo();
     initPdp();
     initPdpTabs();
+    initPdpSizeLinks();
     initPdpGallery();
     initPdpMobileGallery();
     setTimeout(function () { initPdpGallery(); initPdpMobileGallery(); }, 900); // el Swiper puede inicializar después del DOMContentLoaded
