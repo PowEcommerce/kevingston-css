@@ -1283,6 +1283,16 @@
     }).observe(ham, { attributes: true, attributeFilter: ["class"] });
   }
 
+  /* Menú Panel 2/3: el nativo pone "Ver todo en {categoría}" (traducción no editable
+     en compose). Lo acortamos a "Ver todo" (Figma). */
+  function initMenuVerTodo() {
+    var ham = document.getElementById("nav-hamburger");
+    if (!ham) return;
+    ham.querySelectorAll(".nav-hamburger-body .nav-item > .nav-list-link").forEach(function (a) {
+      if (/^\s*ver todo en /i.test(a.textContent || "")) a.textContent = "Ver todo";
+    });
+  }
+
   function init() {
     var adbarClosed = initAdbarClose();
     if (!adbarClosed) initTopbarCarousel();
@@ -1297,6 +1307,7 @@
     initOffersModal();
     initMenuIcon();
     initMenuClickNav();
+    initMenuVerTodo();
 
     fetch(MAP_URL, { cache: "no-cache" })
       .then(function (r) { return r.ok ? r.json() : null; })
