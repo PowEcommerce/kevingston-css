@@ -1140,8 +1140,10 @@ html.kv-menu-open .js-head-main .menu-container .js-modal-open-private::after{op
   .kv-gallery-stacked .kv-gfull{grid-column:1 / -1}
   .kv-gallery-stacked .kv-ghalf{grid-column:span 1}
   .kv-gallery-stacked .kv-gslide img{width:100%!important;height:auto!important;display:block;border-radius:8px;aspect-ratio:auto}
-  /* ocultar thumbnails + flechas + paginación (galería ahora stacked) */
+  /* ocultar thumbnails + flechas + paginación/fracción (galería ahora stacked) */
   .js-product-images-thumbs{display:none!important}
   .kv-gallery-stacked .swiper-button-prev,.kv-gallery-stacked .swiper-button-next,
-  .kv-gallery-stacked .swiper-pagination,.kv-gallery-stacked .js-product-slider-thumbs{display:none!important}
+  .kv-gallery-stacked .swiper-pagination,.kv-gallery-stacked .js-product-slider-thumbs,
+  .js-product-images .swiper-fractions,.js-product-images [class*="fraction"],
+  .js-product-images .swiper-pagination,.js-product-images .product-slider-fraction{display:none!important}
 }

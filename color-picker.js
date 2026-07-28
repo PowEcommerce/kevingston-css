@@ -1461,6 +1461,20 @@
     var slides = [].slice.call(wrapper.children).filter(function (s) { return s.querySelector && s.querySelector("img"); });
     if (!slides.length) return;
     slider.setAttribute("data-kv-gallery", "1");
+    // cargar las imágenes lazy ANTES de destruir el swiper (si no quedan en placeholder)
+    if (slider.swiper && slider.swiper.lazy && slider.swiper.lazy.loadInSlide) {
+      try { for (var li = 0; li < slides.length; li++) slider.swiper.lazy.loadInSlide(li); } catch (e) {}
+    }
+    // fallback: forzar src desde data-src/data-srcset en cada img lazy
+    slides.forEach(function (s) {
+      var img = s.querySelector("img.swiper-lazy, img[data-src], img[data-srcset]");
+      if (!img) return;
+      var ds = img.getAttribute("data-src");
+      var dss = img.getAttribute("data-srcset");
+      if (ds) img.src = ds;
+      if (dss) { img.srcset = dss; img.removeAttribute("data-srcset"); }
+      img.classList.remove("swiper-lazy");
+    });
     if (slider.swiper) { try { slider.swiper.destroy(true, true); } catch (e) {} }
     slider.classList.add("kv-gallery-stacked");
     slides.forEach(function (s) { s.classList.add("kv-gslide"); s.classList.remove("kv-gfull", "kv-ghalf"); });
