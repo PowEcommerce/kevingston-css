@@ -151,15 +151,24 @@ h1.heading-block,h2.heading-block,h3.heading-block,h4.heading-block,h5.heading-b
 .modal-nav-main .modal-header.no-title{justify-content:flex-start}
 .modal-nav-main .modal-close{padding:0}
 .modal-nav-main .modal-close-icon{font-size:20px;color:#000}
-/* Contenido */
-.modal-nav-main>.modal-body{display:block;padding:16px 32px 24px}
-/* Items base: Lato 16px, filas compactas */
+/* Contenido: header 84px + content pt-16 px-32 pb-32 (Figma 959-19260) */
+.modal-nav-main>.modal-body{display:block;padding:16px 32px 32px}
+/* nav-list = flex column, gap 12px DENTRO de cada grupo (Figma) */
+.modal-nav-main .nav-list{display:flex;flex-direction:column;gap:12px}
+/* Items base: Lato Regular 16px/1.3 */
 .modal-nav-main .nav-list-link{min-height:0;padding:6px 0;font-family:"Lato",sans-serif;font-size:16px;font-weight:400;line-height:1.3;color:#000;text-transform:none}
+/* Panel 1: sin padding vertical (el espaciado lo da el gap 12/18) */
+.modal-nav-main .nav-list>.nav-item>.nav-list-link{padding:0}
 .modal-nav-main .nav-item{margin:0;display:block;width:100%}
 /* Override del layout nativo mega-menu en el sub-panel (horizontal/uppercase/56px/lineas) */
 .modal-nav-main .modal-nav-hamburger .nav-item{display:block!important;width:100%!important;border:none!important;padding:0!important;margin:0!important}
 .modal-nav-main .modal-nav-hamburger .nav-list-link{display:block!important;min-height:0!important;padding:6px 0!important;font-family:"Lato",sans-serif!important;font-size:16px!important;font-weight:400!important;line-height:1.3!important;text-transform:none!important;grid-template-columns:none!important;border:none!important;margin-bottom:0!important}
 .modal-nav-main .nav-list-arrow{color:#000;font-size:16px;display:inline-flex;align-items:center}
+/* Chevron: desktop OCULTO, aparece en hover (spec). Mobile: siempre visible (M04). */
+@media (min-width:768px){
+  .modal-nav-main .nav-list>.nav-item>.nav-list-link .nav-list-arrow{opacity:0;transition:opacity .2s ease-out}
+  .modal-nav-main .nav-list>.nav-item:hover>.nav-list-link .nav-list-arrow{opacity:1}
+}
 /* Panel 1: filas de categoría (Figma) — nombre a la izq, chevron a la der, hover subraya. */
 .modal-nav-main .nav-list>.nav-item>.nav-list-link{display:flex!important;align-items:center;justify-content:space-between;gap:12px;width:100%}
 /* Subrayado progresivo (width 0->100%, 200ms ease-out) — spec "Hover sobre ítems" */
@@ -170,15 +179,19 @@ h1.heading-block,h2.heading-block,h3.heading-block,h4.heading-block,h5.heading-b
    1=badge "Hasta 30% OFF", 2="New Arrivals" bold, 11-13=cuenta/locales/franquicia (gris).
    Divisores entre grupos: antes de 3 (categorías), 6 (accesos), 10 (Promociones), 11 (cuenta).
    OJO: si cambia el orden/cantidad de ítems del menú hay que reajustar estos :nth-child. */
-.modal-nav-main .nav-list>.nav-item:first-child{margin-bottom:6px}
-.modal-nav-main .nav-list>.nav-item:first-child>.nav-list-link{display:inline-flex!important;width:auto!important;justify-content:center;background:#000;color:#fff;font-weight:700;font-size:14px;border-radius:4px;padding:4px 8px}
+/* Item 1 = badge "Hasta 30% OFF" (pill negro, Lato Bold 16px) */
+.modal-nav-main .nav-list>.nav-item:first-child>.nav-list-link{display:inline-flex!important;width:auto!important;justify-content:center;background:#000;color:#fff;font-weight:700;font-size:16px;line-height:1.3;border-radius:4px;padding:4px 8px}
 .modal-nav-main .nav-list>.nav-item:first-child>.nav-list-link::after{display:none}
+/* Item 2 = "New Arrivals" bold, 18px desde el badge (gap 12 + 6) */
+.modal-nav-main .nav-list>.nav-item:nth-child(2){margin-top:6px}
 .modal-nav-main .nav-list>.nav-item:nth-child(2)>.nav-list-link{font-weight:700}
+/* Inicios de grupo (Hombre 3, Bóxers 6, Promociones 10, Cuenta 11): 18 + divisor + 18 */
 .modal-nav-main .nav-list>.nav-item:nth-child(3),
 .modal-nav-main .nav-list>.nav-item:nth-child(6),
 .modal-nav-main .nav-list>.nav-item:nth-child(10),
-.modal-nav-main .nav-list>.nav-item:nth-child(11){border-top:1px solid #DCDAD6;margin-top:12px;padding-top:18px}
-.modal-nav-main .nav-list>.nav-item:nth-child(n+11)>.nav-list-link{color:#737373}
+.modal-nav-main .nav-list>.nav-item:nth-child(11){margin-top:6px;border-top:1px solid #DCDAD6;padding-top:18px}
+/* Cuenta/Locales/Franquicia (11-13): gris #404040 (Figma primary/800) */
+.modal-nav-main .nav-list>.nav-item:nth-child(n+11)>.nav-list-link{color:#404040}
 /* Seccion inferior: menu secundario en gris #404040 */
 .modal-nav-main .nav-secondary{background:#fff;border:none;border-top:1px solid #DCDAD6;margin-top:12px;padding-top:18px}
 .modal-nav-main .nav-secondary .secondary-menu-link{padding:6px 0;font-size:16px;color:#404040}
