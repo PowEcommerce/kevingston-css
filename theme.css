@@ -1094,9 +1094,17 @@ html.kv-menu-open .js-head-main .menu-container .js-modal-open-private::after{op
 .js-product-detail .product-price-main .product-offer-label,
 .js-product-detail .js-price-discount-disclaimer-private,
 .js-product-detail .js-saved-money-message{display:none!important}
-/* Cuotas 14px negro + precio sin impuestos 12px gris */
-.js-product-detail .js-max-installments-container{font:400 14px/1.3 "Lato",sans-serif;color:#000;margin:8px 0 0}
-.js-product-detail .price-without-taxes-container,.js-product-detail .js-price-without-taxes-container{font:400 12px/1.3 "Lato",sans-serif;color:#737373;margin:8px 0 0}
+/* Cuotas 14px negro + precio sin impuestos 12px gris.                     */
+/* El wrapper .js-fullscreen-modal-open es flex-column: controlo el ritmo   */
+/* con gap:8 (cuotas→sin impuestos) y márgenes 8 arriba / 24 abajo (Figma). */
+.js-product-detail .product-content>.js-fullscreen-modal-open{display:flex!important;flex-direction:column;align-items:flex-start;gap:8px!important;margin:8px 0 24px!important}
+.js-product-detail .js-max-installments-container{font:400 14px/1.3 "Lato",sans-serif;color:#000;margin:0}
+.js-product-detail .price-without-taxes-container,.js-product-detail .js-price-without-taxes-container{font:400 12px/1.3 "Lato",sans-serif;color:#737373;margin:0}
+/* precio (sin margen abajo: el gap lo da el wrapper de cuotas) */
+.js-product-detail .product-content>.js-price-container{margin-bottom:0!important}
+/* "Ver más detalles" y el "0% descuento" no van en el Figma */
+.js-product-detail .product-payments-link,
+.js-product-detail .js-product-discount-container{display:none!important}
 /* Ocultar elementos nativos que en el Figma NO van entre cuotas y colores  */
 /* ("Envío gratis superando..." + promo "Llevá 2 y pagá 1!"/disclaimers).   */
 /* El envío/Same Day va al fondo (bloque 7 = app). */
