@@ -24,6 +24,8 @@
 
   // productId (string) -> { color, siblings: [ {id,url,color,name} ] }
   var byId = null;
+  var pdpMap = null;        // color-map crudo (groups por SKU5) — para el PDP
+  var pdpImagesById = null; // product-images.json: id -> [urls]
 
   /* ------------------------------------------------------------------ */
   /* Data                                                                */
@@ -1342,6 +1344,110 @@
     new MutationObserver(function () { trunc(); }).observe(skuEl, { childList: true, characterData: true, subtree: true });
   }
 
+  /* ------------------------------------------------------------------ */
+  /* PDP — bloque 3: selectores de color por SKU-5 (imágenes de los       */
+  /* productos hermanos). Hasta 5 thumbs + "+N colores" que abre modal.   */
+  /* El color NO es variante: se agrupa por los primeros 5 chars del SKU. */
+  /* ------------------------------------------------------------------ */
+  function pdpThumb(s) {
+    var imgs = pdpImagesById && pdpImagesById[String(s.id)];
+    return (imgs && imgs[0]) || "";
+  }
+  function normURL(u) { return (u || "").replace(/^https?:\/\/[^/]+/, "").replace(/\/$/, ""); }
+
+  function initPdpColors() {
+    if (!pdpMap) return;
+    var det = document.querySelector(".js-product-detail");
+    if (!det || det.getAttribute("data-kv-pdpcolors") === "1") return;
+    var skuEl = document.querySelector(".js-product-sku");
+    var full = skuEl ? (skuEl.getAttribute("data-kv-full") || skuEl.textContent || "") : "";
+    var raw = full.replace(/[^a-z0-9]/gi, "");
+    if (raw.length < 5) return;
+    var group = (pdpMap.groups || {})[raw.slice(0, 5)];
+    if (!Array.isArray(group) || group.length < 2) return;
+    det.setAttribute("data-kv-pdpcolors", "1");
+
+    var path = location.pathname.replace(/\/$/, "");
+    var current = null;
+    group.forEach(function (s) { if (normURL(s.url) === path) current = s; });
+
+    var ordered = [];
+    if (current) ordered.push(current);
+    group.forEach(function (s) { if (s !== current) ordered.push(s); });
+
+    var MAX = 5;
+    var shown = ordered.slice(0, MAX);
+    var remaining = ordered.length - shown.length;
+
+    var block = document.createElement("div");
+    block.className = "kv-pdp-colors";
+    var title = document.createElement("div");
+    title.className = "kv-pdp-colors-title";
+    title.textContent = "Color: " + ((current && current.name) || "");
+    block.appendChild(title);
+    var list = document.createElement("div");
+    list.className = "kv-pdp-colors-list";
+    shown.forEach(function (s) {
+      var a = document.createElement("a");
+      a.className = "kv-pdp-color" + (s === current ? " is-active" : "");
+      a.href = s.url;
+      a.title = s.name || "";
+      var t = pdpThumb(s);
+      if (t) a.style.backgroundImage = "url('" + t + "')"; else a.style.background = s.color || "#eee";
+      list.appendChild(a);
+    });
+    if (remaining > 0) {
+      var more = document.createElement("button");
+      more.type = "button";
+      more.className = "kv-pdp-colors-more";
+      more.innerHTML = "+ " + remaining + "<span>colores</span>";
+      more.addEventListener("click", function () { openPdpColorsModal(ordered, current); });
+      list.appendChild(more);
+    }
+    block.appendChild(list);
+
+    var sizeVariant = det.querySelector(".js-product-variants");
+    if (sizeVariant && sizeVariant.parentElement) sizeVariant.parentElement.insertBefore(block, sizeVariant);
+    else { var pc = det.querySelector(".product-content"); if (pc) pc.appendChild(block); }
+
+    // ocultar la variante "Color" nativa (el color va por SKU-5)
+    det.querySelectorAll(".js-product-variants-group").forEach(function (g) {
+      if (/color/i.test((g.textContent || "").trim().slice(0, 10))) g.style.setProperty("display", "none", "important");
+    });
+  }
+
+  function openPdpColorsModal(list, current) {
+    var ov = document.querySelector(".kv-pdp-colors-modal-ov");
+    if (!ov) {
+      ov = document.createElement("div");
+      ov.className = "kv-pdp-colors-modal-ov";
+      ov.innerHTML = '<div class="kv-pdp-colors-modal"><button type="button" class="kv-pdp-colors-modal-close" aria-label="Cerrar"></button><div class="kv-pdp-colors-modal-title">Colores</div><div class="kv-pdp-colors-modal-grid"></div></div>';
+      document.body.appendChild(ov);
+      ov.addEventListener("click", function (e) {
+        if (e.target === ov || e.target.closest(".kv-pdp-colors-modal-close")) { ov.classList.remove("open"); document.documentElement.classList.remove("f2tn-lock"); }
+      });
+      document.addEventListener("keydown", function (e) { if (e.key === "Escape") { ov.classList.remove("open"); document.documentElement.classList.remove("f2tn-lock"); } });
+    }
+    var grid = ov.querySelector(".kv-pdp-colors-modal-grid");
+    grid.innerHTML = "";
+    list.forEach(function (s) {
+      var a = document.createElement("a");
+      a.className = "kv-pdp-modal-color" + (s === current ? " is-active" : "");
+      a.href = s.url;
+      var t = pdpThumb(s);
+      var span = document.createElement("span");
+      span.className = "kv-pdp-modal-thumb";
+      if (t) span.style.backgroundImage = "url('" + t + "')";
+      var nm = document.createElement("span");
+      nm.className = "kv-pdp-modal-name";
+      nm.textContent = s.name || "";
+      a.appendChild(span); a.appendChild(nm);
+      grid.appendChild(a);
+    });
+    ov.classList.add("open");
+    document.documentElement.classList.add("f2tn-lock");
+  }
+
   function init() {
     var adbarClosed = initAdbarClose();
     if (!adbarClosed) initTopbarCarousel();
@@ -1364,16 +1470,18 @@
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (map) {
         if (!map) return;
+        pdpMap = map;
         byId = buildIndex(map);
         renderAll(document);
         observe();
+        initPdpColors();
       })
       .catch(function () { /* silencioso: sin mapa, no hay swatches */ });
 
     fetch(IMAGES_URL, { cache: "no-cache" })
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (data) {
-        if (data && data.images) setupQuickshopGallery(data.images);
+        if (data && data.images) { pdpImagesById = data.images; setupQuickshopGallery(data.images); initPdpColors(); }
       })
       .catch(function () { /* silencioso: sin mapa de imágenes, queda la nativa */ });
   }
