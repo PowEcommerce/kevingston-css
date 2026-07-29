@@ -1497,6 +1497,44 @@
   }
 
   /* ------------------------------------------------------------------ */
+  /* PDP — Modal "Descripción y cuidados" (Figma 1264-29998). Panel       */
+  /* derecho; estructura del Figma (título "Descripción del producto" +   */
+  /* la descripción REAL del producto, dinámica). Cuidados/composición    */
+  /* con íconos requieren data estructurada que el producto nativo no      */
+  /* expone → se muestra la descripción libre del cliente.                 */
+  /* ------------------------------------------------------------------ */
+  function openPdpDescModal() {
+    var ov = document.querySelector(".kv-pdp-desc-modal-ov");
+    if (!ov) {
+      ov = document.createElement("div");
+      ov.className = "kv-pdp-modal-ov kv-pdp-desc-modal-ov";
+      ov.innerHTML =
+        '<div class="kv-pdp-modal-panel" role="dialog" aria-label="Descripción y cuidados">' +
+        '<div class="kv-pdp-modal-header"><h3 class="kv-pdp-modal-header-title">Descripción y cuidados</h3>' +
+        '<button type="button" class="kv-pdp-modal-x" aria-label="Cerrar"></button></div>' +
+        '<div class="kv-pdp-modal-body"><section class="kv-desc-section">' +
+        '<h4 class="kv-desc-heading">Descripción del producto</h4>' +
+        '<div class="kv-desc-text"></div></section></div>' +
+        "</div>";
+      document.body.appendChild(ov);
+      ov.addEventListener("click", function (e) {
+        if (e.target === ov || e.target.closest(".kv-pdp-modal-x")) closePdpModal(ov);
+      });
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && ov.classList.contains("open")) closePdpModal(ov);
+      });
+      // mover la descripción real del producto adentro (dinámico)
+      var descBox = document.querySelector(".product-info-description");
+      var descText = descBox ? descBox.querySelector(".js-product-description") : null;
+      var target = ov.querySelector(".kv-desc-text");
+      if (descText) target.appendChild(descText);
+      else if (descBox) target.innerHTML = (descBox.textContent || "").trim();
+    }
+    ov.classList.add("open");
+    document.documentElement.classList.add("f2tn-lock");
+  }
+
+  /* ------------------------------------------------------------------ */
   /* PDP — bloque 1: galería stacked (Figma). El nativo es un Swiper;    */
   /* lo pasamos a grid vertical con la lógica 1-2-2-1 (5+), 1-2-1 (4),    */
   /* 2 grandes (2). El CSS fuerza el grid; acá asignamos full/half.       */
@@ -1572,10 +1610,15 @@
     var wrap = document.createElement("div");
     wrap.className = "kv-pdp-tabs";
 
-    function makeTab(icon, title) {
+    // onClick opcional → la fila ABRE UN MODAL (panel derecho) en vez de desplegar
+    // accordion (handoff: los facilitadores abren modales, no despliegan).
+    function makeTab(icon, title, onClick) {
       var tab = document.createElement("div"); tab.className = "kv-pdp-tab";
       var head = document.createElement("button"); head.type = "button"; head.className = "kv-pdp-tab-head";
       head.innerHTML = '<span class="kv-tab-ico">' + icon + "</span><span class=\"kv-tab-title\">" + title + "</span>" + CHEV;
+      tab.appendChild(head);
+      wrap.appendChild(tab);
+      if (onClick) { head.addEventListener("click", onClick); return null; }
       var body = document.createElement("div"); body.className = "kv-pdp-tab-body";
       var inner = document.createElement("div"); inner.className = "kv-pdp-tab-inner";
       body.appendChild(inner);
@@ -1584,15 +1627,12 @@
         wrap.querySelectorAll(".kv-pdp-tab.open").forEach(function (t) { t.classList.remove("open"); });
         if (!open) tab.classList.add("open");
       });
-      tab.appendChild(head); tab.appendChild(body);
-      wrap.appendChild(tab);
+      tab.appendChild(body);
       return inner;
     }
 
-    // 1 · Descripción y cuidados (texto real del producto)
-    var b1 = makeTab(IC.desc, "Descripción y cuidados");
-    var descText = descBox.querySelector(".js-product-description");
-    if (descText) b1.appendChild(descText); else b1.textContent = (descBox.textContent || "").trim();
+    // 1 · Descripción y cuidados → MODAL (Figma 1264-29998), contenido dinámico
+    makeTab(IC.desc, "Descripción y cuidados", openPdpDescModal);
 
     // 2 · Formas de pago (editable — texto por defecto)
     var b2 = makeTab(IC.pay, "Formas de pago, promociones y reintegros");

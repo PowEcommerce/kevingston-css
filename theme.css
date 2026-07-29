@@ -1153,6 +1153,14 @@ html.kv-menu-open .js-head-main .menu-container .js-modal-open-private::after{op
 .kv-pdp-modal-thumb{width:100%;aspect-ratio:1;border-radius:4px;background:#f6f5f3 no-repeat center/cover;border:0;box-sizing:border-box}
 .kv-pdp-modal-color.is-active .kv-pdp-modal-thumb{border:1px solid #000}
 .kv-pdp-modal-name{font:400 12px/1.4 "Lato",sans-serif;text-align:center;color:#000}
+/* Modal Descripción y cuidados (Figma 1264-29998): secciones gap 24, título de */
+/* sección 14px bold, texto de descripción 14px (viene del producto).           */
+.kv-pdp-desc-modal-ov .kv-pdp-modal-body{display:flex;flex-direction:column;gap:24px}
+.kv-desc-section{display:flex;flex-direction:column;gap:16px;width:100%}
+.kv-desc-heading{font:700 14px/1.3 "Lato",sans-serif;color:#000;margin:0}
+.kv-desc-text{font:400 14px/1.3 "Lato",sans-serif;color:#000}
+.kv-desc-text p{margin:0}
+.kv-desc-text span,.kv-desc-text a{font-size:14px!important}
 
 /* ================================================================== */
 /* PDP — Bloque 1: galería stacked (1-2-2-1) + columna de info fija     */
