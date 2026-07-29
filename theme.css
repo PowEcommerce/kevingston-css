@@ -5,6 +5,11 @@
 */
 
 /* ================================================================== */
+/* Suavizado de tipografia (macOS): el default se ve apenas mas grueso  */
+/* ================================================================== */
+body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+
+/* ================================================================== */
 /* FOOTER MOBILE — node 959-19564 (primer pase de alta confianza)      */
 /* ================================================================== */
 @media (max-width:767px){
