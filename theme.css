@@ -644,9 +644,11 @@ body.modal-show{overflow:hidden!important}
 /* Badges card: overrides de texto/estado (Figma) */
 /* Envío gratis -> "ENVÍO GRATIS" (oculta el texto original directo con font-size:0
    de mayor especificidad que la regla general .labels .label) */
-.js-item-product .labels .label.js-shipping-label-private{font-size:0!important}
+/* :not() para igualar la especificidad de la regla base gateada (si no, su       */
+/* font:10px!important le gana a este font-size:0 y reaparece el texto nativo).    */
+.js-item-product .labels .label.js-shipping-label-private:not([style*="display:none"]):not([style*="display: none"]){font-size:0!important}
 .js-item-product .labels .label.js-shipping-label-private>*{display:none!important}
-.js-item-product .labels .label.js-shipping-label-private::before{content:"ENVÍO GRATIS";font-size:10px!important;color:#fff}
+.js-item-product .labels .label.js-shipping-label-private:not([style*="display:none"]):not([style*="display: none"])::before{content:"ENVÍO GRATIS";font-size:10px!important;color:#fff}
 /* Sin stock -> "AGOTADO", bg #EECBCB, texto #BE0000. El nativo renderiza el     */
 /* label en TODAS las cards y lo oculta con style="display:none;" cuando hay      */
 /* stock (defer_stock_label_text=true). Antes pintábamos AGOTADO sin condicionar  */
