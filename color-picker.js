@@ -492,6 +492,16 @@
       if (row.children.length) name.parentNode.insertBefore(row, name);
     }
 
+    // CTA: "Agregar al carrito" -> "Agregar al Carrito" (Figma). Respeta estados
+    // nativos ("Agregando...", "Sin stock") porque matchea el texto exacto.
+    function fixBtnText() {
+      var btns = container.querySelectorAll("input.js-addtocart,button.js-addtocart,.js-addtocart");
+      [].forEach.call(btns, function (b) {
+        if (b.tagName === "INPUT") { if (b.value === "Agregar al carrito") b.value = "Agregar al Carrito"; }
+        else if (!b.children.length && (b.textContent || "").trim() === "Agregar al carrito") b.textContent = "Agregar al Carrito";
+      });
+    }
+
     function render() {
       var pid = container.getAttribute("data-product-id");
       if (!pid) return;
@@ -501,11 +511,19 @@
       renderColors(pid);
       renderInfo(pid);
       renderBadges(pid);
+      fixBtnText();
       // Label de precio sin impuestos -> "nacionales" (traduccion, no editable por compose)
       var taxLabel = document.querySelector(
         "#quickshop-modal .price-without-taxes-label"
       );
       if (taxLabel) taxLabel.textContent = "Precio sin impuestos nacionales";
+    }
+
+    // el botón se re-renderiza al cambiar de estado (Agregando.../Sin stock);
+    // un observer re-aplica el texto. Se setea una sola vez.
+    if (!container.__kvBtnObs && "MutationObserver" in window) {
+      container.__kvBtnObs = new MutationObserver(fixBtnText);
+      container.__kvBtnObs.observe(container, { childList: true, subtree: true, characterData: true });
     }
 
     if ("MutationObserver" in window) {
