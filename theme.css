@@ -502,6 +502,12 @@ body.modal-show{overflow:hidden!important}
 /* Color swatch 54x54 */
 #quickshop-modal .btn-variant-color{width:54px!important;height:54px!important;min-width:0!important;padding:0!important}
 #quickshop-modal .btn-variant-color .btn-variant-content{width:100%!important;height:100%!important;border-radius:4px}
+/* Ocultar TODAS las variantes de color nativas dentro del grupo de color: el     */
+/* color va por .kv-modal-swatches. Sin esto, un color SIN hex se renderiza como  */
+/* botón de TEXTO (.btn-variant sin .btn-variant-color) y la regla de talles de    */
+/* arriba (display:inline-flex!important) le pisa su display:none inline => se veía.*/
+#quickshop-modal .js-color-variants-container .btn-variant,
+#quickshop-modal .js-color-variants-container .js-variant-button{display:none!important}
 
 /* ================================================================== */
 /* QUICK SHOP MODAL — slider vertical de imágenes (Parte A)           */
