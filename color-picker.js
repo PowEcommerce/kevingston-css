@@ -1448,17 +1448,33 @@
     });
   }
 
+  function closePdpModal(ov) {
+    ov.classList.remove("open");
+    document.documentElement.classList.remove("f2tn-lock");
+  }
+
   function openPdpColorsModal(list, current) {
     var ov = document.querySelector(".kv-pdp-colors-modal-ov");
     if (!ov) {
       ov = document.createElement("div");
-      ov.className = "kv-pdp-colors-modal-ov";
-      ov.innerHTML = '<div class="kv-pdp-colors-modal"><button type="button" class="kv-pdp-colors-modal-close" aria-label="Cerrar"></button><div class="kv-pdp-colors-modal-title">Colores</div><div class="kv-pdp-colors-modal-grid"></div></div>';
+      // .kv-pdp-modal-ov = animación/panel compartido de las modales de ficha;
+      // .kv-pdp-colors-modal-ov = hook específico de la de colores.
+      ov.className = "kv-pdp-modal-ov kv-pdp-colors-modal-ov";
+      ov.innerHTML =
+        '<div class="kv-pdp-modal-panel" role="dialog" aria-label="Seleccionar color">' +
+        '<div class="kv-pdp-modal-header"><h3 class="kv-pdp-modal-header-title">Seleccionar color</h3>' +
+        '<button type="button" class="kv-pdp-modal-x" aria-label="Cerrar"></button></div>' +
+        '<div class="kv-pdp-modal-body"><div class="kv-pdp-colors-modal-grid"></div></div>' +
+        "</div>";
       document.body.appendChild(ov);
+      // cierre: click en overlay (no en el panel) o en la ✕
       ov.addEventListener("click", function (e) {
-        if (e.target === ov || e.target.closest(".kv-pdp-colors-modal-close")) { ov.classList.remove("open"); document.documentElement.classList.remove("f2tn-lock"); }
+        if (e.target === ov || e.target.closest(".kv-pdp-modal-x")) closePdpModal(ov);
       });
-      document.addEventListener("keydown", function (e) { if (e.key === "Escape") { ov.classList.remove("open"); document.documentElement.classList.remove("f2tn-lock"); } });
+      // cierre con Esc (sólo si está abierta)
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && ov.classList.contains("open")) closePdpModal(ov);
+      });
     }
     var grid = ov.querySelector(".kv-pdp-colors-modal-grid");
     grid.innerHTML = "";
