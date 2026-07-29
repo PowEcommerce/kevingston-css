@@ -392,7 +392,7 @@ h1.heading-block,h2.heading-block,h3.heading-block,h4.heading-block,h5.heading-b
 
 /* DESKTOP: panel docked a la DERECHA, full-height, entra deslizando desde la derecha */
 @media (min-width:768px){
-  #quickshop-modal.modal{top:0!important;right:0!important;bottom:0!important;left:auto!important;width:711px!important;max-width:calc(100vw - 48px)!important;height:100vh!important;max-height:100vh!important;transform:translateX(100%)}
+  #quickshop-modal.modal{top:0!important;right:0!important;bottom:0!important;left:auto!important;width:712px!important;max-width:calc(100vw - 48px)!important;height:100vh!important;max-height:100vh!important;transform:translateX(100%)}
   #quickshop-modal.modal.modal-show{transform:translateX(0)!important}
   #quickshop-modal .modal-body{max-height:calc(100vh - 56px);overflow-y:auto}
 }
@@ -474,7 +474,7 @@ body.modal-show{overflow:hidden!important}
 /* ================================================================== */
 #quickshop-modal *{box-sizing:border-box}
 @media (min-width:768px){
-  #quickshop-modal.modal{width:711px!important;min-width:711px!important;max-width:711px!important}
+  #quickshop-modal.modal{width:712px!important;min-width:712px!important;max-width:712px!important}
   #quickshop-modal .js-quickshop-container .grid-md-2{grid-template-columns:340px 1fr!important;gap:24px!important}
   #quickshop-modal .quickshop-image-container{width:340px!important;max-width:340px!important}
 }
