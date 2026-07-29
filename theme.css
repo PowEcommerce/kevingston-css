@@ -1304,7 +1304,7 @@ html.kv-menu-open .js-head-main .menu-container .js-modal-open-private::after{op
 /* Mobile queda con los valores base de arriba.                                 */
 @media (min-width:768px){
   .container:has(.product-columns){padding-bottom:0!important}
-  .section-related-products{padding-top:0!important;padding-bottom:48px!important}
+  .section-related-products{padding-top:0!important;padding-bottom:0!important}
   .section-related-products .section-title,.section-related-products h2,.section-related-products .products-list-title,.section-related-products [class*="header"] .heading-block{margin-bottom:32px!important}
 }
 /* ocultar el paginador de puntos */
