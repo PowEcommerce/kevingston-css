@@ -591,7 +591,7 @@ body.modal-show{overflow:hidden!important}
 #quickshop-modal .js-insta-variation-label{font-weight:400!important}
 
 /* Ajustes: padding info 16px + form sin margin-right */
-#quickshop-modal .quickshop-details{padding:64px 16px!important}
+#quickshop-modal .quickshop-details{padding:64px 15px!important}
 #quickshop-modal #quickshop-form{margin-right:0!important}
 
 /* Ajustes (batch, sin pushear aún) */
