@@ -1611,46 +1611,40 @@
     var det = document.querySelector(".js-product-detail");
     if (!det) return;
 
-    function findTalle() {
-      var talle = null;
+    function hasSizes() {
+      var ok = false;
       [].forEach.call(det.querySelectorAll(".js-product-variants-group"), function (g) {
-        if (/talle/i.test((g.textContent || "").slice(0, 40)) && g.querySelector(".js-variant-button")) talle = g;
+        if (/talle/i.test((g.textContent || "").slice(0, 40)) && g.querySelector(".btn-variant:not(.btn-variant-color)")) ok = true;
       });
-      return talle;
+      return ok;
     }
 
     function apply() {
-      var talle = findTalle();
-      if (!talle) return;
-      // (1) Label "Talle: X" → "Talles" (Figma).
-      var lbl = talle.querySelector(":scope > .form-label");
-      if (lbl && (lbl.textContent || "").trim() !== "Talles") lbl.textContent = "Talles";
-      // (2) Links "Guía de talles"/"Conocé tu talle" (si no están ya).
-      if (!talle.querySelector(".kv-pdp-sizelinks")) {
-        var row = document.createElement("div");
-        row.className = "kv-pdp-sizelinks";
-        var guia = document.createElement("button");
-        guia.type = "button"; guia.className = "kv-sizelink kv-sizeguide-open"; guia.textContent = "Guía de talles";
-        var fit = document.createElement("button");
-        fit.type = "button"; fit.className = "kv-sizelink kv-fitting-open"; fit.textContent = "Conocé tu talle";
-        row.appendChild(guia); row.appendChild(fit);
-        talle.appendChild(row);
-        guia.addEventListener("click", function () { openSizeGuide(); });
-        fit.addEventListener("click", function () {
-          var app = document.querySelector('[class*="ready-size"],[id*="ready-size"],[class*="readysize"],[data-app*="size"]');
-          if (app) { app.click(); }
-        });
-      }
+      // El label ("Talles") ya lo hace el CSS (::before). Acá sólo los links.
+      // Se insertan como HERMANO después de .js-product-variants (contenedor que el
+      // nativo re-renderiza por dentro pero NO reemplaza a sus hermanos) → sobreviven.
+      if (det.querySelector(".kv-pdp-sizelinks")) return;
+      var vars = det.querySelector(".js-product-variants");
+      if (!vars || !vars.parentElement || !hasSizes()) return;
+      var row = document.createElement("div");
+      row.className = "kv-pdp-sizelinks";
+      var guia = document.createElement("button");
+      guia.type = "button"; guia.className = "kv-sizelink kv-sizeguide-open"; guia.textContent = "Guía de talles";
+      var fit = document.createElement("button");
+      fit.type = "button"; fit.className = "kv-sizelink kv-fitting-open"; fit.textContent = "Conocé tu talle";
+      row.appendChild(guia); row.appendChild(fit);
+      vars.parentElement.insertBefore(row, vars.nextSibling);
+      guia.addEventListener("click", function () { openSizeGuide(); });
+      fit.addEventListener("click", function () {
+        var app = document.querySelector('[class*="ready-size"],[id*="ready-size"],[class*="readysize"],[data-app*="size"]');
+        if (app) { app.click(); }
+      });
     }
 
     apply();
-    // El nativo (Nube SDK) re-renderiza el grupo de variantes de forma async y en
-    // momentos variables (hidratación, cambio de variante) → borra mis links y
-    // revierte el label. El MutationObserver solo no alcanza (race). Un interval
-    // idempotente y barato garantiza que se re-aplique siempre. apply() no muta
-    // nada si ya está aplicado, así que no pelea con el nativo salvo para corregir.
+    // backup: si el nativo llegara a borrar los links, se re-inyectan.
     new MutationObserver(function () { apply(); }).observe(det, { childList: true, subtree: true });
-    setInterval(apply, 500);
+    [400, 1200, 3000].forEach(function (ms) { setTimeout(apply, ms); });
   }
 
   /* ------------------------------------------------------------------ */
