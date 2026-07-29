@@ -430,6 +430,14 @@ body.modal-show{overflow:hidden!important}
 #quickshop-modal .modal-body{padding:24px}
 #quickshop-modal .js-quickshop-container .grid-md-2{gap:24px;align-items:start}
 #quickshop-modal .quickshop-image-container{border-radius:8px;overflow:hidden}
+/* Scrollbar sutil (desktop tiene overflow-y:auto). En Windows las barras salen  */
+/* gruesas; se afinan con scrollbar-width (Firefox) + ::-webkit-scrollbar         */
+/* (Chrome/Edge). Mac/mobile ya usan overlay sutil.                               */
+#quickshop-modal .quickshop-image-container{scrollbar-width:thin;scrollbar-color:rgba(0,0,0,.22) transparent}
+#quickshop-modal .quickshop-image-container::-webkit-scrollbar{width:6px;height:6px}
+#quickshop-modal .quickshop-image-container::-webkit-scrollbar-track{background:transparent}
+#quickshop-modal .quickshop-image-container::-webkit-scrollbar-thumb{background:rgba(0,0,0,.22);border-radius:10px}
+#quickshop-modal .quickshop-image-container::-webkit-scrollbar-thumb:hover{background:rgba(0,0,0,.38)}
 
 /* Panel derecho: ritmo vertical 24px */
 #quickshop-modal .quickshop-details{display:flex;flex-direction:column;gap:24px}
