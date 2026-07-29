@@ -555,7 +555,9 @@ body.modal-show{overflow:hidden!important}
 #quickshop-modal .js-product-variants-group:not(.js-color-variants-container)>.form-label>*{display:none!important}
 /* Gaps entre chips de talle */
 #quickshop-modal .btn-variant:not(.btn-variant-color){margin:0 16px 16px 0!important}
-#quickshop-modal .kv-modal-swatches{margin-top:0!important;gap:16px!important}
+/* gap 12 para que 4 swatches + botón "+N" entren en UNA fila (columna del modal  */
+/* ~324px); si no, el "+N" se iba a una fila aparte. Mobile queda en 16 (abajo).  */
+#quickshop-modal .kv-modal-swatches{margin-top:0!important;gap:12px!important}
 /* Opciones ↔ CTA = 24px */
 #quickshop-modal .quickshop-actions{margin-top:24px!important}
 
