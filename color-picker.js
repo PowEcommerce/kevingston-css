@@ -386,9 +386,15 @@
         more.className = "kv-modal-swatch-more";
         more.textContent = "+" + remaining.length;
         more.setAttribute("aria-label", "Ver los demás colores");
-        // Abre el modal de "todos los colores" (mismo que la ficha), en vez de
-        // agregar los ocultos inline a la lista.
-        more.addEventListener("click", function () { openPdpColorsModal(ordered, active); });
+        // Abre el modal de "todos los colores" (mismo que la ficha) y CIERRA el
+        // quick-shop, para no dejar los dos modales apilados.
+        more.addEventListener("click", function () {
+          openPdpColorsModal(ordered, active);
+          var qs = document.getElementById("quickshop-modal");
+          var cb = qs && qs.querySelector(".modal-close");
+          if (cb) cb.click();
+          else if (qs) qs.classList.remove("modal-show");
+        });
         row.appendChild(more);
       }
       group.appendChild(row);
