@@ -70,7 +70,7 @@
     });
     var ordered = (selected ? [selected] : []).concat(rest);
 
-    var MAX = 3;
+    var MAX = 4; // Figma: hasta 4 swatches + botón "+N" (ver los demás colores)
     var shown = ordered.slice(0, MAX);
     var remaining = ordered.length - shown.length;
 
