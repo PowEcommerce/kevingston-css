@@ -551,7 +551,7 @@ body.modal-show{overflow:hidden!important}
 #quickshop-modal .js-product-variants{display:flex!important;flex-direction:column;gap:16px!important}
 #quickshop-modal .js-product-variants-group{margin:0!important}
 /* Label "Color:/Talle:" ↔ controles = 16px */
-#quickshop-modal .form-label{font-size:14px!important;line-height:1.3;margin:0 0 16px!important;display:block}
+#quickshop-modal .form-label{font-size:14px!important;line-height:1.3;margin:0 0 14px!important;display:block}
 /* Label de talle → "Talles" (sin el valor seleccionado), igual que la ficha.    */
 /* Por CSS ::before porque el nativo revierte el textContent por JS. SOLO el grupo */
 /* de talle: el de Color lleva .js-color-variants-container y NO se toca (mantiene  */
@@ -585,7 +585,7 @@ body.modal-show{overflow:hidden!important}
 }
 
 /* Quick shop modal: cuotas + precio sin impuestos (inyectados por JS) */
-#quickshop-modal .kv-modal-info{display:flex;flex-direction:column;gap:8px;margin:0}
+#quickshop-modal .kv-modal-info{display:flex;flex-direction:column;gap:7px;margin:0}
 #quickshop-modal .kv-modal-cuotas{font:400 12px/normal "Lato",sans-serif;color:#000;margin:0}
 #quickshop-modal .kv-modal-notax{font:400 10px/normal "Lato",sans-serif;color:#8f8f8f;margin:0}
 
@@ -602,7 +602,7 @@ body.modal-show{overflow:hidden!important}
 
 /* Ajustes (batch, sin pushear aún) */
 #quickshop-modal .product-detail-variants{margin-bottom:0!important}
-#quickshop-modal .quickshop-actions{margin-top:8px!important}
+#quickshop-modal .quickshop-actions{margin-top:9px!important}
 /* X de cerrar del modal a la mitad (original --icon-size-2x = 2em -> 1em) */
 #quickshop-modal .modal-close-icon{font-size:1.3em!important}
 
