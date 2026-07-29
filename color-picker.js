@@ -1831,21 +1831,56 @@
     new MutationObserver(fix).observe(cont, { childList: true, subtree: true });
   }
 
+  /* PDP — Modal "Guía de talles" (Figma 2520-24913). Panel lateral (mismo    */
+  /* sistema .kv-pdp-modal que los facilitadores): tabla de medidas + "Cómo    */
+  /* medir" (ilustración) + 5 pasos. Los DATOS DE LA TABLA son PLACEHOLDER      */
+  /* del Figma (S/01 y valores) → el cliente carga su tabla real. Los pasos e   */
+  /* instrucciones de medición sí son finales.                                  */
   function openSizeGuide() {
-    var ov = document.querySelector(".kv-sizeguide-ov");
+    var ov = document.querySelector(".kv-pdp-sizeguide-modal-ov");
     if (!ov) {
       ov = document.createElement("div");
-      ov.className = "kv-sizeguide-ov";
+      ov.className = "kv-pdp-modal-ov kv-pdp-sizeguide-modal-ov";
+      var SIZES = ["S/01", "S/01", "S/01", "S/01", "S/01", "S/01", "S/01", "S/01", "S/01"];
+      var ROWS = [
+        ["Ancho de hombros", "49"], ["Ancho de pecho", "54"], ["Ancho bajo", "54"],
+        ["Largo total", "74"], ["Largo de manga", "74"]
+      ];
+      var thead = '<tr><th class="kv-sg-corner">Talles</th>' + SIZES.map(function (s) { return "<th>" + s + "</th>"; }).join("") + "</tr>";
+      var tbody = ROWS.map(function (r) {
+        return "<tr><th>" + r[0] + "</th>" + SIZES.map(function () { return "<td>" + r[1] + "</td>"; }).join("") + "</tr>";
+      }).join("");
+      var STEPS = [
+        ["1. Ancho de Hombros", "Medir desde donde comienza el hombro recto hasta el otro hombro."],
+        ["2. Ancho de Pecho", "Medir debajo de la curvatura de la manga, es decir, desde la sisa hasta el otro extremo."],
+        ["3. Ancho Bajo", "Medir en la parte inferior de la prenda de extremo a otro."],
+        ["4. Largo Total", "El largo total de la prenda se mide desde donde termina el ancho del cuello, es decir, desde donde comienza el hombro hacia abajo."],
+        ["5. Largo de Manga", "Medir desde el inicio del hombro hasta el puño."]
+      ];
+      var steps = STEPS.map(function (s) {
+        return '<div class="kv-sg-step"><h5 class="kv-sg-step-h">' + s[0] + '</h5><p class="kv-sg-step-t">' + s[1] + "</p></div>";
+      }).join("");
       ov.innerHTML =
-        '<div class="kv-sizeguide" role="dialog" aria-label="Guía de talles">' +
-        '<button type="button" class="kv-sizeguide-close" aria-label="Cerrar"></button>' +
-        '<h3 class="kv-sizeguide-title">Guía de talles</h3>' +
-        '<div class="kv-sizeguide-body"><p>Próximamente vas a poder ver acá la tabla de talles.</p></div>' +
-        "</div>";
+        '<div class="kv-pdp-modal-panel" role="dialog" aria-label="Guía de talles">' +
+        '<div class="kv-pdp-modal-header"><h3 class="kv-pdp-modal-header-title">Guía de talles</h3>' +
+        '<button type="button" class="kv-pdp-modal-x" aria-label="Cerrar"></button></div>' +
+        '<div class="kv-pdp-modal-body">' +
+        '<div class="kv-sg-table-wrap"><table class="kv-sg-table"><thead>' + thead + "</thead><tbody>" + tbody + "</tbody></table></div>" +
+        '<section class="kv-sg-how"><div class="kv-sg-how-txt"><h4 class="kv-sg-how-title">Cómo medir</h4>' +
+        '<p class="kv-sg-how-p">Para poder medir una prenda vas a necesitar un centímetro. Tenés que apoyar la prenda en una superficie plana. La medida se toma desde las costuras laterales.</p></div>' +
+        '<img class="kv-sg-how-img" src="' + PROMO_IMG + 'sizeguide-illu.png" alt="Cómo medir una prenda" loading="lazy"></section>' +
+        '<div class="kv-sg-steps">' + steps + "</div>" +
+        "</div></div>";
       document.body.appendChild(ov);
-      ov.addEventListener("click", function (e) { if (e.target === ov || e.target.classList.contains("kv-sizeguide-close")) ov.classList.remove("open"); });
+      ov.addEventListener("click", function (e) {
+        if (e.target === ov || e.target.closest(".kv-pdp-modal-x")) closePdpModal(ov);
+      });
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && ov.classList.contains("open")) closePdpModal(ov);
+      });
     }
     ov.classList.add("open");
+    document.documentElement.classList.add("f2tn-lock");
   }
 
   /* ------------------------------------------------------------------ */
