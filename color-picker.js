@@ -70,7 +70,7 @@
     });
     var ordered = (selected ? [selected] : []).concat(rest);
 
-    var MAX = 4; // Figma: hasta 4 swatches + botón "+N" (ver los demás colores)
+    var MAX = 3; // card de grilla: hasta 3 swatches + "+N" (Figma card 959-17367)
     var shown = ordered.slice(0, MAX);
     var remaining = ordered.length - shown.length;
 
@@ -344,7 +344,8 @@
 
       var row = document.createElement("div");
       row.className = "kv-modal-swatches";
-      entry.siblings.forEach(function (sib) {
+
+      function makeSwatch(sib) {
         var imgs = imagesMap[String(sib.id)];
         var src = imgs && imgs[0];
         var isActive = String(sib.id) === pid;
@@ -366,8 +367,31 @@
         } else if (sib.color) {
           a.style.background = sib.color; // fallback si el hermano no tiene foto
         }
-        row.appendChild(a);
-      });
+        return a;
+      }
+
+      // Activo primero, resto en orden. Máximo 4 swatches + botón "+N" (ver los
+      // demás colores), igual que la ficha. El "+N" revela los ocultos.
+      var active = null;
+      entry.siblings.forEach(function (s) { if (String(s.id) === pid) active = s; });
+      var ordered = active ? [active] : [];
+      entry.siblings.forEach(function (s) { if (s !== active) ordered.push(s); });
+
+      var MAX = 4;
+      ordered.slice(0, MAX).forEach(function (sib) { row.appendChild(makeSwatch(sib)); });
+      var remaining = ordered.slice(MAX);
+      if (remaining.length) {
+        var more = document.createElement("button");
+        more.type = "button";
+        more.className = "kv-modal-swatch-more";
+        more.textContent = "+" + remaining.length;
+        more.setAttribute("aria-label", "Ver los demás colores");
+        more.addEventListener("click", function () {
+          remaining.forEach(function (sib) { row.insertBefore(makeSwatch(sib), more); });
+          if (more.parentNode) more.parentNode.removeChild(more);
+        });
+        row.appendChild(more);
+      }
       group.appendChild(row);
     }
 
