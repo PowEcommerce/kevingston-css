@@ -386,10 +386,9 @@
         more.className = "kv-modal-swatch-more";
         more.textContent = "+" + remaining.length;
         more.setAttribute("aria-label", "Ver los demás colores");
-        more.addEventListener("click", function () {
-          remaining.forEach(function (sib) { row.insertBefore(makeSwatch(sib), more); });
-          if (more.parentNode) more.parentNode.removeChild(more);
-        });
+        // Abre el modal de "todos los colores" (mismo que la ficha), en vez de
+        // agregar los ocultos inline a la lista.
+        more.addEventListener("click", function () { openPdpColorsModal(ordered, active); });
         row.appendChild(more);
       }
       group.appendChild(row);
