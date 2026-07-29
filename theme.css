@@ -1399,8 +1399,10 @@ html.kv-menu-open .js-head-main .menu-container .js-modal-open-private::after{op
   /* a la columna de info.                                                      */
   .container:has(.product-columns){padding-left:0!important;padding-right:0!important}
   .js-product-detail .js-product-info{padding-left:16px!important;padding-right:16px!important}
-  /* título "También te recomendamos" 20px en mobile (desktop 24px) */
-  .section-related-products .section-title,.section-related-products h2,.section-related-products .products-list-title,.section-related-products [class*="header"] .heading-block{font-size:20px!important}
+  /* título "También te recomendamos" 20px en mobile (desktop 24px). Se targetea */
+  /* .heading-block DIRECTO (el JS lo convierte a h1/h2/h3 según SEO → el         */
+  /* selector por tag/ancestro "header" no siempre matcheaba).                    */
+  .section-related-products .heading-block,.section-related-products .section-title,.section-related-products h2,.section-related-products .products-list-title{font-size:20px!important;line-height:1.2!important}
   /* sección recomendados sin padding top/bottom en mobile */
   .section-related-products{padding-top:0!important;padding-bottom:0!important}
 }
