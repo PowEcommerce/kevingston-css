@@ -1371,6 +1371,7 @@ html.kv-menu-open .js-head-main .menu-container .js-modal-open-private::after{op
   /* ritmo vertical mobile: cuotas (wrapper flex-column) y colores */
   .js-product-detail .product-content>.js-fullscreen-modal-open{margin:8px 0 16px!important}
   .kv-pdp-colors{margin:16px 0 0}
+  .js-product-detail .product-content>.breadcrumbs{font-size:10px}
 }
 
 /* PDP mobile — flechas laterales + barra de progreso (inyectadas por JS) */
