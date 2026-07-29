@@ -384,7 +384,7 @@
         var more = document.createElement("button");
         more.type = "button";
         more.className = "kv-modal-swatch-more";
-        more.textContent = "+" + remaining.length;
+        more.innerHTML = "+ " + remaining.length + "<span>colores</span>"; // igual que la PDP
         more.setAttribute("aria-label", "Ver los demás colores");
         // Abre el modal de "todos los colores" (mismo que la ficha) y CIERRA el
         // quick-shop, para no dejar los dos modales apilados.
