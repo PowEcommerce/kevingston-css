@@ -1361,8 +1361,8 @@ html.kv-menu-open .js-head-main .menu-container .js-modal-open-private::after{op
 .js-product-images-thumbs{display:none!important}
 @media (max-width:767px){
   .js-product-detail .js-product-name.product-name{font-size:32px!important;line-height:1.1!important;padding-right:44px}
-  .js-product-detail .product-price-main{font-size:20px!important}
-  .js-product-detail .product-price-compare,.js-product-detail .js-compare-price-display,.js-product-detail .product-price-main .js-price-display{font-size:20px!important}
+  .js-product-detail .product-price-main{font-size:18px!important}
+  .js-product-detail .product-price-compare,.js-product-detail .js-compare-price-display,.js-product-detail .product-price-main .js-price-display{font-size:18px!important}
   /* galería: imagen cuadrada full-width */
   .js-product-images .product-images-slider,.js-product-slider{width:100%!important}
   .js-product-slider .js-product-slide img{border-radius:0}
