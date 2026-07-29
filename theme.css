@@ -1197,7 +1197,7 @@ html.kv-menu-open .js-head-main .menu-container .js-modal-open-private::after{op
 .js-product-detail .btn-variant-no-stock::after,.js-product-detail .btn-variant-no-stock::before{display:none!important}
 /* Links "Guía de talles" (izq) + "Conocé tu talle" (der) — inyectados por JS   */
 /* como fila full-width dentro del grupo de talle (Figma: 12px subrayado, space-between) */
-.kv-pdp-sizelinks{display:flex;align-items:center;justify-content:space-between;gap:24px;margin:16px 0 0}
+.kv-pdp-sizelinks{display:flex;align-items:center;justify-content:space-between;gap:24px;margin:16px 0 24px}
 .kv-sizelink{background:none;border:0;padding:0;cursor:pointer;font:400 12px/1.2 "Lato",sans-serif;color:#000;text-decoration:underline;text-underline-offset:3px}
 .kv-sizelink:hover{opacity:.7}
 /* Add to cart: full-width, texto 14px regular (Figma btn 2340:20271) */
@@ -1221,15 +1221,17 @@ html.kv-menu-open .js-head-main .menu-container .js-modal-open-private::after{op
 /* ================================================================== */
 .kv-pdp-tabs{margin:24px 0 0;border-top:1px solid #F0F0F0}
 .kv-pdp-tab{border-bottom:1px solid #F0F0F0}
-.kv-pdp-tab-head{display:flex;align-items:center;gap:12px;width:100%;padding:16px 0;background:none;border:0;cursor:pointer;font:400 16px/1.3 "Lato",sans-serif;color:#000;text-align:left}
+/* Fila = ícono 24 + gap 8 + texto 14 + chevron 14; padding 8/0 → fila 40px con    */
+/* 8px arriba/abajo del divisor (Figma 2340:20272: gap 8 entre filas y líneas).    */
+.kv-pdp-tab-head{display:flex;align-items:center;gap:8px;width:100%;padding:8px 0;background:none;border:0;cursor:pointer;font:400 14px/1.3 "Lato",sans-serif;color:#000;text-align:left}
 .kv-pdp-tab-head .kv-tab-ico{width:24px;height:24px;flex:none;display:inline-flex;color:#000}
 .kv-pdp-tab-head .kv-tab-ico svg{width:24px;height:24px}
 .kv-pdp-tab-head .kv-tab-title{flex:1 1 auto}
-.kv-pdp-tab-head .kv-tab-chev{width:16px;height:16px;flex:none;color:#000;transition:transform .25s ease}
+.kv-pdp-tab-head .kv-tab-chev{width:14px;height:14px;flex:none;color:#000;transition:transform .25s ease}
 .kv-pdp-tab.open .kv-tab-chev{transform:rotate(90deg)}
 .kv-pdp-tab-body{max-height:0;overflow:hidden;transition:max-height .3s ease}
 .kv-pdp-tab.open .kv-pdp-tab-body{max-height:1200px}
-.kv-pdp-tab-inner{padding:0 0 20px 36px;font:400 14px/1.5 "Lato",sans-serif;color:#333}
+.kv-pdp-tab-inner{padding:0 0 20px 32px;font:400 14px/1.5 "Lato",sans-serif;color:#333}
 .kv-pdp-tab-inner p{margin:0 0 8px}
 .kv-pdp-tab-inner .product-description-heading{display:none}
 
