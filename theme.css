@@ -1299,6 +1299,10 @@ html.kv-menu-open .js-head-main .menu-container .js-modal-open-private::after{op
 /* ================================================================== */
 .section-related-products{padding:48px 0 56px}
 .section-related-products .section-title,.section-related-products h2,.section-related-products .products-list-title,.section-related-products [class*="header"] .heading-block{font:400 24px/1.2 "Lato",sans-serif!important;color:#000!important;text-transform:none!important;margin:0 0 24px!important}
+/* Card del carrusel de recomendados con fondo crema (Figma) — el css_code    */
+/* global pinta .js-item-product de blanco; acá se sobreescribe por scope.      */
+.section-related-products .js-item-product,
+.section-related-products .js-item-product .product-item-image-container{background:#F6F5F3!important}
 /* Desktop: recomendados sin gap superior (contenedor del producto y sección    */
 /* ambos con 0 arriba/abajo). título→carrusel 32px, fin del carrusel→footer 48. */
 /* Mobile queda con los valores base de arriba.                                 */
