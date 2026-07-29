@@ -1382,6 +1382,8 @@ html.kv-menu-open .js-head-main .menu-container .js-modal-open-private::after{op
   .js-product-detail .js-product-info{padding-left:16px!important;padding-right:16px!important}
   /* título "También te recomendamos" 20px en mobile (desktop 24px) */
   .section-related-products .section-title,.section-related-products h2,.section-related-products .products-list-title,.section-related-products [class*="header"] .heading-block{font-size:20px!important}
+  /* sección recomendados sin padding top/bottom en mobile */
+  .section-related-products{padding-top:0!important;padding-bottom:0!important}
 }
 
 /* PDP mobile — flechas laterales + barra de progreso (inyectadas por JS) */
