@@ -1368,6 +1368,9 @@ html.kv-menu-open .js-head-main .menu-container .js-modal-open-private::after{op
   .js-product-slider .js-product-slide img{border-radius:0}
   /* fracción "1/N" del swiper: la ocultamos (usamos barra propia) */
   .js-product-images .swiper-fractions,.js-product-slider-pagination{display:none!important}
+  /* ritmo vertical mobile: cuotas (wrapper flex-column) y colores */
+  .js-product-detail .product-content>.js-fullscreen-modal-open{margin:8px 0 16px!important}
+  .kv-pdp-colors{margin:16px 0 0}
 }
 
 /* PDP mobile — flechas laterales + barra de progreso (inyectadas por JS) */
