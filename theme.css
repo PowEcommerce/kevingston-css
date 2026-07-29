@@ -624,12 +624,15 @@ body.modal-show{overflow:hidden!important}
 /* BADGES de la card — estilo Figma (node 959-17368)                  */
 /* Pill 10px blanco, padding 4/8, rounded 50px, uppercase             */
 /* ================================================================== */
-.js-item-product .labels .label{
+/* Gateado con :not([display:none]): el nativo oculta cucardas que NO aplican con  */
+/* style="display:none" inline; sin el gate, el display:inline-flex!important (y   */
+/* el opacity:1) las forzaba visibles. Sólo se estilan las que el nativo muestra.  */
+.js-item-product .labels .label:not([style*="display:none"]):not([style*="display: none"]){
   border-radius:50px!important;padding:4px 8px!important;min-height:0!important;
   font:400 10px/normal "Lato",sans-serif!important;color:#fff!important;
   display:inline-flex!important;align-items:center;justify-content:center;
   text-align:center;white-space:nowrap;text-transform:uppercase;letter-spacing:0;
-  width:auto!important;
+  width:auto!important;opacity:1!important;
 }
 .js-item-product .labels .label *{color:#fff!important;font-size:10px!important}
 /* Colores por tipo */
@@ -639,8 +642,6 @@ body.modal-show{overflow:hidden!important}
 .js-item-product .js-shipping-label-private .label-icon{display:none!important}
 
 /* Badges card: overrides de texto/estado (Figma) */
-/* Opacidad full en todas las cucardas */
-.js-item-product .labels .label{opacity:1!important}
 /* Envío gratis -> "ENVÍO GRATIS" (oculta el texto original directo con font-size:0
    de mayor especificidad que la regla general .labels .label) */
 .js-item-product .labels .label.js-shipping-label-private{font-size:0!important}
