@@ -406,6 +406,9 @@
       if (!url) return;
 
       var apply = function (text) {
+        // "Precio sin impuestos" → "Precio sin impuestos nacionales" (el fetch al
+        // PDP trae el texto crudo, sin la palabra que agrega initPdp en la ficha).
+        if (text) text = text.replace(/Precio sin impuestos(?! nacionales)/i, "Precio sin impuestos nacionales");
         if (text && !info.querySelector(".kv-modal-notax")) {
           var p2 = document.createElement("p");
           p2.className = "kv-modal-notax";
