@@ -178,11 +178,13 @@ async function generate() {
       name: name || firstLangValue(p.name),
     });
   }
-  // descartar grupos de 1 solo color
+  // Se incluyen TAMBIÉN los grupos de 1 solo color: la card de 1 color muestra
+  // igual su swatch (activo, sin "+N") para no romper la grilla (todas las cards
+  // con fila de color de la misma altura).
   const finalGroups = {};
   let kept = 0;
   for (const k of Object.keys(groups)) {
-    if (groups[k].length >= 2) { finalGroups[k] = groups[k]; kept += groups[k].length; }
+    if (groups[k].length >= 1) { finalGroups[k] = groups[k]; kept += groups[k].length; }
   }
   const out = {
     _readme: "Generado por tools/gen-color-map.js. 'color' (hex) sale del diccionario tools/color-names.json; null = falta definir.",

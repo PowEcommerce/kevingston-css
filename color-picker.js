@@ -35,7 +35,7 @@
     var groups = (map && map.groups) || {};
     Object.keys(groups).forEach(function (sku5) {
       var items = groups[sku5];
-      if (!Array.isArray(items) || items.length < 2) return; // 1 solo color => sin picker
+      if (!Array.isArray(items) || items.length < 1) return; // incluye grupos de 1 color (swatch único en la card)
       items.forEach(function (item) {
         if (item && item.id != null) {
           idx[String(item.id)] = { color: item.color, siblings: items };
@@ -57,7 +57,7 @@
     if (!entry) return; // producto sin grupo => nada que mostrar
 
     var sibs = entry.siblings || [];
-    if (sibs.length < 2) return;
+    if (sibs.length < 1) return; // 1 color => se muestra igual (swatch único activo, sin "+N")
 
     card.setAttribute(DONE_ATTR, "1");
 

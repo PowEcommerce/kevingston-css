@@ -40,6 +40,22 @@
         "name": "CAMPERA EUROPE HIGH CAMPERA test 1"
       }
     ],
+    "053C0": [
+      {
+        "id": 352300439,
+        "url": "/productos/campera-fighter-test-1xixq/",
+        "color": "#7A4B27",
+        "name": "Tabaco"
+      }
+    ],
+    "054A8": [
+      {
+        "id": 355535710,
+        "url": "/productos/campera-europe-high-13dpd/",
+        "color": null,
+        "name": "CAMPERA EUROPE HIGH CAMPERA EUROPE HIGH"
+      }
+    ],
     "00902": [
       {
         "id": 356941770,
@@ -756,6 +772,14 @@
         "name": "negro"
       }
     ],
+    "M1465": [
+      {
+        "id": 356957946,
+        "url": "/productos/camisa-new-rosalia/",
+        "color": "#111111",
+        "name": "negro"
+      }
+    ],
     "00994": [
       {
         "id": 357837312,
@@ -766,6 +790,14 @@
       {
         "id": 357837340,
         "url": "/productos/boxer-exocet-ii-racing1/",
+        "color": "#2A4B8D",
+        "name": "azul"
+      }
+    ],
+    "00997": [
+      {
+        "id": 357837363,
+        "url": "/productos/boxer-boeing/",
         "color": "#2A4B8D",
         "name": "azul"
       }
@@ -854,6 +886,14 @@
         "name": "verde claro"
       }
     ],
+    "009B4": [
+      {
+        "id": 357837668,
+        "url": "/productos/boxer-new-mirage/",
+        "color": "#2E5D3B",
+        "name": "verde"
+      }
+    ],
     "009B5": [
       {
         "id": 357837691,
@@ -872,6 +912,14 @@
         "url": "/productos/boxer-monday2/",
         "color": "#5E1A24",
         "name": "bordeaux-blanco"
+      }
+    ],
+    "009B7": [
+      {
+        "id": 357837748,
+        "url": "/productos/boxer-team/",
+        "color": "#111111",
+        "name": "negro"
       }
     ],
     "009B8": [
@@ -952,6 +1000,14 @@
         "url": "/productos/camisa-pond2/",
         "color": "#2A4B8D",
         "name": "azul"
+      }
+    ],
+    "012B3": [
+      {
+        "id": 357838069,
+        "url": "/productos/camisa-york4/",
+        "color": "#2A4B8D",
+        "name": "azul-blanco-celeste"
       }
     ],
     "012B4": [
@@ -1166,6 +1222,14 @@
         "name": "marrón"
       }
     ],
+    "012D3": [
+      {
+        "id": 357839263,
+        "url": "/productos/camisa-rowen3/",
+        "color": "#2A4B8D",
+        "name": "azul-blanco"
+      }
+    ],
     "012D4": [
       {
         "id": 357839323,
@@ -1178,6 +1242,14 @@
         "url": "/productos/camisa-rowen5/",
         "color": "#111111",
         "name": "negro"
+      }
+    ],
+    "012D5": [
+      {
+        "id": 357839378,
+        "url": "/productos/camisa-mond8/",
+        "color": "#FFFFFF",
+        "name": "blanco"
       }
     ],
     "01577": [
@@ -1222,6 +1294,14 @@
         "url": "/productos/camisa-mond15/",
         "color": "#8A8D91",
         "name": "gris-blanco"
+      }
+    ],
+    "01578": [
+      {
+        "id": 357839647,
+        "url": "/productos/camisa-rowen6/",
+        "color": "#2A4B8D",
+        "name": "azul-blanco"
       }
     ],
     "020L3": [
