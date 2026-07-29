@@ -1534,6 +1534,120 @@
     document.documentElement.classList.add("f2tn-lock");
   }
 
+  // Guarda el calculador de envío nativo (lo saca del layout en initPdpTabs para
+  // que no deje hueco; el modal de "Medios de envío" lo monta al abrirse).
+  var pdpShipBox = null;
+
+  /* ------------------------------------------------------------------ */
+  /* PDP — Modal "Formas de pago, promociones y reintegros" (Figma       */
+  /* 1264-30277). Panel derecho: intro + "Ver todas las promociones" +   */
+  /* lista de promos (logo + título + descripción). CONTENIDO HARDCODE    */
+  /* del Figma → editable pendiente (no hay fuente en el admin todavía).  */
+  /* ------------------------------------------------------------------ */
+  var PROMO_IMG = "https://powecommerce.github.io/kevingston-css/img/";
+  var PROMO_TRUCK = '<svg viewBox="0 0 28 23" fill="none"><g transform="translate(0 0.3)"><path d="M18.4041 15.9232V0.50651M18.3886 0.5C18.3886 0.5 6.67678 0.5 0.518975 0.5M0.5 0.539498C0.5 7.65839 0.5 18.7686 0.5 18.7686M0.519048 18.7619H3.69848M27.1667 10.5201H18.4062M24.3171 18.366H25.0475C25.609 18.366 26.1474 18.1429 26.5445 17.7459C26.9415 17.3489 27.1645 16.8104 27.1645 16.2489V9.8977L24.2155 3.85768C24.0412 3.50201 23.7707 3.20237 23.4346 2.99279C23.0985 2.78322 22.7104 2.67212 22.3143 2.67212H18.7852" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path d="M16.8607 18.9225H10.6429M3.99947 18.9861C3.99947 19.7699 4.31085 20.5216 4.8651 21.0759C5.41935 21.6301 6.17108 21.9415 6.95491 21.9415C7.73874 21.9415 8.49046 21.6301 9.04472 21.0759C9.59897 20.5216 9.91034 19.7699 9.91034 18.9861C9.91034 18.2022 9.59897 17.4505 9.04472 16.8963C8.49046 16.342 7.73874 16.0306 6.95491 16.0306C6.17108 16.0306 5.41935 16.342 4.8651 16.8963C4.31085 17.4505 3.99947 18.2022 3.99947 18.9861ZM17.4154 18.9861C17.4154 19.3742 17.4918 19.7585 17.6403 20.1171C17.7889 20.4756 18.0066 20.8014 18.281 21.0759C18.5554 21.3503 18.8812 21.568 19.2398 21.7165C19.5984 21.8651 19.9827 21.9415 20.3708 21.9415C20.7589 21.9415 21.1432 21.8651 21.5018 21.7165C21.8604 21.568 22.1862 21.3503 22.4606 21.0759C22.7351 20.8014 22.9527 20.4756 23.1013 20.1171C23.2498 19.7585 23.3262 19.3742 23.3262 18.9861C23.3262 18.5979 23.2498 18.2136 23.1013 17.8551C22.9527 17.4965 22.7351 17.1707 22.4606 16.8963C22.1862 16.6218 21.8604 16.4041 21.5018 16.2556C21.1432 16.1071 20.7589 16.0306 20.3708 16.0306C19.9827 16.0306 19.5984 16.1071 19.2398 16.2556C18.8812 16.4041 18.5554 16.6218 18.281 16.8963C18.0066 17.1707 17.7889 17.4965 17.6403 17.8551C17.4918 18.2136 17.4154 18.5979 17.4154 18.9861Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></g></svg>';
+  var PROMO_ITEMS = [
+    { img: "promo-santander.png", title: "¡SÚPER MIÉRCOLES!", desc: "25% de ahorro segmento Sorpresa abonando con QR desde App Santander y App MODO. Sin tope de reintegro. Hasta 6 cuotas sin interés." },
+    { svg: PROMO_TRUCK, title: "ENVÍOS GRATIS", desc: "Envíos gratis a todo el país en compras superiores a $180.000" },
+    { img: "promo-cuotas.png", title: "CUOTAS SIN INTERÉS", desc: "Válido para tarjetas bancarias VISA, MASTER y AMEX emitidas por entidades bancarias, Mercado Pago y MODO. 3 cuotas sin interés sin mínimo de compra. 6 cuotas sin interés con un mínimo de compra de $100.000, no aplica para pagos realizados con MODO." },
+    { img: "promo-malvinas.png", title: "BENEFICIO VETERANOS MALVINAS", desc: "¡10% OFF + 3 cuotas sin interés! Acumulable con promociones. Para obtenerlo, contactanos a través de nuestro chat." }
+  ];
+  function openPdpPayModal() {
+    var ov = document.querySelector(".kv-pdp-pay-modal-ov");
+    if (!ov) {
+      ov = document.createElement("div");
+      ov.className = "kv-pdp-modal-ov kv-pdp-pay-modal-ov";
+      var items = PROMO_ITEMS.map(function (it) {
+        var ico = it.svg ? it.svg : '<img src="' + PROMO_IMG + it.img + '" alt="" loading="lazy">';
+        return '<li class="kv-pay-item"><span class="kv-pay-ico">' + ico + '</span>' +
+          '<div class="kv-pay-info"><h4 class="kv-pay-title">' + it.title + '</h4>' +
+          '<p class="kv-pay-desc">' + it.desc + '</p></div></li>';
+      }).join("");
+      ov.innerHTML =
+        '<div class="kv-pdp-modal-panel" role="dialog" aria-label="Formas de pago, promociones y reintegros">' +
+        '<div class="kv-pdp-modal-header"><h3 class="kv-pdp-modal-header-title">Formas de pago, promociones y reintegros</h3>' +
+        '<button type="button" class="kv-pdp-modal-x" aria-label="Cerrar"></button></div>' +
+        '<div class="kv-pdp-modal-body">' +
+        '<p class="kv-pay-intro">Podes abonar con tarjeta de débito, crédito o en efectivo a través de RapiPago, Pago Fácil y Provincia NET Pagos.</p>' +
+        '<a class="kv-pay-link" href="#">Ver todas las promociones</a>' +
+        '<ul class="kv-pay-list">' + items + '</ul>' +
+        '</div></div>';
+      document.body.appendChild(ov);
+      ov.addEventListener("click", function (e) {
+        if (e.target === ov || e.target.closest(".kv-pdp-modal-x")) closePdpModal(ov);
+      });
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && ov.classList.contains("open")) closePdpModal(ov);
+      });
+    }
+    ov.classList.add("open");
+    document.documentElement.classList.add("f2tn-lock");
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* PDP — Modal "Medios de envío" (Figma 1264-30169). Panel derecho con  */
+  /* el calculador de envío NATIVO montado adentro (input CP + Calcular). */
+  /* ------------------------------------------------------------------ */
+  function openPdpShippingModal() {
+    var ov = document.querySelector(".kv-pdp-ship-modal-ov");
+    if (!ov) {
+      ov = document.createElement("div");
+      ov.className = "kv-pdp-modal-ov kv-pdp-ship-modal-ov";
+      ov.innerHTML =
+        '<div class="kv-pdp-modal-panel" role="dialog" aria-label="Medios de envío">' +
+        '<div class="kv-pdp-modal-header"><h3 class="kv-pdp-modal-header-title">Medios de envío</h3>' +
+        '<button type="button" class="kv-pdp-modal-x" aria-label="Cerrar"></button></div>' +
+        '<div class="kv-pdp-modal-body"><h4 class="kv-ship-heading">Verifica los medios de envío</h4>' +
+        '<div class="kv-ship-calc"></div></div></div>';
+      document.body.appendChild(ov);
+      ov.addEventListener("click", function (e) {
+        if (e.target === ov || e.target.closest(".kv-pdp-modal-x")) closePdpModal(ov);
+      });
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && ov.classList.contains("open")) closePdpModal(ov);
+      });
+      // montar el calculador nativo (guardado por initPdpTabs) adentro del modal
+      var host = ov.querySelector(".kv-ship-calc");
+      if (pdpShipBox) host.appendChild(pdpShipBox);
+      else host.innerHTML = "<p>Ingresá tu código postal para calcular los medios de envío y tiempos de entrega.</p>";
+    }
+    ov.classList.add("open");
+    document.documentElement.classList.add("f2tn-lock");
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* PDP — Modal "Cambios y devoluciones" (Figma 1264-30155). Panel       */
+  /* derecho, texto del Figma + "Más información". HARDCODE → editable     */
+  /* pendiente.                                                            */
+  /* ------------------------------------------------------------------ */
+  function openPdpReturnsModal() {
+    var ov = document.querySelector(".kv-pdp-ret-modal-ov");
+    if (!ov) {
+      ov = document.createElement("div");
+      ov.className = "kv-pdp-modal-ov kv-pdp-ret-modal-ov";
+      ov.innerHTML =
+        '<div class="kv-pdp-modal-panel" role="dialog" aria-label="Cambios y devoluciones">' +
+        '<div class="kv-pdp-modal-header"><h3 class="kv-pdp-modal-header-title">Cambios y devoluciones</h3>' +
+        '<button type="button" class="kv-pdp-modal-x" aria-label="Cerrar"></button></div>' +
+        '<div class="kv-pdp-modal-body">' +
+        '<div class="kv-ret-text">' +
+        '<p class="kv-ret-p">Contas con 30 días desde la recepción de tu pedido para solicitar el cambio de tus productos, y/o 10 días para gestionar la devolución.</p>' +
+        '<p class="kv-ret-p">Los cambios se realizan por la misma prenda en otro talle, u otro producto que desees por el valor abonado.</p>' +
+        '</div>' +
+        '<a class="kv-ret-link" href="#">Más información</a>' +
+        '</div></div>';
+      document.body.appendChild(ov);
+      ov.addEventListener("click", function (e) {
+        if (e.target === ov || e.target.closest(".kv-pdp-modal-x")) closePdpModal(ov);
+      });
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && ov.classList.contains("open")) closePdpModal(ov);
+      });
+    }
+    ov.classList.add("open");
+    document.documentElement.classList.add("f2tn-lock");
+  }
+
   /* ------------------------------------------------------------------ */
   /* PDP — bloque 1: galería stacked (Figma). El nativo es un Swiper;    */
   /* lo pasamos a grid vertical con la lógica 1-2-2-1 (5+), 1-2-1 (4),    */
@@ -1631,21 +1745,18 @@
       return inner;
     }
 
-    // 1 · Descripción y cuidados → MODAL (Figma 1264-29998), contenido dinámico
+    // Las 4 filas abren MODAL (panel derecho), no accordion (Figma: facilitadores
+    // = modales). 1 Descripción (dinámica) · 2 Formas de pago/promos (1264-30277)
+    // · 3 Medios de envío (1264-30169, calc nativo) · 4 Cambios (1264-30155).
     makeTab(IC.desc, "Descripción y cuidados", openPdpDescModal);
+    makeTab(IC.pay, "Formas de pago, promociones y reintegros", openPdpPayModal);
+    makeTab(IC.delivery, "Tiempos de entrega y medios de envío", openPdpShippingModal);
+    makeTab(IC.returns, "Cambios y devoluciones", openPdpReturnsModal);
 
-    // 2 · Formas de pago (editable — texto por defecto)
-    var b2 = makeTab(IC.pay, "Formas de pago, promociones y reintegros");
-    b2.innerHTML = "<p>Aceptamos todas las tarjetas de crédito y débito, transferencia bancaria y efectivo. Consultá las promociones y reintegros bancarios vigentes.</p>";
-
-    // 3 · Tiempos de entrega (calculador de envío nativo)
-    var b3 = makeTab(IC.delivery, "Tiempos de entrega y medios de envío");
-    var shipBox = document.querySelector(".product-shipping-wrapper") || document.querySelector(".shipping-calculator");
-    if (shipBox) b3.appendChild(shipBox); else b3.innerHTML = "<p>Ingresá tu código postal para calcular los medios de envío y tiempos de entrega.</p>";
-
-    // 4 · Cambios y devoluciones (editable — texto por defecto)
-    var b4 = makeTab(IC.returns, "Cambios y devoluciones");
-    b4.innerHTML = "<p>Tenés hasta 30 días para cambios y devoluciones. La primera devolución es gratis. Los productos deben estar sin uso y con su etiqueta.</p>";
+    // sacar el calculador de envío nativo del layout (deja hueco de ~100px si
+    // queda suelto) y guardarlo para montarlo dentro del modal de Medios de envío.
+    pdpShipBox = document.querySelector(".product-shipping-wrapper") || document.querySelector(".shipping-calculator");
+    if (pdpShipBox && pdpShipBox.parentNode) pdpShipBox.parentNode.removeChild(pdpShipBox);
 
     // insertar el accordion DENTRO de .product-content (después del form) para
     // que no le aplique el gap:40 flex de .js-product-info; el ritmo botón→solapas
