@@ -291,6 +291,10 @@ h1.heading-block,h2.heading-block,h3.heading-block,h4.heading-block,h5.heading-b
 .js-item-product .product-item-colors-container{display:none!important}
 .kv-swatches{
   display:flex;align-items:center;gap:12px;margin-top:0;margin-left:3px;
+  /* altura fija: con "+N" (texto 12px) la fila es más alta que con un solo dot;
+     fijándola, la fila mide igual con 1 o con N colores y los swatches quedan
+     a la MISMA distancia de las cuotas (si no, el dot único queda más arriba). */
+  min-height:16px;
 }
 .kv-swatch{
   width:10px;height:10px;border-radius:50%;flex:none;display:block;text-decoration:none;
