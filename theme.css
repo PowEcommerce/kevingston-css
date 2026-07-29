@@ -1372,6 +1372,11 @@ html.kv-menu-open .js-head-main .menu-container .js-modal-open-private::after{op
   .js-product-detail .product-content>.js-fullscreen-modal-open{margin:8px 0 16px!important}
   .kv-pdp-colors{margin:16px 0 0}
   .js-product-detail .product-content>.breadcrumbs{font-size:10px}
+  /* imagen full-bleed (375, sin padding lateral); el texto conserva px-16     */
+  /* (Figma 1407-27142). Se anula el padding del container y se re-aplica sólo  */
+  /* a la columna de info.                                                      */
+  .container:has(.product-columns){padding-left:0!important;padding-right:0!important}
+  .js-product-detail .js-product-info{padding-left:16px!important;padding-right:16px!important}
 }
 
 /* PDP mobile — flechas laterales + barra de progreso (inyectadas por JS) */
