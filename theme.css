@@ -47,6 +47,14 @@ body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
    Wordmark KEVINGSTON animado (GIF, loop infinito) centrado. */
 .product-item-image-container.kv-img-loading::after{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:60%;max-width:180px;aspect-ratio:1628/196;background:url(https://powecommerce.github.io/kevingston-css/card-loader.gif) center/contain no-repeat;z-index:5;pointer-events:none}
 
+/* Hover de card (DESKTOP): la imagen secundaria nativa es object-fit:contain,   */
+/* y como el contenedor toma el ratio de la PRINCIPAL, la secundaria con otro    */
+/* ratio queda con fondo blanco (letterbox) = el "velo blanco". La forzamos a     */
+/* cover para que llene el mismo frame que la principal, sin blanco.              */
+@media (min-width:768px){
+  .product-item-image-container .product-item-image-secondary{object-fit:cover!important;object-position:center!important}
+}
+
 /* Banners — animacion de entrada del contenido (spec 03). El JS agrega .kv-reveal (oculto)
    y luego .kv-revealed (visible). opacity 0->1 + translateY 20px->0, 600ms ease-out. La imagen NO anima. */
 /* Oculto INSTANTANEO (sin transicion) para que no haya fade-out al cargar (solo imagen).
