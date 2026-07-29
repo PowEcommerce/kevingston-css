@@ -527,8 +527,8 @@ body.modal-show{overflow:hidden!important}
 /* Botón "+N" (ver los demás colores) — mismo tamaño que el swatch, reveal inline. */
 /* margin-left:-16px cancela el gap del flex SOLO antes de este último elemento    */
 /* (los swatches mantienen su gap 16) para que entre "seguido" en la misma fila.   */
-.kv-modal-swatch-more{width:54px;height:54px;border-radius:4px;border:1px solid #737373;background:#fff;color:#000;font:400 14px/1 "Lato",sans-serif;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;box-sizing:border-box;padding:0;flex:none;margin-left:-16px}
-.kv-modal-swatch-more:hover{background:#f6f5f3}
+.kv-modal-swatch-more{width:54px;height:54px;border-radius:4px;border:0;background:#f6f5f3;color:#000;font:400 14px/1 "Lato",sans-serif;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;box-sizing:border-box;padding:0;flex:none;margin-left:-16px}
+.kv-modal-swatch-more:hover{background:#eceae6}
 
 /* ================================================================== */
 /* QUICK SHOP MODAL — pase fino de spacing/tamaños (valores Figma)    */
