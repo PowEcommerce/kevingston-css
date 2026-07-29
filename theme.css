@@ -1299,13 +1299,11 @@ html.kv-menu-open .js-head-main .menu-container .js-modal-open-private::after{op
 /* ================================================================== */
 .section-related-products{padding:48px 0 56px}
 .section-related-products .section-title,.section-related-products h2,.section-related-products .products-list-title,.section-related-products [class*="header"] .heading-block{font:400 24px/1.2 "Lato",sans-serif!important;color:#000!important;text-transform:none!important;margin:0 0 24px!important}
-/* Desktop: espaciado EXACTO al Figma (1184-24198): última foto→título 82px,   */
-/* título→carrusel 32px, fin del carrusel→footer 48px. La sección va con       */
-/* padding-top:0 y el gap superior (82) lo aporta el padding-bottom del         */
-/* contenedor del producto (así no se suman dos espacios). Mobile queda con     */
-/* los valores base de arriba.                                                  */
+/* Desktop: recomendados sin gap superior (contenedor del producto y sección    */
+/* ambos con 0 arriba/abajo). título→carrusel 32px, fin del carrusel→footer 48. */
+/* Mobile queda con los valores base de arriba.                                 */
 @media (min-width:768px){
-  .container:has(.product-columns){padding-bottom:82px!important}
+  .container:has(.product-columns){padding-bottom:0!important}
   .section-related-products{padding-top:0!important;padding-bottom:48px!important}
   .section-related-products .section-title,.section-related-products h2,.section-related-products .products-list-title,.section-related-products [class*="header"] .heading-block{margin-bottom:32px!important}
 }
