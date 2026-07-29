@@ -1804,10 +1804,7 @@
       row.appendChild(guia); row.appendChild(fit);
       vars.parentElement.insertBefore(row, vars.nextSibling);
       guia.addEventListener("click", function () { openSizeGuide(); });
-      fit.addEventListener("click", function () {
-        var app = document.querySelector('[class*="ready-size"],[id*="ready-size"],[class*="readysize"],[data-app*="size"]');
-        if (app) { app.click(); }
-      });
+      fit.addEventListener("click", function () { openSizeFitModal(); });
     }
 
     apply();
@@ -1849,6 +1846,40 @@
       ov.addEventListener("click", function (e) { if (e.target === ov || e.target.classList.contains("kv-sizeguide-close")) ov.classList.remove("open"); });
     }
     ov.classList.add("open");
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* PDP — Pop-up "Conocé tu talle" (handoff 02). A diferencia de las      */
+  /* modales de ficha (panel lateral que desliza), este es un overlay      */
+  /* CENTRADO que aparece con FADE (opacity 0→1, 300ms ease-in-out) sobre  */
+  /* overlay #000/50%. Cierra con ✕ / click overlay / Esc; bloquea scroll. */
+  /* Contenido placeholder (falta la fuente/tabla del cliente).            */
+  /* ------------------------------------------------------------------ */
+  function closeSizeFitModal(ov) {
+    ov.classList.remove("open");
+    document.documentElement.classList.remove("f2tn-lock");
+  }
+  function openSizeFitModal() {
+    var ov = document.querySelector(".kv-sizefit-ov");
+    if (!ov) {
+      ov = document.createElement("div");
+      ov.className = "kv-sizefit-ov";
+      ov.innerHTML =
+        '<div class="kv-sizefit" role="dialog" aria-label="Conocé tu talle">' +
+        '<button type="button" class="kv-sizefit-close" aria-label="Cerrar"></button>' +
+        '<h3 class="kv-sizefit-title">Conocé tu talle</h3>' +
+        '<div class="kv-sizefit-body"><p>Próximamente vas a poder encontrar tu talle ideal desde acá.</p></div>' +
+        "</div>";
+      document.body.appendChild(ov);
+      ov.addEventListener("click", function (e) {
+        if (e.target === ov || e.target.closest(".kv-sizefit-close")) closeSizeFitModal(ov);
+      });
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && ov.classList.contains("open")) closeSizeFitModal(ov);
+      });
+    }
+    ov.classList.add("open");
+    document.documentElement.classList.add("f2tn-lock");
   }
 
   /* ------------------------------------------------------------------ */

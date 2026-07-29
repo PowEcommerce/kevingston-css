@@ -1210,7 +1210,8 @@ html.kv-menu-open .js-head-main .menu-container .js-modal-open-private::after{op
   .product-columns .js-product-images{flex:0 0 677px;max-width:677px;min-width:0;display:block!important}
   .product-columns .product-images-slider,
   .product-columns .js-product-slider.kv-gallery-stacked{width:100%!important;max-width:none!important}
-  .product-columns .js-product-info{flex:0 0 448px;max-width:448px;position:sticky;top:100px;align-self:flex-start}
+  /* columna info fija: 24px por debajo del header sticky (84px) = 108px.  */
+  .product-columns .js-product-info{flex:0 0 448px;max-width:448px;position:sticky;top:108px;align-self:flex-start}
   /* galería en grid vertical */
   .kv-gallery-stacked{width:100%!important;height:auto!important;overflow:visible!important}
   .kv-gallery-stacked>.swiper-wrapper{display:grid!important;grid-template-columns:1fr 1fr;gap:16px;transform:none!important;height:auto!important;width:100%!important}
@@ -1271,6 +1272,20 @@ html.kv-menu-open .js-head-main .menu-container .js-modal-open-private::after{op
 .kv-sizeguide-close::after{transform:translate(-50%,-50%) rotate(-45deg)}
 .kv-sizeguide-title{font:500 20px/1.2 "Lato",sans-serif;margin:0 0 20px}
 .kv-sizeguide-body{font:400 14px/1.5 "Lato",sans-serif;color:#333}
+
+/* Pop-up "Conocé tu talle" (handoff 02): overlay CENTRADO con FADE (no      */
+/* desliza). Overlay y pop-up: opacity 0→1, 300ms ease-in-out, terminan      */
+/* juntos. Overlay #000/50%. Cierra con ✕/overlay/Esc (JS) + scroll lock.    */
+.kv-sizefit-ov{position:fixed;inset:0;z-index:2100;background:rgba(0,0,0,.5);opacity:0;visibility:hidden;transition:opacity .3s ease-in-out,visibility 0s linear .3s;display:flex;align-items:center;justify-content:center;padding:16px}
+.kv-sizefit-ov.open{opacity:1;visibility:visible;transition:opacity .3s ease-in-out,visibility 0s}
+.kv-sizefit{background:#fff;width:480px;max-width:100%;max-height:calc(100dvh - 80px);overflow:auto;position:relative;padding:32px;border-radius:8px;font-family:"Lato",sans-serif;opacity:0;transition:opacity .3s ease-in-out}
+.kv-sizefit-ov.open .kv-sizefit{opacity:1}
+.kv-sizefit-close{position:absolute;top:16px;right:16px;width:36px;height:36px;border:0;border-radius:50px;background:rgba(233,231,226,.5);cursor:pointer;padding:0}
+.kv-sizefit-close::before,.kv-sizefit-close::after{content:"";position:absolute;top:50%;left:50%;width:14px;height:1.5px;background:#000}
+.kv-sizefit-close::before{transform:translate(-50%,-50%) rotate(45deg)}
+.kv-sizefit-close::after{transform:translate(-50%,-50%) rotate(-45deg)}
+.kv-sizefit-title{font:500 20px/1.2 "Lato",sans-serif;margin:0 0 20px}
+.kv-sizefit-body{font:400 14px/1.5 "Lato",sans-serif;color:#333}
 
 /* ================================================================== */
 /* PDP — Bloque 6: solapas descriptivas (accordion). Figma 1184-24198  */
