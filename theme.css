@@ -1371,7 +1371,9 @@ html.kv-menu-open .js-head-main .menu-container .js-modal-open-private::after{op
   /* ritmo vertical mobile: cuotas (wrapper flex-column) y colores */
   .js-product-detail .product-content>.js-fullscreen-modal-open{margin:8px 0 16px!important}
   .kv-pdp-colors{margin:16px 0 0}
-  .js-product-detail .product-content>.breadcrumbs{font-size:10px}
+  /* breadcrumbs 10px: el font-size en el contenedor no baja a los hijos (tienen */
+  /* su propio size) → se targetean directo a, .crumb y .separator.             */
+  .js-product-detail .breadcrumbs a,.js-product-detail .breadcrumbs .crumb,.js-product-detail .breadcrumbs .separator{font-size:10px!important}
   /* imagen full-bleed (375, sin padding lateral); el texto conserva px-16     */
   /* (Figma 1407-27142). Se anula el padding del container y se re-aplica sólo  */
   /* a la columna de info.                                                      */
