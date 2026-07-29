@@ -612,10 +612,14 @@ body.modal-show{overflow:hidden!important}
 .js-item-product .labels .label.js-shipping-label-private{font-size:0!important}
 .js-item-product .labels .label.js-shipping-label-private>*{display:none!important}
 .js-item-product .labels .label.js-shipping-label-private::before{content:"ENVÍO GRATIS";font-size:10px!important;color:#fff}
-/* Sin stock -> "AGOTADO", bg #EECBCB, texto #BE0000 */
-.js-item-product .labels .label.js-stock-label-private{background:#EECBCB!important;color:#BE0000!important;font-size:0!important}
-.js-item-product .labels .label.js-stock-label-private>*{display:none!important}
-.js-item-product .labels .label.js-stock-label-private::before{content:"AGOTADO";font-size:10px!important;color:#BE0000}
+/* Sin stock -> "AGOTADO", bg #EECBCB, texto #BE0000. El nativo renderiza el     */
+/* label en TODAS las cards y lo oculta con style="display:none;" cuando hay      */
+/* stock (defer_stock_label_text=true). Antes pintábamos AGOTADO sin condicionar  */
+/* => aparecía también con stock. Ahora sólo pintamos cuando el nativo NO lo tiene */
+/* oculto (sin stock).                                                            */
+.js-item-product .labels .label.js-stock-label-private:not([style*="display:none"]):not([style*="display: none"]){background:#EECBCB!important;color:#BE0000!important;font-size:0!important}
+.js-item-product .labels .label.js-stock-label-private:not([style*="display:none"]):not([style*="display: none"])>*{display:none!important}
+.js-item-product .labels .label.js-stock-label-private:not([style*="display:none"]):not([style*="display: none"])::before{content:"AGOTADO";font-size:10px!important;color:#BE0000}
 /* ENVÍO GRATIS -> esquina superior izquierda. El resto (SALE/%OFF/AGOTADO) queda abajo-izq:
    estiro el grupo a full-height con las promos ancladas abajo (flex-end) y saco solo el
    shipping a top-left (position:absolute relativo al grupo, que ahora cubre toda la imagen). */
