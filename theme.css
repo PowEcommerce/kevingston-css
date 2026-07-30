@@ -301,7 +301,9 @@ h1.heading-block,h2.heading-block,h3.heading-block,h4.heading-block,h5.heading-b
 /* a .8). opacity:1 fijo con especificidad alta gana sobre cualquier :hover.       */
 .js-item-product .product-item-link,
 .js-item-product .product-item-link:hover,
-.js-item-product a.product-item-link:hover{opacity:1!important}
+.js-item-product a.product-item-link:hover,
+.js-product-item-image-link-private,
+.js-product-item-image-link-private:hover{opacity:1!important}
 .kv-swatches{
   display:flex;align-items:center;gap:12px;margin-top:0;margin-left:3px;
   /* altura fija: con "+N" (texto 12px) la fila es más alta que con un solo dot;
