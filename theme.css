@@ -897,6 +897,10 @@ body.modal-show{overflow:hidden!important}
   :is(#ns-section-editorial_products,#ns-section-editorial_products_mujer) #ns-block-editorial_text{grid-column:1;grid-row:2}
   :is(#ns-section-editorial_products,#ns-section-editorial_products_mujer) .products-list-slider{grid-column:2;grid-row:2;min-width:0}
   :is(#ns-section-editorial_products,#ns-section-editorial_products_mujer) #ns-block-editorial_text .heading-block{max-width:308px}
+  /* texto EXACTO al Figma (2131-22759): todo a 308px, flush left, sin padding    */
+  /* lateral => quedan 24px libres a la derecha (332 col − 308) por el ancho.      */
+  :is(#ns-section-editorial_products,#ns-section-editorial_products_mujer) #ns-block-editorial_text{padding-left:0!important;padding-right:0!important}
+  :is(#ns-section-editorial_products,#ns-section-editorial_products_mujer) #ns-block-editorial_text .text-content{max-width:308px!important}
   :is(#ns-section-editorial_products,#ns-section-editorial_products_mujer) #ns-block-editorial_text .btn{margin-top:12px}
   /* sin flechas en desktop (en mobile quedan las chevron) */
   :is(#ns-section-editorial_products,#ns-section-editorial_products_mujer) .swiper-button-outside{display:none!important}
