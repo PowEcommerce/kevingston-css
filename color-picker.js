@@ -174,6 +174,13 @@
               sw.params.slidesOffsetBefore = off;
               sw.params.slidesOffsetAfter = off;
               sw.update();
+            } else if (isRecommendations) {
+              // mobile: 1 card + peek (Figma 1407-27219: card 283 en 343)
+              sw.params.slidesPerView = 1.2;
+              sw.params.spaceBetween = 16;
+              sw.params.slidesOffsetBefore = 0;
+              sw.params.slidesOffsetAfter = 0;
+              sw.update();
             }
           }
         } catch (e) {}
