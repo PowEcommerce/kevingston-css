@@ -1335,6 +1335,10 @@ html.kv-menu-open .js-head-main .menu-container .js-modal-open-private::after{op
 .js-product-detail .product-actions .form-quantity-container{display:none!important}
 .js-product-detail .product-actions .buy-button-container{width:100%!important;display:block!important}
 .js-product-detail .product-actions .js-addtocart.btn,.js-product-detail .buy-button-container input.js-addtocart{width:100%!important;border-radius:50px!important;font:400 14px/1 "Lato",sans-serif!important;padding:15px 36px!important}
+/* Al agregar al carrito abre el modal del carrito (cart_open_type=show_cart); el */
+/* mensaje inline "producto agregado" no debe aparecer. El nativo lo revela por   */
+/* JS => se oculta con !important.                                                */
+.product-added-message,.js-added-to-cart-product-message,.product-added-message-text{display:none!important}
 /* Modal Guía de talles (contenido lo carga el cliente) */
 /* Modal "Guía de talles" (Figma 2520-24913): panel lateral (.kv-pdp-modal) con */
 /* tabla de medidas + "Cómo medir" (texto 191 + ilustración 201) + 5 pasos.     */
