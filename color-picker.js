@@ -1816,7 +1816,10 @@
     imgEls.forEach(function (im, i) {
       im.style.cursor = "zoom-in";
       var link = im.closest("a");
-      (link || im).addEventListener("click", function (e) { e.preventDefault(); e.stopPropagation(); open(i); });
+      (link || im).addEventListener("click", function (e) {
+        if (!e.isTrusted) return; // ignorar clicks sintéticos (el nativo dispara clicks al init -> abría solo)
+        e.preventDefault(); e.stopPropagation(); open(i);
+      });
     });
   }
 
