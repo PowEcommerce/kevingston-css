@@ -826,6 +826,9 @@ body.modal-show{overflow:hidden!important}
   /* 696). El css_code fija max-width:1028 pero el padding lateral nativo (border-  */
   /* box) se resta y achica los banners a <332 => se ven más chicos. Padding 0.     */
   #ns-section-facilitators .container{max-width:1028px!important;padding-left:0!important;padding-right:0!important;margin-left:auto!important;margin-right:auto!important}
+  /* alto FIJO 106px del banner (Figma 3573-34936: 332×106). En desktop no había  */
+  /* control de alto => tomaba el aspect ratio de la imagen y quedaba más corto.   */
+  #ns-section-facilitators .banner-image-container-cropped-custom{padding-bottom:106px!important}
   /* estilo base — OCULTAS por defecto (con <=3 banners no van) */
   #ns-section-facilitators .js-swiper-banners-prev,
   #ns-section-facilitators .js-swiper-banners-next{
