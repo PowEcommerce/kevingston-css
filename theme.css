@@ -912,6 +912,7 @@ body.modal-show{overflow:hidden!important}
   :is(#ns-section-editorial_products,#ns-section-editorial_products_mujer) .js-products-list-slider > .d-flex.flex-column{display:flex!important;gap:0!important}
   :is(#ns-section-editorial_products,#ns-section-editorial_products_mujer) #ns-block-editorial_text{margin-top:16px!important}
   :is(#ns-section-editorial_products,#ns-section-editorial_products_mujer) .products-list-slider{margin-top:32px!important}
+  #ns-section-editorial_products .product-item:not(.product-item-reduced){margin-bottom:0!important}
   /* el texto respeta 16px a la derecha (el carrusel si hace bleed hasta el borde) */
   :is(#ns-section-editorial_products,#ns-section-editorial_products_mujer) #ns-block-tabs_row,
   :is(#ns-section-editorial_products,#ns-section-editorial_products_mujer) #ns-block-editorial_text{padding-right:16px!important}
