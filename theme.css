@@ -820,6 +820,10 @@ body.modal-show{overflow:hidden!important}
    (Swiper agrega .swiper-button-lock cuando entran todas). Figma 3573-34891:
    circulo gris + chevron, en los bordes, centradas vertical; disabled/lock ocultas. */
 @media (min-width:768px){
+  /* Container = track EXACTO de 1028 (Figma 3573-34936: 3 banners de 332 a 0/348/  */
+  /* 696). El css_code fija max-width:1028 pero el padding lateral nativo (border-  */
+  /* box) se resta y achica los banners a <332 => se ven más chicos. Padding 0.     */
+  #ns-section-facilitators .container{max-width:1028px!important;padding-left:0!important;padding-right:0!important;margin-left:auto!important;margin-right:auto!important}
   /* estilo base — OCULTAS por defecto (con <=3 banners no van) */
   #ns-section-facilitators .js-swiper-banners-prev,
   #ns-section-facilitators .js-swiper-banners-next{
