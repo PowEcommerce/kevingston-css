@@ -919,9 +919,14 @@ body.modal-show{overflow:hidden!important}
   :is(#ns-section-editorial_products,#ns-section-editorial_products_mujer) #ns-block-tabs_row,
   :is(#ns-section-editorial_products,#ns-section-editorial_products_mujer) #ns-block-tabs_row .group-content{justify-content:flex-start!important}
 }
-/* boton "Ver Coleccion": pill outline 218×44, texto 14px Lato Regular negro,
-   borde negro (Figma 2131-22774). Sobreescribe herencias del css_code. */
-:is(#ns-section-editorial_products,#ns-section-editorial_products_mujer) #ns-block-editorial_text .btn{min-width:218px!important;min-height:44px!important;width:auto!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;padding:0 24px!important;border-radius:50px!important;border:1px solid #000!important;font-size:14px!important;line-height:normal!important;background:transparent!important;color:#000!important}
+/* boton "Ver Coleccion": pill outline negro. Desktop 218×44 / 14px (Figma
+   2131-22774); mobile 121×30 / 12px compacto (Figma 959-19551). */
+@media (min-width:768px){
+  :is(#ns-section-editorial_products,#ns-section-editorial_products_mujer) #ns-block-editorial_text .btn{min-width:218px!important;min-height:44px!important;width:auto!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;padding:0 24px!important;border-radius:50px!important;border:1px solid #000!important;font-size:14px!important;line-height:normal!important;background:transparent!important;color:#000!important}
+}
+@media (max-width:767px){
+  :is(#ns-section-editorial_products,#ns-section-editorial_products_mujer) #ns-block-editorial_text .btn{min-width:0!important;min-height:30px!important;width:auto!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;padding:0 24px!important;border-radius:50px!important;border:1px solid #000!important;font-size:12px!important;line-height:normal!important;background:transparent!important;color:#000!important}
+}
 /* tipografia editorial (el css_code solo cubre el base; la extiendo al gemelo) */
 :is(#ns-section-editorial_products,#ns-section-editorial_products_mujer) .heading-block{font-weight:400!important;line-height:normal;color:#050505}
 :is(#ns-section-editorial_products,#ns-section-editorial_products_mujer) .text-content{font-weight:400;font-size:14px;line-height:1.3;color:#000}
