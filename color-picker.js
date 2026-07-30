@@ -1768,7 +1768,10 @@
     });
     if (!imgEls.length) return;
     gallery.setAttribute("data-kv-zoom", "1");
-    var srcs = imgEls.map(function (im) { return im.currentSrc || im.src; });
+    // usar el ATRIBUTO src (URL real que puso initPdpGallery); NO currentSrc, que
+    // devuelve el placeholder para las imágenes aún no cargadas (bajo el fold).
+    // imgEls ya está filtrado (src real), así que los índices quedan alineados.
+    var srcs = imgEls.map(function (im) { return im.getAttribute("src"); });
     var idx = 0, ov = null, imgNode = null, countNode = null;
 
     function show() {
