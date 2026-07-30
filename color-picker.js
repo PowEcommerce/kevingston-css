@@ -138,7 +138,9 @@
   /* agrega sus slides al inicializarse (lazy / cambio de tab).           */
   /* ------------------------------------------------------------------ */
   function disableProductLoops() {
-    var swipers = document.querySelectorAll(".js-products-list-swiper");
+    // .js-recommendations-swiper = carrusel de recomendados de la ficha (mismo
+    // 4+peek que la home, pero su container ya tiene padding => offset 0).
+    var swipers = document.querySelectorAll(".js-products-list-swiper, .js-recommendations-swiper");
     for (var i = 0; i < swipers.length; i++) {
       (function (el) {
         if (el._kvNoLoop) return;
@@ -158,17 +160,19 @@
           var isEditorial = el.closest(
             "#ns-section-editorial_products, #ns-section-editorial_products_mujer"
           );
+          var isRecommendations = el.classList.contains("js-recommendations-swiper");
+          var off = isRecommendations ? 0 : 32; // recomendados: el container ya paddea
           if (!isEditorial) {
             var bp = sw.params.breakpoints;
             if (bp && bp["768"]) {
               bp["768"].slidesPerView = 4.2;
-              bp["768"].slidesOffsetBefore = 32; // arranca alineado; al scrollear sangra al borde
-              bp["768"].slidesOffsetAfter = 32; // al final, el ultimo producto no queda pegado al borde
+              bp["768"].slidesOffsetBefore = off; // arranca alineado; al scrollear sangra al borde
+              bp["768"].slidesOffsetAfter = off; // al final, el ultimo producto no queda pegado al borde
             }
             if (window.innerWidth >= 768) {
               sw.params.slidesPerView = 4.2;
-              sw.params.slidesOffsetBefore = 32;
-              sw.params.slidesOffsetAfter = 32;
+              sw.params.slidesOffsetBefore = off;
+              sw.params.slidesOffsetAfter = off;
               sw.update();
             }
           }
