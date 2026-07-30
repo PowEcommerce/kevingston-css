@@ -1754,6 +1754,70 @@
   }
 
   /* ------------------------------------------------------------------ */
+  /* PDP — Zoom de galería (Figma 3995-25646). Lightbox al clickear una   */
+  /* imagen de la galería stacked (desktop): overlay + imagen centrada +   */
+  /* contador "N / total" + flechas 48px + ✕. El zoom nativo dependía del   */
+  /* Swiper (destruido por initPdpGallery), por eso se arma custom.         */
+  /* ------------------------------------------------------------------ */
+  function initPdpZoom() {
+    if (window.innerWidth < 768) return; // desktop (galería stacked)
+    var gallery = document.querySelector(".js-product-slider.kv-gallery-stacked");
+    if (!gallery || gallery.getAttribute("data-kv-zoom") === "1") return;
+    var imgEls = [].slice.call(gallery.querySelectorAll("img")).filter(function (im) {
+      var s = im.getAttribute("src"); return s && !/^data:/.test(s);
+    });
+    if (!imgEls.length) return;
+    gallery.setAttribute("data-kv-zoom", "1");
+    var srcs = imgEls.map(function (im) { return im.currentSrc || im.src; });
+    var idx = 0, ov = null, imgNode = null, countNode = null;
+
+    function show() {
+      imgNode.src = srcs[idx];
+      countNode.textContent = (idx + 1) + " / " + srcs.length;
+    }
+    function go(d) { idx = (idx + d + srcs.length) % srcs.length; show(); }
+    function close() {
+      if (ov) ov.classList.remove("open");
+      document.documentElement.classList.remove("f2tn-lock");
+    }
+    function build() {
+      ov = document.createElement("div");
+      ov.className = "kv-zoom-ov";
+      ov.innerHTML =
+        '<div class="kv-zoom-count"></div>' +
+        '<button type="button" class="kv-zoom-close" aria-label="Cerrar"></button>' +
+        '<button type="button" class="kv-zoom-arrow kv-zoom-prev" aria-label="Anterior"></button>' +
+        '<img class="kv-zoom-img" alt="">' +
+        '<button type="button" class="kv-zoom-arrow kv-zoom-next" aria-label="Siguiente"></button>';
+      document.body.appendChild(ov);
+      imgNode = ov.querySelector(".kv-zoom-img");
+      countNode = ov.querySelector(".kv-zoom-count");
+      ov.addEventListener("click", function (e) {
+        if (e.target.closest(".kv-zoom-prev")) go(-1);
+        else if (e.target.closest(".kv-zoom-next")) go(1);
+        else if (e.target === ov || e.target.closest(".kv-zoom-close")) close();
+      });
+      document.addEventListener("keydown", function (e) {
+        if (!ov.classList.contains("open")) return;
+        if (e.key === "Escape") close();
+        else if (e.key === "ArrowLeft") go(-1);
+        else if (e.key === "ArrowRight") go(1);
+      });
+    }
+    function open(i) {
+      if (!ov) build();
+      idx = i; show();
+      ov.classList.add("open");
+      document.documentElement.classList.add("f2tn-lock");
+    }
+    imgEls.forEach(function (im, i) {
+      im.style.cursor = "zoom-in";
+      var link = im.closest("a");
+      (link || im).addEventListener("click", function (e) { e.preventDefault(); e.stopPropagation(); open(i); });
+    });
+  }
+
+  /* ------------------------------------------------------------------ */
   /* PDP — bloque 6: 4 solapas descriptivas (accordion). Figma 1184-24198.*/
   /* 1 Descripción (real) · 2 Formas de pago (editable) · 3 Tiempos de     */
   /* entrega (calculador nativo) · 4 Cambios y devoluciones (editable).    */
@@ -2027,8 +2091,9 @@
     initPdpSizeLinks();
     initPdpBtnText();
     initPdpGallery();
+    initPdpZoom();
     initPdpMobileGallery();
-    setTimeout(function () { initPdpGallery(); initPdpMobileGallery(); }, 900); // el Swiper puede inicializar después del DOMContentLoaded
+    setTimeout(function () { initPdpGallery(); initPdpZoom(); initPdpMobileGallery(); }, 900); // el Swiper puede inicializar después del DOMContentLoaded
 
     fetch(MAP_URL, { cache: "no-cache" })
       .then(function (r) { return r.ok ? r.json() : null; })
