@@ -1457,7 +1457,7 @@
     if (current) ordered.push(current);
     group.forEach(function (s) { if (s !== current) ordered.push(s); });
 
-    var MAX = 5;
+    var MAX = window.innerWidth < 768 ? 4 : 5; // mobile: 4 + "+N colores"; desktop: 5
     var shown = ordered.slice(0, MAX);
     var remaining = ordered.length - shown.length;
 
