@@ -1288,12 +1288,12 @@ html.kv-menu-open .js-head-main .menu-container .js-modal-open-private::after{op
 /* PDP — Zoom de galería / lightbox (Figma 3995-25646). Overlay blanco tenue,   */
 /* imagen centrada sobre card crema, contador arriba-centro, ✕ arriba-der, y     */
 /* flechas 48px crema a los costados (mismos chevrons que el carrusel).          */
-.kv-zoom-ov{position:fixed;inset:0;z-index:3500;background:rgba(255,255,255,.8);opacity:0;visibility:hidden;transition:opacity .3s ease,visibility 0s linear .3s;display:flex;align-items:center;justify-content:center}
+.kv-zoom-ov{position:fixed;inset:0;z-index:3500;background:rgba(0,0,0,.8);opacity:0;visibility:hidden;transition:opacity .3s ease,visibility 0s linear .3s;display:flex;align-items:center;justify-content:center}
 .kv-zoom-ov.open{opacity:1;visibility:visible;transition:opacity .3s ease}
 .kv-zoom-img{max-width:min(679px,86vw);max-height:86vh;width:auto;height:auto;object-fit:contain;display:block;background:#f6f5f3;border-radius:8px}
-.kv-zoom-count{position:absolute;top:24px;left:50%;transform:translateX(-50%);font:400 12px/1 "Lato",sans-serif;color:#000}
+.kv-zoom-count{position:absolute;top:24px;left:50%;transform:translateX(-50%);font:400 12px/1 "Lato",sans-serif;color:#fff}
 .kv-zoom-close{position:absolute;top:24px;right:24px;width:24px;height:24px;border:0;background:none;cursor:pointer;padding:0;z-index:2}
-.kv-zoom-close::before,.kv-zoom-close::after{content:"";position:absolute;top:50%;left:50%;width:20px;height:1.5px;background:#000}
+.kv-zoom-close::before,.kv-zoom-close::after{content:"";position:absolute;top:50%;left:50%;width:20px;height:1.5px;background:#fff}
 .kv-zoom-close::before{transform:translate(-50%,-50%) rotate(45deg)}
 .kv-zoom-close::after{transform:translate(-50%,-50%) rotate(-45deg)}
 .kv-zoom-arrow{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;border:0;border-radius:50%;background-color:#f6f5f3;background-repeat:no-repeat;background-position:center;background-size:24px 24px;cursor:pointer;padding:0}
