@@ -900,6 +900,7 @@ body.modal-show{overflow:hidden!important}
   :is(#ns-section-editorial_products,#ns-section-editorial_products_mujer) #ns-block-editorial_text .btn{margin-top:12px}
   /* sin flechas en desktop (en mobile quedan las chevron) */
   :is(#ns-section-editorial_products,#ns-section-editorial_products_mujer) .swiper-button-outside{display:none!important}
+  #ns-section-editorial_products .product-item:not(.product-item-reduced){margin-bottom:0!important}
 }
 @media (max-width:767px){
   /* mobile: resetear el grid global (linea 7 lo pone en todas las resoluciones) -> apilado */
