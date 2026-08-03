@@ -166,17 +166,20 @@
             var bp = sw.params.breakpoints;
             if (bp && bp["768"]) {
               bp["768"].slidesPerView = 4.2;
+              bp["768"].slidesPerGroup = 1; // mover de a 1 card (no de a 4)
               bp["768"].slidesOffsetBefore = off; // arranca alineado; al scrollear sangra al borde
               bp["768"].slidesOffsetAfter = off; // al final, el ultimo producto no queda pegado al borde
             }
             if (window.innerWidth >= 768) {
               sw.params.slidesPerView = 4.2;
+              sw.params.slidesPerGroup = 1;
               sw.params.slidesOffsetBefore = off;
               sw.params.slidesOffsetAfter = off;
               sw.update();
             } else if (isRecommendations) {
               // mobile: 1 card + peek (Figma 1407-27219: card 283 en 343)
               sw.params.slidesPerView = 1.2;
+              sw.params.slidesPerGroup = 1;
               sw.params.spaceBetween = 16;
               sw.params.slidesOffsetBefore = 0;
               sw.params.slidesOffsetAfter = 0;
