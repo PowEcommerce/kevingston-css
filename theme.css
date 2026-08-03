@@ -779,9 +779,9 @@ body.modal-show{overflow:hidden!important}
 }
 
 /* Top bar: carrusel vertical de mensajes (animación custom por JS) */
-.kv-topbar{position:relative;overflow:hidden;height:16px;width:100%}
+.kv-topbar{position:relative;overflow:hidden;height:40px;width:100%}
 .kv-topbar-track{display:flex;flex-direction:column;will-change:transform}
-.kv-topbar-msg{height:16px;line-height:16px;display:flex;align-items:center;justify-content:center;white-space:nowrap;flex:none;width:100%}
+.kv-topbar-msg{height:40px;line-height:40px;display:flex;align-items:center;justify-content:center;white-space:nowrap;flex:none;width:100%}
 
 /* Flechas ocultas en mobile: hero_slideshow + full_banner_carousel (mismos estilos que el primer carousel) */
 @media (max-width:767px){
