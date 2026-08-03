@@ -12,6 +12,27 @@ body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
 /* Listas en contenido de usuario: interlineado 18px, sin margen inferior */
 .user-content ul li,.user-content ol li{line-height:18px!important;margin-bottom:0!important}
 
+/* Búsqueda SIN RESULTADOS -> hero de error (Figma 3572-32152). El JS agrega   */
+/* body.kv-search-empty-on + inyecta .kv-search-empty; se oculta lo nativo.     */
+/* La FOTO la sube el cliente a img/search-error.jpg; fallback #2b2b2b.         */
+body.kv-search-empty-on .page-header,
+body.kv-search-empty-on .section-main-products-grid{display:none!important}
+.kv-search-empty{position:relative;width:100%;min-height:423px;display:flex;align-items:center;background:#2b2b2b url("https://powecommerce.github.io/kevingston-css/img/search-error.jpg") center/cover no-repeat;color:#fff}
+.kv-search-empty-inner{width:100%;box-sizing:border-box;padding:40px}
+.kv-search-empty-title{font:400 40px/1.2 "Lato",sans-serif;color:#fff;margin:0 0 16px}
+.kv-search-empty-text{font:400 16px/1.4 "Lato",sans-serif;color:#fff;margin:0 0 24px;max-width:430px}
+.kv-search-empty-btns{display:flex;gap:16px;flex-wrap:wrap}
+.kv-search-empty-btns a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 24px;border-radius:50px;font:400 14px/1 "Lato",sans-serif;text-decoration:none;box-sizing:border-box;transition:background-color .25s ease}
+.kv-search-btn-help{background:#000;color:#fff;border:1px solid #000}
+.kv-search-btn-help:hover{background:#222}
+.kv-search-btn-home{background:transparent;color:#fff;border:1px solid #fff}
+.kv-search-btn-home:hover{background:rgba(255,255,255,.12)}
+@media (max-width:767px){
+  .kv-search-empty{min-height:400px}
+  .kv-search-empty-inner{padding:24px 16px}
+  .kv-search-empty-title{font-size:28px}
+}
+
 /* ================================================================== */
 /* FOOTER MOBILE — node 959-19564 (primer pase de alta confianza)      */
 /* ================================================================== */

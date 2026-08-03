@@ -863,6 +863,34 @@
   }
 
   /* ------------------------------------------------------------------ */
+  /* Busqueda SIN RESULTADOS -> pagina de error tipo hero (Figma 3572-32152).*/
+  /* Solo en template-search cuando NO hay resultados (existe la sugerencia). */
+  /* Oculta el contenido nativo (header + grid + destacados) e inyecta el hero.*/
+  /* Foto de fondo + titulo + subtitulo + 2 botones (HTML real). La FOTO la     */
+  /* sube el cliente (img/search-error.jpg); mientras, fallback #2b2b2b.        */
+  /* ------------------------------------------------------------------ */
+  function initSearchEmpty() {
+    if (document.body.getAttribute("data-kv-search-empty")) return;
+    if (!/\btemplate-search\b/.test(document.body.className)) return;
+    // "sin resultados" = el nativo renderiza la sugerencia de busqueda
+    if (!document.querySelector(".products-grid-search-suggestion")) return;
+    document.body.setAttribute("data-kv-search-empty", "1");
+    document.body.classList.add("kv-search-empty-on");
+    var hero = document.createElement("section");
+    hero.className = "kv-search-empty";
+    hero.innerHTML =
+      '<div class="kv-search-empty-inner">' +
+      '<h1 class="kv-search-empty-title">No hay resultados para tu búsqueda</h1>' +
+      '<p class="kv-search-empty-text">La página que buscas no fue encontrada. Por favor, volvé a la página principal o visita nuestra sección de Ayuda.</p>' +
+      '<div class="kv-search-empty-btns">' +
+      '<a class="kv-search-btn-help" href="#">Sección de Ayuda</a>' +
+      '<a class="kv-search-btn-home" href="/">Regresar al Inicio</a>' +
+      "</div></div>";
+    var main = document.getElementById("MainContent") || document.body;
+    main.insertBefore(hero, main.firstChild);
+  }
+
+  /* ------------------------------------------------------------------ */
   /* Banners: animacion de entrada del contenido (spec 03).              */
   /* ------------------------------------------------------------------ */
   var bannerPending = [], bannerBound = false, bannerFirstDone = false;
@@ -2103,6 +2131,7 @@
     initBannerReveal();
     // reintentos: algunas secciones (slideshows) renderizan su contenido despues
     [600, 1500, 3000].forEach(function (ms) { setTimeout(initBannerReveal, ms); });
+    initSearchEmpty();
     initSeoHeadings();
     initSearchPanel();
     initPromoModal();
