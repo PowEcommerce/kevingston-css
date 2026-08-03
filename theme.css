@@ -729,8 +729,8 @@ body.modal-show{overflow:hidden!important}
   #quickshop-modal .modal-header-close-only{top:0!important;right:0!important}
 }
 
-/* Adbar (barra de anuncios) a 12px (base usa --font-small=14) */
-.adbar{font-size:12px!important}
+/* Adbar (barra de anuncios) a 12px (base usa --font-small=14) + alto 40px */
+.adbar{font-size:12px!important;height:40px!important;min-height:40px!important;display:flex!important;align-items:center!important;justify-content:center!important}
 
 /* ================================================================== */
 /* FIX logo mobile: el filtro que lo pinta blanco (para el header      */
