@@ -100,7 +100,7 @@ h1.heading-block,h2.heading-block,h3.heading-block,h4.heading-block,h5.heading-b
 @media (min-width:768px){
   /* Figma 959-18107: links 332 + gap 16 + recomendados 1028 (3 cards). */
   .f2tn-search-panel .f2tn-search-cols{display:flex!important;gap:0!important;align-items:flex-start;max-width:1440px;margin:0 auto;width:100%}
-  .f2tn-search-panel .f2tn-col-links{flex:none;width:332px}
+  .f2tn-search-panel .f2tn-col-links{flex:none;width:348px}
   .f2tn-search-panel .f2tn-col-banners{flex:1;min-width:0}
   .f2tn-search-panel .f2tn-banners{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
   /* input alineado con la columna de recomendados (332 links + 16 gap = 348),
