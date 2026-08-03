@@ -982,7 +982,7 @@
   /* ------------------------------------------------------------------ */
   var SEARCH_PANEL_HTML =
     '<div class="f2tn-search-ov"><div class="f2tn-search-panel">' +
-    '<button type="button" class="f2tn-x f2tn-search-close" aria-label="Cerrar"></button>' +
+    '<button type="button" class="f2tn-search-close" aria-label="Cerrar"></button>' +
     '<div class="f2tn-search-inner">' +
     '<form class="f2tn-search-form" action="/search" method="get" role="search">' +
     '<span class="f2tn-search-ico" aria-hidden="true"></span>' +
