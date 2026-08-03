@@ -865,27 +865,15 @@
   /* ------------------------------------------------------------------ */
   /* Banners: animacion de entrada del contenido (spec 03).              */
   /* ------------------------------------------------------------------ */
-  var bannerIO = null, bannerFirstDone = false;
+  var bannerPending = [], bannerBound = false, bannerFirstDone = false;
   function initBannerReveal() {
-    /* Anima los bloques de texto (.media-content) de los banners. El 1er banner con
-       texto (hero) revela al cargar con delay; el resto cuando ENTRA al viewport.
-       IntersectionObserver IGNORANDO el 1er callback (estado inicial): al cargar,
-       las imagenes lazy de arriba colapsan el layout y el estado inicial daba
-       falsos positivos (revelaba todos sin scroll). El IO re-evalua ante cada
-       shift de layout + scroll => revela cuando el banner realmente entra. Se
-       re-ejecuta (init + reintentos) por si alguna seccion renderiza tarde. */
-    if (!bannerIO && "IntersectionObserver" in window) {
-      bannerIO = new IntersectionObserver(function (entries) {
-        entries.forEach(function (e) {
-          var t = e.target;
-          if (!t._kvSeen) { t._kvSeen = true; return; } // saltar estado inicial
-          if (e.isIntersecting && t._kvRevealFn) {
-            t._kvRevealFn();
-            bannerIO.unobserve(t);
-          }
-        });
-      }, { threshold: 0.2 });
-    }
+    /* Anima los bloques de texto (.media-content) de los banners. El 1er (hero)
+       revela al cargar con delay; el resto SOLO cuando entra al viewport DESPUES
+       de haber estado por debajo. Ese gate "wasBelow" evita el falso positivo del
+       load: al cargar, las imagenes lazy de arriba colapsan el layout y todos los
+       banners caen en el viewport inicial; como aun no estuvieron "por debajo",
+       no se revelan. Un barrido periodico actualiza wasBelow a medida que cargan
+       las imagenes (el layout crece y los banners bajan). Re-ejecutable. */
     var secs = document.querySelectorAll(
       ".section-banners, .js-slideshow-container, .section-hero, .section-video"
     );
@@ -909,14 +897,37 @@
         if (!bannerFirstDone) {
           bannerFirstDone = true;
           setTimeout(reveal, 1600); // hero: revela al cargar (visible de entrada)
-        } else if (bannerIO) {
-          sec._kvRevealFn = reveal;
-          bannerIO.observe(sec);
         } else {
-          reveal();
+          bannerPending.push({ sec: sec, reveal: reveal, wasBelow: false });
         }
       })(secs[i]);
     }
+
+    if (bannerBound) return;
+    bannerBound = true;
+    function sweep() {
+      var vh = window.innerHeight || document.documentElement.clientHeight || 800;
+      for (var i = bannerPending.length - 1; i >= 0; i--) {
+        var p = bannerPending[i];
+        var r = p.sec.getBoundingClientRect();
+        if (r.top >= vh) p.wasBelow = true; // estuvo debajo del viewport
+        if (p.wasBelow && r.bottom > 40 && r.top < vh * 0.85) {
+          p.reveal();
+          bannerPending.splice(i, 1);
+        }
+      }
+    }
+    var ticking = false;
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function () { sweep(); ticking = false; });
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    // barridos periodicos (8s): actualizan wasBelow mientras cargan las imagenes
+    // y crece el layout, sin depender de un scroll.
+    var t = 0, iv = setInterval(function () { sweep(); if (++t > 20 || !bannerPending.length) clearInterval(iv); }, 400);
   }
 
   /* ------------------------------------------------------------------ */
