@@ -864,21 +864,31 @@
 
   /* ------------------------------------------------------------------ */
   /* Banners: animacion de entrada del contenido (spec 03).              */
-  /* Reveal por seccion: si esta en el viewport inicial -> delay 1600ms  */
-  /* (banner principal, 03-A); si no -> IntersectionObserver (03-B).     */
-  /* Una sola vez. Solo secciones con contenido de texto (no solo-imagen).*/
   /* ------------------------------------------------------------------ */
+  var bannerIO = null, bannerFirstDone = false;
   function initBannerReveal() {
-    /* Anima los bloques de texto (.media-content) de los banners. El 1er banner
-       con texto (hero) revela al cargar con delay (03-A); el resto cuando ENTRA
-       al viewport al scrollear (03-B). Se usa getBoundingClientRect EN VIVO (no
-       IntersectionObserver): al cargar, las imagenes lazy de arriba colapsan el
-       layout y el IO daba falsos positivos (revelaban todos sin scroll). */
+    /* Anima los bloques de texto (.media-content) de los banners. El 1er banner con
+       texto (hero) revela al cargar con delay; el resto cuando ENTRA al viewport.
+       IntersectionObserver IGNORANDO el 1er callback (estado inicial): al cargar,
+       las imagenes lazy de arriba colapsan el layout y el estado inicial daba
+       falsos positivos (revelaba todos sin scroll). El IO re-evalua ante cada
+       shift de layout + scroll => revela cuando el banner realmente entra. Se
+       re-ejecuta (init + reintentos) por si alguna seccion renderiza tarde. */
+    if (!bannerIO && "IntersectionObserver" in window) {
+      bannerIO = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          var t = e.target;
+          if (!t._kvSeen) { t._kvSeen = true; return; } // saltar estado inicial
+          if (e.isIntersecting && t._kvRevealFn) {
+            t._kvRevealFn();
+            bannerIO.unobserve(t);
+          }
+        });
+      }, { threshold: 0.2 });
+    }
     var secs = document.querySelectorAll(
-      ".section-banners, .js-slideshow-container, .section-hero"
+      ".section-banners, .js-slideshow-container, .section-hero, .section-video"
     );
-    var pending = []; // { sec, reveal } que revelan por scroll
-    var firstBanner = true;
     for (var i = 0; i < secs.length; i++) {
       (function (sec) {
         if (sec._kvReveal) return;
@@ -896,40 +906,17 @@
         var reveal = function () {
           for (var m = 0; m < targets.length; m++) targets[m].classList.add("kv-revealed");
         };
-        if (firstBanner) {
-          firstBanner = false;
+        if (!bannerFirstDone) {
+          bannerFirstDone = true;
           setTimeout(reveal, 1600); // hero: revela al cargar (visible de entrada)
+        } else if (bannerIO) {
+          sec._kvRevealFn = reveal;
+          bannerIO.observe(sec);
         } else {
-          pending.push({ sec: sec, reveal: reveal });
+          reveal();
         }
       })(secs[i]);
     }
-    if (!pending.length) return;
-
-    function sweep(topFactor) {
-      var vh = window.innerHeight || document.documentElement.clientHeight;
-      for (var i = pending.length - 1; i >= 0; i--) {
-        var r = pending[i].sec.getBoundingClientRect();
-        if (r.bottom > 0 && r.top < vh * topFactor) {
-          pending[i].reveal();
-          pending.splice(i, 1);
-        }
-      }
-    }
-    var ticking = false;
-    function onScroll() {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(function () { sweep(0.85); ticking = false; });
-    }
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll, { passive: true });
-    // Al cargar (tras window.load) revelar SOLO los CLARAMENTE visibles (mitad
-    // superior). Un falso-positivo por layout corto queda cerca del borde inferior
-    // => no entra en <0.4 y espera al scroll. El resto, por scroll.
-    function initialSweep() { sweep(0.4); }
-    if (document.readyState === "complete") initialSweep();
-    else window.addEventListener("load", initialSweep, { once: true });
   }
 
   /* ------------------------------------------------------------------ */
@@ -2103,6 +2090,8 @@
     initNewCollectionTabs();
     initFooterText();
     initBannerReveal();
+    // reintentos: algunas secciones (slideshows) renderizan su contenido despues
+    [600, 1500, 3000].forEach(function (ms) { setTimeout(initBannerReveal, ms); });
     initSeoHeadings();
     initSearchPanel();
     initPromoModal();
