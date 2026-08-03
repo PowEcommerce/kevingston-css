@@ -869,6 +869,10 @@
   /* Una sola vez. Solo secciones con contenido de texto (no solo-imagen).*/
   /* ------------------------------------------------------------------ */
   function initBannerReveal() {
+    // Diferir hasta window.load: si se arma antes, las imagenes de arriba aun no
+    // cargaron -> el layout esta corto -> todos los banners caen en el viewport
+    // inicial y el IO dispara al toque (revelan sin scroll, no se ve la animacion).
+    function run() {
     var io =
       "IntersectionObserver" in window
         ? new IntersectionObserver(
@@ -921,6 +925,9 @@
         }
       })(secs[i]);
     }
+    }
+    if (document.readyState === "complete") run();
+    else window.addEventListener("load", run, { once: true });
   }
 
   /* ------------------------------------------------------------------ */
