@@ -869,28 +869,16 @@
   /* Una sola vez. Solo secciones con contenido de texto (no solo-imagen).*/
   /* ------------------------------------------------------------------ */
   function initBannerReveal() {
-    // Diferir hasta window.load: si se arma antes, las imagenes de arriba aun no
-    // cargaron -> el layout esta corto -> todos los banners caen en el viewport
-    // inicial y el IO dispara al toque (revelan sin scroll, no se ve la animacion).
-    function run() {
-    var io =
-      "IntersectionObserver" in window
-        ? new IntersectionObserver(
-            function (entries) {
-              entries.forEach(function (e) {
-                if (e.isIntersecting && e.target._kvRevealFn) {
-                  e.target._kvRevealFn();
-                  io.unobserve(e.target);
-                }
-              });
-            },
-            { threshold: 0.15 }
-          )
-        : null;
+    /* Anima los bloques de texto (.media-content) de los banners. El 1er banner
+       con texto (hero) revela al cargar con delay (03-A); el resto cuando ENTRA
+       al viewport al scrollear (03-B). Se usa getBoundingClientRect EN VIVO (no
+       IntersectionObserver): al cargar, las imagenes lazy de arriba colapsan el
+       layout y el IO daba falsos positivos (revelaban todos sin scroll). */
     var secs = document.querySelectorAll(
       ".section-banners, .js-slideshow-container, .section-hero"
     );
-    var firstBanner = true; // el primer banner con texto = "banner principal" (delay al cargar)
+    var pending = []; // { sec, reveal } que revelan por scroll
+    var firstBanner = true;
     for (var i = 0; i < secs.length; i++) {
       (function (sec) {
         if (sec._kvReveal) return;
@@ -899,35 +887,49 @@
         for (var k = 0; k < contents.length; k++) {
           if ((contents[k].textContent || "").trim()) { hasText = true; break; }
         }
-        // Solo anima los BLOQUES DE TEXTO (.media-content). Las imagenes NO animan:
-        // los banners solo-imagen (facilitators, etc.) quedan estaticos.
+        // Solo anima los BLOQUES DE TEXTO. Banners solo-imagen quedan estaticos.
         if (!hasText) return;
         var targets = contents;
         if (!targets.length) return;
         sec._kvReveal = true;
-        for (var j = 0; j < targets.length; j++)
-          targets[j].classList.add("kv-reveal");
+        for (var j = 0; j < targets.length; j++) targets[j].classList.add("kv-reveal");
         var reveal = function () {
-          for (var m = 0; m < targets.length; m++)
-            targets[m].classList.add("kv-revealed");
+          for (var m = 0; m < targets.length; m++) targets[m].classList.add("kv-revealed");
         };
         if (firstBanner) {
-          // 03-A: SOLO el banner principal (primer bloque con texto) -> delay al cargar
           firstBanner = false;
-          setTimeout(reveal, 1600);
-        } else if (io) {
-          // 03-B: el resto SIEMPRE por scroll (entrar al viewport). No confiar en la
-          // posicion al cargar (las imagenes de arriba aun no cargaron -> layout corto).
-          sec._kvRevealFn = reveal;
-          io.observe(sec);
+          setTimeout(reveal, 1600); // hero: revela al cargar (visible de entrada)
         } else {
-          reveal();
+          pending.push({ sec: sec, reveal: reveal });
         }
       })(secs[i]);
     }
+    if (!pending.length) return;
+
+    function sweep(topFactor) {
+      var vh = window.innerHeight || document.documentElement.clientHeight;
+      for (var i = pending.length - 1; i >= 0; i--) {
+        var r = pending[i].sec.getBoundingClientRect();
+        if (r.bottom > 0 && r.top < vh * topFactor) {
+          pending[i].reveal();
+          pending.splice(i, 1);
+        }
+      }
     }
-    if (document.readyState === "complete") run();
-    else window.addEventListener("load", run, { once: true });
+    var ticking = false;
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function () { sweep(0.85); ticking = false; });
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    // Al cargar (tras window.load) revelar SOLO los CLARAMENTE visibles (mitad
+    // superior). Un falso-positivo por layout corto queda cerca del borde inferior
+    // => no entra en <0.4 y espera al scroll. El resto, por scroll.
+    function initialSweep() { sweep(0.4); }
+    if (document.readyState === "complete") initialSweep();
+    else window.addEventListener("load", initialSweep, { once: true });
   }
 
   /* ------------------------------------------------------------------ */
