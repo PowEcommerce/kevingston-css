@@ -183,7 +183,7 @@ h1.heading-block,h2.heading-block,h3.heading-block,h4.heading-block,h5.heading-b
   .f2tn-search-panel .f2tn-col-links{width:100%!important}
   /* Te puede interesar: SLIDER swipeable — card 283 (82.5%) + peek, gap 16, snap por card */
   .f2tn-search-panel .f2tn-col-banners{width:100%!important;max-width:none!important;overflow:visible}
-  .f2tn-search-panel .f2tn-banners{display:flex!important;flex-wrap:nowrap!important;gap:16px!important;overflow-x:auto!important;overflow-y:visible;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;margin:0 -16px!important;padding:0 16px 4px!important;grid-template-columns:none!important}
+  .f2tn-search-panel .f2tn-banners{display:flex!important;flex-wrap:nowrap!important;gap:16px!important;overflow-x:auto!important;overflow-y:visible;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;margin:0 -16px 0 0!important;padding:0 16px 4px 0!important;grid-template-columns:none!important}
   .f2tn-search-panel .f2tn-bcard{flex:0 0 82.5%!important;width:82.5%!important;max-width:82.5%!important;scroll-snap-align:start}
   .f2tn-search-panel .f2tn-bimg{aspect-ratio:325/386;height:auto}
   /* label card mobile: Button1/Regular 400 14px (desktop es 16) */
