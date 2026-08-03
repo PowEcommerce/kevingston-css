@@ -92,6 +92,9 @@ h1.heading-block,h2.heading-block,h3.heading-block,h4.heading-block,h5.heading-b
 .f2tn-search-panel .f2tn-blabel{font:400 16px/1.3 "Lato",sans-serif;color:#000;text-align:center}
 /* Boton cerrar (Figma 3645:34495): circulo crema 36px + icono × (20/close) */
 .f2tn-search-panel .f2tn-search-close{width:36px!important;height:36px!important;border:0!important;box-shadow:none!important;border-radius:50%!important;background:rgba(233,231,226,.5) url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='20'%20height='20'%20viewBox='0%200%2020%2020'%20fill='none'%3E%3Cpath%20d='M4.17%204.17L15.83%2015.83M15.83%204.17L4.17%2015.83'%20stroke='black'%20stroke-linecap='round'%20stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center!important;background-size:20px 20px!important}
+/* el boton trae la clase .f2tn-x (css_code) que dibuja OTRA X con ::before/::after
+   => quedaban DOS X superpuestas. Se anulan; queda solo el SVG de arriba. */
+.f2tn-search-panel .f2tn-search-close::before,.f2tn-search-panel .f2tn-search-close::after{display:none!important}
 /* ocultar el boton "clear" nativo del input[type=search] (el × que aparece en hover) */
 .f2tn-search-panel input[type="search"]::-webkit-search-cancel-button,
 .f2tn-search-panel input[type="search"]::-webkit-search-decoration{-webkit-appearance:none;appearance:none;display:none}
