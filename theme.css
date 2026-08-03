@@ -12,6 +12,8 @@ body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
 /* Listas en contenido de usuario: interlineado 18px, sin margen inferior */
 .user-content ul li,.user-content ol li{line-height:18px!important;margin-bottom:0!important}
 
+#ns-section-top_banner{display:none!important}
+
 /* Búsqueda SIN RESULTADOS -> hero de error (Figma 3572-32152). El JS agrega   */
 /* body.kv-search-empty-on + inyecta .kv-search-empty; se oculta lo nativo.     */
 /* La FOTO la sube el cliente a img/search-error.jpg; fallback #2b2b2b.         */
