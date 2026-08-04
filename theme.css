@@ -1098,10 +1098,13 @@ body.modal-show{overflow:hidden!important}
 /* Mobile: bottom-sheet, slide desde abajo. Campos Nombre+checkboxes    */
 /* inyectados por color-picker.js (initPromoModal).                     */
 /* ================================================================== */
-#promotional-modal.modal{margin:0!important;padding:0!important;border-radius:0!important;background:#fff!important;will-change:transform;transition:transform 450ms cubic-bezier(.16,1,.3,1)!important}
+/* Spring de apertura/cierre (stiffness 120, damping 22, mass 1 -> crítico, ζ≈1.0).
+   Reproducido como linear() muestreando la ODE del resorte, normalizado a 1. 500ms. */
+:root{--kv-modal-spring:linear(0,0.0395 5.6%,0.128 11.1%,0.2392 16.7%,0.3523 22.2%,0.4616 27.8%,0.5585 33.3%,0.6447 38.9%,0.7168 44.4%,0.7782 50%,0.8289 55.6%,0.8695 61.1%,0.903 66.7%,0.9295 72.2%,0.9509 77.8%,0.9677 83.3%,0.9812 88.9%,0.9917 94.4%,1)}
+#promotional-modal.modal{margin:0!important;padding:0!important;border-radius:0!important;background:#fff!important;will-change:transform;transition:transform 500ms var(--kv-modal-spring)!important}
 #promotional-modal .modal-body{padding:0!important;background:#fff!important}
 #promotional-modal .promotional-modal-content{background:#fff}
-#promotional-modal.modal::before{content:"";position:fixed;inset:0;background:#000;opacity:0;transition:opacity 450ms cubic-bezier(.16,1,.3,1);pointer-events:none;z-index:-1}
+#promotional-modal.modal::before{content:"";position:fixed;inset:0;background:#000;opacity:0;transition:opacity 500ms var(--kv-modal-spring);pointer-events:none;z-index:-1}
 #promotional-modal.modal.modal-show::before{opacity:.4}
 
 /* banner arriba + contenido abajo (columna en ambos breakpoints) */
