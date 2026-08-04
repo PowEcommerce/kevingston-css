@@ -1511,6 +1511,12 @@ html.kv-menu-open .js-head-main .menu-container .js-modal-open-private::after{op
 /* G2 (QA ficha, Figma 4042-37306): el talle sin stock SE PUEDE seleccionar; al hacerlo
    toma el estado "sinstock-select" (bg #ccc, borde #737373, texto tachado). */
 .js-product-detail .btn-variant-no-stock.selected{background:#ccc!important;border-color:#737373!important;color:#737373!important}
+/* G2 CTA sin stock: "Stock no Disponible" (disabled #ccc/#8f8f8f) + "Avisarme cuando
+   haya stock" (outline) inyectado por color-picker.js (initPdpOutOfStock). */
+.js-product-detail.kv-pdp-oos .js-addtocart{background:#ccc!important;color:#8f8f8f!important;border:0!important;cursor:not-allowed;opacity:1!important}
+.js-product-detail .kv-pdp-notify-btn{display:block;width:100%;height:44px;min-height:44px;margin:8px 0 0;border-radius:50px;border:1px solid #000;background:transparent;color:#000;font:400 14px/1 "Lato",sans-serif;cursor:pointer;transition:background-color .2s ease,border-width .2s ease}
+.js-product-detail .kv-pdp-notify-btn:hover{border-width:1.5px}
+.js-product-detail .kv-pdp-notify-btn.kv-pdp-notify-done{border-color:#737373;color:#737373;cursor:default;pointer-events:none}
 .js-product-detail .btn-variant-no-stock .btn-variant-content{color:#8f8f8f!important;text-decoration:line-through!important}
 .js-product-detail .btn-variant-no-stock::after,.js-product-detail .btn-variant-no-stock::before{display:none!important}
 /* F1 (QA ficha, Figma 1300-37935): estados HOVER de los selectores.

@@ -2106,6 +2106,57 @@
     }, true);
   }
 
+  /* PDP — G2 (QA): al seleccionar un talle SIN STOCK, el CTA pasa a "Stock no
+     Disponible" (disabled) y se inyecta "Avisarme cuando haya stock" (outline).
+     TN no trae notify nativo -> el botón queda listo; conectar su backend (captura de
+     email) es una feature de tienda aparte. Figma 4042-37306. */
+  function initPdpOutOfStock() {
+    var det = document.querySelector(".js-product-detail");
+    if (!det || det.getAttribute("data-kv-oos") === "1") return;
+    var cont = det.querySelector(".buy-button-container") || det.querySelector(".product-actions");
+    if (!cont) return;
+    det.setAttribute("data-kv-oos", "1");
+    var notifyBtn = null;
+    function cta() { return cont.querySelector("input.js-addtocart,button.js-addtocart,.js-addtocart"); }
+    function txt(b) { return (b.value || b.textContent || "").trim().toLowerCase(); }
+    function ensureNotify() {
+      if (!notifyBtn) {
+        notifyBtn = document.createElement("button");
+        notifyBtn.type = "button";
+        notifyBtn.className = "kv-pdp-notify-btn";
+        notifyBtn.textContent = "Avisarme cuando haya stock";
+        notifyBtn.addEventListener("click", function () {
+          var nat = det.querySelector(".js-product-available-alert,[data-component*='available'],.js-notify-me");
+          if (nat) { nat.click(); return; }
+          notifyBtn.classList.add("kv-pdp-notify-done");
+          notifyBtn.textContent = "Te avisaremos cuando haya stock";
+        });
+      }
+      return notifyBtn;
+    }
+    function sync() {
+      var b = cta();
+      if (!b) return;
+      var selNo = det.querySelector(".btn-variant-no-stock.selected:not(.btn-variant-color)");
+      var oos = !!selNo || (b.disabled && txt(b).indexOf("sin stock") > -1);
+      if (oos) {
+        if (b.tagName === "INPUT") { if (b.value !== "Stock no Disponible") b.value = "Stock no Disponible"; }
+        else if (txt(b) !== "stock no disponible") { var s = b.querySelector(".js-addtocart-text"); if (s) s.textContent = "Stock no Disponible"; else b.textContent = "Stock no Disponible"; }
+        det.classList.add("kv-pdp-oos");
+        var n = ensureNotify();
+        if (!n.isConnected) (b.closest(".buy-button-container") || cont).appendChild(n);
+      } else {
+        det.classList.remove("kv-pdp-oos");
+        if (notifyBtn && notifyBtn.isConnected) { notifyBtn.remove(); notifyBtn.classList.remove("kv-pdp-notify-done"); notifyBtn.textContent = "Avisarme cuando haya stock"; }
+      }
+    }
+    sync();
+    new MutationObserver(sync).observe(cont, { childList: true, subtree: true, attributes: true, attributeFilter: ["disabled", "value", "class"] });
+    det.addEventListener("click", function (e) {
+      if (e.target.closest && e.target.closest(".btn-variant:not(.btn-variant-color)")) setTimeout(sync, 60);
+    }, true);
+  }
+
   /* PDP — Modal "Guía de talles" (Figma 2520-24913). Panel lateral (mismo    */
   /* sistema .kv-pdp-modal que los facilitadores): tabla de medidas + "Cómo    */
   /* medir" (ilustración) + 5 pasos. Los DATOS DE LA TABLA son PLACEHOLDER      */
@@ -2283,7 +2334,8 @@
     initPdpBadges();
     [500, 1500].forEach(function (ms) { setTimeout(initPdpBadges, ms); }); // los labels nativos pueden renderizar tarde
     initPdpSizeGate();
-    [500, 1500].forEach(function (ms) { setTimeout(initPdpSizeGate, ms); }); // el form de talles puede renderizar tarde
+    initPdpOutOfStock();
+    [500, 1500].forEach(function (ms) { setTimeout(initPdpSizeGate, ms); setTimeout(initPdpOutOfStock, ms); }); // el form de talles puede renderizar tarde
     initPdpGallery();
     initPdpZoom();
     initPdpMobileGallery();
