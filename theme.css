@@ -87,10 +87,6 @@ body.kv-search-empty-on .section-main-products-grid{display:none!important}
    La transicion va solo en el reveal -> fade+slide de entrada. */
 .kv-reveal{opacity:0;transform:translateY(20px);will-change:opacity,transform}
 .kv-reveal.kv-revealed{opacity:1;transform:none;transition:opacity .6s ease-out,transform .6s ease-out}
-/* Reserva el espacio de la scrollbar SIEMPRE: al abrir un modal (f2tn-lock =
-   overflow:hidden) no desaparece la scrollbar -> el contenido y el header sticky
-   no saltan/corren. */
-html{scrollbar-gutter:stable}
 
 /* SEO headings: el heading-block se convierte por JS de <div> a <h1/h2/h3> (etiquetas SEO).
    Neutralizamos los defaults del navegador para que el estilo NO cambie (el font-size lo dan las clases). */
@@ -1374,13 +1370,11 @@ html.kv-menu-open .js-head-main .menu-container .js-modal-open-private::after{op
 /* handoff 01: apertura 450ms spring(~ease-out sin overshoot), cierre     */
 /* 350ms ease-in; panel translateX(100→0), overlay opacity 0→1.           */
 /* ================================================================== */
-/* MISMA animación que el newsletter: el fondo oscuro va en ::before y hace fade con
-   el spring; el PANEL solo slidea (translateX) sin fadear. Antes el fade estaba en el
-   .kv-pdp-modal-ov (que contiene el panel) -> el panel fadeaba junto = "fade raro". */
-.kv-pdp-modal-ov{position:fixed;inset:0;z-index:3000;visibility:hidden;transition:visibility 0s linear .5s}
-.kv-pdp-modal-ov.open{visibility:visible;transition:visibility 0s}
-.kv-pdp-modal-ov::before{content:"";position:fixed;inset:0;background:rgba(0,0,0,.5);opacity:0;transition:opacity 500ms var(--kv-modal-spring);pointer-events:none}
-.kv-pdp-modal-ov.open::before{opacity:1}
+/* MISMA idea que el newsletter: el PANEL solo slidea (translateX) sin fadear. El
+   oscurecido de la página se anima por BACKGROUND-COLOR (transparente -> negro .5),
+   NO por opacity del contenedor -> así el panel (hijo) no fadea. */
+.kv-pdp-modal-ov{position:fixed;inset:0;z-index:3000;background:rgba(0,0,0,0);visibility:hidden;transition:background-color 500ms var(--kv-modal-spring),visibility 0s linear .5s}
+.kv-pdp-modal-ov.open{background:rgba(0,0,0,.5);visibility:visible;transition:background-color 500ms var(--kv-modal-spring),visibility 0s}
 .kv-pdp-modal-panel{position:fixed;top:0;right:0;height:100dvh;width:466px;max-width:100%;background:#fff;transform:translateX(100%);transition:transform 500ms var(--kv-modal-spring);display:flex;flex-direction:column;font-family:"Lato",sans-serif}
 .kv-pdp-modal-ov.open .kv-pdp-modal-panel{transform:translateX(0)}
 .kv-pdp-modal-header{display:flex;align-items:center;justify-content:space-between;gap:48px;padding:16px 24px;border-bottom:1px solid #d9d9d9;flex:none}
@@ -1591,9 +1585,8 @@ html.kv-menu-open .js-head-main .menu-container .js-modal-open-private::after{op
 @media (max-width:767px){
   /* M01 · paneles .kv-pdp-modal (colores/descripción/pago/envío/cambios/guía)  */
   .kv-pdp-modal-panel{width:100%!important;max-width:100%!important;transition:transform .3s ease-out}
-  .kv-pdp-modal-ov{transition:visibility 0s linear .3s}
-  .kv-pdp-modal-ov.open{transition:visibility 0s}
-  .kv-pdp-modal-ov::before{transition:opacity .3s ease-out}
+  .kv-pdp-modal-ov{transition:background-color .3s ease-out,visibility 0s linear .3s}
+  .kv-pdp-modal-ov.open{transition:background-color .3s ease-out,visibility 0s}
 
   /* M02 · "Conocé tu talle": de pop-up centrado (desktop) a panel lateral       */
   /* full-screen que entra desde la derecha, igual que los de M01.               */
