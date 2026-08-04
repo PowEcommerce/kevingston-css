@@ -939,7 +939,13 @@
         var p = bannerPending[i];
         var r = p.sec.getBoundingClientRect();
         if (r.top >= vh) p.wasBelow = true; // estuvo debajo del viewport
-        if (p.wasBelow && r.bottom > 40 && r.top < vh * 0.85) {
+        // Revela cuando el banner ENTRÓ en un 95%: (vh - r.top) = cuánto del banner ya
+        // subió dentro del viewport desde abajo; se compara contra el 95% de su alto
+        // (o del viewport si el banner es más alto). Para banners de alto normal esto
+        // equivale a que su parte inferior entre al viewport. Antes disparaba al 85%
+        // del TOP -> muy temprano, la animación pasaba antes de llegar a verla.
+        var H = r.height || 1;
+        if (p.wasBelow && r.bottom > 40 && (vh - r.top) >= 0.95 * Math.min(H, vh)) {
           p.reveal();
           bannerPending.splice(i, 1);
         }
