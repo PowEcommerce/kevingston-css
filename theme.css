@@ -1507,7 +1507,10 @@ html.kv-menu-open .js-head-main .menu-container .js-modal-open-private::after{op
 .js-product-detail .btn-variant{width:32px;min-width:32px;max-width:32px;height:32px;min-height:32px;padding:0;border:1px solid #737373;border-radius:4px;background:#fff;color:#000;font:400 12px/1 "Lato",sans-serif;display:inline-flex;align-items:center;justify-content:center;margin:0!important;flex:none}
 .js-product-detail .btn-variant.selected{background:#000!important;color:#fff!important;border-color:#000!important}
 /* sin stock: gris + texto tachado (line-through), igual que en la vista rápida */
-.js-product-detail .btn-variant-no-stock{border-color:#8f8f8f!important;color:#8f8f8f!important;background:#fff!important;pointer-events:none;text-decoration:line-through!important}
+.js-product-detail .btn-variant-no-stock{border-color:#8f8f8f!important;color:#8f8f8f!important;background:#fff!important;text-decoration:line-through!important;cursor:pointer}
+/* G2 (QA ficha, Figma 4042-37306): el talle sin stock SE PUEDE seleccionar; al hacerlo
+   toma el estado "sinstock-select" (bg #ccc, borde #737373, texto tachado). */
+.js-product-detail .btn-variant-no-stock.selected{background:#ccc!important;border-color:#737373!important;color:#737373!important}
 .js-product-detail .btn-variant-no-stock .btn-variant-content{color:#8f8f8f!important;text-decoration:line-through!important}
 .js-product-detail .btn-variant-no-stock::after,.js-product-detail .btn-variant-no-stock::before{display:none!important}
 /* F1 (QA ficha, Figma 1300-37935): estados HOVER de los selectores.
