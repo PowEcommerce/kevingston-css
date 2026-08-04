@@ -1370,15 +1370,15 @@ html.kv-menu-open .js-head-main .menu-container .js-modal-open-private::after{op
 /* handoff 01: apertura 450ms spring(~ease-out sin overshoot), cierre     */
 /* 350ms ease-in; panel translateX(100→0), overlay opacity 0→1.           */
 /* ================================================================== */
-.kv-pdp-modal-ov{position:fixed;inset:0;z-index:3000;background:rgba(0,0,0,.5);opacity:0;visibility:hidden;transition:opacity .35s ease-in,visibility 0s linear .35s}
-.kv-pdp-modal-ov.open{opacity:1;visibility:visible;transition:opacity 500ms var(--kv-modal-spring),visibility 0s}
-.kv-pdp-modal-panel{position:fixed;top:0;right:0;height:100dvh;width:466px;max-width:100%;background:#fff;transform:translateX(100%);transition:transform .35s ease-in;display:flex;flex-direction:column;font-family:"Lato",sans-serif}
-.kv-pdp-modal-ov.open .kv-pdp-modal-panel{transform:translateX(0);transition:transform 500ms var(--kv-modal-spring)}
-/* cierre con el MISMO spring, solo desktop (mobile mantiene su .3s ease-out) */
-@media (min-width:768px){
-  .kv-pdp-modal-ov{transition:opacity 500ms var(--kv-modal-spring),visibility 0s linear 500ms}
-  .kv-pdp-modal-panel{transition:transform 500ms var(--kv-modal-spring)}
-}
+/* MISMA animación que el newsletter: el fondo oscuro va en ::before y hace fade con
+   el spring; el PANEL solo slidea (translateX) sin fadear. Antes el fade estaba en el
+   .kv-pdp-modal-ov (que contiene el panel) -> el panel fadeaba junto = "fade raro". */
+.kv-pdp-modal-ov{position:fixed;inset:0;z-index:3000;visibility:hidden;transition:visibility 0s linear .5s}
+.kv-pdp-modal-ov.open{visibility:visible;transition:visibility 0s}
+.kv-pdp-modal-ov::before{content:"";position:fixed;inset:0;background:rgba(0,0,0,.5);opacity:0;transition:opacity 500ms var(--kv-modal-spring);pointer-events:none}
+.kv-pdp-modal-ov.open::before{opacity:1}
+.kv-pdp-modal-panel{position:fixed;top:0;right:0;height:100dvh;width:466px;max-width:100%;background:#fff;transform:translateX(100%);transition:transform 500ms var(--kv-modal-spring);display:flex;flex-direction:column;font-family:"Lato",sans-serif}
+.kv-pdp-modal-ov.open .kv-pdp-modal-panel{transform:translateX(0)}
 .kv-pdp-modal-header{display:flex;align-items:center;justify-content:space-between;gap:48px;padding:16px 24px;border-bottom:1px solid #d9d9d9;flex:none}
 .kv-pdp-modal-header-title{font:500 16px/1.3 "Lato",sans-serif;color:#000;margin:0}
 .kv-pdp-modal-x{width:20px;height:20px;border:0;background:none;cursor:pointer;padding:0;position:relative;flex:none}
@@ -1586,9 +1586,10 @@ html.kv-menu-open .js-head-main .menu-container .js-modal-open-private::after{op
 /* y Esc no aplica en mobile. Scroll lock lo maneja el JS (f2tn-lock).          */
 @media (max-width:767px){
   /* M01 · paneles .kv-pdp-modal (colores/descripción/pago/envío/cambios/guía)  */
-  .kv-pdp-modal-panel{width:100%!important;max-width:100%!important}
-  .kv-pdp-modal-ov.open{transition:opacity .3s ease-out,visibility 0s}
-  .kv-pdp-modal-ov.open .kv-pdp-modal-panel{transition:transform .3s ease-out}
+  .kv-pdp-modal-panel{width:100%!important;max-width:100%!important;transition:transform .3s ease-out}
+  .kv-pdp-modal-ov{transition:visibility 0s linear .3s}
+  .kv-pdp-modal-ov.open{transition:visibility 0s}
+  .kv-pdp-modal-ov::before{transition:opacity .3s ease-out}
 
   /* M02 · "Conocé tu talle": de pop-up centrado (desktop) a panel lateral       */
   /* full-screen que entra desde la derecha, igual que los de M01.               */
