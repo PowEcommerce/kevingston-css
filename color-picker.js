@@ -1158,6 +1158,17 @@
     if (!form) return; // popup sin newsletter (modo CTA) -> no tocamos
     modal.setAttribute("data-kv-sub", "1");
 
+    // Honeypot anti-spam: el theme deja action="/winnie-pooh" (URL trampa) y confía
+    // en que el handler AJAX haga preventDefault. Si el ajax NO intercepta, el submit
+    // nativo cae en la trampa y te redirige a /winnie-pooh. Blindaje: al enviar, si la
+    // action sigue apuntando a la trampa, la limpiamos para postear a la página actual
+    // (igual que hace el theme para forms NO-ajax) y el server procesa la suscripción.
+    form.addEventListener("submit", function () {
+      if ((form.getAttribute("action") || "").indexOf("winnie-pooh") !== -1) {
+        form.setAttribute("action", "");
+      }
+    });
+
     var wrapper = form.querySelector(".newsletter-form-wrapper") || form;
     var emailInput = wrapper.querySelector('input[name="email"]');
     var button = wrapper.querySelector('button[type="submit"], .newsletter-form-button');
