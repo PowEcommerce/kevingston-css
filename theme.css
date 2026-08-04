@@ -167,8 +167,11 @@ h1.heading-block,h2.heading-block,h3.heading-block,h4.heading-block,h5.heading-b
    tertiary) ni el color que cargue el admin. Handoff a cliente no-técnico: solo agrega el
    botón sobre la imagen y sale bien solo. Especificidad .section.section-X (0,4,0 en hover)
    para ganarle al hover gris de [data-store^="button-block-"] del css_code (0,3,0). */
-.section.section-slideshow .btn,.section.section-hero .btn,.section.section-banners .btn{-webkit-backdrop-filter:blur(4px)!important;backdrop-filter:blur(4px)!important;background-color:rgba(0,0,0,.2)!important;border:1px solid #fff!important;color:#fff!important;transition:background-color .2s ease,border-color .2s ease,border-width .2s ease,color .2s ease}
-.section.section-slideshow .btn:hover,.section.section-hero .btn:hover,.section.section-banners .btn:hover{background-color:rgba(0,0,0,.3)!important;border:2px solid #fff!important;color:#fff!important}
+/* El color lo pone el cliente en el admin (hex normal) y color-picker.js (initBlurButtons)
+   lo lee y lo vuelca a las vars --kv-bbg (base .2), --kv-bbg-h (hover .3) y --kv-btxt (texto
+   del admin tal cual). Default negro/blanco si no cargó color. Borde blanco = look blurred. */
+.section.section-slideshow .btn,.section.section-hero .btn,.section.section-banners .btn{-webkit-backdrop-filter:blur(4px)!important;backdrop-filter:blur(4px)!important;background-color:var(--kv-bbg,rgba(0,0,0,.2))!important;border:1px solid #fff!important;color:var(--kv-btxt,#fff)!important;transition:background-color .2s ease,border-color .2s ease,border-width .2s ease,color .2s ease}
+.section.section-slideshow .btn:hover,.section.section-hero .btn:hover,.section.section-banners .btn:hover{background-color:var(--kv-bbg-h,rgba(0,0,0,.3))!important;border:2px solid #fff!important;color:var(--kv-btxt,#fff)!important}
 /* ocultar el boton "clear" nativo del input[type=search] (el × que aparece en hover) */
 .f2tn-search-panel input[type="search"]::-webkit-search-cancel-button,
 .f2tn-search-panel input[type="search"]::-webkit-search-decoration{-webkit-appearance:none;appearance:none;display:none}

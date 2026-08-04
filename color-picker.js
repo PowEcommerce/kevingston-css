@@ -2136,6 +2136,34 @@
     update();
   }
 
+  /* ------------------------------------------------------------------ */
+  /* Botones "blurred" sobre imagen (slideshow/hero/banners): el cliente  */
+  /* elige el COLOR desde el admin (hex normal) y acá le agregamos la      */
+  /* OPACIDAD (.2 base / .3 hover) volcándolo a vars CSS. El texto se      */
+  /* respeta tal cual. TN no acepta rgba ni hex-8 en el admin -> por eso   */
+  /* la transparencia la pone el JS, no el cliente. Handoff: solo elige    */
+  /* el color y listo. Idempotente (se re-corre por reintentos).           */
+  /* ------------------------------------------------------------------ */
+  function parseRGB(c) {
+    if (!c) return null;
+    c = ("" + c).trim();
+    var m = c.match(/(\d+)\s*[, ]\s*(\d+)\s*[, ]\s*(\d+)/);
+    if (m) return [+m[1], +m[2], +m[3]];
+    var h = c.charAt(0) === "#" ? c.slice(1) : c;
+    if (/^[0-9a-fA-F]{6}$/.test(h)) return [parseInt(h.slice(0, 2), 16), parseInt(h.slice(2, 4), 16), parseInt(h.slice(4, 6), 16)];
+    if (/^[0-9a-fA-F]{3}$/.test(h)) return [parseInt(h[0] + h[0], 16), parseInt(h[1] + h[1], 16), parseInt(h[2] + h[2], 16)];
+    return null;
+  }
+  function initBlurButtons() {
+    var btns = document.querySelectorAll(".section-slideshow .btn, .section-hero .btn, .section-banners .btn");
+    btns.forEach(function (btn) {
+      var rgb = parseRGB(btn.style.backgroundColor) || [0, 0, 0]; // color del admin (inline); default negro
+      btn.style.setProperty("--kv-bbg", "rgba(" + rgb[0] + "," + rgb[1] + "," + rgb[2] + ",.2)");
+      btn.style.setProperty("--kv-bbg-h", "rgba(" + rgb[0] + "," + rgb[1] + "," + rgb[2] + ",.3)");
+      if (btn.style.color) btn.style.setProperty("--kv-btxt", btn.style.color); // texto del admin, tal cual
+    });
+  }
+
   function init() {
     var adbarClosed = initAdbarClose();
     if (!adbarClosed) initTopbarCarousel();
@@ -2144,8 +2172,9 @@
     initNewCollectionTabs();
     initFooterText();
     initBannerReveal();
-    // reintentos: algunas secciones (slideshows) renderizan su contenido despues
-    [600, 1500, 3000].forEach(function (ms) { setTimeout(initBannerReveal, ms); });
+    initBlurButtons();
+    // reintentos: algunas secciones (slideshows) renderizan/clonan su contenido despues
+    [600, 1500, 3000].forEach(function (ms) { setTimeout(initBannerReveal, ms); setTimeout(initBlurButtons, ms); });
     initSearchEmpty();
     initSeoHeadings();
     initSearchPanel();
