@@ -1256,12 +1256,16 @@
 
     var successAlert = form.querySelector(".js-newsletter-success-alert");
     if (successAlert) {
+      // El theme muestra el alert seteando display:block INLINE. No podemos usar
+      // getComputedStyle porque el CSS lo tapa con !important (siempre "none"):
+      // detectamos por el style inline que togglea el theme.
       var show = function () {
-        var vis = getComputedStyle(successAlert).display !== "none";
+        var vis = successAlert.style.display !== "none" && successAlert.style.display !== "";
         modal.classList.toggle("kv-sub-success", vis);
         if (vis) markNewsletterDone();
       };
       new MutationObserver(show).observe(successAlert, { attributes: true, attributeFilter: ["style", "class"] });
+      show();
     }
     // cierre por ×, overlay o Escape → el modal pierde .modal-show
     var closeBtn = modal.querySelector(".modal-close");

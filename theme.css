@@ -1144,7 +1144,10 @@ body.modal-show{overflow:hidden!important}
 /* botón Suscribirme (pill negro) — deshabilitado hasta completar nombre+email */
 #promotional-modal .newsletter-form-button.btn{width:100%!important;height:44px!important;min-height:44px;margin:8px 0 0!important;border-radius:50px!important;font:400 14px/1 "Lato",sans-serif!important;background:#000!important;color:#fff!important;border:0!important;display:inline-flex;align-items:center;justify-content:center}
 #promotional-modal .newsletter-form-button.btn.kv-sub-disabled,#promotional-modal .newsletter-form-button.btn:disabled{background:#ccc!important;color:#8f8f8f!important;cursor:not-allowed;pointer-events:none}
-#promotional-modal .newsletter-form-alert{display:none!important}
+/* Ocultamos solo el alert de ÉXITO (mostramos nuestro cartel custom .kv-sub-successbox).
+   El de ERROR sí se muestra, estilado, para que el usuario vea si algo falla. */
+#promotional-modal .js-newsletter-success-alert{display:none!important}
+#promotional-modal .js-newsletter-error-alert{background:none!important;border:0!important;padding:8px 0 0!important;margin:0!important;color:#a00e1d!important;font:400 13px/1.3 "Lato",sans-serif!important;text-align:center}
 
 /* estado ÉXITO: banner + mensaje centrado, sin form */
 #promotional-modal .kv-sub-successbox{display:none;flex-direction:column;gap:8px;text-align:center;padding:24px}
