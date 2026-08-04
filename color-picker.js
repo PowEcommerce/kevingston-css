@@ -18,6 +18,14 @@
 (function () {
   "use strict";
 
+  // Preview del admin de TN: el storefront se renderiza dentro de un IFRAME (el sitio
+  // publicado es top-level). Marcamos <html class="kv-preview"> lo antes posible para
+  // que el CSS NO fuerce el look "blurred" (translúcido + texto blanco) en el editor
+  // -> ahí el botón se ve con su color sólido normal (visible/editable). En el sitio
+  // publicado no aplica y el blurred sigue funcionando.
+  try { if (window.self !== window.top) document.documentElement.classList.add("kv-preview"); }
+  catch (e) { document.documentElement.classList.add("kv-preview"); }
+
   var MAP_URL = "https://powecommerce.github.io/kevingston-css/color-map.json";
   var CARD_SELECTOR = ".js-item-product[data-product-id]";
   var DONE_ATTR = "data-kv-cp"; // marca de card ya procesada
@@ -2161,6 +2169,7 @@
     return null;
   }
   function initBlurButtons() {
+    if (document.documentElement.classList.contains("kv-preview")) return; // en el editor, botón sólido normal
     var btns = document.querySelectorAll(".section-slideshow .btn, .section-hero .btn, .section-banners .btn");
     btns.forEach(function (btn) {
       var rgb = parseRGB(btn.style.backgroundColor) || [0, 0, 0]; // color del admin (inline); default negro
