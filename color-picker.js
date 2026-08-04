@@ -2029,6 +2029,55 @@
     new MutationObserver(fix).observe(cont, { childList: true, subtree: true });
   }
 
+  /* PDP — G1 (QA): NO hay talle seleccionado por default. Se deselecciona el que TN
+     preselecciona; y si se toca el CTA sin talle elegido, la leyenda pasa de
+     "Agregar al Carrito" a "Seleccioná tu talle" (y no agrega al carrito). Al elegir
+     un talle vuelve a "Agregar al Carrito". Solo aplica si el producto TIENE talles. */
+  function initPdpSizeGate() {
+    var det = document.querySelector(".js-product-detail");
+    if (!det || det.getAttribute("data-kv-sizegate") === "1") return;
+    function sizeBtns() { return det.querySelectorAll(".btn-variant:not(.btn-variant-color)"); }
+    if (!sizeBtns().length) return; // producto sin talles -> sin gate
+    det.setAttribute("data-kv-sizegate", "1");
+    var cont = det.querySelector(".buy-button-container") || det;
+    var userPicked = false;
+
+    function ctaBtns() { return cont.querySelectorAll("input.js-addtocart,button.js-addtocart,.js-addtocart"); }
+    function setLabel(txt) {
+      [].forEach.call(ctaBtns(), function (b) {
+        if (b.tagName === "INPUT") { b.value = txt; return; }
+        var s = b.querySelector(".js-addtocart-text");
+        if (s) s.textContent = txt; else b.textContent = txt;
+      });
+    }
+    function anySelected() {
+      var b = sizeBtns();
+      for (var i = 0; i < b.length; i++) if (b[i].classList.contains("selected")) return true;
+      return false;
+    }
+    function deselect() { if (!userPicked) [].forEach.call(sizeBtns(), function (b) { b.classList.remove("selected"); }); }
+    deselect();
+    [100, 400, 1000, 2000].forEach(function (ms) { setTimeout(deselect, ms); });
+
+    // al elegir un talle (con stock) -> CTA vuelve a "Agregar al Carrito"
+    det.addEventListener("click", function (e) {
+      var sb = e.target.closest && e.target.closest(".btn-variant:not(.btn-variant-color)");
+      if (sb && !sb.classList.contains("btn-variant-no-stock")) { userPicked = true; setLabel("Agregar al Carrito"); }
+    }, true);
+
+    // gate del add-to-cart: sin talle -> "Seleccioná tu talle" (bloquea el alta)
+    cont.addEventListener("click", function (e) {
+      var cta = e.target.closest && e.target.closest(".js-addtocart");
+      if (!cta) return;
+      if (!anySelected()) {
+        e.preventDefault(); e.stopImmediatePropagation();
+        setLabel("Seleccioná tu talle");
+        var grp = det.querySelector(".js-product-variants-group:not(.js-color-variants-container)");
+        if (grp) { try { grp.scrollIntoView({ behavior: "smooth", block: "center" }); } catch (x) {} }
+      }
+    }, true);
+  }
+
   /* PDP — Modal "Guía de talles" (Figma 2520-24913). Panel lateral (mismo    */
   /* sistema .kv-pdp-modal que los facilitadores): tabla de medidas + "Cómo    */
   /* medir" (ilustración) + 5 pasos. Los DATOS DE LA TABLA son PLACEHOLDER      */
@@ -2203,6 +2252,8 @@
     initPdpTabs();
     initPdpSizeLinks();
     initPdpBtnText();
+    initPdpSizeGate();
+    [500, 1500].forEach(function (ms) { setTimeout(initPdpSizeGate, ms); }); // el form de talles puede renderizar tarde
     initPdpGallery();
     initPdpZoom();
     initPdpMobileGallery();
