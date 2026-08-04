@@ -1361,7 +1361,7 @@ html.kv-menu-open .js-head-main .menu-container .js-modal-open-private::after{op
    del contenido (343px), repartidos parejo con space-between (1er swatch al borde izq,
    "+N" al borde der, gaps ~18px iguales). */
 @media (max-width:767px){
-  .kv-pdp-colors-list{justify-content:space-between;gap:8px;flex-wrap:nowrap}
+  .kv-pdp-colors-list{justify-content:flex-start;gap:16px;flex-wrap:nowrap}
 }
 
 /* ================================================================== */
