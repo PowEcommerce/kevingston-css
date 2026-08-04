@@ -428,6 +428,9 @@ html:not(.kv-preview) .section.section-slideshow .btn:hover,html:not(.kv-preview
 .js-product-detail .js-product-slide:hover,
 .js-product-detail .js-product-image-cover,
 .js-product-detail .js-product-image-cover:hover{opacity:1!important}
+/* GENERAL: cualquier <a> que envuelva una imagen NO baja la opacity en hover
+   (el theme aplica opacity .8 a los links). Cubre cards, galería, banners, etc. */
+a:has(img):hover,a:has(picture):hover{opacity:1!important}
 /* B3 (QA ficha): cards del carrusel de recomendados iguales a las de home
    (card blanca + bloque de info con fondo blanco). */
 .section-related-products .js-item-product{background:#fff!important;border-radius:8px;overflow:hidden}
