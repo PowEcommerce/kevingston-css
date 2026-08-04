@@ -188,7 +188,7 @@
               sw.update();
             } else if (isRecommendations) {
               // mobile: 1 card + peek (Figma 1407-27219: card 283 en 343)
-              sw.params.slidesPerView = 1.2;
+              sw.params.slidesPerView = 1.25;
               sw.params.slidesPerGroup = 1;
               sw.params.spaceBetween = 16;
               sw.params.slidesOffsetBefore = 0;
