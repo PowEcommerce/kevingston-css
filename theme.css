@@ -1220,6 +1220,7 @@ body.modal-show{overflow:hidden!important}
   .f2tn-offers{width:100%;max-width:375px;max-height:calc(100dvh - 32px);border-radius:12px;opacity:0;transition:opacity .3s ease-out}
   .f2tn-offers-ov.f2tn-open .f2tn-offers{opacity:1}
   .f2tn-offers-media{aspect-ratio:343/300}
+  .f2tn-offers-title{margin-top:12px}
 }
 
 /* ================================================================== */
