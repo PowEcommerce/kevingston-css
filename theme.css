@@ -1192,8 +1192,11 @@ body.modal-show{overflow:hidden!important}
 .f2tn-offers-close::before{transform:translate(-50%,-50%) rotate(45deg)}
 .f2tn-offers-close::after{transform:translate(-50%,-50%) rotate(-45deg)}
 .f2tn-offers-media{position:relative;width:100%;flex:none;background:#E9E7E2 url("https://powecommerce.github.io/kevingston-css/img/promo-modal-banner.jpg") center/cover no-repeat}
-.f2tn-offers-img{display:block;width:100%;height:100%;object-fit:cover}
-.f2tn-offers-img[src=""],.f2tn-offers-img:not([src]){display:none}
+/* El banner del modal usa la imagen del Figma como fondo del media (arriba).
+   El <img> del bloque HTML se oculta: el admin le cargó una foto placeholder
+   (camperas.jpg) que tapaba el banner correcto. Para cambiar el banner, se
+   reemplaza el archivo hosteado img/promo-modal-banner.jpg. */
+.f2tn-offers-img{display:none!important}
 .f2tn-offers-body{flex:1 1 auto;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;padding:24px;text-align:center}
 .f2tn-offers-textwrap{display:flex;flex-direction:column;gap:8px;width:100%}
 .f2tn-offers-title{font:500 24px/1.2 "Lato",sans-serif;color:#000;margin:0}
