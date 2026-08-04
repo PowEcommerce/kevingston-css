@@ -1352,6 +1352,12 @@ html.kv-menu-open .js-head-main .menu-container .js-modal-open-private::after{op
 .kv-pdp-color.is-active{border:1px solid #000;box-shadow:none}
 .kv-pdp-colors-more{min-width:54px;height:54px;padding:0 6px;border:0;box-sizing:border-box;border-radius:4px;background:#f6f5f3;cursor:pointer;font:400 12px/1.1 "Lato",sans-serif;color:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px}
 .kv-pdp-colors-more span{font-size:8px;color:#000}
+/* A5 (QA ficha mobile, Figma 1407-27142): los swatches + "+N" ocupan TODO el ancho
+   del contenido (343px), repartidos parejo con space-between (1er swatch al borde izq,
+   "+N" al borde der, gaps ~18px iguales). */
+@media (max-width:767px){
+  .kv-pdp-colors-list{justify-content:space-between;gap:8px;flex-wrap:nowrap}
+}
 
 /* ================================================================== */
 /* Modales de la ficha: panel 466px que entra desde la derecha, alto     */
@@ -1575,6 +1581,10 @@ html.kv-menu-open .js-head-main .menu-container .js-modal-open-private::after{op
 /* Fila = ícono 24 + gap 8 + texto 14 + chevron 14; padding 8/0 → fila 40px con    */
 /* 8px arriba/abajo del divisor (Figma 2340:20272: gap 8 entre filas y líneas).    */
 .kv-pdp-tab-head{display:flex;align-items:center;gap:8px;width:100%;padding:8px 0;background:none;border:0;cursor:pointer;font:400 14px/1.3 "Lato",sans-serif;color:#000;text-align:left}
+/* A6 (QA ficha): CTA -> 1er desplegable = 24px. La 1ra fila sin padding-top para que
+   el ícono quede a 24px del CTA (el contenedor ya tiene margin 24); el pitch de 40px
+   entre filas se mantiene. */
+.kv-pdp-tab:first-child .kv-pdp-tab-head{padding-top:0}
 .kv-pdp-tab-head .kv-tab-ico{width:24px;height:24px;flex:none;display:inline-flex;color:#000}
 .kv-pdp-tab-head .kv-tab-ico svg{width:24px;height:24px}
 .kv-pdp-tab-head .kv-tab-title{flex:1 1 auto}
