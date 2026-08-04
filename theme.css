@@ -142,6 +142,29 @@ h1.heading-block,h2.heading-block,h3.heading-block,h4.heading-block,h5.heading-b
 .section-related-products .swiper-button-prev:hover,.section-related-products .swiper-button-next:hover,
 .kv-mob-arrow:hover,
 .js-slideshow-container .swiper-button-prev:hover,.js-slideshow-container .swiper-button-next:hover{background-color:rgba(233,231,226,.8)!important}
+
+/* ================================================================== */
+/* HOVER de botones — Figma component set 959:17465 "btn"             */
+/* primary #000->#666 · secondary(blanco) #fff->#fafafa               */
+/* tertiary(outline) borde ->1.5px · blurred rgba(.2)->rgba(.3)+borde 2px */
+/* (texto/disable ya vienen del theme por settings)                   */
+/* ================================================================== */
+.btn-primary,.btn.btn-secondary,
+.section-slideshow .btn-primary,.section-hero .btn-primary,.section-banners .btn-primary,
+.footer-content .newsletter-form-button.btn,.f2tn-offers-cta,
+:is(#ns-section-editorial_products,#ns-section-editorial_products_mujer) #ns-block-editorial_text .btn{transition:background-color .2s ease,border-color .2s ease,border-width .2s ease,color .2s ease}
+/* PRIMARY (relleno negro) -> hover #666 */
+.btn-primary:hover,
+.f2tn-offers-cta:hover,
+#promotional-modal .newsletter-form-button.btn:not(.kv-sub-disabled):hover{background-color:#666!important}
+/* SECONDARY (relleno blanco) -> hover #fafafa (newsletter del footer) */
+.footer-content .newsletter-form-button.btn:hover{background-color:#fafafa!important}
+/* TERTIARY (outline) -> borde 1.5px (.btn-secondary + botón editorial "Ver Colección") */
+.btn.btn-secondary:hover,
+:is(#ns-section-editorial_products,#ns-section-editorial_products_mujer) #ns-block-editorial_text .btn:hover{border-width:1.5px!important}
+/* BLURRED (CTAs sobre imagen: hero/slideshow/banners) -> base rgba(.2), hover rgba(.3)+borde 2px */
+.section-slideshow .btn-primary,.section-hero .btn-primary,.section-banners .btn-primary{background-color:rgba(0,0,0,.2)!important}
+.section-slideshow .btn-primary:hover,.section-hero .btn-primary:hover,.section-banners .btn-primary:hover{background-color:rgba(0,0,0,.3)!important;border-width:2px!important}
 /* ocultar el boton "clear" nativo del input[type=search] (el × que aparece en hover) */
 .f2tn-search-panel input[type="search"]::-webkit-search-cancel-button,
 .f2tn-search-panel input[type="search"]::-webkit-search-decoration{-webkit-appearance:none;appearance:none;display:none}
