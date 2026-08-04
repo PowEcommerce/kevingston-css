@@ -486,9 +486,9 @@ h1.heading-block,h2.heading-block,h3.heading-block,h4.heading-block,h5.heading-b
 
 /* DESKTOP: panel docked a la DERECHA, full-height, entra deslizando desde la derecha */
 @media (min-width:768px){
-  #quickshop-modal.modal{top:0!important;right:0!important;bottom:0!important;left:auto!important;width:712px!important;max-width:calc(100vw - 48px)!important;height:100vh!important;max-height:100vh!important;transform:translateX(100%)}
-  #quickshop-modal.modal.modal-show{transform:translateX(0)!important;transition:transform 450ms cubic-bezier(.22,1,.36,1)!important}
-  #quickshop-modal.modal.modal-show::before{transition:opacity 450ms cubic-bezier(.22,1,.36,1)}
+  #quickshop-modal.modal{top:0!important;right:0!important;bottom:0!important;left:auto!important;width:712px!important;max-width:calc(100vw - 48px)!important;height:100vh!important;max-height:100vh!important;transform:translateX(100%);transition:transform 500ms var(--kv-modal-spring)!important}
+  #quickshop-modal.modal.modal-show{transform:translateX(0)!important;transition:transform 500ms var(--kv-modal-spring)!important}
+  #quickshop-modal.modal.modal-show::before{transition:opacity 500ms var(--kv-modal-spring)}
   #quickshop-modal .modal-body{max-height:calc(100vh - 56px);overflow-y:auto}
 }
 
@@ -1184,7 +1184,7 @@ body.modal-show{overflow:hidden!important}
 /* editables desde el bloque HTML. Apertura/cierre por color-picker.js   */
 /* (initOffersModal). Exclusión mutua con la suscripción nativa.         */
 /* ================================================================== */
-.f2tn-offers-ov{position:fixed;inset:0;z-index:2050;background:rgba(0,0,0,.4);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .4s ease,visibility .4s ease;display:flex;font-family:"Lato",sans-serif;color:#000}
+.f2tn-offers-ov{position:fixed;inset:0;z-index:2050;background:rgba(0,0,0,.4);opacity:0;visibility:hidden;pointer-events:none;transition:opacity 500ms var(--kv-modal-spring),visibility 500ms var(--kv-modal-spring);display:flex;font-family:"Lato",sans-serif;color:#000}
 .f2tn-offers-ov.f2tn-open{opacity:1;visibility:visible;pointer-events:auto}
 .f2tn-offers{position:relative;background:#fff;display:flex;flex-direction:column;overflow-x:hidden;overflow-y:auto;will-change:transform,opacity}
 .f2tn-offers-close{position:absolute;top:24px;right:24px;z-index:3;width:36px;height:36px;border:0;border-radius:50px;background:rgba(0,0,0,.5);cursor:pointer;padding:0}
@@ -1207,7 +1207,7 @@ body.modal-show{overflow:hidden!important}
 
 /* Desktop (07-C): move in desde la derecha, 450ms */
 @media (min-width:768px){
-  .f2tn-offers{width:450px;max-width:calc(100vw - 48px);height:100vh;margin-left:auto;transform:translateX(100%);transition:transform 450ms cubic-bezier(.16,1,.3,1)}
+  .f2tn-offers{width:450px;max-width:calc(100vw - 48px);height:100vh;margin-left:auto;transform:translateX(100%);transition:transform 500ms var(--kv-modal-spring)}
   .f2tn-offers-ov.f2tn-open .f2tn-offers{transform:translateX(0)}
   .f2tn-offers-media{height:430px}
 }
@@ -1301,9 +1301,14 @@ html.kv-menu-open .js-head-main .menu-container .js-modal-open-private::after{op
 /* 350ms ease-in; panel translateX(100→0), overlay opacity 0→1.           */
 /* ================================================================== */
 .kv-pdp-modal-ov{position:fixed;inset:0;z-index:3000;background:rgba(0,0,0,.5);opacity:0;visibility:hidden;transition:opacity .35s ease-in,visibility 0s linear .35s}
-.kv-pdp-modal-ov.open{opacity:1;visibility:visible;transition:opacity .45s cubic-bezier(.22,1,.36,1),visibility 0s}
+.kv-pdp-modal-ov.open{opacity:1;visibility:visible;transition:opacity 500ms var(--kv-modal-spring),visibility 0s}
 .kv-pdp-modal-panel{position:fixed;top:0;right:0;height:100dvh;width:466px;max-width:100%;background:#fff;transform:translateX(100%);transition:transform .35s ease-in;display:flex;flex-direction:column;font-family:"Lato",sans-serif}
-.kv-pdp-modal-ov.open .kv-pdp-modal-panel{transform:translateX(0);transition:transform .45s cubic-bezier(.22,1,.36,1)}
+.kv-pdp-modal-ov.open .kv-pdp-modal-panel{transform:translateX(0);transition:transform 500ms var(--kv-modal-spring)}
+/* cierre con el MISMO spring, solo desktop (mobile mantiene su .3s ease-out) */
+@media (min-width:768px){
+  .kv-pdp-modal-ov{transition:opacity 500ms var(--kv-modal-spring),visibility 0s linear 500ms}
+  .kv-pdp-modal-panel{transition:transform 500ms var(--kv-modal-spring)}
+}
 .kv-pdp-modal-header{display:flex;align-items:center;justify-content:space-between;gap:48px;padding:16px 24px;border-bottom:1px solid #d9d9d9;flex:none}
 .kv-pdp-modal-header-title{font:500 16px/1.3 "Lato",sans-serif;color:#000;margin:0}
 .kv-pdp-modal-x{width:20px;height:20px;border:0;background:none;cursor:pointer;padding:0;position:relative;flex:none}
