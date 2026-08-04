@@ -431,10 +431,10 @@ html:not(.kv-preview) .section.section-slideshow .btn:hover,html:not(.kv-preview
 /* GENERAL: cualquier <a> que envuelva una imagen NO baja la opacity en hover
    (el theme aplica opacity .8 a los links). Cubre cards, galería, banners, etc. */
 a:has(img):hover,a:has(picture):hover{opacity:1!important}
-/* B3 (QA ficha): cards del carrusel de recomendados iguales a las de home
-   (card blanca + bloque de info con fondo blanco). */
-.section-related-products .js-item-product{background:#fff!important;border-radius:8px;overflow:hidden}
-.section-related-products .js-item-product .product-item-information{background:#fff!important}
+/* B3 (QA ficha): cards del carrusel de recomendados con fondo #f6f5f3 en el bloque
+   de info (Figma new-card / Card-Content = background/secondary #f6f5f3), no blanco. */
+.section-related-products .js-item-product{background:#f6f5f3!important;border-radius:8px;overflow:hidden}
+.section-related-products .js-item-product .product-item-information{background:#f6f5f3!important}
 .kv-swatches{
   display:flex;align-items:center;gap:12px;margin-top:0;margin-left:3px;
   /* altura fija: con "+N" (texto 12px) la fila es más alta que con un solo dot;
