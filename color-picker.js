@@ -2029,6 +2029,32 @@
     new MutationObserver(fix).observe(cont, { childList: true, subtree: true });
   }
 
+  /* PDP — C2 (QA): cucardas arriba del título. Lee el % de descuento nativo
+     (.js-offer-label.product-offer-label -> "60% OFF") y la promo
+     (.promotion-detail-title.label-primary -> "Llevá 2 y pagá 1!") y las inyecta
+     como pills (descuento rojo + promo naranja) antes del nombre. Figma 1288-30575. */
+  function initPdpBadges() {
+    var det = document.querySelector(".js-product-detail");
+    if (!det || det.getAttribute("data-kv-badges") === "1") return;
+    var name = det.querySelector(".js-product-name, .product-name");
+    if (!name) return;
+    det.setAttribute("data-kv-badges", "1");
+    var row = document.createElement("div");
+    row.className = "kv-pdp-badges";
+    function addPill(txt, cls) {
+      if (!txt) return;
+      var s = document.createElement("span");
+      s.className = "kv-pdp-badge " + cls;
+      s.textContent = txt;
+      row.appendChild(s);
+    }
+    var off = det.querySelector(".js-offer-label.product-offer-label, .js-offer-label, .product-offer-label");
+    addPill(off && (off.textContent || "").trim(), "kv-pdp-badge-off");
+    var promo = det.querySelector(".promotion-detail-title.label-primary, .promotion-detail-title");
+    addPill(promo && (promo.textContent || "").trim(), "kv-pdp-badge-promo");
+    if (row.children.length) name.parentNode.insertBefore(row, name);
+  }
+
   /* PDP — G1 (QA): NO hay talle seleccionado por default. Se deselecciona el que TN
      preselecciona; y si se toca el CTA sin talle elegido, la leyenda pasa de
      "Agregar al Carrito" a "Seleccioná tu talle" (y no agrega al carrito). Al elegir
@@ -2252,6 +2278,8 @@
     initPdpTabs();
     initPdpSizeLinks();
     initPdpBtnText();
+    initPdpBadges();
+    [500, 1500].forEach(function (ms) { setTimeout(initPdpBadges, ms); }); // los labels nativos pueden renderizar tarde
     initPdpSizeGate();
     [500, 1500].forEach(function (ms) { setTimeout(initPdpSizeGate, ms); }); // el form de talles puede renderizar tarde
     initPdpGallery();

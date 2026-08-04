@@ -1332,6 +1332,14 @@ html.kv-menu-open .js-head-main .menu-container .js-modal-open-private::after{op
 .js-product-detail .js-free-shipping-minimum-message.free-shipping-message{display:none!important}
 /* el form no debe sumar espacio arriba (colores maneja su propio margin 24) */
 .js-product-detail .js-product-form{margin-top:0!important;padding-top:0!important}
+/* C2 (QA ficha, Figma 1288-30575): cucardas arriba del título. Descuento #be0000 +
+   promo #ff8000, texto blanco 10px, pill radio 50px, fila gap 16, 8px al título.
+   Las inyecta color-picker.js (initPdpBadges) leyendo los labels nativos. */
+.js-product-detail .kv-pdp-badges{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start;margin:0 0 8px}
+.js-product-detail .kv-pdp-badges:empty{display:none;margin:0}
+.js-product-detail .kv-pdp-badge{display:inline-flex;align-items:center;justify-content:center;padding:4px 8px;border-radius:50px;font:400 10px/1 "Lato",sans-serif;color:#fff;white-space:nowrap}
+.js-product-detail .kv-pdp-badge-off{background:#be0000}
+.js-product-detail .kv-pdp-badge-promo{background:#ff8000}
 
 /* ================================================================== */
 /* PDP — Bloque 3: selector de color por SKU-5 (thumbs + "+N colores") */
