@@ -1716,7 +1716,7 @@ html.kv-menu-open .js-head-main .menu-container .js-modal-open-private::after{op
   /* (Figma 1407-27142). Se anula el padding del container y se re-aplica sólo  */
   /* a la columna de info.                                                      */
   .container:has(.product-columns){padding-left:0!important;padding-right:0!important}
-  .js-product-detail .js-product-info{padding-left:16px!important;padding-right:16px!important}
+  .js-product-detail .js-product-info{padding-left:16px!important;padding-right:16px!important;padding-top:8px!important}
   /* título "También te recomendamos" 20px en mobile (desktop 24px). Se targetea */
   /* .heading-block DIRECTO (el JS lo convierte a h1/h2/h3 según SEO → el         */
   /* selector por tag/ancestro "header" no siempre matcheaba).                    */
