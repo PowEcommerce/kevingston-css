@@ -1622,7 +1622,7 @@
       a.appendChild(span); a.appendChild(nm);
       grid.appendChild(a);
     });
-    ov.classList.add("open");
+    void ov.offsetWidth; ov.classList.add("open"); // reflow -> el estado inicial se pinta antes del slide (evita apertura brusca la 1ra vez)
     document.documentElement.classList.add("f2tn-lock");
   }
 
@@ -1660,7 +1660,7 @@
       if (descText) target.appendChild(descText);
       else if (descBox) target.innerHTML = (descBox.textContent || "").trim();
     }
-    ov.classList.add("open");
+    void ov.offsetWidth; ov.classList.add("open"); // reflow -> el estado inicial se pinta antes del slide (evita apertura brusca la 1ra vez)
     document.documentElement.classList.add("f2tn-lock");
   }
 
@@ -1710,7 +1710,7 @@
         if (e.key === "Escape" && ov.classList.contains("open")) closePdpModal(ov);
       });
     }
-    ov.classList.add("open");
+    void ov.offsetWidth; ov.classList.add("open"); // reflow -> el estado inicial se pinta antes del slide (evita apertura brusca la 1ra vez)
     document.documentElement.classList.add("f2tn-lock");
   }
 
@@ -1741,7 +1741,7 @@
       if (pdpShipBox) host.appendChild(pdpShipBox);
       else host.innerHTML = "<p>Ingresá tu código postal para calcular los medios de envío y tiempos de entrega.</p>";
     }
-    ov.classList.add("open");
+    void ov.offsetWidth; ov.classList.add("open"); // reflow -> el estado inicial se pinta antes del slide (evita apertura brusca la 1ra vez)
     document.documentElement.classList.add("f2tn-lock");
   }
 
@@ -1774,7 +1774,7 @@
         if (e.key === "Escape" && ov.classList.contains("open")) closePdpModal(ov);
       });
     }
-    ov.classList.add("open");
+    void ov.offsetWidth; ov.classList.add("open"); // reflow -> el estado inicial se pinta antes del slide (evita apertura brusca la 1ra vez)
     document.documentElement.classList.add("f2tn-lock");
   }
 
@@ -1886,7 +1886,7 @@
     function open(i) {
       if (!ov) build();
       idx = i; show();
-      ov.classList.add("open");
+      void ov.offsetWidth; ov.classList.add("open"); // reflow -> el estado inicial se pinta antes del slide (evita apertura brusca la 1ra vez)
       document.documentElement.classList.add("f2tn-lock");
     }
     imgEls.forEach(function (im, i) {
@@ -2231,7 +2231,7 @@
         if (e.key === "Escape" && ov.classList.contains("open")) closePdpModal(ov);
       });
     }
-    ov.classList.add("open");
+    void ov.offsetWidth; ov.classList.add("open"); // reflow -> el estado inicial se pinta antes del slide (evita apertura brusca la 1ra vez)
     document.documentElement.classList.add("f2tn-lock");
   }
 
@@ -2265,7 +2265,7 @@
         if (e.key === "Escape" && ov.classList.contains("open")) closeSizeFitModal(ov);
       });
     }
-    ov.classList.add("open");
+    void ov.offsetWidth; ov.classList.add("open"); // reflow -> el estado inicial se pinta antes del slide (evita apertura brusca la 1ra vez)
     document.documentElement.classList.add("f2tn-lock");
   }
 

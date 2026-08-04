@@ -87,6 +87,10 @@ body.kv-search-empty-on .section-main-products-grid{display:none!important}
    La transicion va solo en el reveal -> fade+slide de entrada. */
 .kv-reveal{opacity:0;transform:translateY(20px);will-change:opacity,transform}
 .kv-reveal.kv-revealed{opacity:1;transform:none;transition:opacity .6s ease-out,transform .6s ease-out}
+/* Reserva el espacio de la scrollbar SIEMPRE: al abrir un modal (f2tn-lock =
+   overflow:hidden) no desaparece la scrollbar -> el contenido y el header sticky
+   no saltan/corren. */
+html{scrollbar-gutter:stable}
 
 /* SEO headings: el heading-block se convierte por JS de <div> a <h1/h2/h3> (etiquetas SEO).
    Neutralizamos los defaults del navegador para que el estilo NO cambie (el font-size lo dan las clases). */
