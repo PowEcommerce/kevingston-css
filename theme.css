@@ -1373,8 +1373,8 @@ html.kv-menu-open .js-head-main .menu-container .js-modal-open-private::after{op
 /* MISMA idea que el newsletter: el PANEL solo slidea (translateX) sin fadear. El
    oscurecido de la página se anima por BACKGROUND-COLOR (transparente -> negro .5),
    NO por opacity del contenedor -> así el panel (hijo) no fadea. */
-.kv-pdp-modal-ov{position:fixed;inset:0;z-index:3000;background:rgba(0,0,0,0);visibility:hidden;transition:background-color 500ms var(--kv-modal-spring),visibility 0s linear .5s}
-.kv-pdp-modal-ov.open{background:rgba(0,0,0,.5);visibility:visible;transition:background-color 500ms var(--kv-modal-spring),visibility 0s}
+.kv-pdp-modal-ov{position:fixed;inset:0;z-index:3000;background:rgba(0,0,0,0);visibility:hidden;transition:background-color .2s ease-out,visibility 0s linear .5s}
+.kv-pdp-modal-ov.open{background:rgba(0,0,0,.5);visibility:visible;transition:background-color .2s ease-out,visibility 0s}
 .kv-pdp-modal-panel{position:fixed;top:0;right:0;height:100dvh;width:466px;max-width:100%;background:#fff;transform:translateX(100%);transition:transform 500ms var(--kv-modal-spring);display:flex;flex-direction:column;font-family:"Lato",sans-serif}
 .kv-pdp-modal-ov.open .kv-pdp-modal-panel{transform:translateX(0)}
 .kv-pdp-modal-header{display:flex;align-items:center;justify-content:space-between;gap:48px;padding:16px 24px;border-bottom:1px solid #d9d9d9;flex:none}
@@ -1585,8 +1585,8 @@ html.kv-menu-open .js-head-main .menu-container .js-modal-open-private::after{op
 @media (max-width:767px){
   /* M01 · paneles .kv-pdp-modal (colores/descripción/pago/envío/cambios/guía)  */
   .kv-pdp-modal-panel{width:100%!important;max-width:100%!important;transition:transform .3s ease-out}
-  .kv-pdp-modal-ov{transition:background-color .3s ease-out,visibility 0s linear .3s}
-  .kv-pdp-modal-ov.open{transition:background-color .3s ease-out,visibility 0s}
+  .kv-pdp-modal-ov{transition:background-color .2s ease-out,visibility 0s linear .3s}
+  .kv-pdp-modal-ov.open{transition:background-color .2s ease-out,visibility 0s}
 
   /* M02 · "Conocé tu talle": de pop-up centrado (desktop) a panel lateral       */
   /* full-screen que entra desde la derecha, igual que los de M01.               */
