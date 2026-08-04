@@ -171,7 +171,7 @@
           );
           var isRecommendations = el.classList.contains("js-recommendations-swiper");
           var off = isRecommendations ? 0 : 32; // recomendados: el container ya paddea
-          var spv = 4.2; // 4 completas + peek de la quinta
+          var spv = isRecommendations ? 4.1 : 4.2; // recomendados 4.1, home 4.2 (4 + peek)
           if (!isEditorial) {
             var bp = sw.params.breakpoints;
             if (bp && bp["768"]) {
