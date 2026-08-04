@@ -1618,6 +1618,14 @@ html.kv-menu-open .js-head-main .menu-container .js-modal-open-private::after{op
 .kv-pdp-tab.open .kv-tab-chev{transform:rotate(90deg)}
 .kv-pdp-tab-body{max-height:0;overflow:hidden;transition:max-height .3s ease}
 .kv-pdp-tab.open .kv-pdp-tab-body{max-height:1200px}
+/* Bloque "Envío Same day" hardcodeado (Figma 1244-29952): caja #f6f5f3 radio 8,
+   ícono camión en cajita blanca radio 4, texto 12px bold+regular. Inyectado por JS. */
+.js-product-detail .kv-pdp-sameday{background:#f6f5f3;border-radius:8px;padding:16px 8px;display:flex;flex-direction:column;align-items:center;justify-content:center;margin:24px 0 0}
+.js-product-detail .kv-pdp-sameday-row{display:flex;gap:16px;align-items:center;justify-content:center}
+.js-product-detail .kv-pdp-sameday-ico{background:#fff;border-radius:4px;padding:8px;display:inline-flex;flex:none}
+.js-product-detail .kv-pdp-sameday-ico svg{width:20px;height:16px;display:block}
+.js-product-detail .kv-pdp-sameday-text{font:400 12px/1.35 "Lato",sans-serif;color:#000;margin:0;max-width:362px}
+.js-product-detail .kv-pdp-sameday-text strong{font-weight:700}
 .kv-pdp-tab-inner{padding:0 0 20px 32px;font:400 14px/1.5 "Lato",sans-serif;color:#333}
 .kv-pdp-tab-inner p{margin:0 0 8px}
 .kv-pdp-tab-inner .product-description-heading{display:none}

@@ -2157,6 +2157,32 @@
     }, true);
   }
 
+  /* PDP — Bloque "Envío Same day" HARDCODEADO (sin app). Figma 1244-29952: caja
+     #f6f5f3 radio 8, ícono camión en cajita blanca, texto bold+regular, con cuenta
+     regresiva en vivo hasta fin del día. Va después de los desplegables. */
+  function initPdpSameDay() {
+    var det = document.querySelector(".js-product-detail");
+    if (!det || det.getAttribute("data-kv-sameday") === "1") return;
+    var anchor = det.querySelector(".kv-pdp-tabs") || det.querySelector(".buy-button-container");
+    if (!anchor || !anchor.parentNode) return;
+    det.setAttribute("data-kv-sameday", "1");
+    var TRUCK = '<svg width="20" height="16" viewBox="0 0 21 17" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 14C18 14.663 17.7366 15.2989 17.2678 15.7678C16.7989 16.2366 16.163 16.5 15.5 16.5C14.837 16.5 14.2011 16.2366 13.7322 15.7678C13.2634 15.2989 13 14.663 13 14C13 13.337 13.2634 12.7011 13.7322 12.2322C14.2011 11.7634 14.837 11.5 15.5 11.5C16.163 11.5 16.7989 11.7634 17.2678 12.2322C17.7366 12.7011 18 13.337 18 14ZM8 14C8 14.663 7.73661 15.2989 7.26777 15.7678C6.79893 16.2366 6.16304 16.5 5.5 16.5C4.83696 16.5 4.20107 16.2366 3.73223 15.7678C3.26339 15.2989 3 14.663 3 14C3 13.337 3.26339 12.7011 3.73223 12.2322C4.20107 11.7634 4.83696 11.5 5.5 11.5C6.16304 11.5 6.79893 11.7634 7.26777 12.2322C7.73661 12.7011 8 13.337 8 14Z" stroke="black"/><path d="M13 14H8M0.5 0.5H10.5C11.914 0.5 12.621 0.5 13.06 0.94C13.5 1.378 13.5 2.085 13.5 3.5V12M14 3H15.801C16.631 3 17.046 3 17.39 3.195C17.734 3.389 17.947 3.745 18.374 4.457L20.073 7.287C20.285 7.641 20.391 7.819 20.446 8.015C20.5 8.212 20.5 8.418 20.5 8.831V11.5C20.5 12.435 20.5 12.902 20.299 13.25C20.1674 13.478 19.978 13.6674 19.75 13.799C19.402 14 18.935 14 18 14M0.5 9.5V11.5C0.5 12.435 0.5 12.902 0.701 13.25C0.832648 13.478 1.02199 13.6674 1.25 13.799C1.598 14 2.065 14 3 14M0.5 3.5H6.5M0.5 6.5H4.5" stroke="black" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    var box = document.createElement("div");
+    box.className = "kv-pdp-sameday";
+    box.innerHTML = '<div class="kv-pdp-sameday-row"><span class="kv-pdp-sameday-ico">' + TRUCK + '</span><p class="kv-pdp-sameday-text"><strong>Envío Same day.</strong> Si vivís en CABA recibilo mañana comprando dentro de las próximas <span class="kv-pdp-sameday-count"></span>.</p></div>';
+    anchor.parentNode.insertBefore(box, anchor.nextSibling);
+    var countEl = box.querySelector(".kv-pdp-sameday-count");
+    function upd() {
+      var now = new Date();
+      var end = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0); // próxima medianoche
+      var diff = Math.max(0, end - now);
+      var h = Math.floor(diff / 3600000), m = Math.floor((diff % 3600000) / 60000);
+      countEl.textContent = h + " hs " + m + " min";
+    }
+    upd();
+    setInterval(upd, 30000);
+  }
+
   /* PDP — Modal "Guía de talles" (Figma 2520-24913). Panel lateral (mismo    */
   /* sistema .kv-pdp-modal que los facilitadores): tabla de medidas + "Cómo    */
   /* medir" (ilustración) + 5 pasos. Los DATOS DE LA TABLA son PLACEHOLDER      */
@@ -2329,6 +2355,8 @@
     initMobileMenuLogo();
     initPdp();
     initPdpTabs();
+    initPdpSameDay();
+    [400, 1200].forEach(function (ms) { setTimeout(initPdpSameDay, ms); }); // los tabs se inyectan por JS
     initPdpSizeLinks();
     initPdpBtnText();
     initPdpBadges();
