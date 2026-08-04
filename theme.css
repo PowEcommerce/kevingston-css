@@ -1640,7 +1640,7 @@ html.kv-menu-open .js-head-main .menu-container .js-modal-open-private::after{op
 /* (padding+margin) para que el carrusel sangre al borde derecho (peek al borde)  */
 /* y arranque alineado a 36px.                                                     */
 @media (min-width:768px){.section-related-products .container{max-width:none!important;width:100%!important;margin-left:0!important;margin-right:0!important;padding-left:36px!important;padding-right:0!important}}
-@media (max-width:767px){.section-related-products .container{max-width:none!important;width:100%!important;margin:0!important;padding-left:16px!important;padding-right:16px!important}}
+@media (max-width:767px){.section-related-products .container{max-width:none!important;width:100%!important;margin:0!important;padding-left:16px!important;padding-right:0!important}}
 .section-related-products .section-title,.section-related-products h2,.section-related-products .products-list-title,.section-related-products [class*="header"] .heading-block{font:400 24px/1.2 "Lato",sans-serif!important;color:#000!important;text-transform:none!important;margin:0 0 24px!important}
 /* Card del carrusel de recomendados con fondo crema (Figma) — el css_code    */
 /* global pinta .js-item-product de blanco; acá se sobreescribe por scope.      */
