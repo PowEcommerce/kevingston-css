@@ -163,23 +163,25 @@
             sw.slideTo(0, 0); // reset al inicio (loopDestroy deja un indice intermedio)
           } catch (e) {}
         }
-        // Desktop: 4 productos + peek del 5to (slidesPerView 4.2). Editorial NO (layout propio).
+        // Desktop: home = 4 + peek (4.2). Recomendados de la ficha = EXACTO 4, sin peek
+        // (Figma 1840-20305: card 332 en container 1376 = 4×332+3×16). Editorial NO.
         try {
           var isEditorial = el.closest(
             "#ns-section-editorial_products, #ns-section-editorial_products_mujer"
           );
           var isRecommendations = el.classList.contains("js-recommendations-swiper");
           var off = isRecommendations ? 0 : 32; // recomendados: el container ya paddea
+          var spv = isRecommendations ? 4 : 4.2; // recomendados exacto 4, home 4+peek
           if (!isEditorial) {
             var bp = sw.params.breakpoints;
             if (bp && bp["768"]) {
-              bp["768"].slidesPerView = 4.2;
+              bp["768"].slidesPerView = spv;
               bp["768"].slidesPerGroup = 1; // mover de a 1 card (no de a 4)
               bp["768"].slidesOffsetBefore = off; // arranca alineado; al scrollear sangra al borde
               bp["768"].slidesOffsetAfter = off; // al final, el ultimo producto no queda pegado al borde
             }
             if (window.innerWidth >= 768) {
-              sw.params.slidesPerView = 4.2;
+              sw.params.slidesPerView = spv;
               sw.params.slidesPerGroup = 1;
               sw.params.slidesOffsetBefore = off;
               sw.params.slidesOffsetAfter = off;
