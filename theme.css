@@ -1620,7 +1620,7 @@ html.kv-menu-open .js-head-main .menu-container .js-modal-open-private::after{op
 .kv-pdp-tab.open .kv-pdp-tab-body{max-height:1200px}
 /* Bloque "Envío Same day" hardcodeado (Figma 1244-29952): caja #f6f5f3 radio 8,
    ícono camión en cajita blanca radio 4, texto 12px bold+regular. Inyectado por JS. */
-.js-product-detail .kv-pdp-sameday{background:#f6f5f3;border-radius:8px;padding:16px 8px;display:flex;flex-direction:column;align-items:center;justify-content:center;margin:24px 0 0}
+.js-product-detail .kv-pdp-sameday{background:#f6f5f3;border-radius:8px;padding:12px 14px;display:flex;flex-direction:column;align-items:center;justify-content:center;margin:24px 0 0}
 .js-product-detail .kv-pdp-sameday-row{display:flex;gap:16px;align-items:center;justify-content:center}
 .js-product-detail .kv-pdp-sameday-ico{background:#fff;border-radius:4px;padding:8px;display:inline-flex;flex:none}
 .js-product-detail .kv-pdp-sameday-ico svg{width:20px;height:16px;display:block}
