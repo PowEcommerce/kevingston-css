@@ -163,15 +163,15 @@
             sw.slideTo(0, 0); // reset al inicio (loopDestroy deja un indice intermedio)
           } catch (e) {}
         }
-        // Desktop: home = 4 + peek (4.2). Recomendados de la ficha = EXACTO 4, sin peek
-        // (Figma 1840-20305: card 332 en container 1376 = 4×332+3×16). Editorial NO.
+        // Desktop: 4 cards + peek de la quinta (slidesPerView 4.2) — home y recomendados
+        // de la ficha (elección del cliente: 4 + un poquito de la quinta). Editorial NO.
         try {
           var isEditorial = el.closest(
             "#ns-section-editorial_products, #ns-section-editorial_products_mujer"
           );
           var isRecommendations = el.classList.contains("js-recommendations-swiper");
           var off = isRecommendations ? 0 : 32; // recomendados: el container ya paddea
-          var spv = isRecommendations ? 4 : 4.2; // recomendados exacto 4, home 4+peek
+          var spv = 4.2; // 4 completas + peek de la quinta
           if (!isEditorial) {
             var bp = sw.params.breakpoints;
             if (bp && bp["768"]) {
