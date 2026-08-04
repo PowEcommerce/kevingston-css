@@ -1487,6 +1487,12 @@ html.kv-menu-open .js-head-main .menu-container .js-modal-open-private::after{op
 .js-product-detail .btn-variant-no-stock{border-color:#8f8f8f!important;color:#8f8f8f!important;background:#fff!important;pointer-events:none;text-decoration:line-through!important}
 .js-product-detail .btn-variant-no-stock .btn-variant-content{color:#8f8f8f!important;text-decoration:line-through!important}
 .js-product-detail .btn-variant-no-stock::after,.js-product-detail .btn-variant-no-stock::before{display:none!important}
+/* F1 (QA ficha, Figma 1300-37935): estados HOVER de los selectores.
+   Talle: borde 2px negro (solo con stock y no seleccionado).
+   Color: borde 1px #737373 (solo no activo). "+N colores": borde 1px #737373. */
+.js-product-detail .btn-variant:not(.selected):not(.btn-variant-no-stock):hover{border:2px solid #000!important;box-sizing:border-box}
+.kv-pdp-color:not(.is-active):hover{border:1px solid #737373}
+.kv-pdp-colors-more:hover{border:1px solid #737373}
 /* Links "Guía de talles" (izq) + "Conocé tu talle" (der) — inyectados por JS   */
 /* como fila full-width dentro del grupo de talle (Figma: 12px subrayado, space-between) */
 .kv-pdp-sizelinks{display:flex;align-items:center;justify-content:space-between;gap:24px;margin:16px 0 24px}
