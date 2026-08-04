@@ -1445,6 +1445,11 @@ html.kv-menu-open .js-head-main .menu-container .js-modal-open-private::after{op
   .product-columns .js-product-slider.kv-gallery-stacked{width:100%!important;max-width:none!important}
   /* columna info fija: 24px por debajo del header sticky (84px) = 108px.  */
   .product-columns .js-product-info{flex:0 1 31.11vw;max-width:31.11vw;min-width:0;position:sticky;top:108px;align-self:flex-start}
+  /* E1 (QA ficha): header SIEMPRE sticky en la ficha (como el prototipo). El adbar
+     (40px) scrollea y sale por arriba; la barra principal (84px) queda pegada. Así la
+     info (sticky top:108) queda justo 24px debajo del header. */
+  .template-product .js-header{position:sticky!important;top:-40px;z-index:1001}
+  .template-product .js-header .js-head-main{background:#fff}
   /* galería en grid vertical */
   .kv-gallery-stacked{width:100%!important;height:auto!important;overflow:visible!important}
   .kv-gallery-stacked>.swiper-wrapper{display:grid!important;grid-template-columns:1fr 1fr;gap:16px;transform:none!important;height:auto!important;width:100%!important}
