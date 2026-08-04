@@ -417,7 +417,17 @@ html:not(.kv-preview) .section.section-slideshow .btn:hover,html:not(.kv-preview
 .js-item-product .product-item-link:hover,
 .js-item-product a.product-item-link:hover,
 .js-product-item-image-link-private,
-.js-product-item-image-link-private:hover{opacity:1!important}
+.js-product-item-image-link-private:hover,
+/* E3 (QA ficha): las imágenes de la galería PDP tampoco deben cambiar en hover
+   (el nativo les baja la opacity -> se veía como overlay blanco). */
+.js-product-detail .js-product-slide-link,
+.js-product-detail .js-product-slide-link:hover,
+.js-product-detail .product-slide-link,
+.js-product-detail .product-slide-link:hover,
+.js-product-detail .js-product-slide,
+.js-product-detail .js-product-slide:hover,
+.js-product-detail .js-product-image-cover,
+.js-product-detail .js-product-image-cover:hover{opacity:1!important}
 .kv-swatches{
   display:flex;align-items:center;gap:12px;margin-top:0;margin-left:3px;
   /* altura fija: con "+N" (texto 12px) la fila es más alta que con un solo dot;
