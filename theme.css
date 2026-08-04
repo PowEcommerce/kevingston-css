@@ -1524,7 +1524,10 @@ html.kv-menu-open .js-head-main .menu-container .js-modal-open-private::after{op
 /* F1 (QA ficha, Figma 1300-37935): estados HOVER de los selectores.
    Talle: borde 2px negro (solo con stock y no seleccionado).
    Color: borde 1px #737373 (solo no activo). "+N colores": borde 1px #737373. */
-.js-product-detail .btn-variant:not(.selected):not(.btn-variant-no-stock):hover{border-color:#000!important}
+/* Talle: hover borde 2px negro (Figma). El ancho NO está en la transición (solo
+   border-color) -> el 2px aparece instantáneo, sin la animación de "rellenar". */
+.js-product-detail .btn-variant:not(.selected):not(.btn-variant-no-stock):hover{border:2px solid #000!important;box-sizing:border-box}
+/* Colores y "+N": borde siempre 1px, solo cambia el color. */
 .kv-pdp-color:not(.is-active):hover{border-color:#737373}
 .kv-pdp-colors-more:hover{border-color:#737373}
 /* Links "Guía de talles" (izq) + "Conocé tu talle" (der) — inyectados por JS   */
