@@ -1679,7 +1679,7 @@ html.kv-menu-open .js-head-main .menu-container .js-modal-open-private::after{op
   .section-related-products .swiper-button-prev,.section-related-products .swiper-button-next{
     width:36px!important;height:36px!important;border-radius:50%;background-color:rgba(233,231,226,.5)!important;
     background-repeat:no-repeat;background-position:center;background-size:20px 20px;
-    display:flex;align-items:center;justify-content:center;margin:0;top:50%;transform:translateY(-50%);z-index:5;opacity:1!important;pointer-events:auto}
+    display:flex;align-items:center;justify-content:center;margin:0;top:36%;transform:translateY(-50%);z-index:5;opacity:1!important;pointer-events:auto}
   .section-related-products .swiper-button-prev{left:0!important;right:auto!important}
   .section-related-products .swiper-button-next{right:0!important;left:auto!important}
   .section-related-products .swiper-button-prev .slider-arrow,.section-related-products .swiper-button-next .slider-arrow,
