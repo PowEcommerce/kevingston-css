@@ -1199,7 +1199,7 @@ body.modal-show{overflow:hidden!important}
 .f2tn-offers-img{display:none!important}
 .f2tn-offers-body{flex:1 1 auto;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;padding:24px;text-align:center}
 .f2tn-offers-textwrap{display:flex;flex-direction:column;gap:8px;width:100%}
-.f2tn-offers-title{font:500 24px/1.2 "Lato",sans-serif;color:#000;margin:0}
+.f2tn-offers-title{font:500 24px/1.2 "Lato",sans-serif;color:#000;margin:42px 0 0}
 .f2tn-offers-text{font:400 16px/1.3 "Lato",sans-serif;color:#000;margin:0}
 .f2tn-offers-btns{display:flex;flex-direction:column;align-items:center;gap:24px}
 .f2tn-offers-btns:empty{display:none}
