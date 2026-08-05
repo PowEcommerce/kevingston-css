@@ -2017,12 +2017,12 @@ html.f2tn-lock:has(body.template-product) body{overflow:visible!important}
 /* ---- Mobile (Figma 3211-30582): 16px padding lateral + item apilado ---- */
 @media(max-width:767px){
   #shoppingCartPage .container{padding-left:16px!important;padding-right:16px!important}
-  /* Título mobile: menos espacio (Figma: 24 arriba, 16 al divider, 16 al contenido) */
-  #shoppingCartPage .cart-page-content::before{margin:24px 0 16px;padding-bottom:16px}
+  /* Título mobile: 24 arriba, 14 al divider; el gap al producto lo da el padding-top del item */
+  #shoppingCartPage .cart-page-content::before{margin:24px 0 0;padding-bottom:14px}
   /* Item: img 98 + gap 8 → izq [nombre/variante/stepper/tax] + gap 16 → der [eliminar/precio] */
-  #shoppingCartPage .cart-page-item{display:flex;gap:8px;align-items:stretch;margin:0;padding:16px 0;border:0;border-bottom:1px solid #d9d9d9;background:none}
+  #shoppingCartPage .cart-page-item{display:flex;gap:8px;align-items:stretch;margin:0;padding:24px 0;border:0;border-bottom:1px solid #d9d9d9;background:none}
   #shoppingCartPage .cart-item-image-container{flex:0 0 98px;width:98px;height:98px}
-  #shoppingCartPage .cart-item-image{width:98px;height:98px;object-fit:cover}
+  #shoppingCartPage .cart-item-image{width:98px!important;height:98px!important;object-fit:cover;max-width:none}
   #shoppingCartPage .cart-item-info-container{flex:1 1 auto;min-width:0;display:grid;grid-template-columns:1fr auto;column-gap:16px;grid-template-areas:"name delete" "qty price" "tax tax";align-content:space-between;min-height:98px}
   #shoppingCartPage .cart-item-product-info,
   #shoppingCartPage .cart-item-totals-container{display:contents}
