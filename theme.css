@@ -1976,28 +1976,46 @@ html.f2tn-lock:has(body.template-product) body{overflow:visible!important}
   content:"Resumen de Compra";display:block;font-family:'Lato',sans-serif;font-weight:600;font-size:18px;line-height:1.2;color:#000;
   padding-bottom:16px;margin-bottom:32px;border-bottom:1px solid #d9d9d9;
 }
-/* Layout desktop: productos (1fr) | resumen (332) */
+/* Ocultar la calculadora de envío en la página (Figma no la muestra) — en TODOS los anchos.
+   Se mantiene la barra de envío gratis (que vive aparte del cart-fulfillment-info). */
+#shoppingCartPage .cart-page-fulfillment .cart-fulfillment-info{display:none!important}
+
+/* ---- Layout desktop: productos (1fr) | resumen (332). Override del grid nativo
+   (.cart-page-products{grid-column:1/-1} y .cart-page-summary{grid-row:1/3}). ---- */
 @media(min-width:768px){
   #shoppingCartPage .cart-page-content{display:grid;grid-template-columns:minmax(0,1fr) 332px;column-gap:117px;align-items:start}
   #shoppingCartPage .cart-page-content::before{grid-column:1/-1}
-  #shoppingCartPage .cart-page-products{grid-column:1;min-width:0}
-  #shoppingCartPage .cart-page-summary{grid-column:2}
-  #shoppingCartPage .cart-page-fulfillment{display:none} /* Figma no muestra calc en la página */
+  #shoppingCartPage .cart-page-products{grid-column:1;grid-row:auto;min-width:0}
+  #shoppingCartPage .cart-page-summary{grid-column:2;grid-row:auto}
+  #shoppingCartPage .cart-page-fulfillment{display:none}
+
+  /* Tabla: header + filas comparten el mismo grid de columnas */
+  #shoppingCartPage .cart-page-table-header,
+  #shoppingCartPage .cart-page-item{display:grid;grid-template-columns:94px minmax(0,1fr) 58px 100px 58px 36px;column-gap:24px;align-items:center;padding-right:0}
+  #shoppingCartPage .cart-page-table-header{margin:0 0 0;padding:0 0 16px;border-bottom:1px solid #d9d9d9;font-family:'Lato',sans-serif;font-weight:400;font-size:14px;color:#1d1d1b}
+  #shoppingCartPage .cart-page-table-header>div:first-child{grid-column:1/3}
+  #shoppingCartPage .cart-page-table-header-totals{display:contents}
+  #shoppingCartPage .cart-page-table-header-totals>div{text-align:left}
+  #shoppingCartPage .cart-page-item{margin:0;padding:24px 0;border:0;border-bottom:1px solid #d9d9d9;background:none}
+  #shoppingCartPage .cart-item-info-container,
+  #shoppingCartPage .cart-item-product-info,
+  #shoppingCartPage .cart-item-totals-container{display:contents}
 }
 
-/* Header de tabla + filas: mismo grid (Productos | Cantidad | Precio | Subtotal | del) */
-#shoppingCartPage .cart-page-table-header,
-#shoppingCartPage .cart-page-item{display:grid;grid-template-columns:94px minmax(0,1fr) 58px 100px 58px 36px;column-gap:24px;align-items:center}
-#shoppingCartPage .cart-page-table-header{padding:0 0 16px;border-bottom:1px solid #d9d9d9;font-family:'Lato',sans-serif;font-weight:400;font-size:14px;color:#1d1d1b}
-#shoppingCartPage .cart-page-table-header>div:first-child{grid-column:1/3}
-#shoppingCartPage .cart-page-table-header-totals{display:contents}
-#shoppingCartPage .cart-page-table-header-totals>div{text-align:left}
+/* ---- Mobile: fila apilada (imagen | [nombre/cantidad | eliminar/precio]) ---- */
+@media(max-width:767px){
+  #shoppingCartPage .cart-page-item{display:flex;gap:16px;align-items:stretch;margin:0;padding:16px 0;border:0;border-bottom:1px solid #d9d9d9;background:none}
+  #shoppingCartPage .cart-item-info-container{flex:1 1 auto;min-width:0;display:grid;grid-template-columns:1fr auto;grid-template-areas:"name delete" "qty price";align-content:space-between;min-height:94px;column-gap:12px}
+  #shoppingCartPage .cart-item-product-info,
+  #shoppingCartPage .cart-item-totals-container{display:contents}
+  #shoppingCartPage .cart-item-name-container{grid-area:name}
+  #shoppingCartPage .cart-item-delete{grid-area:delete;justify-self:end}
+  #shoppingCartPage .cart-item-quantity{grid-area:qty;align-self:end}
+  #shoppingCartPage .cart-item-subtotal{grid-area:price;justify-self:end;align-self:end;text-align:right}
+  #shoppingCartPage .cart-item-unit-price{display:none} /* mobile: solo subtotal */
+}
 
-/* Fila de producto */
-#shoppingCartPage .cart-page-item{margin:0;padding:24px 0;border:0;border-bottom:1px solid #d9d9d9;background:none}
-#shoppingCartPage .cart-item-info-container,
-#shoppingCartPage .cart-item-product-info,
-#shoppingCartPage .cart-item-totals-container{display:contents}
+/* ---- Fila de producto (común) ---- */
 #shoppingCartPage .cart-item-image-container{flex:none;width:94px;height:94px}
 #shoppingCartPage .cart-item-image{width:94px;height:94px;object-fit:cover}
 #shoppingCartPage .cart-item-name-container{display:flex;flex-direction:column;gap:8px;min-width:0}
