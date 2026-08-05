@@ -2543,15 +2543,15 @@
     if (!(ratio > 0.4) || !(ratio < 1)) return; // sanidad
     var items = page.querySelectorAll('.cart-page-item');
     for (var i = 0; i < items.length; i++) {
-      var nameC = items[i].querySelector('.cart-item-name-container');
-      if (!nameC || nameC.querySelector('.kv-item-notax')) continue;
+      var info = items[i].querySelector('.cart-item-info-container');
+      if (!info || info.querySelector('.kv-item-notax')) continue;
       var priceEl = items[i].querySelector('.js-cart-item-unit-price') || items[i].querySelector('.js-cart-item-subtotal');
       var base = priceEl ? kvParseMoney(priceEl.textContent) : 0;
       if (!(base > 0)) continue;
       var d = document.createElement('div');
       d.className = 'kv-item-notax';
-      d.textContent = 'Precio sin impuestos nacionales ' + kvFmtMoney(base * ratio);
-      nameC.appendChild(d);
+      d.innerHTML = '<span class="kv-notax-lbl">Precio sin impuestos nacionales</span> <span class="kv-notax-val">' + kvFmtMoney(base * ratio) + '</span>';
+      info.appendChild(d);
     }
   }
   function applyCart() {

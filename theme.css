@@ -1999,32 +1999,42 @@ html.f2tn-lock:has(body.template-product) body{overflow:visible!important}
   #shoppingCartPage .cart-page-table-header{display:grid;grid-template-columns:446px 58px 100px 58px 36px;justify-content:space-between;align-items:center;margin:0;padding:0;border:0;font-family:'Lato',sans-serif;font-weight:400;font-size:14px;color:#1d1d1b}
   #shoppingCartPage .cart-page-table-header-totals{display:contents}
   #shoppingCartPage .cart-page-table-header-totals>div{text-align:center}
-  #shoppingCartPage .cart-item-quantity{justify-self:center}
   #shoppingCartPage .cart-item-unit-price,#shoppingCartPage .cart-item-subtotal{text-align:center}
-  /* Fila: imagen(94)+16 en flex, resto en grid alineado al header (offset image = 446-336) */
+  /* Fila: imagen(94)+16 en flex, resto en grid alineado al header (offset image = 446-336).
+     2 filas: nombre(row1) + tax(row2) en col1; cantidad/precio/subtotal/eliminar centrados verticalmente */
   #shoppingCartPage .cart-page-item{display:flex;gap:16px;align-items:center;margin:0;padding:24px 0;border:0;border-bottom:1px solid #d9d9d9;background:none}
-  #shoppingCartPage .cart-item-info-container{flex:1 1 auto;min-width:0;display:grid;grid-template-columns:336px 58px 100px 58px 36px;justify-content:space-between;align-items:center}
+  #shoppingCartPage .cart-item-info-container{flex:1 1 auto;min-width:0;display:grid;grid-template-columns:336px 58px 100px 58px 36px;grid-template-areas:"name qty price sub del" "tax qty price sub del";justify-content:space-between;align-items:center}
   #shoppingCartPage .cart-item-product-info,
   #shoppingCartPage .cart-item-totals-container{display:contents}
-  #shoppingCartPage .cart-item-name-container{overflow:hidden}
-  #shoppingCartPage .cart-item-delete{justify-self:center}
+  #shoppingCartPage .cart-item-name-container{grid-area:name;overflow:hidden}
+  #shoppingCartPage .kv-item-notax{grid-area:tax}
+  #shoppingCartPage .cart-item-quantity{grid-area:qty;justify-self:center}
+  #shoppingCartPage .cart-item-unit-price{grid-area:price}
+  #shoppingCartPage .cart-item-subtotal{grid-area:sub}
+  #shoppingCartPage .cart-item-delete{grid-area:del;justify-self:center}
 }
 
 /* ---- Mobile (Figma 3211-30582): 16px padding lateral + item apilado ---- */
 @media(max-width:767px){
   #shoppingCartPage .container{padding-left:16px!important;padding-right:16px!important}
+  /* Título mobile: menos espacio (Figma: 24 arriba, 16 al divider, 16 al contenido) */
+  #shoppingCartPage .cart-page-content::before{margin:24px 0 16px;padding-bottom:16px}
   /* Item: img 98 + gap 8 → izq [nombre/variante/stepper/tax] + gap 16 → der [eliminar/precio] */
   #shoppingCartPage .cart-page-item{display:flex;gap:8px;align-items:stretch;margin:0;padding:16px 0;border:0;border-bottom:1px solid #d9d9d9;background:none}
   #shoppingCartPage .cart-item-image-container{flex:0 0 98px;width:98px;height:98px}
   #shoppingCartPage .cart-item-image{width:98px;height:98px;object-fit:cover}
-  #shoppingCartPage .cart-item-info-container{flex:1 1 auto;min-width:0;display:grid;grid-template-columns:1fr auto;column-gap:16px;grid-template-areas:"name delete" "qty price";align-content:space-between;min-height:98px}
+  #shoppingCartPage .cart-item-info-container{flex:1 1 auto;min-width:0;display:grid;grid-template-columns:1fr auto;column-gap:16px;grid-template-areas:"name delete" "qty price" "tax tax";align-content:space-between;min-height:98px}
   #shoppingCartPage .cart-item-product-info,
   #shoppingCartPage .cart-item-totals-container{display:contents}
   #shoppingCartPage .cart-item-name-container{grid-area:name;display:flex;flex-direction:column;gap:8px;min-width:0}
   #shoppingCartPage .cart-item-delete{grid-area:delete;justify-self:end}
-  #shoppingCartPage .cart-item-quantity{grid-area:qty;align-self:end;justify-self:start}
-  #shoppingCartPage .cart-item-subtotal{grid-area:price;justify-self:end;align-self:end;text-align:right}
+  #shoppingCartPage .cart-item-quantity{grid-area:qty;align-self:center;justify-self:start}
+  #shoppingCartPage .cart-item-subtotal{grid-area:price;justify-self:end;align-self:center;text-align:right}
   #shoppingCartPage .cart-item-unit-price{display:none}
+  /* tax: fila full-width abajo, label izquierda + valor derecha (Figma mobile) */
+  #shoppingCartPage .kv-item-notax{grid-area:tax;display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-top:8px}
+  /* separación productos → resumen */
+  #shoppingCartPage .cart-page-summary{margin-top:32px}
   /* Barra de envío gratis: en el resumen (después del botón), no entre productos y resumen */
   #shoppingCartPage .cart-page-fulfillment{display:none}
   #shoppingCartPage #cart-sticky-summary>.d-none.d-md-block:has(.js-ship-free-rest){display:block!important}
