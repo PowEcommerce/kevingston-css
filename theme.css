@@ -1844,8 +1844,8 @@ html.f2tn-lock:has(body.template-product) body{overflow:visible!important}
 #modal-cart .cart-item-subtotal .price-compare{font-family:'Lato',sans-serif;font-weight:400;font-size:12px;line-height:1.3;color:#6d6d6d;text-decoration:line-through}
 #modal-cart .cart-item-subtotal .js-cart-item-subtotal{font-family:'Lato',sans-serif;font-weight:400;font-size:12px;line-height:1.3;color:#000}
 
-/* --- Zona summary (.cart-row): 36px bajo items, luego bloques --- */
-#modal-cart .cart-row{display:flex;flex-direction:column;gap:24px;padding:0 24px 24px;margin-top:36px}
+/* --- Zona summary (.cart-row): 36px bajo items; separaciones internas por margen (no gap) --- */
+#modal-cart .cart-row{display:flex;flex-direction:column;gap:0;padding:0 24px 24px;margin-top:36px}
 
 /* Barra envío gratis: sin caja/camión, label 12px centrado, track #d9d9d9, filler verde + knob */
 #modal-cart .js-ship-free-rest.progress-bar{margin:0;padding:0;background:none;border:0;box-shadow:none;display:flex;flex-direction:column;gap:8px}
@@ -1883,8 +1883,11 @@ html.f2tn-lock:has(body.template-product) body{overflow:visible!important}
 #modal-cart .cart-subtotals-container,#modal-cart .js-cart-total-container{display:flex;flex-direction:column;gap:16px;margin:0}
 #modal-cart .cart-totals-row{display:flex;justify-content:space-between;align-items:baseline;font-family:'Lato',sans-serif;font-size:14px;margin:0}
 #modal-cart .cart-totals-subtotal,#modal-cart .cart-totals-total{font-weight:600;color:#1d1d1b}
-/* Orden Figma (medios movido por JS entre subtotal y total): divider DEBAJO del subtotal */
-#modal-cart .cart-subtotals-container{padding:0 0 24px;border-bottom:1px solid #d9d9d9;margin:0 0 24px}
+/* Orden Figma (medios movido por JS entre subtotal y total): divider DEBAJO del subtotal.
+   margin-top 32 = separación barra envío → subtotal (sin gap del cart-row) */
+#modal-cart .cart-subtotals-container{padding:0 0 24px;border-bottom:1px solid #d9d9d9;margin:32px 0 24px}
+/* total → botón (Figma 16), ya que van en wrappers separados sin gap */
+#modal-cart .js-ajax-cart-submit,#modal-cart #ajax-cart-submit-div{margin-top:16px}
 /* Bloque "Medios de envío" (movido por JS acá): separación al total */
 #modal-cart .js-cart-total-container>.cart-fulfillment-info,
 #modal-cart .cart-fulfillment-info.kv-moved{margin:0 0 36px}
