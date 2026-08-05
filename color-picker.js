@@ -2482,13 +2482,36 @@
       }
     });
   }
+  /* Mover "Medios de envío" entre subtotal y total (orden Figma) */
+  function moveMedios() {
+    var totalC = document.querySelector('#modal-cart .js-cart-total-container');
+    var medios = document.querySelector('#modal-cart .cart-fulfillment-info');
+    if (totalC && medios && totalC.parentNode && medios.nextElementSibling !== totalC) {
+      medios.classList.add('kv-moved');
+      totalC.parentNode.insertBefore(medios, totalC);
+    }
+  }
+  /* Subtotal nativo "Subtotal (sin envío):" → "Subtotal: (sin envío)" (Figma) */
+  function fixSubtotalLabel() {
+    var lbl = document.querySelector('#modal-cart .cart-totals-subtotal > span');
+    if (!lbl) return;
+    var want = /\(|sin env[ií]o/i.test(lbl.textContent) ? 'Subtotal: (sin envío)' : 'Subtotal:';
+    if (lbl.textContent.trim() !== want) lbl.textContent = want;
+  }
+  /* "Ver más productos" → "Seguir Comprando" (Figma) */
+  function fixContinueLink() {
+    var a = document.querySelector('#modal-cart .cart-continue-shopping .btn-link');
+    if (a && a.textContent.trim() !== 'Seguir Comprando') a.textContent = 'Seguir Comprando';
+  }
+  function applyCart() {
+    initEnvios(); fixEmptyText(); fixVariants();
+    moveMedios(); fixSubtotalLabel(); fixContinueLink();
+  }
   function boot() {
-    initEnvios();
-    fixEmptyText();
-    fixVariants();
+    applyCart();
     var modal = document.getElementById('modal-cart');
     if (modal && !modal.__kvEnviosObs) {
-      modal.__kvEnviosObs = new MutationObserver(function () { initEnvios(); fixEmptyText(); fixVariants(); });
+      modal.__kvEnviosObs = new MutationObserver(function () { applyCart(); });
       modal.__kvEnviosObs.observe(modal, { childList: true, subtree: true });
     }
   }
