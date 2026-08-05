@@ -1880,7 +1880,14 @@ html.f2tn-lock:has(body.template-product) body{overflow:visible!important}
 #modal-cart .shipping-calculator .js-shipping-input::placeholder{color:#737373}
 #modal-cart .shipping-calculator .js-calculate-shipping{border:1px solid #000;border-radius:4px;height:40px;padding:0 16px;background:#fff;color:#000;font-family:'Lato',sans-serif;font-size:14px;flex:0 0 auto}
 /* "No sé mi código postal": link 14 #8f8f8f subrayado */
-#modal-cart .shipping-calculator .js-shipping-calculator-form>.btn-link{font-family:'Lato',sans-serif;font-weight:400;font-size:14px;color:#8f8f8f;text-decoration:underline;text-underline-offset:2px;padding:8px 0 0;display:inline-block}
+#modal-cart .shipping-calculator .js-shipping-calculator-form>.btn-link{font-family:'Lato',sans-serif;font-weight:400;font-size:14px;color:#8f8f8f;text-decoration:underline;text-underline-offset:2px;padding:12px 0 0;display:inline-block}
+/* Estado CP guardado: "Entregas para el CP: X" 12px + "Cambiar CP" como botón pill (Figma 2305:22474) */
+#modal-cart .shipping-calculator .form-swap-value-label{font-family:'Lato',sans-serif;font-size:12px;color:#000}
+#modal-cart .shipping-calculator .js-shipping-calculator-change-zipcode{
+  border:.75px solid #000;border-radius:50px;padding:8px 24px;background:#fff;color:#000;
+  font-family:'Lato',sans-serif;font-weight:400;font-size:12px;line-height:1;text-decoration:none;
+  display:inline-flex;align-items:center;justify-content:center;
+}
 
 /* Totales: subtotal y total en semibold 14 #1d1d1b; divider arriba del bloque */
 #modal-cart .cart-subtotals-container,#modal-cart .js-cart-total-container{display:flex;flex-direction:column;gap:16px;margin:0}
