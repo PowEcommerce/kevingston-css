@@ -1765,7 +1765,7 @@ html.f2tn-lock:has(body.template-product) body{overflow:visible!important}
 }
 #modal-cart .modal-title{
   font-family:'Lato',sans-serif;font-weight:400;font-size:20px;line-height:1;
-  color:#000;text-align:left;flex:1 1 auto;
+  color:#000;text-align:left;flex:1 1 auto;margin:0;
 }
 #modal-cart .modal-header .modal-close{margin-left:auto;padding:0}
 #modal-cart .modal-close-icon{width:20px;height:20px}
