@@ -1769,6 +1769,8 @@ html.f2tn-lock:has(body.template-product) body{overflow:visible!important}
 }
 #modal-cart .modal-header .modal-close{margin-left:auto;padding:0}
 #modal-cart .modal-close-icon{width:20px;height:20px}
+/* Body sin padding nativo → las medidas de cada sección (24px) quedan exactas al Figma */
+#modal-cart .modal-body{padding:0}
 
 /* --- Estado vacío: fila plana (icono info 20px + texto), sin caja alert --- */
 #modal-cart .js-empty-ajax-cart{padding:24px}

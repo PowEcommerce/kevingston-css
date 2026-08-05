@@ -2434,11 +2434,18 @@
       })(list[i]);
     }
   }
+  function fixEmptyText() {
+    var a = document.querySelector('#modal-cart .js-empty-ajax-cart .alert');
+    if (a && a.textContent.trim() !== 'El carrito de compras está vacío') {
+      a.textContent = 'El carrito de compras está vacío';
+    }
+  }
   function boot() {
     initEnvios();
+    fixEmptyText();
     var modal = document.getElementById('modal-cart');
     if (modal && !modal.__kvEnviosObs) {
-      modal.__kvEnviosObs = new MutationObserver(function () { initEnvios(); });
+      modal.__kvEnviosObs = new MutationObserver(function () { initEnvios(); fixEmptyText(); });
       modal.__kvEnviosObs.observe(modal, { childList: true, subtree: true });
     }
   }
