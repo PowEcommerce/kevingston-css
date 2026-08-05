@@ -2474,7 +2474,7 @@
   }
   function fixVariants() {
     loadColors(function () {
-      var els = document.querySelectorAll('#modal-cart .cart-item-variant:not([data-kv-var])');
+      var els = document.querySelectorAll('#modal-cart .cart-item-variant:not([data-kv-var]),#shoppingCartPage .cart-item-variant:not([data-kv-var])');
       for (var i = 0; i < els.length; i++) {
         var el = els[i]; el.setAttribute('data-kv-var', '1');
         var t = el.textContent.trim(); if (!t) continue;
@@ -2493,10 +2493,12 @@
   }
   /* Subtotal nativo "Subtotal (sin envío):" → "Subtotal: (sin envío)" (Figma) */
   function fixSubtotalLabel() {
-    var lbl = document.querySelector('#modal-cart .cart-totals-subtotal > span');
-    if (!lbl) return;
-    var want = /\(|sin env[ií]o/i.test(lbl.textContent) ? 'Subtotal: (sin envío)' : 'Subtotal:';
-    if (lbl.textContent.trim() !== want) lbl.textContent = want;
+    var lbls = document.querySelectorAll('#modal-cart .cart-totals-subtotal>span:first-child,#shoppingCartPage .cart-totals-subtotal>span:first-child');
+    for (var i = 0; i < lbls.length; i++) {
+      var lbl = lbls[i];
+      var want = /\(|sin env[ií]o/i.test(lbl.textContent) ? 'Subtotal: (sin envío)' : 'Subtotal:';
+      if (lbl.textContent.trim() !== want) lbl.textContent = want;
+    }
   }
   /* "Ver más productos" → "Seguir Comprando" (Figma) */
   function fixContinueLink() {
@@ -2530,6 +2532,11 @@
     if (modal && !modal.__kvEnviosObs) {
       modal.__kvEnviosObs = new MutationObserver(function () { applyCart(); });
       modal.__kvEnviosObs.observe(modal, { childList: true, subtree: true });
+    }
+    var page = document.getElementById('shoppingCartPage');
+    if (page && !page.__kvObs) {
+      page.__kvObs = new MutationObserver(function () { applyCart(); });
+      page.__kvObs.observe(page, { childList: true, subtree: true });
     }
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
