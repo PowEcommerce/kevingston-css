@@ -2038,6 +2038,9 @@ html.f2tn-lock:has(body.template-product) body{overflow:visible!important}
   /* Barra de envío gratis: en el resumen (después del botón), no entre productos y resumen */
   #shoppingCartPage .cart-page-fulfillment{display:none}
   #shoppingCartPage #cart-sticky-summary>.d-none.d-md-block:has(.js-ship-free-rest){display:block!important}
+  #shoppingCartPage .js-ship-free-rest.progress-bar{margin-bottom:4px}
+  /* form del carrito: menos margen inferior (spacing-4 en vez de spacing-5) */
+  #shoppingCartPage .cart-form{margin-bottom:var(--spacing-4)}
 }
 
 /* ---- Fila de producto (común) ---- */
