@@ -1854,17 +1854,37 @@ html.f2tn-lock:has(body.template-product) body{overflow:visible!important}
 #modal-cart .js-ship-free-rest .bar-progress-active{position:relative;height:6px;background:#339933;border-radius:50px}
 #modal-cart .js-ship-free-rest .bar-progress-active::after{content:"";position:absolute;right:-6px;top:50%;transform:translateY(-50%);width:13px;height:13px;border-radius:50%;background:#fff;border:1px solid #339933;box-sizing:border-box}
 
-/* Medios de envío (calculadora colapsada): label semibold 14 #737373 + chevron */
-#modal-cart .cart-fulfillment-info,#modal-cart .shipping-wrapper{margin:0}
-#modal-cart .js-shipping-calculator-head{font-family:'Lato',sans-serif;font-weight:600;font-size:14px;color:#737373}
+/* Medios de envío = acordeón (header propio inyectado por JS: .kv-envios-header) */
+#modal-cart .cart-fulfillment-info,#modal-cart .shipping-wrapper,#modal-cart .shipping-calculator{margin:0}
+#modal-cart .shipping-calculator .form-label{display:none} /* ocultamos "Medios de envío" nativo; usamos el header propio */
+#modal-cart .kv-envios-header{display:flex;justify-content:space-between;align-items:center;width:100%;padding:0;border:0;background:none;cursor:pointer;font-family:'Lato',sans-serif;font-weight:600;font-size:14px;line-height:1.3;color:#1d1d1b}
+#modal-cart .kv-envios-chev{width:12px;height:7px;flex:0 0 12px;background:no-repeat center/12px 7px;transition:transform .2s ease;
+  background-image:url("data:image/svg+xml,%3Csvg%20width%3D%2213%22%20height%3D%227%22%20viewBox%3D%220%200%2013%207%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M0.5%200.5L6.5%206.5L12.5%200.5%22%20stroke%3D%22%23737373%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E")}
+#modal-cart .shipping-calculator.kv-open .kv-envios-chev{transform:rotate(180deg)}
+/* Colapsado: ocultar todo menos el header propio */
+#modal-cart .shipping-calculator:not(.kv-open) .js-shipping-calculator-head,
+#modal-cart .shipping-calculator:not(.kv-open) .js-shipping-calculator-spinner,
+#modal-cart .shipping-calculator:not(.kv-open) .js-shipping-calculator-response{display:none}
+/* Expandido: separación header ↔ contenido */
+#modal-cart .shipping-calculator.kv-open .js-shipping-calculator-head{margin-top:24px}
+/* Input CP: borde #ccc, radio 4, alto 40, placeholder #737373 (Figma 1674:18369) */
+#modal-cart .shipping-calculator .input-append{display:flex;gap:8px;align-items:stretch}
+#modal-cart .shipping-calculator .js-shipping-input{border:1px solid #ccc;border-radius:4px;height:40px;padding:0 13px;font-family:'Lato',sans-serif;font-size:14px;color:#1d1d1b;flex:1 1 auto;background:#fff}
+#modal-cart .shipping-calculator .js-shipping-input::placeholder{color:#737373}
+#modal-cart .shipping-calculator .js-calculate-shipping{border:1px solid #000;border-radius:4px;height:40px;padding:0 16px;background:#fff;color:#000;font-family:'Lato',sans-serif;font-size:14px;flex:0 0 auto}
+/* "No sé mi código postal": link 14 #8f8f8f subrayado */
+#modal-cart .shipping-calculator .js-shipping-calculator-form>.btn-link{font-family:'Lato',sans-serif;font-weight:400;font-size:14px;color:#8f8f8f;text-decoration:underline;text-underline-offset:2px;padding:8px 0 0;display:inline-block}
 
 /* Totales: subtotal y total en semibold 14 #1d1d1b; divider arriba del bloque */
 #modal-cart .cart-subtotals-container,#modal-cart .js-cart-total-container{display:flex;flex-direction:column;gap:16px;margin:0}
 #modal-cart .cart-totals-row{display:flex;justify-content:space-between;align-items:baseline;font-family:'Lato',sans-serif;font-size:14px;margin:0}
 #modal-cart .cart-totals-subtotal,#modal-cart .cart-totals-total{font-weight:600;color:#1d1d1b}
 #modal-cart .cart-subtotals-container{padding-top:24px;border-top:1px solid #d9d9d9}
-/* Envío "calcular para ver" (Figma lo resuelve en el accordion Medios de envío) */
-#modal-cart #shipping-cost-container,#modal-cart .cart-totals-secondary{display:none}
+/* Ocultar (decisión cliente 2026-08-05): "Precio sin impuestos" y "Costo de envío/calcular"
+   — no están en el Figma. Van con !important porque el CSS base fuerza display:flex. */
+#modal-cart #shipping-cost-container,
+#modal-cart .cart-totals-secondary,
+#modal-cart .price-without-taxes-cart-container{display:none!important}
 /* Cuotas: 12px regular, alineado a la derecha bajo el total */
 #modal-cart .cart-totals-installments{font-family:'Lato',sans-serif;font-weight:400;font-size:12px;color:#1d1d1b;text-align:right;line-height:1.3}
 

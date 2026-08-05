@@ -2409,3 +2409,39 @@
     init();
   }
 })();
+
+/* ============================================================================
+   Kevingston — Carrito desplegable: "Medios de envío" como acordeón colapsable
+   (Figma 2305:22768). Inyecta un header propio + chevron; colapsado por defecto.
+   Se re-inicializa cuando el carrito ajax se re-renderiza.
+   ==========================================================================*/
+(function () {
+  function initEnvios() {
+    var list = document.querySelectorAll('#modal-cart .shipping-calculator:not([data-kv-envios])');
+    for (var i = 0; i < list.length; i++) {
+      (function (el) {
+        el.setAttribute('data-kv-envios', '1');
+        var head = document.createElement('button');
+        head.type = 'button';
+        head.className = 'kv-envios-header';
+        head.setAttribute('aria-expanded', 'false');
+        head.innerHTML = '<span>Medios de envío</span><span class="kv-envios-chev" aria-hidden="true"></span>';
+        el.insertBefore(head, el.firstChild);
+        head.addEventListener('click', function () {
+          var open = el.classList.toggle('kv-open');
+          head.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+      })(list[i]);
+    }
+  }
+  function boot() {
+    initEnvios();
+    var modal = document.getElementById('modal-cart');
+    if (modal && !modal.__kvEnviosObs) {
+      modal.__kvEnviosObs = new MutationObserver(function () { initEnvios(); });
+      modal.__kvEnviosObs.observe(modal, { childList: true, subtree: true });
+    }
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+  else boot();
+})();
