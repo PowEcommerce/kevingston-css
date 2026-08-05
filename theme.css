@@ -1915,7 +1915,7 @@ html.f2tn-lock:has(body.template-product) body{overflow:visible!important}
 #modal-cart .radio-button-icons{position:relative;display:block;width:14px;height:14px}
 #modal-cart .radio-button-icon.unchecked{display:block;width:14px;height:14px;border:1px solid #000;border-radius:50px;box-sizing:border-box;background:none}
 #modal-cart .radio-button-icon.checked{display:none;position:absolute;inset:0;width:14px;height:14px;border:1px solid #000;border-radius:50px;box-sizing:border-box}
-#modal-cart .radio-button-icon.checked::after{content:"";position:absolute;inset:3px;border-radius:50px;background:#000}
+#modal-cart .radio-button-icon.checked::after{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:9px;height:9px;border-radius:50px;background:#000}
 #modal-cart .js-shipping-method:checked~.radio-button-content .radio-button-icon.checked{display:block}
 #modal-cart .js-shipping-method:checked~.radio-button-content .radio-button-icon.unchecked{display:none}
 /* Textos de la opción */
