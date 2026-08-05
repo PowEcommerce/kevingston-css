@@ -2527,10 +2527,37 @@
     var lbl = document.querySelector('#shoppingCartPage .price-without-taxes-cart-container .price-without-taxes-label');
     if (lbl && lbl.textContent.trim() !== 'Subtotal sin impuestos nacionales') lbl.textContent = 'Subtotal sin impuestos nacionales';
   }
+  /* "Precio sin impuestos nacionales $X" por item (Figma). Se calcula con el ratio real
+     sin-impuestos/subtotal del carrito (IVA uniforme) → exacto, no aproximado. */
+  function kvParseMoney(s) { return parseFloat(String(s).replace(/[^\d,.-]/g, '').replace(/\./g, '').replace(',', '.')) || 0; }
+  function kvFmtMoney(n) { return '$' + Math.round(n).toLocaleString('es-AR'); }
+  function fixItemTaxLines() {
+    var page = document.getElementById('shoppingCartPage'); if (!page) return;
+    var subEl = page.querySelector('.js-cart-subtotal[data-priceraw]');
+    var wtEl = page.querySelector('.js-price-without-taxes-cart');
+    if (!subEl || !wtEl) return;
+    var sub = parseFloat(subEl.getAttribute('data-priceraw')) / 100; // priceraw en centavos
+    var wt = kvParseMoney(wtEl.textContent);
+    if (!(sub > 0) || !(wt > 0)) return;
+    var ratio = wt / sub;
+    if (!(ratio > 0.4) || !(ratio < 1)) return; // sanidad
+    var items = page.querySelectorAll('.cart-page-item');
+    for (var i = 0; i < items.length; i++) {
+      var nameC = items[i].querySelector('.cart-item-name-container');
+      if (!nameC || nameC.querySelector('.kv-item-notax')) continue;
+      var priceEl = items[i].querySelector('.js-cart-item-unit-price') || items[i].querySelector('.js-cart-item-subtotal');
+      var base = priceEl ? kvParseMoney(priceEl.textContent) : 0;
+      if (!(base > 0)) continue;
+      var d = document.createElement('div');
+      d.className = 'kv-item-notax';
+      d.textContent = 'Precio sin impuestos nacionales ' + kvFmtMoney(base * ratio);
+      nameC.appendChild(d);
+    }
+  }
   function applyCart() {
     initEnvios(); fixEmptyText(); fixVariants();
     moveMedios(); fixSubtotalLabel(); fixContinueLink();
-    injectModoNotice(); fixCartPageTexts();
+    injectModoNotice(); fixCartPageTexts(); fixItemTaxLines();
   }
   function boot() {
     applyCart();
