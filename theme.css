@@ -1873,7 +1873,7 @@ html.f2tn-lock:has(body.template-product) body{overflow:visible!important}
 #modal-cart .shipping-calculator:not(.kv-open) .js-shipping-calculator-spinner,
 #modal-cart .shipping-calculator:not(.kv-open) .js-shipping-calculator-response{display:none}
 /* Expandido: separación header ↔ contenido */
-#modal-cart .shipping-calculator.kv-open .js-shipping-calculator-head{margin-top:24px}
+#modal-cart .shipping-calculator.kv-open .js-shipping-calculator-head{margin-top:8px}
 /* Input CP: borde #ccc, radio 4, alto 40, placeholder #737373 (Figma 1674:18369) */
 #modal-cart .shipping-calculator .input-append{display:flex;gap:8px;align-items:stretch}
 #modal-cart .shipping-calculator .js-shipping-input{border:1px solid #ccc;border-radius:4px;height:40px;padding:0 13px;font-family:'Lato',sans-serif;font-size:14px;color:#1d1d1b;flex:1 1 auto;background:#fff}
