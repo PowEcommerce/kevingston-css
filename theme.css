@@ -2010,17 +2010,24 @@ html.f2tn-lock:has(body.template-product) body{overflow:visible!important}
   #shoppingCartPage .cart-item-delete{justify-self:center}
 }
 
-/* ---- Mobile: fila apilada (imagen | [nombre/cantidad | eliminar/precio]) ---- */
+/* ---- Mobile (Figma 3211-30582): 16px padding lateral + item apilado ---- */
 @media(max-width:767px){
-  #shoppingCartPage .cart-page-item{display:flex;gap:16px;align-items:stretch;margin:0;padding:16px 0;border:0;border-bottom:1px solid #d9d9d9;background:none}
-  #shoppingCartPage .cart-item-info-container{flex:1 1 auto;min-width:0;display:grid;grid-template-columns:1fr auto;grid-template-areas:"name delete" "qty price";align-content:space-between;min-height:94px;column-gap:12px}
+  #shoppingCartPage .container{padding-left:16px!important;padding-right:16px!important}
+  /* Item: img 98 + gap 8 → izq [nombre/variante/stepper/tax] + gap 16 → der [eliminar/precio] */
+  #shoppingCartPage .cart-page-item{display:flex;gap:8px;align-items:stretch;margin:0;padding:16px 0;border:0;border-bottom:1px solid #d9d9d9;background:none}
+  #shoppingCartPage .cart-item-image-container{flex:0 0 98px;width:98px;height:98px}
+  #shoppingCartPage .cart-item-image{width:98px;height:98px;object-fit:cover}
+  #shoppingCartPage .cart-item-info-container{flex:1 1 auto;min-width:0;display:grid;grid-template-columns:1fr auto;column-gap:16px;grid-template-areas:"name delete" "qty price";align-content:space-between;min-height:98px}
   #shoppingCartPage .cart-item-product-info,
   #shoppingCartPage .cart-item-totals-container{display:contents}
-  #shoppingCartPage .cart-item-name-container{grid-area:name}
+  #shoppingCartPage .cart-item-name-container{grid-area:name;display:flex;flex-direction:column;gap:8px;min-width:0}
   #shoppingCartPage .cart-item-delete{grid-area:delete;justify-self:end}
-  #shoppingCartPage .cart-item-quantity{grid-area:qty;align-self:end}
+  #shoppingCartPage .cart-item-quantity{grid-area:qty;align-self:end;justify-self:start}
   #shoppingCartPage .cart-item-subtotal{grid-area:price;justify-self:end;align-self:end;text-align:right}
-  #shoppingCartPage .cart-item-unit-price{display:none} /* mobile: solo subtotal */
+  #shoppingCartPage .cart-item-unit-price{display:none}
+  /* Barra de envío gratis: en el resumen (después del botón), no entre productos y resumen */
+  #shoppingCartPage .cart-page-fulfillment{display:none}
+  #shoppingCartPage #cart-sticky-summary>.d-none.d-md-block:has(.js-ship-free-rest){display:block!important}
 }
 
 /* ---- Fila de producto (común) ---- */
