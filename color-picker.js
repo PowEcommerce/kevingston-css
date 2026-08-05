@@ -2461,16 +2461,13 @@
       .catch(function () { COLOR_NAMES = new Set(); cb(); });
   }
   function fmtVariant(raw) {
-    if (!COLOR_NAMES || !COLOR_NAMES.size) return raw;
-    var parts = raw.trim().replace(/^\(|\)$/g, '').split(/\s*[\/,]\s*/).filter(Boolean);
-    if (!parts.length) return raw;
-    var color = null, talle = null;
-    parts.forEach(function (p) { if (COLOR_NAMES.has(p.toLowerCase())) color = p; else talle = p; });
-    if (!color && !talle) return raw;
-    var out = [];
-    if (color) out.push('Color: ' + color);
-    if (talle) out.push('Talle: ' + talle);
-    return out.join(' / ');
+    var parts = raw.trim().replace(/^\(|\)$/g, '').split(/\s*[\/,]\s*/).map(function (s) { return s.trim(); }).filter(Boolean);
+    if (parts.length !== 2) return raw; // sólo manejamos el caso "A, B" (talle + color)
+    var a = parts[0], b = parts[1], color, talle;
+    if (COLOR_NAMES && COLOR_NAMES.has(a.toLowerCase())) { color = a; talle = b; }
+    else if (COLOR_NAMES && COLOR_NAMES.has(b.toLowerCase())) { color = b; talle = a; }
+    else { talle = a; color = b; } // fallback posicional: el nativo es "(Talle, Color)"
+    return 'Color: ' + color + ' / Talle: ' + talle;
   }
   function fixVariants() {
     loadColors(function () {
