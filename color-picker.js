@@ -2341,7 +2341,7 @@
     if (!html.classList.contains("f2tn-lock")) return;
     if (!document.body || document.body.className.indexOf("template-product") === -1) return;
     var t = e.target;
-    if (t && t.closest && t.closest(".kv-pdp-modal-panel")) return; // permitir scroll dentro del panel
+    if (t && t.closest && t.closest(".kv-pdp-modal-panel, .f2tn-search-panel")) return; // permitir scroll dentro del panel
     e.preventDefault();
   }
 
