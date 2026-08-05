@@ -1973,6 +1973,8 @@ html.f2tn-lock:has(body.template-product) body{overflow:visible!important}
 #shoppingCartPage{font-family:'Lato',sans-serif;color:#000}
 /* Ocultar breadcrumb + título "Carrito de compras" (page-header) — el Figma arranca en "Resumen de Compra" */
 .template-cart .section-page-header{display:none!important}
+/* Container del carrito sin padding lateral (Figma) */
+#shoppingCartPage .container{padding-left:0!important;padding-right:0!important}
 /* Título "Resumen de Compra" + divider (no existe en el nativo → ::before) */
 #shoppingCartPage .cart-page-content::before{
   content:"Resumen de Compra";display:block;font-family:'Lato',sans-serif;font-weight:600;font-size:16px;line-height:1.3;color:#000;
