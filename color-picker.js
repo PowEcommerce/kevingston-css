@@ -2440,12 +2440,55 @@
       a.textContent = 'El carrito de compras está vacío';
     }
   }
+
+  /* Variante "(Talle, Color)" nativa → "Color: X / Talle: Y" (Figma).
+     Detecta el color contra los nombres del color-map.json de la tienda. */
+  var COLOR_NAMES = null;
+  function loadColors(cb) {
+    if (COLOR_NAMES) { cb(); return; }
+    fetch('https://powecommerce.github.io/kevingston-css/color-map.json', { cache: 'no-cache' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (map) {
+        COLOR_NAMES = new Set();
+        if (map) {
+          Object.keys(map).forEach(function (k) {
+            var g = map[k]; if (!g || !g.forEach) return;
+            g.forEach(function (v) { if (v && v.name) COLOR_NAMES.add(String(v.name).trim().toLowerCase()); });
+          });
+        }
+        cb();
+      })
+      .catch(function () { COLOR_NAMES = new Set(); cb(); });
+  }
+  function fmtVariant(raw) {
+    if (!COLOR_NAMES || !COLOR_NAMES.size) return raw;
+    var parts = raw.trim().replace(/^\(|\)$/g, '').split(/\s*[\/,]\s*/).filter(Boolean);
+    if (!parts.length) return raw;
+    var color = null, talle = null;
+    parts.forEach(function (p) { if (COLOR_NAMES.has(p.toLowerCase())) color = p; else talle = p; });
+    if (!color && !talle) return raw;
+    var out = [];
+    if (color) out.push('Color: ' + color);
+    if (talle) out.push('Talle: ' + talle);
+    return out.join(' / ');
+  }
+  function fixVariants() {
+    loadColors(function () {
+      var els = document.querySelectorAll('#modal-cart .cart-item-variant:not([data-kv-var])');
+      for (var i = 0; i < els.length; i++) {
+        var el = els[i]; el.setAttribute('data-kv-var', '1');
+        var t = el.textContent.trim(); if (!t) continue;
+        el.textContent = fmtVariant(t);
+      }
+    });
+  }
   function boot() {
     initEnvios();
     fixEmptyText();
+    fixVariants();
     var modal = document.getElementById('modal-cart');
     if (modal && !modal.__kvEnviosObs) {
-      modal.__kvEnviosObs = new MutationObserver(function () { initEnvios(); fixEmptyText(); });
+      modal.__kvEnviosObs = new MutationObserver(function () { initEnvios(); fixEmptyText(); fixVariants(); });
       modal.__kvEnviosObs.observe(modal, { childList: true, subtree: true });
     }
   }
