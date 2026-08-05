@@ -1871,7 +1871,8 @@ html.f2tn-lock:has(body.template-product) body{overflow:visible!important}
 /* Colapsado: ocultar todo menos el header propio */
 #modal-cart .shipping-calculator:not(.kv-open) .js-shipping-calculator-head,
 #modal-cart .shipping-calculator:not(.kv-open) .js-shipping-calculator-spinner,
-#modal-cart .shipping-calculator:not(.kv-open) .js-shipping-calculator-response{display:none}
+#modal-cart .shipping-calculator:not(.kv-open) .js-shipping-calculator-response,
+#modal-cart .shipping-calculator:not(.kv-open) .kv-modo-notice{display:none!important}
 /* Expandido: separación header ↔ contenido */
 #modal-cart .shipping-calculator.kv-open .js-shipping-calculator-head{margin-top:8px}
 /* Input CP: borde #ccc, radio 4, alto 40, placeholder #737373 (Figma 1674:18369) */
@@ -1888,6 +1889,43 @@ html.f2tn-lock:has(body.template-product) body{overflow:visible!important}
   font-family:'Lato',sans-serif;font-weight:400;font-size:12px;line-height:1;text-decoration:none;
   display:inline-flex;align-items:center;justify-content:center;
 }
+
+/* ===== Resultados del cálculo de envío (Figma 2305:22783) ===== */
+/* Box "ATENCIÓN" (inyectado por JS): borde naranja, texto centrado #dc8f38 12px */
+#modal-cart .kv-modo-notice{border:1px solid #dc8f38;padding:8px;margin:16px 0 0;color:#dc8f38;font-family:'Lato',sans-serif;font-weight:400;font-size:12px;line-height:1.3;text-align:center}
+/* Respuesta: separación del head; secciones separadas por margen (JS controla display) */
+#modal-cart .shipping-calculator-response{margin-top:24px}
+#modal-cart .shipping-calculator-response .shipping-options{margin:0 0 36px}
+#modal-cart .shipping-calculator-response .shipping-options:last-child{margin-bottom:0}
+/* Título de sección: sin icono, texto 12px + divider debajo (Figma sin camión) */
+#modal-cart .shipping-options-heading{display:block;font-family:'Lato',sans-serif;font-weight:400;font-size:12px;line-height:1.2;color:#000;padding:0 0 8px;margin:0 0 24px;border-bottom:1px solid #d9d9d9}
+#modal-cart .shipping-options-heading svg,#modal-cart .shipping-options-heading .icon-inline{display:none}
+/* Lista de opciones: gap 36 */
+#modal-cart .shipping-options .radio-button-container{display:flex;flex-direction:column;gap:36px;margin:0;padding:0;list-style:none}
+#modal-cart .radio-button-item{margin:0}
+#modal-cart .js-shipping-radio.radio-button{background:none;border:0;padding:0;margin:0;box-shadow:none;display:block}
+#modal-cart .radio-button-content{display:flex;align-items:flex-start;gap:8px}
+/* Radio custom 14px: círculo borde negro; check = punto interno */
+#modal-cart .radio-button-icons-container{flex:0 0 14px;margin:0;padding:0}
+#modal-cart .radio-button-icons{position:relative;display:block;width:14px;height:14px}
+#modal-cart .radio-button-icon.unchecked{display:block;width:14px;height:14px;border:1px solid #000;border-radius:50px;box-sizing:border-box;background:none}
+#modal-cart .radio-button-icon.checked{display:none;position:absolute;inset:0;width:14px;height:14px;border:1px solid #000;border-radius:50px;box-sizing:border-box}
+#modal-cart .radio-button-icon.checked::after{content:"";position:absolute;inset:3px;border-radius:50px;background:#000}
+#modal-cart .js-shipping-method:checked~.radio-button-content .radio-button-icon.checked{display:block}
+#modal-cart .js-shipping-method:checked~.radio-button-content .radio-button-icon.unchecked{display:none}
+/* Textos de la opción */
+#modal-cart .radio-button-label{flex:1 1 auto;min-width:0}
+#modal-cart .radio-button-text{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+#modal-cart .shipping-option-details{display:flex;flex-direction:column;gap:4px}
+#modal-cart .shipping-option-details [data-component="option.name"]{font-family:'Lato',sans-serif;font-weight:400;font-size:12px;line-height:1.2;color:#000}
+#modal-cart .shipping-option-date{font-family:'Lato',sans-serif;font-weight:400;font-size:12px;line-height:1.2;color:#737373}
+/* Precio de la opción: Gratis/$ 12px negro, viejo tachado gris debajo */
+#modal-cart .shipping-option-price{display:flex;flex-direction:column;gap:4px;align-items:flex-end;text-align:right;font-family:'Lato',sans-serif;font-weight:400;font-size:12px;line-height:1.2;color:#000;white-space:nowrap}
+#modal-cart .shipping-option-price .cart-compare-price-container{margin:0}
+#modal-cart .shipping-option-price .price-compare{font-size:12px;color:#737373;text-decoration:line-through}
+/* "Ver más opciones de envío/retiro": link 12px negro subrayado */
+#modal-cart .shipping-toggle-more{margin:0}
+#modal-cart .shipping-toggle-more .btn-link{font-family:'Lato',sans-serif;font-weight:400;font-size:12px;color:#000;text-decoration:underline;text-underline-offset:2px;padding:0}
 
 /* Totales: subtotal y total en semibold 14 #1d1d1b; divider arriba del bloque */
 #modal-cart .cart-subtotals-container,#modal-cart .js-cart-total-container{display:flex;flex-direction:column;gap:16px;margin:0}

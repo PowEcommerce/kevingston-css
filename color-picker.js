@@ -2503,9 +2503,26 @@
     var a = document.querySelector('#modal-cart .cart-continue-shopping .btn-link');
     if (a && a.textContent.trim() !== 'Seguir Comprando') a.textContent = 'Seguir Comprando';
   }
+  /* Box "ATENCIÓN" (MODO) entre la fila del CP y los resultados; solo con resultados */
+  function injectModoNotice() {
+    var sc = document.querySelector('#modal-cart .shipping-calculator');
+    if (!sc) return;
+    var resp = sc.querySelector('.js-shipping-calculator-response');
+    if (!resp) return;
+    var notice = sc.querySelector('.kv-modo-notice');
+    if (!notice) {
+      notice = document.createElement('div');
+      notice.className = 'kv-modo-notice';
+      notice.textContent = 'ATENCIÓN: Las promociones bancarias con tarjetas de crédito o débito que incluyen reintegros se aplican seleccionando la opción MODO al momento de realizar el pago';
+      resp.parentNode.insertBefore(notice, resp);
+    }
+    var want = resp.children.length > 0 ? '' : 'none';
+    if (notice.style.display !== want) notice.style.display = want;
+  }
   function applyCart() {
     initEnvios(); fixEmptyText(); fixVariants();
     moveMedios(); fixSubtotalLabel(); fixContinueLink();
+    injectModoNotice();
   }
   function boot() {
     applyCart();
