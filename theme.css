@@ -1978,7 +1978,7 @@ html.f2tn-lock:has(body.template-product) body{overflow:visible!important}
 /* Título "Resumen de Compra" + divider (no existe en el nativo → ::before) */
 #shoppingCartPage .cart-page-content::before{
   content:"Resumen de Compra";display:block;font-family:'Lato',sans-serif;font-weight:600;font-size:16px;line-height:1.3;color:#000;
-  padding-bottom:28px;margin:32px 0 46px;border-bottom:1px solid #d9d9d9;
+  padding-bottom:28px;margin:32px 0 53px;border-bottom:1px solid #d9d9d9;
 }
 /* Ocultar la calculadora de envío en la página (Figma no la muestra) — en TODOS los anchos.
    Se mantiene la barra de envío gratis (que vive aparte del cart-fulfillment-info). */
@@ -1994,7 +1994,7 @@ html.f2tn-lock:has(body.template-product) body{overflow:visible!important}
   #shoppingCartPage .cart-page-fulfillment{display:none}
 
   /* Header de tabla: grid 5 cols con space-between (spread ~57px como Figma) */
-  #shoppingCartPage .cart-page-table-header{display:grid;grid-template-columns:446px 58px 100px 58px 36px;justify-content:space-between;align-items:center;margin:0;padding:0 0 16px;border:0;font-family:'Lato',sans-serif;font-weight:400;font-size:14px;color:#1d1d1b}
+  #shoppingCartPage .cart-page-table-header{display:grid;grid-template-columns:446px 58px 100px 58px 36px;justify-content:space-between;align-items:center;margin:0;padding:0;border:0;font-family:'Lato',sans-serif;font-weight:400;font-size:14px;color:#1d1d1b}
   #shoppingCartPage .cart-page-table-header-totals{display:contents}
   #shoppingCartPage .cart-page-table-header-totals>div{text-align:left}
   /* Fila: imagen(94)+16 en flex, resto en grid alineado al header (offset image = 446-336) */
