@@ -2521,10 +2521,19 @@
     var want = resp.children.length > 0 ? '' : 'none';
     if (notice.style.display !== want) notice.style.display = want;
   }
+  /* Textos de la página /comprar para matchear el Figma (no editables por traducción en compose) */
+  function fixCartPageTexts() {
+    var inp = document.querySelector('#shoppingCartPage .coupon-input .js-coupon-input');
+    if (inp && inp.getAttribute('placeholder') !== 'Ingresa el código') inp.setAttribute('placeholder', 'Ingresa el código');
+    var apply = document.querySelector('#shoppingCartPage .coupon-input .js-apply-coupon-idle');
+    if (apply && apply.textContent.trim() !== 'Ingresar') apply.textContent = 'Ingresar';
+    var lbl = document.querySelector('#shoppingCartPage .price-without-taxes-cart-container .price-without-taxes-label');
+    if (lbl && lbl.textContent.trim() !== 'Subtotal sin impuestos nacionales') lbl.textContent = 'Subtotal sin impuestos nacionales';
+  }
   function applyCart() {
     initEnvios(); fixEmptyText(); fixVariants();
     moveMedios(); fixSubtotalLabel(); fixContinueLink();
-    injectModoNotice();
+    injectModoNotice(); fixCartPageTexts();
   }
   function boot() {
     applyCart();
