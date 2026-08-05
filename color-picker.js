@@ -2333,8 +2333,22 @@
     });
   }
 
+  /* Scroll lock de la ficha SIN overflow:hidden (para no romper el sticky del header e
+     info). Cuando hay un modal abierto (html.f2tn-lock) en la ficha, frenamos la rueda
+     y el touch del fondo; dentro del panel del modal el scroll se permite. */
+  function kvBlockBgScroll(e) {
+    var html = document.documentElement;
+    if (!html.classList.contains("f2tn-lock")) return;
+    if (!document.body || document.body.className.indexOf("template-product") === -1) return;
+    var t = e.target;
+    if (t && t.closest && t.closest(".kv-pdp-modal-panel")) return; // permitir scroll dentro del panel
+    e.preventDefault();
+  }
+
   function init() {
     var adbarClosed = initAdbarClose();
+    window.addEventListener("wheel", kvBlockBgScroll, { passive: false });
+    window.addEventListener("touchmove", kvBlockBgScroll, { passive: false });
     if (!adbarClosed) initTopbarCarousel();
     initStickyHeader();
     initFacilitatorsSlider();
