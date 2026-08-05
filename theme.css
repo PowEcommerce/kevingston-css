@@ -1971,6 +1971,8 @@ html.f2tn-lock:has(body.template-product) body{overflow:visible!important}
    v1: layout + resumen + cupón + filas. Afinar columnas/tamaños contra render.
    ==========================================================================*/
 #shoppingCartPage{font-family:'Lato',sans-serif;color:#000}
+/* Ocultar breadcrumb + título "Carrito de compras" (page-header) — el Figma arranca en "Resumen de Compra" */
+.template-cart .section-page-header{display:none!important}
 /* Título "Resumen de Compra" + divider (no existe en el nativo → ::before) */
 #shoppingCartPage .cart-page-content::before{
   content:"Resumen de Compra";display:block;font-family:'Lato',sans-serif;font-weight:600;font-size:18px;line-height:1.2;color:#000;
