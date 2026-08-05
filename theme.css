@@ -1798,6 +1798,8 @@ html.f2tn-lock:has(body.template-product) body{overflow:visible!important}
 /* --- Item: fila [img 94][info] alto 94, gap 16 --- */
 #modal-cart .cart-item{display:flex;gap:16px;align-items:stretch;margin:0;padding:0;border:0;background:none}
 #modal-cart .cart-item-image-container{flex:0 0 94px;width:94px;height:94px}
+/* Imagen de producto (carrito y /comprar) sin borde */
+.cart-item-image-container,.order-item-image-container{border:0!important}
 #modal-cart .cart-item-image-container a{display:block;width:94px;height:94px}
 #modal-cart .cart-item-image{width:94px;height:94px;object-fit:cover;border-radius:0}
 
