@@ -2115,3 +2115,60 @@ html.f2tn-lock:has(body.template-product) body{overflow:visible!important}
 #shoppingCartPage .coupon-input .js-coupon-input{width:100%;border:1px solid #ccc;border-radius:4px;height:40px;padding:0 13px;font-family:'Lato',sans-serif;font-size:14px;color:#1d1d1b;background:#fff;margin:0 0 16px}
 #shoppingCartPage .coupon-input .js-coupon-input::placeholder{color:#737373}
 #shoppingCartPage .coupon-input .js-apply-coupon{width:100%;border:.75px solid #000;border-radius:50px;height:44px;background:#fff;color:#000;font-family:'Lato',sans-serif;font-weight:400;font-size:14px;display:flex;align-items:center;justify-content:center}
+
+/* ============================================================
+   MI CUENTA — estilos KVG sobre páginas nativas de cuenta (v1, a verificar con HTML real)
+   Scope: .login-form-section / .account-*-section + breadcrumb (layout)
+   ============================================================ */
+.login-form-section,.account-orders-section,.account-order-section,.account-info-section,.account-addresses-section,.account-address-section{font-family:'Lato',sans-serif;color:#1d1d1b}
+
+/* Breadcrumb + título de página (layout) */
+body[class*="template-account"] .breadcrumbs{font-family:'Lato',sans-serif;font-size:12px;color:#737373}
+body[class*="template-account"] .breadcrumbs .crumb{color:#737373;text-decoration:none}
+body[class*="template-account"] .breadcrumbs .crumb:last-child{color:#000}
+
+/* Títulos de sección del sidebar / bloques (DATOS PERSONALES, MIS DIRECCIONES) */
+.account-section-title{font-family:'Lato',sans-serif;font-size:14px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#000;margin:0}
+.account-section-header{display:flex;align-items:baseline;justify-content:space-between;border-bottom:1px solid #e8e8e8;padding-bottom:12px;margin-bottom:16px}
+
+/* Links "Editar / Ver detalle / Otras direcciones" → matar el tan nativo */
+.login-form-section .btn-link,.account-orders-section .btn-link,.account-order-section .btn-link,.account-info-section .btn-link,.account-addresses-section .btn-link,.account-address-section .btn-link{color:#737373!important;text-decoration:underline;font-family:'Lato',sans-serif;font-size:14px;font-weight:400}
+.login-form-section .btn-link:hover,.account-orders-section .btn-link:hover,.account-order-section .btn-link:hover,.account-info-section .btn-link:hover,.account-addresses-section .btn-link:hover,.account-address-section .btn-link:hover{color:#000!important}
+
+/* CTA primario negro pill (Iniciar sesión, Ir a la tienda, Seguí tu orden, Guardar, Hacer pago) */
+.login-form-section .btn.btn-primary,.account-orders-section .btn.btn-primary,.account-order-section .btn.btn-primary,.account-info-section .btn.btn-primary,.account-address-section .btn.btn-primary,.account-orders-empty .btn.btn-primary{background:#000!important;color:#fff!important;border:0!important;border-radius:50px!important;min-height:44px;height:44px;font:400 14px/44px 'Lato',sans-serif!important;padding:0 36px;text-transform:none;letter-spacing:.02em}
+.login-form-section .btn.btn-primary:hover,.account-orders-section .btn.btn-primary:hover,.account-order-section .btn.btn-primary:hover,.account-info-section .btn.btn-primary:hover,.account-address-section .btn.btn-primary:hover,.account-orders-empty .btn.btn-primary:hover{background:#1d1d1b!important}
+
+/* CTA outline negro pill (Cerrar sesión) */
+.account-logout-link.btn{background:#fff!important;color:#000!important;border:1px solid #000!important;border-radius:50px!important;min-height:44px;height:44px;line-height:42px!important;font:400 14px/42px 'Lato',sans-serif!important;padding:0 36px;text-transform:none;letter-spacing:.02em;width:auto;display:inline-block;text-decoration:none}
+.account-logout-link.btn:hover{background:#000!important;color:#fff!important}
+
+/* Inputs / labels (login, mis datos, direcciones) */
+.login-form-section .form-group,.account-info-section .form-group,.account-address-section .form-group{margin-bottom:20px}
+.login-form-section .form-label,.account-info-section .form-label,.account-address-section .form-label{font-family:'Lato',sans-serif;font-size:12px;font-weight:400;letter-spacing:.08em;text-transform:uppercase;color:#737373;margin-bottom:8px;display:block}
+.login-form-section .form-control,.account-info-section .form-control,.account-address-section .form-control,.account-address-section .form-select{font-family:'Lato',sans-serif;font-size:14px;color:#000;border:1px solid #ccc;border-radius:4px;height:48px;padding:0 16px;box-shadow:none}
+.login-form-section .form-control:focus,.account-info-section .form-control:focus,.account-address-section .form-control:focus,.account-address-section .form-select:focus{border-color:#000;box-shadow:none}
+.login-form-section .form-control::placeholder,.account-info-section .form-control::placeholder,.account-address-section .form-control::placeholder{color:#b3b3b3}
+.login-password-help,.form-login-help{font-family:'Lato',sans-serif;font-size:14px;color:#737373}
+
+/* Sidebar info (DATOS PERSONALES) */
+.account-info-line{color:#000;font-size:14px;line-height:1.6;font-family:'Lato',sans-serif}
+.account-address-text,.account-address-name{font-family:'Lato',sans-serif;font-size:14px;color:#000;line-height:1.6}
+
+/* Cards de orden (Mis compras) */
+.account-order-card .card{border:1px solid #e8e8e8;border-radius:8px;overflow:hidden}
+.account-order-number .btn-link,.account-order-header-content .account-order-number a{color:#000!important;font-weight:600;text-decoration:none!important;font-size:16px}
+.account-order-date{color:#737373;font-size:14px;font-family:'Lato',sans-serif}
+.account-order-total{font-weight:700;color:#000;font-size:18px;font-family:'Lato',sans-serif}
+.account-order-status,.account-order-status-value{color:#000;font-size:14px;font-family:'Lato',sans-serif}
+
+/* Detalle de orden */
+.order-detail-info h4{font-family:'Lato',sans-serif;font-weight:600;color:#000;font-size:16px}
+.order-detail-line,.order-detail-line-compact{font-family:'Lato',sans-serif;font-size:14px;color:#000}
+.order-items-header{color:#737373;font-size:12px;text-transform:uppercase;letter-spacing:.06em;font-family:'Lato',sans-serif}
+.order-item-name{font-size:16px;color:#000;font-family:'Lato',sans-serif}
+.order-totals-line{font-family:'Lato',sans-serif;font-size:14px;color:#000}
+.order-total{font-weight:700;font-size:18px;color:#000;font-family:'Lato',sans-serif}
+
+/* Empty state */
+.account-orders-empty-text{color:#737373;font-family:'Lato',sans-serif;font-size:16px}
