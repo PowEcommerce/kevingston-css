@@ -2175,3 +2175,7 @@ body[class*="template-account"] .breadcrumbs .crumb:last-child{color:#000}
 
 /* Centrar formularios de cuenta (Mis datos / Dirección / Login) */
 .account-info-section .account-form-container,.account-address-section .account-form-container,.login-form-section .account-form-container{width:100%!important;max-width:600px!important;margin-left:auto!important;margin-right:auto!important;float:none!important}
+
+/* Login: título centrado + breadcrumb oculto */
+body.template-account-login .breadcrumbs{display:none!important}
+body.template-account-login .page-header-title-row,body.template-account-login .page-header-title{text-align:center!important;justify-content:center!important}
