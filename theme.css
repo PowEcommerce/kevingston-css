@@ -2184,3 +2184,6 @@ body.template-account-login .page-header-title-row,body.template-account-login .
 body.template-account-reset .breadcrumbs,body.template-account-register .breadcrumbs{display:none!important}
 body.template-account-reset .page-header-title-row,body.template-account-reset .page-header-title,body.template-account-register .page-header-title-row,body.template-account-register .page-header-title{text-align:center!important;justify-content:center!important}
 .reset-form-section .account-form-container,.register-form-section .account-form-container{width:100%!important;max-width:600px!important;margin-left:auto!important;margin-right:auto!important;float:none!important}
+
+/* Cuenta: subtítulo del form, contenedor de logout y info de newpass → centrados */
+.account-form-subtitle,.account-logout-container,.newpass-info-container{text-align:center!important}
