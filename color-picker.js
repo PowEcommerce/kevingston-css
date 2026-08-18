@@ -2599,3 +2599,40 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
   else boot();
 })();
+
+/*
+ * Kevingston — Override del mensaje de error de cupón.
+ * La traducción nativa "Cupón inválido o no aplicable." no es editable por
+ * compose (vive en translations/*.json = fork). store.js inyecta ese texto en
+ * .js-coupon-error desde el data-error-text del contenedor, así que reescribimos
+ * ambos y observamos el carrito por si el drawer/página se re-renderiza (ajax).
+ */
+(function () {
+  var NEW = "El Código de Descuento ingresado no es válido.";
+  var RX = /cup[oó]n inv[aá]lido|no aplicable/i;
+  function fix() {
+    var conts = document.querySelectorAll(
+      '[data-component="cart-coupon.container"][data-error-text], .coupon-input[data-error-text]'
+    );
+    for (var i = 0; i < conts.length; i++) {
+      var t = conts[i].getAttribute("data-error-text");
+      if (t && RX.test(t)) conts[i].setAttribute("data-error-text", NEW);
+    }
+    var errs = document.querySelectorAll(".js-coupon-error");
+    for (var j = 0; j < errs.length; j++) {
+      if (RX.test(errs[j].textContent || "")) errs[j].textContent = NEW;
+    }
+  }
+  function boot() {
+    fix();
+    ["modal-cart", "shoppingCartPage"].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el && !el.__kvCouponObs) {
+        el.__kvCouponObs = new MutationObserver(fix);
+        el.__kvCouponObs.observe(el, { childList: true, subtree: true, characterData: true });
+      }
+    });
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
+  else boot();
+})();
