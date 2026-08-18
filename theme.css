@@ -1854,7 +1854,7 @@ html.f2tn-lock:has(body.template-product) body{overflow:visible!important}
 #modal-cart .cart-row{display:flex;flex-direction:column;gap:0;padding:0 24px 24px;margin-top:36px}
 
 /* Barra envío gratis: sin caja/camión, label 12px centrado, track #d9d9d9, filler verde + knob */
-#modal-cart .js-ship-free-rest.progress-bar{margin:0;padding:0;background:none;border:0;box-shadow:none;display:flex;flex-direction:column;gap:8px}
+#modal-cart .js-ship-free-rest.progress-bar{margin:0;padding:0;background:none;border:0;box-shadow:none;display:flex;flex-direction:column;gap:10px}
 #modal-cart .js-ship-free-rest .progress-bar-header{display:flex;justify-content:center;align-items:center;margin:0}
 #modal-cart .js-ship-free-rest .progress-bar-icon{display:none}
 #modal-cart .js-ship-free-rest .progress-bar-subtitle{display:none}
