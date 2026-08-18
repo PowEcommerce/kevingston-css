@@ -2205,3 +2205,6 @@ body.template-account-reset .page-header-title-row,body.template-account-reset .
 
 /* Buscador: sacar el max-width del inner y de las cols (ancho completo) */
 .f2tn-search-panel .f2tn-search-inner,.f2tn-search-panel .f2tn-search-cols{max-width:none!important}
+
+/* Error de cupón: rojo CC0000, padding y separación custom */
+.coupon-input-error{margin-top:var(--spacing-3);color:#CC0000!important;border-color:#CC0000!important;padding:7px 10px!important}
