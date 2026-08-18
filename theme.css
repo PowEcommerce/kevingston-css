@@ -1931,6 +1931,8 @@ html.f2tn-lock:has(body.template-product) body{overflow:visible!important}
 #modal-cart .shipping-option-details{display:flex;flex-direction:column;gap:4px}
 #modal-cart .shipping-option-details [data-component="option.name"]{font-family:'Lato',sans-serif;font-weight:400;font-size:12px;line-height:1.2;color:#000}
 #modal-cart .shipping-option-date{font-family:'Lato',sans-serif;font-weight:400;font-size:12px;line-height:1.2;color:#737373;opacity:1}
+/* Horarios del local de retiro: sin bullet/marker y al mismo tamaño que la dirección (12px) */
+#modal-cart .shipping-option-pickup-hours{list-style:none!important;padding-left:0!important;margin:0;font-family:'Lato',sans-serif;font-weight:400;font-size:12px;line-height:1.2}
 /* Precio de la opción: Gratis/$ 12px negro, viejo tachado gris debajo */
 #modal-cart .shipping-option-price{display:flex;flex-direction:column;gap:4px;align-items:flex-end;text-align:right;font-family:'Lato',sans-serif;font-weight:400;font-size:12px;line-height:1.2;color:#000;white-space:nowrap}
 #modal-cart .shipping-option-price .cart-compare-price-container{margin:0}
