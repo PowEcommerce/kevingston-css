@@ -1132,6 +1132,8 @@ body.modal-show{overflow:hidden!important}
   /* Barra "Buscar productos": colapso suave (no display:none de golpe) */
   .js-head-main .search-container{overflow:hidden;max-height:48px;opacity:1;transition:max-height .3s ease, opacity .25s ease, margin .3s ease}
   .js-head-main.kv-scrolled .search-container{max-height:0!important;opacity:0!important;margin:0!important}
+  /* Al scrollear (lupa visible), el header colapsa a 60px de alto (Figma) */
+  .js-head-main.kv-scrolled .head-row{min-height:60px!important}
   /* Menú siempre flex para animar la lupa */
   .js-head-main .menu-container{display:flex!important;align-items:center;width:auto!important}
   .kv-scroll-search{
