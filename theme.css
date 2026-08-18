@@ -1950,7 +1950,7 @@ html.f2tn-lock:has(body.template-product) body{overflow:visible!important}
 #modal-cart .js-ajax-cart-submit,#modal-cart #ajax-cart-submit-div{margin-top:16px}
 /* Bloque "Medios de envío" (movido por JS acá): separación al total */
 #modal-cart .js-cart-total-container>.cart-fulfillment-info,
-#modal-cart .cart-fulfillment-info.kv-moved{margin:0 0 36px}
+#modal-cart .cart-fulfillment-info.kv-moved{margin:0 0 38px}
 /* Ocultar (decisión cliente 2026-08-05): "Precio sin impuestos" y "Costo de envío/calcular"
    — no están en el Figma. Van con !important porque el CSS base fuerza display:flex. */
 #modal-cart #shipping-cost-container,
