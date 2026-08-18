@@ -195,8 +195,8 @@ html:not(.kv-preview) .section.section-slideshow .btn:hover,html:not(.kv-preview
   /* input alineado con la columna de recomendados (332 links + 16 gap = 348),
      no centrado; la ✕ queda al borde derecho (Figma). */
   .f2tn-search-panel .f2tn-search-form{margin-left:348px!important;margin-right:0!important}
-  /* input -> contenido: 48px (Figma). */
-  .f2tn-search-panel .f2tn-search-inner{gap:48px!important}
+  /* input -> contenido: 52px (Figma). */
+  .f2tn-search-panel .f2tn-search-inner{gap:52px!important}
 }
 @media (max-width:767px){
   /* Figma 959-18074 (mobile 375): container padding 16, todo alineado a esos tokens */
