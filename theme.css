@@ -2034,7 +2034,7 @@ html.f2tn-lock:has(body.template-product) body{overflow:visible!important}
   #shoppingCartPage .cart-item-info-container{flex:1 1 auto;min-width:0;display:grid;grid-template-columns:1fr auto;column-gap:16px;grid-template-areas:"name delete" "qty price" "tax tax";align-content:start;row-gap:8px}
   #shoppingCartPage .cart-item-product-info,
   #shoppingCartPage .cart-item-totals-container{display:contents}
-  #shoppingCartPage .cart-item-name-container{grid-area:name;display:flex;flex-direction:column;gap:8px;min-width:0}
+  #shoppingCartPage .cart-item-name-container{grid-area:name;display:flex;flex-direction:column;gap:8px;min-width:0;margin-bottom:0}
   #shoppingCartPage .cart-item-delete{grid-area:delete;justify-self:end}
   #shoppingCartPage .cart-item-quantity{grid-area:qty;align-self:center;justify-self:start}
   #shoppingCartPage .cart-item-subtotal{grid-area:price;justify-self:end;align-self:center;text-align:right}
