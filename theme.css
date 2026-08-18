@@ -2076,7 +2076,7 @@ html.f2tn-lock:has(body.template-product) body{overflow:visible!important}
 #shoppingCartPage .cart-page-items-list{margin:0}
 
 /* ---- Resumen (derecha) ---- */
-#shoppingCartPage .cart-page-summary{display:flex;flex-direction:column;gap:24px}
+#shoppingCartPage .cart-page-summary{display:flex;flex-direction:column;gap:30px}
 /* orden Figma: resumen (sticky) primero, cupón al final */
 #shoppingCartPage .cart-page-summary>#cart-sticky-summary{order:1}
 #shoppingCartPage .cart-page-summary>.js-visible-on-cart-filled{order:2}
@@ -2105,7 +2105,8 @@ html.f2tn-lock:has(body.template-product) body{overflow:visible!important}
 }
 #shoppingCartPage .cart-continue-shopping{display:none} /* la página no tiene "seguir comprando" */
 /* barra envío gratis (reusa estética del drawer) */
-#shoppingCartPage .js-ship-free-rest.progress-bar{margin:0;padding:0;background:none;border:0;box-shadow:none;display:flex;flex-direction:column;gap:8px}
+#shoppingCartPage .js-ship-free-rest.progress-bar{margin:0;padding:0;background:none;border:0;box-shadow:none;display:flex;flex-direction:column;gap:10px}
+#shoppingCartPage .cart-page-free-shipping-bar{margin-top:22px}
 #shoppingCartPage .js-ship-free-rest .progress-bar-header{display:flex;justify-content:center;margin:0}
 #shoppingCartPage .js-ship-free-rest .progress-bar-icon,#shoppingCartPage .js-ship-free-rest .progress-bar-subtitle{display:none}
 #shoppingCartPage .js-ship-free-rest .ship-free-rest-message,#shoppingCartPage .js-ship-free-rest .ship-free-rest-text{font-family:'Lato',sans-serif;font-weight:400;font-size:12px;line-height:1.3;color:#000;text-align:center}
