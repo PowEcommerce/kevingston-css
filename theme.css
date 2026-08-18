@@ -1819,7 +1819,7 @@ html.f2tn-lock:has(body.template-product) body{overflow:visible!important}
 #modal-cart .cart-item-name-container{grid-area:name;display:flex;flex-direction:column;gap:6px;min-width:0}
 #modal-cart .cart-item-delete{grid-area:delete;justify-self:end;margin:0}
 #modal-cart .cart-item-quantity{grid-area:qty;align-self:end}
-#modal-cart .cart-item-subtotal{grid-area:price;justify-self:end;align-self:end;text-align:right;display:flex;flex-direction:column;gap:4px;align-items:flex-end}
+#modal-cart .cart-item-subtotal{grid-area:price;justify-self:end;align-self:end;text-align:right;display:flex;flex-direction:column;gap:2px;align-items:flex-end}
 
 /* Nombre + variante */
 #modal-cart .cart-item-name{font-family:'Lato',sans-serif;font-weight:400;font-size:12px;line-height:1.3;color:#000;text-decoration:none;display:block}
@@ -1847,7 +1847,7 @@ html.f2tn-lock:has(body.template-product) body{overflow:visible!important}
 /* Precio: original tachado #6d6d6d + con descuento #000, 12px, apilados (sin badge) */
 #modal-cart .cart-item-subtotal .cart-item-discount-badge{display:none}
 #modal-cart .cart-item-subtotal .cart-compare-price-container{display:flex;justify-content:flex-end;align-items:center;gap:4px;margin:0}
-#modal-cart .cart-item-subtotal .price-compare{font-family:'Lato',sans-serif;font-weight:400;font-size:12px;line-height:1.3;color:#6d6d6d;text-decoration:line-through}
+#modal-cart .cart-item-subtotal .price-compare{font-family:'Lato',sans-serif;font-weight:400;font-size:12px;line-height:1.3;color:#6d6d6d;text-decoration:line-through;opacity:1!important}
 #modal-cart .cart-item-subtotal .js-cart-item-subtotal{font-family:'Lato',sans-serif;font-weight:400;font-size:12px;line-height:1.3;color:#000}
 
 /* --- Zona summary (.cart-row): 36px bajo items; separaciones internas por margen (no gap) --- */
