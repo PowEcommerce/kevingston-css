@@ -1943,6 +1943,7 @@ html.f2tn-lock:has(body.template-product) body{overflow:visible!important}
 
 /* Totales: subtotal y total en semibold 14 #1d1d1b; divider arriba del bloque */
 #modal-cart .cart-subtotals-container,#modal-cart .js-cart-total-container{display:flex;flex-direction:column;gap:16px;margin:0}
+#modal-cart .js-cart-total-container{gap:5px}
 #modal-cart .cart-totals-row{display:flex;justify-content:space-between;align-items:baseline;font-family:'Lato',sans-serif;font-size:14px;margin:0}
 #modal-cart .cart-totals-subtotal,#modal-cart .cart-totals-total{font-weight:600;color:#1d1d1b}
 /* Orden Figma (medios movido por JS entre subtotal y total): divider DEBAJO del subtotal.
