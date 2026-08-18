@@ -1816,7 +1816,7 @@ html.f2tn-lock:has(body.template-product) body{overflow:visible!important}
 }
 #modal-cart .cart-item-product-info,
 #modal-cart .cart-item-totals-container{display:contents}
-#modal-cart .cart-item-name-container{grid-area:name;display:flex;flex-direction:column;gap:8px;min-width:0}
+#modal-cart .cart-item-name-container{grid-area:name;display:flex;flex-direction:column;gap:6px;min-width:0}
 #modal-cart .cart-item-delete{grid-area:delete;justify-self:end;margin:0}
 #modal-cart .cart-item-quantity{grid-area:qty;align-self:end}
 #modal-cart .cart-item-subtotal{grid-area:price;justify-self:end;align-self:end;text-align:right;display:flex;flex-direction:column;gap:4px;align-items:flex-end}
