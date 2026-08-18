@@ -1945,7 +1945,7 @@ html.f2tn-lock:has(body.template-product) body{overflow:visible!important}
 #modal-cart .cart-totals-subtotal,#modal-cart .cart-totals-total{font-weight:600;color:#1d1d1b}
 /* Orden Figma (medios movido por JS entre subtotal y total): divider DEBAJO del subtotal.
    margin-top 32 = separación barra envío → subtotal (sin gap del cart-row) */
-#modal-cart .cart-subtotals-container{padding:0 0 24px;border-bottom:1px solid #d9d9d9;margin:32px 0 24px}
+#modal-cart .cart-subtotals-container{padding:0 0 24px;border-bottom:1px solid #d9d9d9;margin:36px 0 24px}
 /* total → botón (Figma 16), ya que van en wrappers separados sin gap */
 #modal-cart .js-ajax-cart-submit,#modal-cart #ajax-cart-submit-div{margin-top:16px}
 /* Bloque "Medios de envío" (movido por JS acá): separación al total */
