@@ -2080,7 +2080,7 @@ html.f2tn-lock:has(body.template-product) body{overflow:visible!important}
 /* orden Figma: resumen (sticky) primero, cupón al final */
 #shoppingCartPage .cart-page-summary>#cart-sticky-summary{order:1}
 #shoppingCartPage .cart-page-summary>.js-visible-on-cart-filled{order:2}
-#shoppingCartPage #cart-sticky-summary{display:flex;flex-direction:column;gap:36px}
+#shoppingCartPage #cart-sticky-summary{display:flex;flex-direction:column;gap:14px}
 /* dentro del sticky: totales → botón → barra envío */
 #shoppingCartPage #cart-sticky-summary>.js-visible-on-cart-filled:has(.cart-subtotals-container){order:1}
 #shoppingCartPage #cart-sticky-summary>.js-visible-on-cart-filled:has(input[name="go_to_checkout"]),
@@ -2089,8 +2089,8 @@ html.f2tn-lock:has(body.template-product) body{overflow:visible!important}
 #shoppingCartPage #cart-sticky-summary>div:has(.js-ship-free-rest){order:3}
 #shoppingCartPage #cart-sticky-summary .cart-page-gift-promotion-bar{display:none}
 /* subtotal / total */
-#shoppingCartPage .cart-subtotals-container{display:flex;flex-direction:column;gap:8px;padding:0 0 24px;border-bottom:1px solid #d9d9d9;margin:0 0 36px}
-#shoppingCartPage .js-cart-total-container{display:flex;flex-direction:column;gap:16px;margin:0}
+#shoppingCartPage .cart-subtotals-container{display:flex;flex-direction:column;gap:8px;padding:0 0 11px;border-bottom:1px solid #d9d9d9;margin:0 0 36px}
+#shoppingCartPage .js-cart-total-container{display:flex;flex-direction:column;gap:5px;margin:0}
 #shoppingCartPage .cart-totals-row{display:flex;justify-content:space-between;align-items:baseline;font-family:'Lato',sans-serif;font-size:14px;margin:0}
 #shoppingCartPage .cart-totals-subtotal,#shoppingCartPage .cart-totals-total{font-weight:600;color:#1d1d1b}
 /* "Subtotal sin impuestos nacionales": 12px #737373 sin opacity heredado */
