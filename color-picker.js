@@ -1132,7 +1132,7 @@
           results.style.display = "";
           if (noResults || !items.length) { results.innerHTML = ""; return; } // estado vacio
           var out = "";
-          for (var i = 0; i < Math.min(items.length, 6); i++) {
+          for (var i = 0; i < Math.min(items.length, 5); i++) {
             var it = items[i];
             var a = it.querySelector("a[href]");
             var url = a ? a.getAttribute("href") : "#";
@@ -1143,13 +1143,24 @@
             if (img) {
               // en el HTML crudo la URL real esta en data-srcset/data-src (lazy);
               // el srcset y el src son placeholders vacios/base64.
-              var firstUrl = function (s) {
-                return s ? s.trim().split(/[\s,]+/)[0] : "";
+              // Elegimos ~240w del srcset: la 1ra entrada es 50w -> pixelada en el
+              // box 48x60 (peor en retina). 240w es nitido y liviano.
+              var pickSrc = function (ss, target) {
+                if (!ss) return "";
+                var best = "", bestW = 0, big = "", bigW = 0;
+                ss.split(",").forEach(function (part) {
+                  var seg = part.trim().split(/\s+/);
+                  var u = seg[0]; if (!u) return;
+                  var w = parseInt(seg[1], 10) || 0;
+                  if (w > bigW) { big = u; bigW = w; } // mas grande (fallback)
+                  if (w >= target && (bestW === 0 || w < bestW)) { best = u; bestW = w; } // menor >= target
+                });
+                return best || big;
               };
               src =
-                firstUrl(img.getAttribute("data-srcset")) ||
+                pickSrc(img.getAttribute("data-srcset"), 240) ||
                 img.getAttribute("data-src") ||
-                firstUrl(img.getAttribute("srcset")) ||
+                pickSrc(img.getAttribute("srcset"), 240) ||
                 "";
               var raw = img.getAttribute("src") || "";
               if (!src && raw.indexOf("data:") !== 0) src = raw;
