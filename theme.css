@@ -2190,3 +2190,6 @@ body.template-account-reset .page-header-title-row,body.template-account-reset .
 
 /* Buscador: matar el fade/overlay blanco en hover de los resultados (la imagen es background-image en un span, no la agarra a:has(img)) */
 .f2tn-result:hover,.f2tn-result:hover .f2tn-result-img,.f2tn-result:focus,.f2tn-result-all:hover{opacity:1!important}
+
+/* Buscador "Te puede interesar": matar el fade nativo en las bcard */
+.f2tn-search-panel .f2tn-bcard,.f2tn-search-panel .f2tn-bcard:hover,.f2tn-search-panel .f2tn-bcard:focus{opacity:1!important}
