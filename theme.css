@@ -92,12 +92,17 @@ body.kv-search-empty-on .section-main-products-grid{display:none!important}
    Neutralizamos los defaults del navegador para que el estilo NO cambie (el font-size lo dan las clases). */
 h1.heading-block,h2.heading-block,h3.heading-block,h4.heading-block,h5.heading-block,h6.heading-block{margin:0;font-weight:inherit;line-height:inherit}
 
-/* Buscador: panel baja desde arriba (spec 06). Desktop 650px (no full-screen);
-   spring 450ms al abrir, ease-in 350ms al cerrar. Mobile 100% alto. */
+/* Buscador desktop (spec 06): panel baja desde arriba, 650px (no full-screen);
+   spring 450ms al abrir, ease-in 350ms al cerrar. */
 .f2tn-search-panel{height:650px!important;max-height:650px!important;overflow-y:auto;overflow-x:hidden;transition:transform .35s ease-in!important}
 .f2tn-search-ov.f2tn-open .f2tn-search-panel{transition:transform .45s var(--kv-modal-spring)!important}
+/* Buscador MOBILE (spec M05): full-screen (100vw x 100dvh). ENTRA DESDE LA IZQUIERDA
+   con el spring (450ms) vía keyframe; el CIERRE sigue hacia arriba (base translateY(-100%),
+   350ms ease-in), tal cual el handoff. */
+@keyframes kvSearchInLeft{from{transform:translateX(-100%)}to{transform:translateX(0)}}
 @media (max-width:767px){
   .f2tn-search-panel{height:100dvh!important;max-height:100dvh!important;overflow-y:auto!important;-webkit-overflow-scrolling:touch}
+  .f2tn-search-ov.f2tn-open .f2tn-search-panel{transition:none!important;animation:kvSearchInLeft .45s var(--kv-modal-spring) both}
 }
 /* Resultados en vivo del buscador: lista thumbnail + nombre + "Ver todos" */
 .f2tn-results{max-width:664px;width:100%;margin:0 auto;display:flex;flex-direction:column;gap:20px}
