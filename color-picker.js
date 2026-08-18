@@ -1057,14 +1057,27 @@
     ov.classList.add("f2tn-search-ov");
     var input = panel.querySelector('input[type="search"], input[name="q"]');
     var closeBtn = panel.querySelector(".f2tn-search-close");
+    // ancho de la scrollbar → compensamos con padding-right para que el
+    // contenido (y el header fixed) NO salte horizontal al bloquear/soltar el scroll
+    function scrollbarW() {
+      return window.innerWidth - document.documentElement.clientWidth;
+    }
+    var headerEl = document.querySelector(".js-header, .header, header");
     function open() {
       ov.classList.add("f2tn-open");
+      var sw = scrollbarW();
       document.body.style.overflow = "hidden";
+      if (sw > 0) {
+        document.body.style.paddingRight = sw + "px";
+        if (headerEl) headerEl.style.paddingRight = sw + "px";
+      }
       setTimeout(function () { if (input) input.focus(); }, 120);
     }
     function close() {
       ov.classList.remove("f2tn-open");
       document.body.style.overflow = "";
+      document.body.style.paddingRight = "";
+      if (headerEl) headerEl.style.paddingRight = "";
     }
     // Trigger del header (capture + stop para bloquear el buscador nativo)
     var trigs = document.querySelectorAll(
