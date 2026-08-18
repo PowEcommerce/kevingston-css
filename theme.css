@@ -1848,6 +1848,7 @@ html.f2tn-lock:has(body.template-product) body{overflow:visible!important}
 #modal-cart .cart-item-subtotal .cart-item-discount-badge{display:none}
 #modal-cart .cart-item-subtotal .cart-compare-price-container{display:flex;justify-content:flex-end;align-items:center;gap:4px;margin:0}
 #modal-cart .cart-item-subtotal .price-compare{font-family:'Lato',sans-serif;font-weight:400;font-size:12px;line-height:1.3;color:#6d6d6d;text-decoration:line-through;opacity:1!important}
+.cart-item .price-compare{opacity:1!important}
 #modal-cart .cart-item-subtotal .js-cart-item-subtotal{font-family:'Lato',sans-serif;font-weight:400;font-size:12px;line-height:1.3;color:#000}
 
 /* --- Zona summary (.cart-row): 36px bajo items; separaciones internas por margen (no gap) --- */
