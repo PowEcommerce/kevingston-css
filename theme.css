@@ -2193,3 +2193,6 @@ body.template-account-reset .page-header-title-row,body.template-account-reset .
 
 /* Buscador "Te puede interesar": matar el fade nativo en las bcard */
 .f2tn-search-panel .f2tn-bcard,.f2tn-search-panel .f2tn-bcard:hover,.f2tn-search-panel .f2tn-bcard:focus{opacity:1!important}
+
+/* Buscador: sacar el max-width del inner y de las cols (ancho completo) */
+.f2tn-search-panel .f2tn-search-inner,.f2tn-search-panel .f2tn-search-cols{max-width:none!important}
