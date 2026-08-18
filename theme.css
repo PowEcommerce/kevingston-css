@@ -2031,7 +2031,7 @@ html.f2tn-lock:has(body.template-product) body{overflow:visible!important}
   #shoppingCartPage .cart-page-item{display:flex;gap:8px;align-items:stretch;margin:0;padding:24px 0;border:0;border-bottom:1px solid #d9d9d9;background:none}
   #shoppingCartPage .cart-item-image-container{flex:0 0 98px;width:98px;height:98px}
   #shoppingCartPage .cart-item-image{width:98px!important;height:98px!important;object-fit:cover;max-width:none}
-  #shoppingCartPage .cart-item-info-container{flex:1 1 auto;min-width:0;display:grid;grid-template-columns:1fr auto;column-gap:16px;grid-template-areas:"name delete" "qty price" "tax tax";align-content:space-between;min-height:98px}
+  #shoppingCartPage .cart-item-info-container{flex:1 1 auto;min-width:0;display:grid;grid-template-columns:1fr auto;column-gap:16px;grid-template-areas:"name delete" "qty price" "tax tax";align-content:space-between}
   #shoppingCartPage .cart-item-product-info,
   #shoppingCartPage .cart-item-totals-container{display:contents}
   #shoppingCartPage .cart-item-name-container{grid-area:name;display:flex;flex-direction:column;gap:8px;min-width:0}
