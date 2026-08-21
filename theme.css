@@ -2362,11 +2362,11 @@ body.template-account-login .login-form-section .form-login-help-link.btn-link{c
 .kv-locales-list::-webkit-scrollbar-track{background:#c5c5c5;border-radius:50px}
 .kv-locales-list::-webkit-scrollbar-thumb{background:#6f6f6f;border-radius:50px}
 @media (max-width:767px){
-  .kv-locales{padding:24px 16px}
+  .kv-locales{padding:32px 16px}
   .kv-locales-inner{flex-direction:column;height:auto}
   .kv-locales-sidebar{flex:none;max-width:none;width:100%;order:2;height:auto}
   .kv-locales-list{overflow:visible}
-  .kv-locales-mapwrap{order:1;height:300px;flex:none}
+  .kv-locales-mapwrap{order:1;height:340px;flex:none}
 }
 
 /* ============================================================
@@ -2389,9 +2389,21 @@ body.template-account-login .login-form-section .form-login-help-link.btn-link{c
 .section-locales ~ .section-banners .swiper-pagination-bullet-active{width:12px;height:12px;background:transparent;border:1px solid #000;vertical-align:middle}
 @media (max-width:767px){
   .section-locales ~ .section-banners .banner-item .media,.section-locales ~ .section-banners .banner-item .banner-block{flex-direction:column!important}
-  .section-locales ~ .section-banners .banner-image-container{flex:none;max-width:none;width:100%;min-height:220px}
-  .section-locales ~ .section-banners .media-content{padding:24px 16px}
-  .section-locales ~ .section-banners .heading-block{font-size:28px!important}
+  .section-locales ~ .section-banners .banner-image-container{flex:none;max-width:none;width:100%;min-height:200px}
+  .section-locales ~ .section-banners .media-content{padding:32px 16px;align-items:center;text-align:center}
+  /* Chip, título y texto centrados en mobile (Figma) */
+  .section-locales ~ .section-banners .media-content .text-block:has(+ .heading-block){align-self:center}
+  .section-locales ~ .section-banners .heading-block,.section-locales ~ .section-banners .heading-block p,.section-locales ~ .section-banners .heading-block span{text-align:center!important}
+  .section-locales ~ .section-banners .text-block,.section-locales ~ .section-banners .text-content{text-align:center!important}
+  /* Flechas más chicas (36px) abajo a la derecha, dots abajo */
+  .section-locales ~ .section-banners .swiper-button-prev,.section-locales ~ .section-banners .swiper-button-next{width:36px!important;height:36px!important;top:auto!important;bottom:0!important;transform:none!important;background-size:20px 20px!important}
+  .section-locales ~ .section-banners .swiper-button-prev{left:auto!important;right:52px!important}
+  .section-locales ~ .section-banners .swiper-button-next{right:8px!important;left:auto!important}
+}
+/* Franquicias mobile: botón full-width */
+@media (max-width:767px){
+  .section-locales ~ .section-rich-text .rich-text{padding:32px 16px}
+  .section-locales ~ .section-rich-text .btn.btn-primary{width:100%;min-width:0}
 }
 
 /* Banner locales: convertir el botón editable en la pastilla "Apertura 2025" (Figma), arriba del título */
