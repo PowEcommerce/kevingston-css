@@ -87,6 +87,9 @@ body.kv-search-empty-on .section-main-products-grid{display:none!important}
    La transicion va solo en el reveal -> fade+slide de entrada. */
 .kv-reveal{opacity:0;transform:translateY(20px);will-change:opacity,transform}
 .kv-reveal.kv-revealed{opacity:1;transform:none;transition:opacity .6s ease-out,transform .6s ease-out}
+/* La animación de entrada de banners/hero es SOLO para la home. En el resto de las páginas
+   (locales, etc.) el contenido queda visible siempre (si no, el reveal lo deja oculto). */
+body:not(.template-home) .kv-reveal{opacity:1!important;transform:none!important;transition:none!important}
 
 /* SEO headings: el heading-block se convierte por JS de <div> a <h1/h2/h3> (etiquetas SEO).
    Neutralizamos los defaults del navegador para que el estilo NO cambie (el font-size lo dan las clases). */
