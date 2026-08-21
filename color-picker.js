@@ -2717,11 +2717,13 @@
     });
 
     // AJAX login: el error NUNCA navega a /account/login, se resuelve dentro del modal.
+    // Capture phase + stopImmediatePropagation para correr ANTES del submit de store.js.
     document.addEventListener("submit", function (e) {
       var form = e.target;
       if (!form || form.id !== "login-form") return;
       if (!form.closest(".f2tn-auth-ov")) return; // solo el form del modal
       e.preventDefault();
+      e.stopImmediatePropagation();
       var modal = form.closest(".f2tn-auth-ov");
       var errBox = modal.querySelector(".js-login-error");
       var btn = form.querySelector('button[type="submit"]');
@@ -2751,7 +2753,7 @@
           if (btn) btn.disabled = false;
           if (errBox) errBox.style.display = "flex";
         });
-    });
+    }, true);
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
   else boot();
