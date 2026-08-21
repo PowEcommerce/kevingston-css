@@ -2214,3 +2214,37 @@ body.template-account-reset .page-header-title-row,body.template-account-reset .
 
 /* Badge del header (contador carrito): sin fondo/borde, peso normal */
 .head-main .badge{background:transparent;border:transparent;font-weight:400;bottom:2px;right:4px;font-size:8px;color:#000!important}
+
+/* ============================================================
+   LOGIN drawer — /account/login maquetado como panel lateral (Figma 1981-27073)
+   Panel 450px dockeado a la derecha, header 60px + X, form idéntico al Figma.
+   ============================================================ */
+body.template-account-login .login-form-section.kv-login-drawer{display:flex!important;justify-content:flex-end;align-items:stretch;min-height:calc(100vh - 124px);padding:0!important;margin:0;background:#f6f5f3}
+body.template-account-login .kv-login-drawer .account-form-container{width:450px!important;max-width:100%!important;margin:0!important;float:none!important;background:#fff;display:flex;flex-direction:column;box-shadow:0 0 24px rgba(0,0,0,.06)}
+/* Header del panel: título + X, borde inferior */
+body.template-account-login .kv-login-header{display:flex;align-items:center;justify-content:space-between;height:60px;padding:16px 24px;box-sizing:border-box;border-bottom:1px solid #e9e7e2;flex:none}
+body.template-account-login .kv-login-title{font:500 18px/1.3 'Lato',sans-serif;color:#000}
+body.template-account-login .kv-login-close{width:20px;height:20px;flex:none;display:block;background:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='20'%20height='20'%20viewBox='0%200%2020%2020'%20fill='none'%3E%3Cpath%20d='M4.17%204.17L15.83%2015.83M15.83%204.17L4.17%2015.83'%20stroke='black'%20stroke-linecap='round'%20stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center/20px 20px}
+/* Body: padding 24 (Figma) */
+body.template-account-login .kv-login-body{padding:24px;flex:1 1 auto}
+/* Espaciados Figma: inputs gap 16, ¿olvidaste? 24, botón 24, "crear cuenta" 24 */
+body.template-account-login .login-form-section .form-group{margin-bottom:16px;position:relative}
+body.template-account-login .login-form-section .form-group:has(.login-password-help){margin-bottom:0}
+/* Labels: 14px negro normal case + asterisco rojo (override del 12px uppercase gris) */
+body.template-account-login .login-form-section .form-label{font:400 14px/1.3 'Lato',sans-serif!important;color:#000!important;letter-spacing:0!important;text-transform:none!important;margin-bottom:8px;display:block}
+body.template-account-login .login-form-section .form-label::after{content:" *";color:#cc0000}
+/* Input 44px alto (Figma) */
+body.template-account-login .login-form-section .form-control{height:44px}
+/* ¿Olvidaste tu contraseña? → 24px arriba, negro subrayado */
+body.template-account-login .login-password-help{margin-top:24px;margin-bottom:0}
+body.template-account-login .login-form-section .login-password-help-link.btn-link{color:#000!important;text-decoration:underline;font-size:14px}
+/* Botón: full width, 24px arriba */
+body.template-account-login .login-form-section .btn.btn-primary{width:100%;display:block;margin-top:24px}
+/* "¿No tenés cuenta aún? Crear Cuenta" → 24px arriba, texto negro, link negro subrayado */
+body.template-account-login .form-login-help{margin-top:24px;color:#000;font-size:14px;font-family:'Lato',sans-serif}
+body.template-account-login .login-form-section .form-login-help-link.btn-link{color:#000!important;text-decoration:underline;font-size:14px}
+/* Mobile: panel full-width (como los otros modales) */
+@media (max-width:767px){
+  body.template-account-login .login-form-section.kv-login-drawer{min-height:calc(100vh - 60px);background:#fff}
+  body.template-account-login .kv-login-drawer .account-form-container{width:100%!important;box-shadow:none}
+}
