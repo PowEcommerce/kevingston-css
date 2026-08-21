@@ -2445,3 +2445,7 @@ body.template-account-login .login-form-section .form-login-help-link.btn-link{c
 body:has(.kv-locales) .section-hero .heading-block,
 body:has(.kv-locales) .section-hero .heading-block span,
 body:has(.kv-locales) .section-hero .heading-block p{font-size:48px!important;font-weight:600!important}
+
+/* Bullet activo del banner: anillo + punto lleno adentro (radio ◉, Figma) — faltaba el punto interno */
+.section-locales ~ .section-banners .swiper-pagination-bullet-active{position:relative!important}
+.section-locales ~ .section-banners .swiper-pagination-bullet-active::after{content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:6px;height:6px;border-radius:50%;background:#000}
