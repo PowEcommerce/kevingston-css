@@ -2279,3 +2279,6 @@ body.template-account-login .login-form-section .form-login-help-link.btn-link{c
 .f2tn-auth-ov .btn.btn-primary:hover{background:#1d1d1b!important}
 .f2tn-auth-ov .form-login-help{margin-top:24px;color:#000;font-size:14px;font-family:'Lato',sans-serif}
 @media (max-width:767px){.f2tn-auth-panel{width:100%}}
+
+/* Header: ocultar el dropdown de hover de la cuenta ("Entrá/Registrate") — ahora abre el modal */
+.header-account .nav-dropdown-content,.header-account .js-header-dropdown-content{display:none!important}
