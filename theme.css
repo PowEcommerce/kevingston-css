@@ -2248,3 +2248,33 @@ body.template-account-login .login-form-section .form-login-help-link.btn-link{c
   body.template-account-login .login-form-section.kv-login-drawer{min-height:calc(100vh - 60px);background:#fff}
   body.template-account-login .kv-login-drawer .account-form-container{width:100%!important;box-shadow:none}
 }
+
+/* ============================================================
+   LOGIN modal (drawer global) — abre desde el ícono de cuenta. Figma 1981-27073
+   Overlay + panel 450px slide-in desde la derecha (spring al abrir, ease-in al cerrar).
+   Form idéntico a la página /account/login.
+   ============================================================ */
+.f2tn-login-ov{position:fixed;inset:0;z-index:2100;background:rgba(0,0,0,.5);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .35s ease,visibility .35s ease}
+.f2tn-login-ov.f2tn-open{opacity:1;visibility:visible;pointer-events:auto}
+.f2tn-login-panel{position:absolute;top:0;right:0;height:100%;width:450px;max-width:100%;background:#fff;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .35s ease-in;will-change:transform}
+.f2tn-login-ov.f2tn-open .f2tn-login-panel{transform:translateX(0);transition:transform .45s var(--kv-modal-spring)}
+/* Header */
+#kv-login-modal .kv-login-header{display:flex;align-items:center;justify-content:space-between;height:60px;padding:16px 24px;box-sizing:border-box;border-bottom:1px solid #e9e7e2;flex:none}
+#kv-login-modal .kv-login-title{font:500 18px/1.3 'Lato',sans-serif;color:#000}
+#kv-login-modal .kv-login-close{width:20px;height:20px;flex:none;padding:0;border:0;cursor:pointer;background:transparent url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='20'%20height='20'%20viewBox='0%200%2020%2020'%20fill='none'%3E%3Cpath%20d='M4.17%204.17L15.83%2015.83M15.83%204.17L4.17%2015.83'%20stroke='black'%20stroke-linecap='round'%20stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center/20px 20px}
+/* Body */
+#kv-login-modal .kv-login-body{padding:24px;flex:1 1 auto;overflow-y:auto}
+/* Form (mismos estilos que la página) */
+#kv-login-modal .form-group{margin-bottom:16px;position:relative}
+#kv-login-modal .form-group:has(.login-password-help){margin-bottom:0}
+#kv-login-modal .form-label{font:400 14px/1.3 'Lato',sans-serif;color:#000;margin-bottom:8px;display:block;letter-spacing:0;text-transform:none}
+#kv-login-modal .form-label::after{content:" *";color:#cc0000}
+#kv-login-modal .form-control{font:400 14px/1.3 'Lato',sans-serif;color:#000;border:1px solid #ccc;border-radius:4px;height:44px;padding:0 16px;box-shadow:none;width:100%}
+#kv-login-modal .form-control:focus{border-color:#000;box-shadow:none}
+#kv-login-modal .form-control::placeholder{color:#b3b3b3}
+#kv-login-modal .login-password-help{margin-top:24px;margin-bottom:0}
+#kv-login-modal .login-password-help-link.btn-link,#kv-login-modal .form-login-help-link.btn-link{color:#000!important;text-decoration:underline;font-size:14px}
+#kv-login-modal .btn.btn-primary{width:100%;display:block;margin-top:24px;background:#000!important;color:#fff!important;border:0!important;border-radius:50px!important;height:44px;min-height:44px;font:400 14px/44px 'Lato',sans-serif!important;padding:0;text-transform:none;letter-spacing:.02em}
+#kv-login-modal .btn.btn-primary:hover{background:#1d1d1b!important}
+#kv-login-modal .form-login-help{margin-top:24px;color:#000;font-size:14px;font-family:'Lato',sans-serif}
+@media (max-width:767px){.f2tn-login-panel{width:100%}}

@@ -2636,3 +2636,54 @@
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
   else boot();
 })();
+
+/*
+ * Kevingston — Modal de Iniciar sesión (drawer lateral).
+ * El ícono de cuenta del header (deslogueado) abre #kv-login-modal en vez de navegar
+ * a /account/login. El form postea a customer_login_url (funciona desde cualquier página).
+ * Si el usuario está logueado, el snippet no se renderiza y el ícono va al panel de cuenta.
+ */
+(function () {
+  function ov() { return document.getElementById("kv-login-modal"); }
+  function open() {
+    var o = ov(); if (!o) return;
+    o.classList.add("f2tn-open");
+    o.setAttribute("aria-hidden", "false");
+    var sw = window.innerWidth - document.documentElement.clientWidth;
+    document.body.style.overflow = "hidden";
+    if (sw > 0) document.body.style.paddingRight = sw + "px";
+    setTimeout(function () {
+      var i = o.querySelector('input[name="email"]');
+      if (i) i.focus();
+    }, 120);
+  }
+  function close() {
+    var o = ov(); if (!o) return;
+    o.classList.remove("f2tn-open");
+    o.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+    document.body.style.paddingRight = "";
+  }
+  function boot() {
+    var o = ov();
+    if (!o) return; // no renderizado => usuario logueado, no interceptamos
+    var trigs = document.querySelectorAll(
+      '.header-account a.header-icon, .header-account .header-dropdown-content a[href*="account/login"]'
+    );
+    for (var i = 0; i < trigs.length; i++) {
+      trigs[i].addEventListener("click", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        open();
+      }, true);
+    }
+    o.addEventListener("click", function (e) { if (e.target === o) close(); });
+    var c = o.querySelector(".f2tn-login-close");
+    if (c) c.addEventListener("click", close);
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && o.classList.contains("f2tn-open")) close();
+    });
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
+  else boot();
+})();
