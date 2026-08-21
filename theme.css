@@ -2449,3 +2449,6 @@ body:has(.kv-locales) .section-hero .heading-block p{font-size:48px!important;fo
 /* Bullet activo del banner: anillo + punto lleno adentro (radio ◉, Figma) — faltaba el punto interno */
 .section-locales ~ .section-banners .swiper-pagination-bullet-active{position:relative!important}
 .section-locales ~ .section-banners .swiper-pagination-bullet-active::after{content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:6px;height:6px;border-radius:50%;background:#000}
+
+/* Banner locales: bajar un poco los bullets del swiper */
+.section-locales ~ .section-banners .swiper-pagination{margin-top:20px!important}
