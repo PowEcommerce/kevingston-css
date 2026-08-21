@@ -2407,3 +2407,15 @@ body.template-account-login .login-form-section .form-login-help-link.btn-link{c
 .section-locales ~ .section-banners .swiper-button-next{top:50%!important;bottom:auto!important;transform:translateY(-50%);margin:0}
 .section-locales ~ .section-banners .swiper-button-prev{left:32px!important;right:auto!important}
 .section-locales ~ .section-banners .swiper-button-next{right:32px!important;left:auto!important}
+
+/* Banner locales — ajustes finos: panel = alto de la imagen, flechas chevron Figma, bullets */
+.section-locales ~ .section-banners .media-content{align-self:stretch!important}
+/* Flechas: círculo negro translúcido 48px + chevron blanco del Figma (oculta el svg nativo) */
+.section-locales ~ .section-banners .swiper-button-prev,.section-locales ~ .section-banners .swiper-button-next{background:rgba(0,0,0,.5)!important}
+.section-locales ~ .section-banners .swiper-button-prev svg,.section-locales ~ .section-banners .swiper-button-next svg{display:none!important}
+.section-locales ~ .section-banners .swiper-button-prev{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2724%27%20height%3D%2724%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%3E%3Cpath%20d%3D%27M15%205L8%2012L15%2019%27%20stroke%3D%27white%27%20stroke-width%3D%271.5%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%2F%3E%3C%2Fsvg%3E")!important;background-repeat:no-repeat!important;background-position:center!important;background-size:24px 24px!important}
+.section-locales ~ .section-banners .swiper-button-next{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2724%27%20height%3D%2724%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%3E%3Cpath%20d%3D%27M9%205L16%2012L9%2019%27%20stroke%3D%27white%27%20stroke-width%3D%271.5%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%2F%3E%3C%2Fsvg%3E")!important;background-repeat:no-repeat!important;background-position:center!important;background-size:24px 24px!important}
+.section-locales ~ .section-banners .swiper-button-prev::after,.section-locales ~ .section-banners .swiper-button-next::after{display:none!important}
+/* Bullets Figma: activo = anillo hueco 12px, inactivos = punto lleno 6px */
+.section-locales ~ .section-banners .swiper-pagination-bullet{width:6px!important;height:6px!important;background:#000!important;opacity:1!important;border:0!important;border-radius:50%!important;margin:0 4px!important;vertical-align:middle!important}
+.section-locales ~ .section-banners .swiper-pagination-bullet-active{width:12px!important;height:12px!important;background:transparent!important;border:1px solid #000!important}
