@@ -2735,6 +2735,21 @@
         var errBox = modal.querySelector(".js-login-error");
         if (errBox) errBox.style.display = "none";
       }
+
+      // Registro: validación client-side (reemplaza la de TN que salteamos) para no
+      // postear datos inválidos ni crear cuentas con contraseñas que no coinciden.
+      if (isRegister) {
+        var pass = form.querySelector('[name="password"]');
+        var conf = form.querySelector('[name="password_confirmation"]');
+        if (conf && pass) {
+          conf.setCustomValidity(conf.value !== pass.value ? "Las contraseñas no coinciden" : "");
+        }
+        if (typeof form.checkValidity === "function" && !form.checkValidity()) {
+          if (typeof form.reportValidity === "function") form.reportValidity();
+          return;
+        }
+      }
+
       if (btn) btn.disabled = true;
 
       fetch(action, {
