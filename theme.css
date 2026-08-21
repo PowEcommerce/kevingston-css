@@ -2438,3 +2438,10 @@ body.template-account-login .login-form-section .form-login-help-link.btn-link{c
 /* Banner locales: garantizar panel = alto imagen (342px, el align-self:stretch no alcanza en este flex) */
 .section-locales ~ .section-banners .media-content{min-height:342px}
 @media (max-width:767px){ .section-locales ~ .section-banners .media-content{min-height:0!important} }
+
+/* Locales: lupa en el buscador (Figma 2018-25782, ícono a la derecha) */
+.kv-locales-input{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2717%27%20height%3D%2717%27%20viewBox%3D%270%200%2017%2017%27%20fill%3D%27none%27%3E%3Cpath%20d%3D%27M7.01852%2013.537C10.6186%2013.537%2013.537%2010.6186%2013.537%207.01852C13.537%203.41844%2010.6186%200.5%207.01852%200.5C3.41844%200.5%200.5%203.41844%200.5%207.01852C0.5%2010.6186%203.41844%2013.537%207.01852%2013.537Z%27%20stroke%3D%27black%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%2F%3E%3Cpath%20d%3D%27M11.7594%2011.7593L16.5001%2016.5%27%20stroke%3D%27black%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%2F%3E%3C%2Fsvg%3E");background-repeat:no-repeat;background-position:right 13px center;background-size:18px 18px;padding-right:44px}
+/* Hero de la página de locales: título 48px/600 (Figma Display2/Semibold), no el 40px default */
+body:has(.kv-locales) .section-hero .heading-block,
+body:has(.kv-locales) .section-hero .heading-block span,
+body:has(.kv-locales) .section-hero .heading-block p{font-size:48px!important;font-weight:600!important}
