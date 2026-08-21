@@ -2845,3 +2845,60 @@
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
   else boot();
 })();
+
+/*
+ * Kevingston — Página de Locales (sección main-locales).
+ * Lee locales.json (data-json de .kv-locales), renderiza la lista, filtra por búsqueda
+ * y actualiza el mapa embed al hacer clic en "Ver en el mapa". Cuando haya Maps JS API
+ * key se puede reemplazar el iframe por un mapa con pines.
+ */
+(function () {
+  var root = document.querySelector(".kv-locales");
+  if (!root) return;
+  var listEl = root.querySelector(".js-kv-locales-list");
+  var mapEl = root.querySelector(".js-kv-locales-map");
+  var searchEl = root.querySelector(".js-kv-locales-search");
+  var url = root.getAttribute("data-json");
+  var all = [];
+  function esc(s) { return (s || "").replace(/[&<>"]/g, function (c) { return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+  function queryFor(l) { return l.mapQuery || (l.lat && l.lng ? l.lat + "," + l.lng : ((l.address1 || "") + " " + (l.address2 || ""))); }
+  function mapSrc(q) { return "https://www.google.com/maps?q=" + encodeURIComponent(q) + "&output=embed"; }
+  function render(items) {
+    if (!items.length) { listEl.innerHTML = '<div class="kv-locales-empty">No encontramos locales.</div>'; return; }
+    listEl.innerHTML = items.map(function (l) {
+      var phone = l.phone ? '<a href="tel:' + esc((l.phone + "").replace(/\s/g, "")) + '">' + esc(l.phone) + "</a>" : "";
+      return '<div class="kv-locales-item" role="listitem">' +
+        '<div class="kv-locales-item-name">' + esc(l.name) + "</div>" +
+        '<div class="kv-locales-item-details">' +
+          (l.address1 ? "<span>" + esc(l.address1) + "</span>" : "") +
+          (l.address2 ? "<span>" + esc(l.address2) + "</span>" : "") +
+          phone +
+          (l.hours ? "<span>" + esc(l.hours) + "</span>" : "") +
+        "</div>" +
+        '<button type="button" class="kv-locales-item-link" data-q="' + esc(queryFor(l)) + '">Ver en el mapa</button>' +
+      "</div>";
+    }).join("");
+  }
+  if (listEl) listEl.addEventListener("click", function (e) {
+    var btn = e.target.closest ? e.target.closest(".kv-locales-item-link") : null;
+    if (!btn || !mapEl) return;
+    mapEl.src = mapSrc(btn.getAttribute("data-q"));
+    var wrap = root.querySelector(".kv-locales-mapwrap");
+    if (wrap) wrap.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  });
+  if (searchEl) searchEl.addEventListener("input", function () {
+    var q = this.value.trim().toLowerCase();
+    render(!q ? all : all.filter(function (l) {
+      return (((l.name || "") + " " + (l.address1 || "") + " " + (l.address2 || "")).toLowerCase().indexOf(q) >= 0);
+    }));
+  });
+  if (!url) return;
+  fetch(url, { cache: "no-cache" })
+    .then(function (r) { return r.json(); })
+    .then(function (data) {
+      all = (data && data.locales) || [];
+      render(all);
+      if (all.length && mapEl) mapEl.src = mapSrc(queryFor(all[0]));
+    })
+    .catch(function () { if (listEl) listEl.innerHTML = '<div class="kv-locales-empty">No se pudieron cargar los locales.</div>'; });
+})();

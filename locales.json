@@ -1,0 +1,55 @@
+{
+  "_comment": "Locales de Kevingston. Reemplazar por la lista real. 'lat'/'lng' son opcionales (para el mapa interactivo con pines cuando haya API key). 'mapQuery' se usa para el embed sin API key (dirección o 'lat,lng').",
+  "locales": [
+    {
+      "name": "Almagro - Big House",
+      "address1": "Av. Rivadavia 3970",
+      "address2": "Almagro, Ciudad Autónoma de Buenos Aires, Argentina",
+      "phone": "4982-2833",
+      "hours": "Lun a Sab de 10 a 19 hs",
+      "lat": -34.6096,
+      "lng": -58.4207,
+      "mapQuery": "Av. Rivadavia 3970, Almagro, CABA"
+    },
+    {
+      "name": "Microcentro - Big House",
+      "address1": "Florida 253",
+      "address2": "San Nicolás, Ciudad Autónoma de Buenos Aires, Argentina",
+      "phone": "4325-1122",
+      "hours": "Lun a Sab de 10 a 20 hs",
+      "lat": -34.6021,
+      "lng": -58.3745,
+      "mapQuery": "Florida 253, San Nicolás, CABA"
+    },
+    {
+      "name": "Palermo - Big House",
+      "address1": "Av. Santa Fe 3253",
+      "address2": "Palermo, Ciudad Autónoma de Buenos Aires, Argentina",
+      "phone": "4823-4455",
+      "hours": "Lun a Dom de 10 a 21 hs",
+      "lat": -34.5889,
+      "lng": -58.4103,
+      "mapQuery": "Av. Santa Fe 3253, Palermo, CABA"
+    },
+    {
+      "name": "Belgrano - Big House",
+      "address1": "Av. Cabildo 2081",
+      "address2": "Belgrano, Ciudad Autónoma de Buenos Aires, Argentina",
+      "phone": "4788-6677",
+      "hours": "Lun a Sab de 10 a 20 hs",
+      "lat": -34.5613,
+      "lng": -58.4562,
+      "mapQuery": "Av. Cabildo 2081, Belgrano, CABA"
+    },
+    {
+      "name": "Córdoba - Nueva Córdoba",
+      "address1": "Bv. Chacabuco 411",
+      "address2": "Nueva Córdoba, Córdoba, Argentina",
+      "phone": "0351 422-8899",
+      "hours": "Lun a Sab de 10 a 20 hs",
+      "lat": -31.4278,
+      "lng": -64.1888,
+      "mapQuery": "Bv. Chacabuco 411, Nueva Córdoba, Córdoba"
+    }
+  ]
+}
