@@ -2434,3 +2434,7 @@ body.template-account-login .login-form-section .form-login-help-link.btn-link{c
 /* Banner locales: forzar el panel a estirarse a la altura de la imagen (la clase media-content-center lo centraba) */
 .section-locales ~ .section-banners .media-content.media-content-center,.section-locales ~ .section-banners .media-content.media-content-floating{align-self:stretch!important}
 .section-locales ~ .section-banners .banner-item .media{align-items:stretch!important}
+
+/* Banner locales: garantizar panel = alto imagen (342px, el align-self:stretch no alcanza en este flex) */
+.section-locales ~ .section-banners .media-content{min-height:342px}
+@media (max-width:767px){ .section-locales ~ .section-banners .media-content{min-height:0!important} }
