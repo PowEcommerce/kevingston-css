@@ -2419,6 +2419,12 @@ body.template-account-login .login-form-section .form-login-help-link.btn-link{c
 .section-locales ~ .section-banners .swiper-button-next{top:50%!important;bottom:auto!important;transform:translateY(-50%);margin:0}
 .section-locales ~ .section-banners .swiper-button-prev{left:32px!important;right:auto!important}
 .section-locales ~ .section-banners .swiper-button-next{right:32px!important;left:auto!important}
+/* Mobile: flechas 36px sobre la imagen (va DESPUÉS de las reglas desktop para ganar); dots centrados abajo */
+@media (max-width:767px){
+  .section-locales ~ .section-banners .swiper-button-prev,.section-locales ~ .section-banners .swiper-button-next{width:36px!important;height:36px!important;top:100px!important;bottom:auto!important;transform:translateY(-50%)!important;background-size:20px 20px!important}
+  .section-locales ~ .section-banners .swiper-button-prev{left:12px!important;right:auto!important}
+  .section-locales ~ .section-banners .swiper-button-next{right:12px!important;left:auto!important}
+}
 
 /* Banner locales — ajustes finos: panel = alto de la imagen, flechas chevron Figma, bullets */
 .section-locales ~ .section-banners .media-content{align-self:stretch!important}
