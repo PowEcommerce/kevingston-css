@@ -2716,20 +2716,27 @@
       if (e.key === "Escape" && document.querySelector(".f2tn-auth-ov.f2tn-open")) closeAll();
     });
 
-    // AJAX login: el error NUNCA navega a /account/login, se resuelve dentro del modal.
+    // AJAX login/registro: el error NUNCA navega a /account/*, se resuelve dentro del modal.
     // Capture phase + stopImmediatePropagation para correr ANTES del submit de store.js.
     document.addEventListener("submit", function (e) {
       var form = e.target;
-      if (!form || form.id !== "login-form") return;
-      if (!form.closest(".f2tn-auth-ov")) return; // solo el form del modal
+      if (!form || !form.closest(".f2tn-auth-ov")) return;
+      var isLogin = form.id === "login-form";
+      var isRegister = form.id === "register-form";
+      if (!isLogin && !isRegister) return;
       e.preventDefault();
       e.stopImmediatePropagation();
       var modal = form.closest(".f2tn-auth-ov");
-      var errBox = modal.querySelector(".js-login-error");
       var btn = form.querySelector('button[type="submit"]');
-      if (errBox) errBox.style.display = "none";
-      if (btn) btn.disabled = true;
       var action = form.getAttribute("action") || location.pathname;
+      var stayRx = isLogin ? /\/account\/login/ : /\/account\/register/;
+
+      if (isLogin) {
+        var errBox = modal.querySelector(".js-login-error");
+        if (errBox) errBox.style.display = "none";
+      }
+      if (btn) btn.disabled = true;
+
       fetch(action, {
         method: "POST",
         body: new URLSearchParams(new FormData(form)),
@@ -2737,21 +2744,43 @@
         credentials: "same-origin",
       })
         .then(function (res) {
-          // Éxito: TN redirige fuera de /account/login → navegamos ahí (sesión iniciada).
-          if (!/\/account\/login/.test(res.url)) {
+          // Éxito: TN redirige fuera de /account/{login,register} → navegamos ahí.
+          if (!stayRx.test(res.url)) {
             window.location.href = res.url || "/account";
             return null;
           }
-          return res.text(); // error: sigue en /account/login
+          return res.text(); // sigue en la misma página: error o validación pendiente
         })
         .then(function (html) {
           if (html === null) return; // redirección de éxito en curso
-          if (btn) btn.disabled = false;
-          if (errBox) errBox.style.display = "flex";
+          if (isLogin) {
+            if (btn) btn.disabled = false;
+            var eb = modal.querySelector(".js-login-error");
+            if (eb) eb.style.display = "flex";
+            return;
+          }
+          // REGISTRO: re-render de lo que devolvió TN (errores inline o validación pendiente)
+          var doc = new DOMParser().parseFromString(html, "text/html");
+          var newForm = doc.querySelector("#register-form");
+          var body = modal.querySelector(".kv-login-body");
+          if (newForm) {
+            var oldForm = modal.querySelector("#register-form");
+            if (oldForm) { oldForm.parentNode.replaceChild(document.importNode(newForm, true), oldForm); }
+            else if (btn) btn.disabled = false;
+          } else {
+            // cuenta creada con validación pendiente (u otro estado sin form) → mostrar el mensaje de TN
+            var pending = doc.querySelector(".js-account-validation-pending") ||
+                          doc.querySelector(".register-form-section .account-form-container");
+            if (pending && body) { body.innerHTML = ""; body.appendChild(document.importNode(pending, true)); }
+            else { window.location.href = "/account"; }
+          }
         })
         .catch(function () {
           if (btn) btn.disabled = false;
-          if (errBox) errBox.style.display = "flex";
+          if (isLogin) {
+            var eb2 = modal.querySelector(".js-login-error");
+            if (eb2) eb2.style.display = "flex";
+          }
         });
     }, true);
   }
