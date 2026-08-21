@@ -2638,50 +2638,82 @@
 })();
 
 /*
- * Kevingston — Modal de Iniciar sesión (drawer lateral).
- * El ícono de cuenta del header (deslogueado) abre #kv-login-modal en vez de navegar
- * a /account/login. El form postea a customer_login_url (funciona desde cualquier página).
- * Si el usuario está logueado, el snippet no se renderiza y el ícono va al panel de cuenta.
+ * Kevingston — Modales de autenticación (drawer lateral): login / registro / reset.
+ * - El ícono de cuenta (deslogueado) y cualquier link a las URLs de cuenta abren el modal
+ *   correspondiente en vez de navegar. Los cross-links entre modales se rutean por su href.
+ * - Si el usuario está logueado, los snippets no se renderizan y los links navegan normal.
  */
 (function () {
-  function ov() { return document.getElementById("kv-login-modal"); }
-  function open() {
-    var o = ov(); if (!o) return;
+  function norm(u) {
+    try { return new URL(u, location.href).pathname.replace(/\/+$/, ""); }
+    catch (e) { return (u || "").replace(/\/+$/, ""); }
+  }
+  function openModal(id) {
+    var o = document.getElementById(id);
+    if (!o) return;
+    // cerrar cualquier otro abierto sin restaurar el scroll (transición entre modales)
+    var opened = document.querySelectorAll(".f2tn-auth-ov.f2tn-open");
+    for (var i = 0; i < opened.length; i++) {
+      opened[i].classList.remove("f2tn-open");
+      opened[i].setAttribute("aria-hidden", "true");
+    }
     o.classList.add("f2tn-open");
     o.setAttribute("aria-hidden", "false");
     var sw = window.innerWidth - document.documentElement.clientWidth;
     document.body.style.overflow = "hidden";
     if (sw > 0) document.body.style.paddingRight = sw + "px";
     setTimeout(function () {
-      var i = o.querySelector('input[name="email"]');
-      if (i) i.focus();
+      var inp = o.querySelector('input:not([type="hidden"])');
+      if (inp) inp.focus();
     }, 120);
   }
-  function close() {
-    var o = ov(); if (!o) return;
-    o.classList.remove("f2tn-open");
-    o.setAttribute("aria-hidden", "true");
+  function closeAll() {
+    var opened = document.querySelectorAll(".f2tn-auth-ov.f2tn-open");
+    for (var i = 0; i < opened.length; i++) {
+      opened[i].classList.remove("f2tn-open");
+      opened[i].setAttribute("aria-hidden", "true");
+    }
     document.body.style.overflow = "";
     document.body.style.paddingRight = "";
   }
   function boot() {
-    var o = ov();
-    if (!o) return; // no renderizado => usuario logueado, no interceptamos
-    var trigs = document.querySelectorAll(
-      '.header-account a.header-icon, .header-account .header-dropdown-content a[href*="account/login"]'
-    );
-    for (var i = 0; i < trigs.length; i++) {
-      trigs[i].addEventListener("click", function (e) {
+    if (!document.querySelector(".f2tn-auth-ov")) return; // logueado => sin modales
+
+    // Capturar las URLs de cada flujo desde los links renderizados
+    var icon = document.querySelector('.header-account a.header-icon');
+    var regLink = document.querySelector('#kv-login-modal .form-login-help-link');
+    var resLink = document.querySelector('#kv-login-modal .login-password-help-link');
+    var loginUrl = icon ? norm(icon.getAttribute("href")) : "";
+    var registerUrl = regLink ? norm(regLink.getAttribute("href")) : "";
+    var resetUrl = resLink ? norm(resLink.getAttribute("href")) : "";
+
+    function idFor(href) {
+      var p = norm(href);
+      if (loginUrl && p === loginUrl) return "kv-login-modal";
+      if (registerUrl && p === registerUrl) return "kv-register-modal";
+      if (resetUrl && p === resetUrl) return "kv-reset-modal";
+      return null;
+    }
+
+    // Apertura / cross-links (captura para ganarle a otros handlers)
+    document.addEventListener("click", function (e) {
+      var a = e.target.closest ? e.target.closest("a[href]") : null;
+      if (!a) return;
+      var id = idFor(a.getAttribute("href"));
+      if (id && document.getElementById(id)) {
         e.preventDefault();
         e.stopPropagation();
-        open();
-      }, true);
-    }
-    o.addEventListener("click", function (e) { if (e.target === o) close(); });
-    var c = o.querySelector(".f2tn-login-close");
-    if (c) c.addEventListener("click", close);
+        openModal(id);
+      }
+    }, true);
+
+    // Cierre: X, click en overlay, Escape
+    document.addEventListener("click", function (e) {
+      if (e.target.classList && e.target.classList.contains("f2tn-auth-ov")) closeAll();
+      else if (e.target.closest && e.target.closest(".f2tn-auth-close")) closeAll();
+    });
     document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape" && o.classList.contains("f2tn-open")) close();
+      if (e.key === "Escape" && document.querySelector(".f2tn-auth-ov.f2tn-open")) closeAll();
     });
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
