@@ -2715,6 +2715,43 @@
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape" && document.querySelector(".f2tn-auth-ov.f2tn-open")) closeAll();
     });
+
+    // AJAX login: el error NUNCA navega a /account/login, se resuelve dentro del modal.
+    document.addEventListener("submit", function (e) {
+      var form = e.target;
+      if (!form || form.id !== "login-form") return;
+      if (!form.closest(".f2tn-auth-ov")) return; // solo el form del modal
+      e.preventDefault();
+      var modal = form.closest(".f2tn-auth-ov");
+      var errBox = modal.querySelector(".js-login-error");
+      var btn = form.querySelector('button[type="submit"]');
+      if (errBox) errBox.style.display = "none";
+      if (btn) btn.disabled = true;
+      var action = form.getAttribute("action") || location.pathname;
+      fetch(action, {
+        method: "POST",
+        body: new URLSearchParams(new FormData(form)),
+        redirect: "follow",
+        credentials: "same-origin",
+      })
+        .then(function (res) {
+          // Éxito: TN redirige fuera de /account/login → navegamos ahí (sesión iniciada).
+          if (!/\/account\/login/.test(res.url)) {
+            window.location.href = res.url || "/account";
+            return null;
+          }
+          return res.text(); // error: sigue en /account/login
+        })
+        .then(function (html) {
+          if (html === null) return; // redirección de éxito en curso
+          if (btn) btn.disabled = false;
+          if (errBox) errBox.style.display = "flex";
+        })
+        .catch(function () {
+          if (btn) btn.disabled = false;
+          if (errBox) errBox.style.display = "flex";
+        });
+    });
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
   else boot();
