@@ -2382,8 +2382,8 @@ body.template-account-login .login-form-section .form-login-help-link.btn-link{c
 .section-locales ~ .section-banners .swiper-button-prev,.section-locales ~ .section-banners .swiper-button-next{width:48px;height:48px;border-radius:50px;background:rgba(0,0,0,.5)!important;display:flex;align-items:center;justify-content:center;top:auto;bottom:24px}
 .section-locales ~ .section-banners .swiper-button-prev svg,.section-locales ~ .section-banners .swiper-button-next svg{width:24px;height:24px;stroke:#fff;fill:#fff}
 /* dots */
-.section-locales ~ .section-banners .swiper-pagination-bullet{width:6px;height:6px;background:#000;opacity:1;border:0;margin:0 4px}
-.section-locales ~ .section-banners .swiper-pagination-bullet-active{width:12px;height:12px;background:transparent;border:1px solid #000}
+.section-locales ~ .section-banners .swiper-pagination-bullet{width:6px;height:6px;background:#000;opacity:1;border:0;margin:0 4px;vertical-align:middle}
+.section-locales ~ .section-banners .swiper-pagination-bullet-active{width:12px;height:12px;background:transparent;border:1px solid #000;vertical-align:middle}
 @media (max-width:767px){
   .section-locales ~ .section-banners .banner-item .media,.section-locales ~ .section-banners .banner-item .banner-block{flex-direction:column!important}
   .section-locales ~ .section-banners .banner-image-container{flex:none;max-width:none;width:100%;min-height:220px}
