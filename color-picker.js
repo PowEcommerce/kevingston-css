@@ -2730,6 +2730,8 @@
       var btn = form.querySelector('button[type="submit"]');
       var action = form.getAttribute("action") || location.pathname;
       var stayRx = isLogin ? /\/account\/login/ : /\/account\/register/;
+      var emailEl = form.querySelector('[name="email"]');
+      var regEmail = emailEl ? emailEl.value : "";
 
       if (isLogin) {
         var errBox = modal.querySelector(".js-login-error");
@@ -2782,12 +2784,23 @@
             var oldForm = modal.querySelector("#register-form");
             if (oldForm) { oldForm.parentNode.replaceChild(document.importNode(newForm, true), oldForm); }
             else if (btn) btn.disabled = false;
+          } else if (doc.querySelector(".js-account-validation-pending") && body) {
+            // Cuenta creada, validación por email pendiente → vista custom (Figma 4032-32587)
+            var esc = function (s) { return (s || "").replace(/[&<>"]/g, function (c) { return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+            var mailSvg = '<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M29.3344 9.334L17.3454 16.9692C16.9386 17.2055 16.4765 17.3299 16.006 17.3299C15.5355 17.3299 15.0734 17.2055 14.6666 16.9692L2.6656 9.334M5.33248 5.3344H26.6675C28.1404 5.3344 29.3344 6.52819 29.3344 8.0008V23.9992C29.3344 25.4718 28.1404 26.6656 26.6675 26.6656H5.33248C3.8596 26.6656 2.6656 25.4718 2.6656 23.9992V8.0008C2.6656 6.52819 3.8596 5.3344 5.33248 5.3344Z" stroke="#1D1D1D" stroke-width="1.5" stroke-linecap="round"/></svg>';
+            body.innerHTML =
+              '<p class="kv-login-desc">Comprá más rápido y llevá el control de tus pedidos, ¡en un solo lugar!</p>' +
+              '<div class="kv-register-card">' +
+                '<span class="kv-register-card-icon">' + mailSvg + '</span>' +
+                '<div class="kv-register-card-title">¡Estás a un paso de crear tu cuenta!</div>' +
+                '<div class="kv-register-card-text">Te enviamos un link a <span class="kv-register-email">' + esc(regEmail) + '</span> para que valides tu email.</div>' +
+              '</div>' +
+              '<div class="kv-register-links">' +
+                '<div class="kv-register-linkrow">¿Todavía no lo recibiste? <button type="button" class="js-resend-validation-link btn-link kv-register-link" data-customer-email="' + esc(regEmail) + '">Enviar Link de nuevo</button></div>' +
+                '<div class="kv-register-linkrow">¿Ya tenés una cuenta? <a href="' + (loginUrl || "/account/login") + '" class="btn-link kv-register-link">Iniciá Sesión</a></div>' +
+              '</div>';
           } else {
-            // cuenta creada con validación pendiente (u otro estado sin form) → mostrar el mensaje de TN
-            var pending = doc.querySelector(".js-account-validation-pending") ||
-                          doc.querySelector(".register-form-section .account-form-container");
-            if (pending && body) { body.innerHTML = ""; body.appendChild(document.importNode(pending, true)); }
-            else { window.location.href = "/account"; }
+            window.location.href = "/account";
           }
         })
         .catch(function () {
