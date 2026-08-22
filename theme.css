@@ -2506,8 +2506,8 @@ body.template-404 .error-page-container{padding:0!important;margin:0;max-width:n
 body.template-404 .section-hero,
 body.template-404 .hero{min-height:487px}
 body.template-404 .hero .media-visual img{object-fit:cover}
-/* Contenido: centrado vertical, alineado a la izquierda dentro de un max-width */
-body.template-404 .hero .media-content{width:100%;max-width:1440px;margin:0 auto}
+/* Contenido: centrado vertical (un toque más arriba), alineado a la izquierda dentro de un max-width */
+body.template-404 .hero .media-content{width:100%;max-width:1440px;margin:0 auto;transform:translateY(-28px)}
 /* Texto blanco y tamaños Figma */
 body.template-404 .hero .media-content,
 body.template-404 .hero .heading-block,
@@ -2518,14 +2518,14 @@ body.template-404 .hero .text-content p{margin:0 0 4px;font-size:16px;line-heigh
 body.template-404 .hero .text-content p:last-child{margin-bottom:0}
 /* Botones: 1) primario negro pill  2) secundario translúcido con blur + borde blanco */
 body.template-404 .hero .btn{min-width:218px!important;height:44px!important;min-height:44px!important;margin:0!important;padding:0 36px!important;border-radius:50px!important;font:400 14px/1 'Lato',sans-serif!important;display:inline-flex!important;align-items:center;justify-content:center;box-sizing:border-box}
-body.template-404 .hero .btn-primary{background:#000!important;color:#fff!important;border:0!important}
-body.template-404 .hero .btn-primary:hover{background:#1d1d1b!important;color:#fff!important}
+body.template-404 .hero .btn-primary{background:#000!important;background-color:#000!important;color:#fff!important;border:0!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+body.template-404 .hero .btn-primary:hover{background:#1d1d1b!important;background-color:#1d1d1b!important;color:#fff!important}
 body.template-404 .hero .btn-secondary{background:rgba(0,0,0,.2)!important;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);border:1px solid #fff!important;color:#fff!important}
 body.template-404 .hero .btn-secondary:hover{background:rgba(0,0,0,.35)!important;color:#fff!important}
 @media (max-width:767px){
   body.template-404 .section-hero,
   body.template-404 .hero{min-height:520px}
   /* Contenido abajo en mobile */
-  body.template-404 .hero .media-content{justify-content:flex-end;padding-left:16px!important;padding-right:16px!important;padding-bottom:40px!important}
+  body.template-404 .hero .media-content{justify-content:flex-end;transform:none;padding-left:16px!important;padding-right:16px!important;padding-bottom:40px!important}
   body.template-404 .hero .btn{width:100%!important;min-width:0!important}
 }
