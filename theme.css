@@ -2618,13 +2618,15 @@ body.template-404 .hero .btn-secondary:hover{background:rgba(0,0,0,.35)!importan
 .kv-cfaq-answer p{margin:0;font:400 14px/1.4 'Lato',sans-serif}
 .kv-cfaq-more{align-self:flex-start;color:#000!important;font:400 14px/1.3 'Lato',sans-serif;text-decoration:underline!important;cursor:pointer}
 @media (max-width:767px){
-  .kv-chero{min-height:180px}
+  .kv-chero{min-height:200px}
   .kv-chero-title{font-size:32px}
   .kv-contact-body{padding:32px 16px;gap:32px}
+  /* Banners: imagen arriba (más alta) + texto y botón centrados (Figma mobile) */
   .kv-cbanner{grid-template-columns:1fr}
   .kv-cbanner-trabajar .kv-cbanner-img,
-  .kv-cbanner-franq .kv-cbanner-img{min-height:220px}
+  .kv-cbanner-franq .kv-cbanner-img{min-height:360px}
   .kv-cbanner-franq .kv-cbanner-text{order:2}
   .kv-cbanner-franq .kv-cbanner-img{order:1}
-  .kv-cbanner-text{padding:32px 24px}
+  .kv-cbanner-text{padding:32px 24px;align-items:center;text-align:center}
+  .kv-cbanner-btn{min-width:247px}
 }
