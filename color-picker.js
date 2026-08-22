@@ -2954,3 +2954,47 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initKvForms);
   else initKvForms();
 })();
+
+/* ============================================================
+   About Us — animaciones (Figma spec)
+   1) Cascada de textos del primer bloque (Nuestra Historia) al CARGAR.
+   2) Cards Misión/Visión/Valores: fade en cascada al entrar en viewport (IO), 1 sola vez.
+   opacity 0->1, 300ms ease-in-out, 100ms stagger. Los estados los define el CSS (.kv-in).
+   ============================================================ */
+(function () {
+  function initAbout() {
+    var about = document.querySelector('.kv-about');
+    if (!about || about.dataset.kvAnim) return;
+    about.dataset.kvAnim = '1';
+
+    // (1) Primer bloque: cascada al cargar
+    var first = document.querySelectorAll('.kv-about-hist-body .kv-anim');
+    first.forEach(function (el, i) {
+      setTimeout(function () { el.classList.add('kv-in'); }, 60 + i * 100);
+    });
+
+    // (2) Cards al entrar en viewport
+    var org = document.querySelector('.kv-about-orgullo');
+    var cards = document.querySelectorAll('.kv-about-card');
+    if (org && cards.length) {
+      org.classList.add('kv-io'); // recién ahora oculta las cards (evita que queden invisibles si el JS falla)
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries, obs) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              cards.forEach(function (c, i) {
+                setTimeout(function () { c.classList.add('kv-in'); }, i * 100);
+              });
+              obs.disconnect();
+            }
+          });
+        }, { threshold: 0.25 });
+        io.observe(org);
+      } else {
+        cards.forEach(function (c) { c.classList.add('kv-in'); });
+      }
+    }
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initAbout);
+  else initAbout();
+})();

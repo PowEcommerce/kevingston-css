@@ -2709,3 +2709,13 @@ body.template-404 .hero .btn-secondary:hover{background:rgba(0,0,0,.35)!importan
   .kv-about-bnr-btn{margin-top:0}
   .kv-about-bnr-img{flex:none;width:100%;height:181px}
 }
+
+/* About Us — estados de animación (fade cascada) */
+.kv-about-hist-body .kv-anim{opacity:0;transition:opacity .3s ease-in-out}
+.kv-about-hist-body .kv-anim.kv-in{opacity:1}
+.kv-about-orgullo.kv-io .kv-about-card{opacity:0;transition:opacity .3s ease-in-out}
+.kv-about-orgullo.kv-io .kv-about-card.kv-in{opacity:1}
+@media (prefers-reduced-motion:reduce){
+  .kv-about-hist-body .kv-anim,
+  .kv-about-orgullo.kv-io .kv-about-card{opacity:1!important;transition:none!important}
+}
