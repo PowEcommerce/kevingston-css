@@ -2497,28 +2497,35 @@ body:has(.kv-locales) .section-hero .heading-block p{font-size:48px!important;fo
 }
 
 /* ============================================================
-   404 / Error page (Figma 3572-32152 / 3573-32962)
-   Banner full-width con imagen de fondo + overlay, texto blanco + 2 botones
+   404 / Error page — hero nativo (Figma 3572-32152 / 3573-32962)
+   Todo editable desde el admin (imagen desktop/mobile, overlay, textos, botones).
+   Acá solo pulimos el look al Figma, scopeado a la página 404.
    ============================================================ */
-.kv-404.error-page-container{padding:0!important;margin:0;max-width:none}
-.kv-404-inner{position:relative;min-height:487px;display:flex;align-items:center;background:#1d1d1b url("img/404-bg.jpg") center/cover no-repeat;overflow:hidden}
-.kv-404-inner>picture,.kv-404-bg-img{position:absolute;inset:0;z-index:0}
-.kv-404-bg-img{width:100%;height:100%;object-fit:cover;display:block}
-.kv-404-inner::before{content:"";position:absolute;inset:0;background:rgba(0,0,0,.25);z-index:1}
-.kv-404-content{position:relative;z-index:2;width:100%;max-width:1440px;margin:0 auto;padding:32px 64px;display:flex;flex-direction:column;gap:19px;align-items:flex-start}
-.kv-404-title{font:500 32px/1.2 'Lato',sans-serif;color:#fff;margin:0}
-.kv-404-desc{font:400 16px/1.3 'Lato',sans-serif;color:#fff;margin:0;white-space:pre-line}
-.kv-404-desc p{font:400 16px/1.3 'Lato',sans-serif;color:#fff;margin:0}
-.kv-404-buttons{display:flex;gap:16px;flex-wrap:wrap;margin:0}
-.kv-404-btn{display:inline-flex;align-items:center;justify-content:center;height:44px;min-width:218px;padding:0 36px;border-radius:50px;font:400 14px/1 'Lato',sans-serif;text-decoration:none!important;box-sizing:border-box;cursor:pointer}
-.kv-404-btn-primary{background:#000;color:#fff!important}
-.kv-404-btn-primary:hover{background:#1d1d1b;color:#fff!important}
-.kv-404-btn-blurred{background:rgba(0,0,0,.2);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);border:1px solid #fff;color:#fff!important}
-.kv-404-btn-blurred:hover{background:rgba(0,0,0,.35);color:#fff!important}
+/* Full-width real (sin márgenes de la page) + alto mínimo tipo banner */
+body.template-404 .error-page-container{padding:0!important;margin:0;max-width:none}
+body.template-404 .section-hero,
+body.template-404 .hero{min-height:487px}
+body.template-404 .hero .media-visual img{object-fit:cover}
+/* Contenido: centrado vertical, alineado a la izquierda dentro de un max-width */
+body.template-404 .hero .media-content{width:100%;max-width:1440px;margin:0 auto}
+/* Texto blanco y tamaños Figma */
+body.template-404 .hero .media-content,
+body.template-404 .hero .heading-block,
+body.template-404 .hero .text-block,
+body.template-404 .hero .text-content{color:#fff}
+body.template-404 .hero .heading-block{font-weight:500;line-height:1.2;margin:0}
+body.template-404 .hero .text-content p{margin:0 0 4px;font-size:16px;line-height:1.3}
+body.template-404 .hero .text-content p:last-child{margin-bottom:0}
+/* Botones: 1) primario negro pill  2) secundario translúcido con blur + borde blanco */
+body.template-404 .hero .btn{min-width:218px!important;height:44px!important;min-height:44px!important;margin:0!important;padding:0 36px!important;border-radius:50px!important;font:400 14px/1 'Lato',sans-serif!important;display:inline-flex!important;align-items:center;justify-content:center;box-sizing:border-box}
+body.template-404 .hero .btn-primary{background:#000!important;color:#fff!important;border:0!important}
+body.template-404 .hero .btn-primary:hover{background:#1d1d1b!important;color:#fff!important}
+body.template-404 .hero .btn-secondary{background:rgba(0,0,0,.2)!important;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);border:1px solid #fff!important;color:#fff!important}
+body.template-404 .hero .btn-secondary:hover{background:rgba(0,0,0,.35)!important;color:#fff!important}
 @media (max-width:767px){
-  .kv-404-inner{min-height:520px;align-items:flex-end}
-  .kv-404-content{padding:24px 16px 40px;gap:16px}
-  .kv-404-title{font-size:28px}
-  .kv-404-buttons{flex-direction:column;width:100%}
-  .kv-404-btn{width:100%;min-width:0}
+  body.template-404 .section-hero,
+  body.template-404 .hero{min-height:520px}
+  /* Contenido abajo en mobile */
+  body.template-404 .hero .media-content{justify-content:flex-end;padding-left:16px!important;padding-right:16px!important;padding-bottom:40px!important}
+  body.template-404 .hero .btn{width:100%!important;min-width:0!important}
 }
