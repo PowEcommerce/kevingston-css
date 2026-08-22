@@ -2635,3 +2635,77 @@ body.template-404 .hero .btn-secondary:hover{background:rgba(0,0,0,.35)!importan
   .kv-cbanner-text{padding:32px 48px;gap:16px;align-items:center;text-align:center}
   .kv-cbanner-btn{width:100%;min-width:0}
 }
+
+/* ============================================================
+   About Us (Figma 3278-24006 / 3341-32825)
+   ============================================================ */
+.kv-about{background:#fff}
+/* Hero (imagen compuesta con "SOMOS KEVINGSTON") */
+.kv-about-hero{min-height:245px;background:#1d1d1b url("img/about-hero.jpg") center/cover no-repeat}
+/* Títulos "Nuestra / HISTORIA" y "Nuestro / ORGULLO" */
+.kv-about-title{margin:0;display:flex;flex-direction:column;color:#000}
+.kv-about-title-1{font:400 40px/1 'Lato',sans-serif}
+.kv-about-title-2{font:600 64px/1 'Lato',sans-serif}
+/* ===== Nuestra Historia ===== */
+.kv-about-historia{background:#fff;padding:56px 32px;display:flex;justify-content:center}
+.kv-about-hist-inner{max-width:1142px;width:100%;display:flex;gap:16px;align-items:center}
+.kv-about-hist-img{flex:0 0 562px;height:695px;background:url("img/about-historia.jpg") center/cover no-repeat}
+.kv-about-hist-text{flex:1;min-width:0;position:relative;padding-left:48px;align-self:stretch;display:flex;align-items:center}
+.kv-about-hist-body{display:flex;flex-direction:column;gap:32px}
+.kv-about-hist-paras{display:flex;flex-direction:column;gap:32px}
+.kv-about-hist-paras p{margin:0;font:400 18px/1.3 'Lato',sans-serif;color:#000}
+.kv-about-hist-paras strong{font-weight:700}
+.kv-about-hist-logo{position:absolute;right:0;bottom:0;width:118px;height:118px;background:url("img/about-logo.png") center/contain no-repeat;mix-blend-mode:multiply;pointer-events:none}
+/* ===== Nuestro Orgullo ===== */
+.kv-about-orgullo{background:#f6f5f3;padding:56px 32px;display:flex;justify-content:center}
+.kv-about-org-inner{max-width:1142px;width:100%;display:flex;flex-direction:column;gap:64px}
+.kv-about-org-intro{display:flex;gap:16px;align-items:flex-end}
+.kv-about-org-intro .kv-about-title{flex:0 0 auto}
+.kv-about-org-lead{flex:1;margin:0;font:400 18px/1.3 'Lato',sans-serif;color:#000}
+.kv-about-org-lead strong{font-weight:700}
+.kv-about-cards{display:flex;gap:40px}
+.kv-about-card{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;position:relative}
+.kv-about-card-ico{width:54px;height:54px;border-radius:50px;background:#ccc;display:flex;align-items:center;justify-content:center;position:relative;z-index:2;margin-bottom:-27px}
+.kv-about-ico{width:24px;height:24px;display:block;background-position:center;background-repeat:no-repeat;background-size:contain}
+.kv-about-ico-mision{background-image:url("img/about-ic-mision.svg")}
+.kv-about-ico-vision{background-image:url("img/about-ic-vision.svg")}
+.kv-about-ico-valores{background-image:url("img/about-ic-valores.svg")}
+.kv-about-card-body{background:#fff;border-radius:16px;height:240px;padding:16px 24px;display:flex;flex-direction:column;gap:16px;align-items:center;justify-content:center;width:100%;box-sizing:border-box}
+.kv-about-card-title{margin:0;font:500 32px/1 'Lato',sans-serif;color:#000;text-align:center}
+.kv-about-card-text{margin:0;font:400 14px/1.4 'Lato',sans-serif;color:#000;text-align:center}
+/* ===== Banners ===== */
+.kv-about-banners{background:#fff;padding:56px 32px;display:flex;justify-content:center}
+.kv-about-banners-inner{max-width:1146px;width:100%;display:flex;flex-direction:column;gap:40px}
+.kv-about-divider{border:0;border-top:1px solid #ccc;margin:0;width:100%;height:0}
+.kv-about-bnr{display:flex;height:363px;width:100%;overflow:hidden}
+.kv-about-bnr-text{flex:1;min-width:0;background:#f6f5f3;display:flex;flex-direction:column;justify-content:center;gap:16px;padding:32px 48px;box-sizing:border-box}
+.kv-about-bnr-title{margin:0;font:400 32px/1.2 'Lato',sans-serif;color:#000}
+.kv-about-bnr-desc{margin:0;font:400 20px/1.3 'Lato',sans-serif;color:#000}
+.kv-about-bnr-btn{display:inline-flex;align-items:center;justify-content:center;min-width:218px;width:218px;height:44px;padding:0 36px;border-radius:50px;background:#000;color:#fff!important;font:400 14px/1 'Lato',sans-serif;text-decoration:none!important;box-sizing:border-box;transition:background-color .2s ease}
+.kv-about-bnr-btn:hover{background:#1d1d1b}
+.kv-about-bnr-img{flex:0 0 680px;background-position:center;background-size:cover;background-repeat:no-repeat}
+.kv-about-bnr-img-1{background-image:url("img/about-b1.jpg")}
+.kv-about-bnr-img-2{background-image:url("img/about-b2.jpg")}
+/* ===== Mobile ===== */
+@media (max-width:767px){
+  .kv-about-hero{min-height:200px;background-image:url("img/about-hero-mobile.jpg")}
+  .kv-about-title-1{font-size:28px}
+  .kv-about-title-2{font-size:44px}
+  .kv-about-historia,.kv-about-orgullo,.kv-about-banners{padding:40px 16px}
+  .kv-about-hist-inner{flex-direction:column;gap:32px}
+  .kv-about-hist-img{flex:none;width:100%;height:auto;aspect-ratio:562/695}
+  .kv-about-hist-text{padding-left:0}
+  .kv-about-hist-logo{display:none}
+  .kv-about-org-inner{gap:40px}
+  .kv-about-org-intro{flex-direction:column;align-items:flex-start;gap:16px}
+  .kv-about-cards{flex-direction:column;gap:40px}
+  .kv-about-card-body{height:auto;min-height:200px}
+  /* Banners: texto arriba (centrado) + imagen abajo */
+  .kv-about-banners-inner{gap:32px}
+  .kv-about-bnr{flex-direction:column;height:auto}
+  .kv-about-bnr-2 .kv-about-bnr-img{order:2}
+  .kv-about-bnr-2 .kv-about-bnr-text{order:1}
+  .kv-about-bnr-text{align-items:center;text-align:center;padding:32px 16px;gap:16px}
+  .kv-about-bnr-btn{margin-top:0}
+  .kv-about-bnr-img{flex:none;width:100%;height:181px}
+}
