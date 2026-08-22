@@ -2470,3 +2470,10 @@ body:has(.kv-locales) .section-hero .heading-block p{font-size:48px!important;fo
 
 /* Banner locales: bajar un poco los bullets del swiper */
 .section-locales ~ .section-banners .swiper-pagination{margin-top:20px!important}
+
+/* Hero locales: título 46px en mobile (48px en desktop) */
+@media (max-width:767px){
+  body:has(.kv-locales) .section-hero .heading-block,
+  body:has(.kv-locales) .section-hero .heading-block span,
+  body:has(.kv-locales) .section-hero .heading-block p{font-size:46px!important}
+}
