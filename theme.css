@@ -2518,8 +2518,11 @@ body.template-404 .hero .text-content p{margin:0 0 4px;font-size:16px;line-heigh
 body.template-404 .hero .text-content p:last-child{margin-bottom:0}
 /* Botones: 1) primario negro pill  2) secundario translúcido con blur + borde blanco */
 body.template-404 .hero .btn{min-width:218px!important;height:44px!important;min-height:44px!important;margin:0!important;padding:0 36px!important;border-radius:50px!important;font:400 14px/1 'Lato',sans-serif!important;display:inline-flex!important;align-items:center;justify-content:center;box-sizing:border-box}
-body.template-404 .hero .btn-primary{background:#000!important;background-color:#000!important;color:#fff!important;border:0!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
-body.template-404 .hero .btn-primary:hover{background:#1d1d1b!important;background-color:#1d1d1b!important;color:#fff!important}
+/* El primario DEBE ser negro sólido: vence a la regla translúcida de hero/banners (html:not(.kv-preview) .section.section-hero .btn, especificidad 0,4,1) */
+html:not(.kv-preview) body.template-404 .section-hero .btn-primary,
+body.template-404 .hero .btn-primary{--kv-bbg:#000;--kv-btxt:#fff;background:#000!important;background-color:#000!important;color:#fff!important;border:0!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+html:not(.kv-preview) body.template-404 .section-hero .btn-primary:hover,
+body.template-404 .hero .btn-primary:hover{background:#1d1d1b!important;background-color:#1d1d1b!important;border:0!important;color:#fff!important}
 body.template-404 .hero .btn-secondary{background:rgba(0,0,0,.2)!important;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);border:1px solid #fff!important;color:#fff!important}
 body.template-404 .hero .btn-secondary:hover{background:rgba(0,0,0,.35)!important;color:#fff!important}
 @media (max-width:767px){
