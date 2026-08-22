@@ -2402,7 +2402,7 @@ body.template-account-login .login-form-section .form-login-help-link.btn-link{c
 }
 /* Franquicias mobile: padding + botón full-width */
 @media (max-width:767px){
-  .section-locales ~ .section-rich-text .rich-text{padding:32px 16px}
+  .section-locales ~ .section-rich-text .rich-text{padding:32px 0!important}
   .section-locales ~ .section-rich-text .btn.btn-primary{width:100%;min-width:0}
 }
 
