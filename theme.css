@@ -2600,7 +2600,9 @@ body.template-404 .hero .btn-secondary:hover{background:rgba(0,0,0,.35)!importan
 .kv-cbanner-trabajar .kv-cbanner-img{background-image:url("img/contact-trabajar.jpg")}
 .kv-cbanner-franq .kv-cbanner-img{background-image:url("img/contact-franquicia.jpg")}
 .kv-cbanner-text{background:#f6f5f3;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:24px;padding:48px}
-.kv-cbanner-title{margin:0;color:#000;font:500 28px/1.3 'Lato',sans-serif}
+.kv-cbanner-title{margin:0;color:#000;font:400 32px/1.3 'Lato',sans-serif}
+/* Subtítulo del form: distinto texto en desktop vs mobile */
+.kv-sub-mob{display:none}
 .kv-cbanner-btn{display:inline-flex;align-items:center;justify-content:center;min-width:218px;height:44px;padding:0 36px;border-radius:50px;background:#000;color:#fff!important;font:400 14px/1 'Lato',sans-serif;text-decoration:none!important;box-sizing:border-box;transition:background-color .2s ease}
 .kv-cbanner-btn:hover{background:#1d1d1b}
 /* FAQ */
@@ -2618,15 +2620,17 @@ body.template-404 .hero .btn-secondary:hover{background:rgba(0,0,0,.35)!importan
 .kv-cfaq-answer p{margin:0;font:400 14px/1.4 'Lato',sans-serif}
 .kv-cfaq-more{align-self:flex-start;color:#000!important;font:400 14px/1.3 'Lato',sans-serif;text-decoration:underline!important;cursor:pointer}
 @media (max-width:767px){
-  .kv-chero{min-height:200px}
-  .kv-chero-title{font-size:32px}
+  .kv-chero{min-height:200px;background-image:url("img/contact-hero-mobile.jpg")}
   .kv-contact-body{padding:32px 16px;gap:32px}
-  /* Banners: imagen arriba (más alta) + texto y botón centrados (Figma mobile) */
+  /* Subtítulo: mostrar versión mobile (más corta) */
+  .kv-sub-desk{display:none}
+  .kv-sub-mob{display:block}
+  /* Banners: imagen arriba (alta) + texto y botón centrados, botón full-width (Figma mobile) */
   .kv-cbanner{grid-template-columns:1fr}
   .kv-cbanner-trabajar .kv-cbanner-img,
-  .kv-cbanner-franq .kv-cbanner-img{min-height:360px}
+  .kv-cbanner-franq .kv-cbanner-img{min-height:363px}
   .kv-cbanner-franq .kv-cbanner-text{order:2}
   .kv-cbanner-franq .kv-cbanner-img{order:1}
-  .kv-cbanner-text{padding:32px 24px;align-items:center;text-align:center}
-  .kv-cbanner-btn{min-width:247px}
+  .kv-cbanner-text{padding:32px 48px;gap:16px;align-items:center;text-align:center}
+  .kv-cbanner-btn{width:100%;min-width:0}
 }
