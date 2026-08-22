@@ -2904,54 +2904,53 @@
 })();
 
 /* ============================================================
-   Libro de quejas / reclamos (/reclamos-sugerencias)
-   Puebla los selects editables y envía el form por AJAX al endpoint
-   nativo de contacto de TN (/winnie-pooh) => llega por mail a la tienda.
-   Va acá (no inline) porque TN escapea el <script> de la sección.
+   Forms tipo contacto (Libro de quejas /reclamos-sugerencias + Contacto)
+   Genérico, dirigido por data-attributes:
+   - Puebla selects .js-kv-options desde data-kv-options (una opción por línea).
+   - Al enviar (fase de captura, ANTES de store.js) pliega los campos marcados
+     con data-kv-fold="Etiqueta" dentro del textarea marcado con data-kv-message,
+     porque TN solo manda name/email/phone/message por mail.
+   NO hace preventDefault: el envío real + reCAPTCHA lo maneja store.js vía la
+   clase js-winnie-pooh-form. Va acá (no inline) porque TN escapea el <script>.
    ============================================================ */
 (function () {
-  function initReclamos() {
-    var form = document.getElementById('kv-reclamos-form');
-    if (!form || form.dataset.kvBound) return;
+  function populate(sel) {
+    var raw = sel.getAttribute('data-kv-options') || '';
+    raw.split(/\r?\n/).forEach(function (line) {
+      var v = line.trim();
+      if (!v) return;
+      var op = document.createElement('option');
+      op.value = v;
+      op.textContent = v;
+      sel.appendChild(op);
+    });
+  }
+
+  function bindForm(form) {
+    if (form.dataset.kvBound) return;
     form.dataset.kvBound = '1';
 
-    var box = form.closest('.kv-reclamos');
+    form.querySelectorAll('.js-kv-options').forEach(populate);
 
-    // Poblar selects desde las opciones editables (una por línea)
-    box.querySelectorAll('.js-kv-options').forEach(function (sel) {
-      var raw = sel.getAttribute('data-kv-options') || '';
-      raw.split(/\r?\n/).forEach(function (line) {
-        var v = line.trim();
-        if (!v) return;
-        var op = document.createElement('option');
-        op.value = v;
-        op.textContent = v;
-        sel.appendChild(op);
-      });
-    });
-
-    // Plegar los campos extra (DNI, dónde compraste, tipo de consulta) dentro del
-    // mensaje ANTES de que store.js envíe (fase de captura). NO hacemos preventDefault:
-    // el envío real + reCAPTCHA lo maneja store.js vía la clase js-winnie-pooh-form.
     form.addEventListener('submit', function () {
-      var msg = document.getElementById('kvr-msg');
+      var msg = form.querySelector('[data-kv-message]');
       if (!msg || msg.dataset.kvFolded) return;
-      var placeSel = document.getElementById('kvr-place');
-      var querySel = document.getElementById('kvr-query');
-      var docEl = form.querySelector('[name=documento]');
-      var placeLabel = (placeSel && placeSel.getAttribute('data-kv-label')) || 'Dónde compraste';
-      var queryLabel = (querySel && querySel.getAttribute('data-kv-label')) || 'Tipo de consulta';
+      var lines = [];
+      form.querySelectorAll('[data-kv-fold]').forEach(function (el) {
+        lines.push(el.getAttribute('data-kv-fold') + ': ' + (el.value || ''));
+      });
       var userMsg = (msg.value || '').trim();
       msg.value =
-        'N° de Documento: ' + (docEl ? docEl.value : '') + '\n' +
-        placeLabel + ': ' + (placeSel ? placeSel.value : '') + '\n' +
-        queryLabel + ': ' + (querySel ? querySel.value : '') + '\n' +
-        '--------------------------------\n' +
+        (lines.length ? lines.join('\n') + '\n--------------------------------\n' : '') +
         (userMsg ? ('Mensaje:\n' + userMsg) : 'Mensaje: (sin comentario)');
       msg.dataset.kvFolded = '1';
     }, true);
   }
 
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initReclamos);
-  else initReclamos();
+  function initKvForms() {
+    document.querySelectorAll('form.js-kv-cform').forEach(bindForm);
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initKvForms);
+  else initKvForms();
 })();
