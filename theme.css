@@ -2428,6 +2428,11 @@ body.template-account-login .login-form-section .form-login-help-link.btn-link{c
   .section-locales ~ .section-banners .swiper-button-prev{left:auto!important;right:56px!important}
   .section-locales ~ .section-banners .swiper-button-next{right:12px!important;left:auto!important}
   .section-locales ~ .section-banners .swiper-pagination{text-align:left!important;padding-left:16px!important;margin-top:12px!important}
+  /* Pill centrado en mobile (la regla desktop lo pone a la izquierda) */
+  .section-locales ~ .section-banners .media-content .text-block:has(+ .heading-block){align-self:center!important}
+  /* Todo el bloque (imagen + panel) con 16px a los costados */
+  .section-locales ~ .section-banners .banner-item .media,
+  .section-locales ~ .section-banners .banner-item .banner-block{padding-left:16px!important;padding-right:16px!important;box-sizing:border-box}
 }
 
 /* Banner locales — ajustes finos: panel = alto de la imagen, flechas chevron Figma, bullets */
