@@ -2529,6 +2529,14 @@ body.template-404 .hero .btn-secondary:hover{background:rgba(0,0,0,.35)!importan
   body.template-404 .section-hero,
   body.template-404 .hero{min-height:520px}
   /* Contenido abajo en mobile */
-  body.template-404 .hero .media-content{justify-content:flex-end;transform:none;padding-left:16px!important;padding-right:16px!important;padding-bottom:40px!important}
-  body.template-404 .hero .btn{width:100%!important;min-width:0!important}
+  body.template-404 .hero .media-content{justify-content:flex-end;align-items:center;text-align:center;transform:none;padding-left:16px!important;padding-right:16px!important;padding-bottom:40px!important}
+  /* Textos centrados en mobile */
+  body.template-404 .hero .heading-block,
+  body.template-404 .hero .text-block,
+  body.template-404 .hero .text-content,
+  body.template-404 .hero .text-content p{text-align:center!important}
+  /* Botones centrados y menos anchos (no full-width) */
+  body.template-404 .hero .group-block,
+  body.template-404 .hero .group-content{align-items:center!important;width:100%}
+  body.template-404 .hero .btn{width:auto!important;min-width:218px!important}
 }
