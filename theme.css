@@ -2540,3 +2540,42 @@ body.template-404 .hero .btn-secondary:hover{background:rgba(0,0,0,.35)!importan
   body.template-404 .hero .group-content{align-items:center!important;width:100%}
   body.template-404 .hero .btn{width:auto!important;min-width:218px!important}
 }
+
+/* ============================================================
+   Libro de quejas / reclamos-sugerencias (Figma 1851-21851 / 2010-6855)
+   Página propia con formulario de contacto (envía por mail nativo TN).
+   ============================================================ */
+.kv-reclamos{background:#fff;padding:48px 32px;box-sizing:border-box}
+.kv-reclamos-inner{max-width:913px;margin:0 auto;display:flex;flex-direction:column;gap:36px;align-items:center}
+.kv-reclamos-head{display:flex;flex-direction:column;gap:19px;text-align:center;width:100%}
+.kv-reclamos-title{font:500 24px/normal 'Lato',sans-serif;color:#000;margin:0}
+.kv-reclamos-sub{font:400 16px/1.3 'Lato',sans-serif;color:#000;margin:0}
+.kv-reclamos-form{width:100%;display:flex;flex-direction:column;gap:24px}
+.kv-reclamos-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.kv-field{display:flex;flex-direction:column;gap:8px;min-width:0}
+.kv-label{font:400 14px/1.3 'Lato',sans-serif;color:#000}
+.kv-req{color:#a00e1d;margin-left:2px}
+.kv-input,.kv-select{width:100%;height:40px;border:1px solid #ccc;border-radius:4px;padding:0 13px;font:400 14px/1.3 'Lato',sans-serif;color:#000;background:#fff;box-sizing:border-box}
+.kv-input::placeholder{color:#737373}
+.kv-input:focus,.kv-select:focus{border-color:#737373;outline:none}
+.kv-textarea{height:auto;min-height:90px;padding:13px;resize:vertical}
+.kv-textarea::placeholder{color:#737373}
+.kv-select-wrap{position:relative;width:100%}
+.kv-select{-webkit-appearance:none;appearance:none;padding-right:42px;cursor:pointer}
+.kv-select:required:invalid{color:#737373}
+.kv-select option{color:#000}
+.kv-select-arrow{position:absolute;right:13px;top:50%;transform:translateY(-50%);width:24px;height:24px;pointer-events:none;color:#000}
+.kv-reclamos-actions{display:flex;justify-content:center;width:100%}
+.kv-reclamos-submit{width:218px;height:44px;border-radius:50px;background:#000;color:#fff;border:0;font:400 14px/1 'Lato',sans-serif;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:background-color .2s ease}
+.kv-reclamos-submit:hover{background:#1d1d1b}
+.kv-reclamos-submit.is-loading{opacity:.7;pointer-events:none}
+.kv-reclamos-alert{width:100%;padding:14px 16px;border-radius:4px;font:400 14px/1.3 'Lato',sans-serif;box-sizing:border-box}
+.kv-reclamos-success{background:#e6f4ea;color:#1e7e34;border:1px solid #b7dfc3;text-align:center}
+.kv-reclamos-error{background:#fdecea;color:#c0392b;border:1px solid #f5c6cb}
+.kv-reclamos [hidden]{display:none}
+@media (max-width:767px){
+  .kv-reclamos{padding:32px 16px}
+  .kv-reclamos-inner{gap:32px}
+  .kv-reclamos-row{grid-template-columns:1fr}
+  .kv-reclamos-submit{width:100%}
+}
