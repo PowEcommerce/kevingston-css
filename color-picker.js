@@ -2916,8 +2916,6 @@
     form.dataset.kvBound = '1';
 
     var box = form.closest('.kv-reclamos');
-    var okEl = box.querySelector('.js-kv-reclamos-success');
-    var erEl = box.querySelector('.js-kv-reclamos-error');
 
     // Poblar selects desde las opciones editables (una por línea)
     box.querySelectorAll('.js-kv-options').forEach(function (sel) {
@@ -2932,52 +2930,26 @@
       });
     });
 
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      erEl.hidden = true;
-      if (!form.checkValidity()) { form.reportValidity(); return; }
-
-      var btn = form.querySelector('.kv-reclamos-submit');
-      btn.disabled = true;
-      btn.classList.add('is-loading');
-
+    // Plegar los campos extra (DNI, dónde compraste, tipo de consulta) dentro del
+    // mensaje ANTES de que store.js envíe (fase de captura). NO hacemos preventDefault:
+    // el envío real + reCAPTCHA lo maneja store.js vía la clase js-winnie-pooh-form.
+    form.addEventListener('submit', function () {
+      var msg = document.getElementById('kvr-msg');
+      if (!msg || msg.dataset.kvFolded) return;
       var placeSel = document.getElementById('kvr-place');
       var querySel = document.getElementById('kvr-query');
+      var docEl = form.querySelector('[name=documento]');
       var placeLabel = (placeSel && placeSel.getAttribute('data-kv-label')) || 'Dónde compraste';
       var queryLabel = (querySel && querySel.getAttribute('data-kv-label')) || 'Tipo de consulta';
-
-      var data = new FormData(form);
-      var userMsg = (data.get('message') || '').trim();
-      var extra =
-        'N° de Documento: ' + (data.get('documento') || '') + '\n' +
-        placeLabel + ': ' + (data.get('purchase_place') || '') + '\n' +
-        queryLabel + ': ' + (data.get('query_type') || '') + '\n' +
+      var userMsg = (msg.value || '').trim();
+      msg.value =
+        'N° de Documento: ' + (docEl ? docEl.value : '') + '\n' +
+        placeLabel + ': ' + (placeSel ? placeSel.value : '') + '\n' +
+        queryLabel + ': ' + (querySel ? querySel.value : '') + '\n' +
         '--------------------------------\n' +
         (userMsg ? ('Mensaje:\n' + userMsg) : 'Mensaje: (sin comentario)');
-      data.set('message', extra);
-      // estos no son campos nativos de TN; ya van dentro del mensaje
-      data.delete('documento');
-      data.delete('purchase_place');
-      data.delete('query_type');
-
-      fetch('/winnie-pooh', {
-        method: 'POST',
-        body: data,
-        headers: { 'X-Requested-With': 'XMLHttpRequest' },
-        credentials: 'same-origin'
-      })
-        .then(function (res) {
-          if (!res.ok && res.status >= 400) throw new Error('bad status ' + res.status);
-          form.hidden = true;
-          okEl.hidden = false;
-          box.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        })
-        .catch(function () {
-          erEl.hidden = false;
-          btn.disabled = false;
-          btn.classList.remove('is-loading');
-        });
-    });
+      msg.dataset.kvFolded = '1';
+    }, true);
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initReclamos);
