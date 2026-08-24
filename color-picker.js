@@ -3082,21 +3082,41 @@
     root.dataset.kvInit = '1';
     var btns = root.querySelectorAll('.js-kv-ayuda-cat');
     var panels = root.querySelectorAll('.kv-ayuda-panel');
+    function renderRecaptcha(active) {
+      var rc = active.querySelector('.kv-ayuda-recaptcha');
+      if (!rc || rc.dataset.kvRendered) return;
+      if (window.grecaptcha && grecaptcha.render) {
+        rc.dataset.kvRendered = '1';
+        grecaptcha.render(rc, { sitekey: rc.getAttribute('data-sitekey'), callback: window.kvRecaptchaOk, 'expired-callback': window.kvRecaptchaExpired });
+      } else {
+        setTimeout(function () { renderRecaptcha(active); }, 200);
+      }
+    }
     function activate(targetId) {
       btns.forEach(function (b) { b.classList.toggle('is-active', b.getAttribute('data-target') === targetId); });
       panels.forEach(function (p) { p.classList.toggle('is-active', p.id === targetId); });
-      // Si el panel embebe el mapa de locales y estaba oculto, recargar el iframe (Google embed no
-      // renderiza en display:none → queda en blanco). Se recarga una sola vez al mostrarse.
       var active = root.querySelector('.kv-ayuda-panel.is-active');
       if (active) {
+        // Mapa de locales embebido: el iframe queda en blanco si estaba display:none → recargar 1 vez.
         var map = active.querySelector('.js-kv-locales-map');
         if (map && !map.dataset.kvShown) { map.dataset.kvShown = '1'; setTimeout(function () { map.src = map.src; }, 60); }
+        // reCAPTCHA del formulario: render explícito al mostrarse (no renderiza en display:none).
+        renderRecaptcha(active);
       }
     }
     btns.forEach(function (b) {
       b.addEventListener('click', function () { activate(b.getAttribute('data-target')); });
     });
-    if (btns.length) activate(btns[0].getAttribute('data-target'));
+    // Tras enviar el formulario (recarga con `contact`), abrir la tab que muestra el resultado.
+    var resultPanel = root.querySelector('.kv-ayuda-panel .kv-ayuda-result');
+    var startPanel = resultPanel ? resultPanel.closest('.kv-ayuda-panel') : null;
+    if (startPanel) {
+      var startBtn = root.querySelector('.js-kv-ayuda-cat[data-target="' + startPanel.id + '"]');
+      if (startBtn) { activate(startPanel.id); }
+      else if (btns.length) { activate(btns[0].getAttribute('data-target')); }
+    } else if (btns.length) {
+      activate(btns[0].getAttribute('data-target'));
+    }
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initAyuda);
   else initAyuda();
