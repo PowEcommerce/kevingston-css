@@ -2845,3 +2845,10 @@ body.template-404 .hero .btn-secondary:hover{background:rgba(0,0,0,.35)!importan
   .kv-ayuda-cat{width:96px;flex:0 0 auto}
   .kv-ayuda-body{padding:24px 16px}
 }
+
+/* Ayuda: locales embebido + nota (Pick-up) */
+.kv-ayuda-note{margin-top:32px;font:400 16px/1.3 'Lato',sans-serif;color:#000}
+.kv-ayuda-note ul{margin:0;padding-left:20px}
+.kv-ayuda-note li{margin-bottom:8px}
+.kv-ayuda-note li:last-child{margin-bottom:0}
+.kv-ayuda-note a{color:#000;text-decoration:underline}
