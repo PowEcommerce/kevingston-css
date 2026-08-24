@@ -2998,3 +2998,76 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initAbout);
   else initAbout();
 })();
+
+/* ============================================================
+   Promociones — filtro por día + flip "Ver Condiciones" + carrusel
+   ============================================================ */
+(function () {
+  function norm(s) { return (s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, ''); }
+  function initPromos() {
+    var root = document.querySelector('.kv-promos');
+    if (!root || root.dataset.kvInit) return;
+    root.dataset.kvInit = '1';
+
+    // Filtro por día
+    var tabs = root.querySelectorAll('.kv-promo-tab');
+    var cards = root.querySelectorAll('.kv-promo-card');
+    var empty = root.querySelector('.js-kv-promos-empty');
+    function applyFilter(day) {
+      var shown = 0;
+      cards.forEach(function (card) {
+        var days = norm(card.getAttribute('data-days'));
+        var match = day === 'all' || days.indexOf('todos') !== -1 || days.indexOf(day) !== -1;
+        card.style.display = match ? '' : 'none';
+        if (match) { shown++; } else { card.classList.remove('is-open'); }
+      });
+      if (empty) empty.hidden = shown !== 0;
+    }
+    tabs.forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        tabs.forEach(function (t) { t.classList.remove('is-active'); });
+        tab.classList.add('is-active');
+        applyFilter(tab.getAttribute('data-day'));
+      });
+    });
+
+    // Flip "Ver Condiciones" / cerrar
+    root.querySelectorAll('.js-kv-promo-more').forEach(function (btn) {
+      btn.addEventListener('click', function () { var c = btn.closest('.kv-promo-card'); if (c) c.classList.add('is-open'); });
+    });
+    root.querySelectorAll('.js-kv-promo-close').forEach(function (btn) {
+      btn.addEventListener('click', function () { var c = btn.closest('.kv-promo-card'); if (c) c.classList.remove('is-open'); });
+    });
+
+    // Carrusel final
+    var carousel = root.querySelector('.js-kv-promos-carousel');
+    if (carousel) {
+      var track = carousel.querySelector('.js-kv-promos-track');
+      var n = track ? track.children.length : 0;
+      var idx = 0;
+      var dotsWrap = carousel.querySelector('.js-kv-promos-dots');
+      var dots = [];
+      if (n <= 1) { carousel.setAttribute('data-single', '1'); }
+      if (dotsWrap && n > 1) {
+        for (var i = 0; i < n; i++) {
+          var d = document.createElement('button');
+          d.type = 'button'; d.className = 'kv-promos-dot'; d.setAttribute('aria-label', 'Slide ' + (i + 1));
+          (function (k) { d.addEventListener('click', function () { go(k); }); })(i);
+          dotsWrap.appendChild(d); dots.push(d);
+        }
+      }
+      function go(k) {
+        idx = (k + n) % n;
+        if (track) track.style.transform = 'translateX(' + (-idx * 100) + '%)';
+        dots.forEach(function (d, j) { d.classList.toggle('is-active', j === idx); });
+      }
+      var prev = carousel.querySelector('.js-kv-promos-prev');
+      var next = carousel.querySelector('.js-kv-promos-next');
+      if (prev) prev.addEventListener('click', function () { go(idx - 1); });
+      if (next) next.addEventListener('click', function () { go(idx + 1); });
+      if (n) go(0);
+    }
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initPromos);
+  else initPromos();
+})();

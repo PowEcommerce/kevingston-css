@@ -2719,3 +2719,77 @@ body.template-404 .hero .btn-secondary:hover{background:rgba(0,0,0,.35)!importan
   .kv-about-hist-body .kv-anim,
   .kv-about-orgullo.kv-io .kv-about-card{opacity:1!important;transition:none!important}
 }
+
+/* ============================================================
+   Promociones (Figma 1939-2703 / 2014-5577)
+   ============================================================ */
+.kv-promos{background:#fff}
+/* Hero */
+.kv-promos-hero{position:relative;min-height:245px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#1d1d1b url("img/promos-hero.jpg") center/cover no-repeat}
+.kv-promos-hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.kv-promos-hero-ov{position:absolute;inset:0;background:rgba(0,0,0,.4);z-index:1}
+.kv-promos-hero-title{position:relative;z-index:2;margin:0;font:600 48px/1 'Lato',sans-serif;color:#fff;text-align:center}
+/* Main: tabs + grilla */
+.kv-promos-main{max-width:1440px;margin:0 auto;padding:40px 32px;box-sizing:border-box}
+.kv-promos-tabs{display:flex;flex-wrap:wrap;gap:20px;justify-content:center}
+.kv-promo-tab{appearance:none;cursor:pointer;background:#fff;border:.75px solid #000;border-radius:50px;padding:8px 24px;font:400 12px/1 'Lato',sans-serif;color:#000;white-space:nowrap;transition:background-color .15s ease,color .15s ease}
+.kv-promo-tab.is-active{background:#000;color:#fff;border-color:#000}
+.kv-promos-grid{display:flex;flex-wrap:wrap;gap:32px;justify-content:center;margin-top:40px}
+.kv-promos-empty{width:100%;text-align:center;color:#737373;font:400 16px/1.3 'Lato',sans-serif;padding:40px 0}
+/* Promo card (flip) */
+.kv-promo-card{position:relative;width:310px;height:310px;border-radius:16px;overflow:hidden;flex:0 0 310px}
+.kv-promo-front{position:absolute;inset:0;background:#fff;border:1px solid #ccc;border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:8px;align-items:flex-start;box-sizing:border-box;overflow:hidden}
+.kv-promo-badge{background:#f6f5f3;border-radius:50px;padding:8px 16px;font:600 14px/1.3 'Lato',sans-serif;color:#000;display:inline-flex}
+.kv-promo-details{flex:1;width:100%;display:flex;flex-direction:column;gap:16px;align-items:center;justify-content:center;min-height:0}
+.kv-promo-detail-inner{display:flex;flex-direction:column;gap:8px;align-items:center;width:100%}
+.kv-promo-icon{height:80px;display:flex;align-items:center;justify-content:center}
+.kv-promo-icon-img{max-height:80px;width:auto;object-fit:contain}
+.kv-promo-info{display:flex;flex-direction:column;gap:8px;align-items:center;width:100%}
+.kv-promo-title{margin:0;font:700 14px/1.4 'Lato',sans-serif;color:#000;text-align:center}
+.kv-promo-desc{margin:0;font:400 14px/1.3 'Lato',sans-serif;color:#737373;text-align:center}
+.kv-promo-more{appearance:none;background:none;border:0;cursor:pointer;font:400 14px/1.3 'Lato',sans-serif;color:#000;text-decoration:underline;padding:0}
+.kv-promo-back{position:absolute;inset:0;background:#f6f5f3;border:1px solid #ccc;border-radius:16px;padding:16px;box-sizing:border-box;display:flex;flex-direction:column;gap:16px;transform:translateY(100%);transition:transform .3s ease}
+.kv-promo-card.is-open .kv-promo-back{transform:translateY(0)}
+.kv-promo-back-body{flex:1;display:flex;flex-direction:column;gap:8px;align-items:center;justify-content:center;text-align:center}
+.kv-promo-back-sec{display:flex;flex-direction:column;gap:8px;width:100%}
+.kv-promo-back-h{margin:0;font:600 16px/1.3 'Lato',sans-serif;color:#000}
+.kv-promo-back-t{margin:0;font:400 14px/1.3 'Lato',sans-serif;color:#000}
+.kv-promo-close{position:absolute;top:16px;right:16px;width:36px;height:36px;border:0;border-radius:50px;background:rgba(0,0,0,.5);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.kv-promo-close svg{width:20px;height:20px}
+/* Carrusel */
+.kv-promos-carousel{position:relative;background:#fff;padding:32px 0;display:flex;flex-direction:column;align-items:center;gap:24px}
+.kv-promos-viewport{width:100%;overflow:hidden}
+.kv-promos-track{display:flex;transition:transform .4s ease}
+.kv-promos-slide{flex:0 0 100%;display:flex;min-height:342px}
+.kv-promos-slide-img{position:relative;flex:0 0 680px;overflow:hidden;min-height:342px}
+.kv-promos-slide-img-el{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.kv-promos-slide-text{flex:1;min-width:0;background:#f6f5f3;display:flex;flex-direction:column;justify-content:center;gap:24px;padding:32px 48px 32px 64px;box-sizing:border-box}
+.kv-promos-slide-title{margin:0;font:400 32px/1 'Lato',sans-serif;color:#000}
+.kv-promos-slide-desc{margin:0;font:400 20px/1.2 'Lato',sans-serif;color:#000}
+.kv-promos-slide-btn{display:inline-flex;align-items:center;justify-content:center;width:218px;height:44px;padding:0 36px;border-radius:50px;background:#000;color:#fff!important;font:400 14px/1 'Lato',sans-serif;text-decoration:none!important;box-sizing:border-box}
+.kv-promos-slide-btn:hover{background:#1d1d1b}
+.kv-promos-slide-legal{display:flex;flex-direction:column;gap:16px}
+.kv-promos-slide-promo{margin:0;font:600 16px/1.3 'Lato',sans-serif;color:#000}
+.kv-promos-slide-dias{margin:0;font:400 16px/1.3 'Lato',sans-serif;color:#000}
+.kv-promos-slide-dias strong{font-weight:600}
+.kv-promos-arrow{position:absolute;top:calc(50% - 12px);transform:translateY(-50%);width:48px;height:48px;border:0;border-radius:50px;background:rgba(0,0,0,.5);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:2}
+.kv-promos-arrow svg{width:24px;height:24px}
+.kv-promos-prev{left:32px}
+.kv-promos-next{right:32px}
+.kv-promos-dots{display:flex;gap:8px;align-items:center;justify-content:center}
+.kv-promos-dot{width:8px;height:8px;border-radius:50%;background:#ccc;border:0;padding:0;cursor:pointer}
+.kv-promos-dot.is-active{background:#000}
+.kv-promos-carousel[data-single="1"] .kv-promos-arrow,.kv-promos-carousel[data-single="1"] .kv-promos-dots{display:none}
+/* Mobile */
+@media (max-width:767px){
+  .kv-promos-hero{min-height:200px}
+  .kv-promos-hero-title{font-size:32px}
+  .kv-promos-main{padding:32px 16px}
+  .kv-promos-tabs{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;gap:12px;-webkit-overflow-scrolling:touch;padding-bottom:4px}
+  .kv-promos-grid{gap:16px;margin-top:32px}
+  .kv-promo-card{flex:0 0 100%;width:100%;max-width:343px;margin:0 auto}
+  .kv-promos-slide{flex-direction:column;min-height:0}
+  .kv-promos-slide-img{flex:none;width:100%;height:220px;min-height:0}
+  .kv-promos-slide-text{padding:24px 16px;gap:16px}
+  .kv-promos-arrow{display:none}
+}
