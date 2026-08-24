@@ -3071,3 +3071,26 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initPromos);
   else initPromos();
 })();
+
+/* ============================================================
+   Sección de Ayuda — switch de categorías (el acordeón es <details> nativo)
+   ============================================================ */
+(function () {
+  function initAyuda() {
+    var root = document.querySelector('.kv-ayuda');
+    if (!root || root.dataset.kvInit) return;
+    root.dataset.kvInit = '1';
+    var btns = root.querySelectorAll('.js-kv-ayuda-cat');
+    var panels = root.querySelectorAll('.kv-ayuda-panel');
+    function activate(targetId) {
+      btns.forEach(function (b) { b.classList.toggle('is-active', b.getAttribute('data-target') === targetId); });
+      panels.forEach(function (p) { p.classList.toggle('is-active', p.id === targetId); });
+    }
+    btns.forEach(function (b) {
+      b.addEventListener('click', function () { activate(b.getAttribute('data-target')); });
+    });
+    if (btns.length) activate(btns[0].getAttribute('data-target'));
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initAyuda);
+  else initAyuda();
+})();
