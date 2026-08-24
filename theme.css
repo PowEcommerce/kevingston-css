@@ -2857,3 +2857,12 @@ body.template-404 .hero .btn-secondary:hover{background:rgba(0,0,0,.35)!importan
 .kv-ayuda-sub{margin:0 0 24px;font:400 16px/1.3 'Lato',sans-serif;color:#000}
 .kv-ayuda-form{max-width:520px}
 .kv-ayuda-actions{justify-content:flex-start}
+
+/* Ayuda: sub-desplegables anidados dentro de una respuesta (regiones de envío) */
+.kv-ayuda-ans .kv-subfaq{border:0}
+.kv-ayuda-ans .kv-subfaq>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:6px 0;font:400 16px/1.3 'Lato',sans-serif;color:#000;text-decoration:underline}
+.kv-ayuda-ans .kv-subfaq>summary::-webkit-details-marker{display:none}
+.kv-ayuda-ans .kv-subfaq>summary::after{content:"";width:10px;height:10px;border-right:1.5px solid #000;border-bottom:1.5px solid #000;transform:rotate(45deg);transition:transform .2s ease;flex:none;margin-right:6px}
+.kv-ayuda-ans .kv-subfaq[open]>summary::after{transform:rotate(225deg)}
+.kv-ayuda-ans .kv-subfaq-body{padding:4px 0 12px}
+.kv-ayuda-ans .kv-subfaq-body p{margin:0 0 8px}
