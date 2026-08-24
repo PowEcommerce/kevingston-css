@@ -3085,6 +3085,13 @@
     function activate(targetId) {
       btns.forEach(function (b) { b.classList.toggle('is-active', b.getAttribute('data-target') === targetId); });
       panels.forEach(function (p) { p.classList.toggle('is-active', p.id === targetId); });
+      // Si el panel embebe el mapa de locales y estaba oculto, recargar el iframe (Google embed no
+      // renderiza en display:none → queda en blanco). Se recarga una sola vez al mostrarse.
+      var active = root.querySelector('.kv-ayuda-panel.is-active');
+      if (active) {
+        var map = active.querySelector('.js-kv-locales-map');
+        if (map && !map.dataset.kvShown) { map.dataset.kvShown = '1'; setTimeout(function () { map.src = map.src; }, 60); }
+      }
     }
     btns.forEach(function (b) {
       b.addEventListener('click', function () { activate(b.getAttribute('data-target')); });
