@@ -2866,3 +2866,26 @@ body.template-404 .hero .btn-secondary:hover{background:rgba(0,0,0,.35)!importan
 .kv-ayuda-ans .kv-subfaq[open]>summary::after{transform:rotate(225deg)}
 .kv-ayuda-ans .kv-subfaq-body{padding:4px 0 12px}
 .kv-ayuda-ans .kv-subfaq-body p{margin:0 0 8px}
+
+/* Ayuda: Formas de pago (cards con ícono + texto) */
+.kv-pago{display:flex;flex-direction:column;gap:32px}
+.kv-pago-card{background:#f6f5f3;border-radius:16px;padding:24px}
+.kv-pago-h{margin:0 0 16px;font:600 18px/1.3 'Lato',sans-serif;color:#000}
+.kv-pago-row{display:flex;align-items:center;gap:24px}
+.kv-pago-ico{flex:none;width:140px;height:70px;background-repeat:no-repeat;background-position:center}
+.kv-pago-ico-tarjeta{background-image:url("img/pago-ic-tarjeta.svg")}
+.kv-pago-ico-efectivo{background-image:url("img/pago-ic-efectivo.svg")}
+.kv-pago-ico-mp{background-image:url("img/pago-ic-mp.svg")}
+.kv-pago-c{flex:1;min-width:0;display:flex;flex-direction:column;gap:16px}
+.kv-pago-body{font:400 16px/1.3 'Lato',sans-serif;color:#000}
+.kv-pago-body p{margin:0 0 8px}
+.kv-pago-body p:last-child{margin-bottom:0}
+.kv-pago-body a{color:#000;text-decoration:underline}
+.kv-pago-body ul{margin:0 0 8px;padding-left:20px}
+.kv-pago-links{display:flex;flex-direction:column}
+.kv-pago-links a,.kv-pago-links span{font:400 16px/1.3 'Lato',sans-serif;color:#000;text-decoration:underline}
+@media (max-width:767px){
+  .kv-pago{gap:16px}
+  .kv-pago-row{gap:12px}
+  .kv-pago-ico{width:72px}
+}
