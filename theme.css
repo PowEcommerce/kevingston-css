@@ -2265,7 +2265,7 @@ body.template-account-login .login-form-section .form-login-help-link.btn-link{c
    cambiando de contenido. El overlay entrante muestra el drawer sólido en su lugar (sin
    re-deslizar) y solo el contenido interno hace fade/slide; el saliente se oculta al
    instante detrás. La 1ra apertura y el cierre final mantienen el slide del drawer. */
-@keyframes kvAuthContentIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes kvAuthContentIn{from{opacity:0}to{opacity:1}}
 .f2tn-auth-ov.f2tn-switch{transition:none!important}
 .f2tn-auth-ov.f2tn-switch:not(.f2tn-open){opacity:0!important;visibility:hidden!important}
 .f2tn-auth-ov.f2tn-switch.f2tn-open{opacity:1!important;visibility:visible!important;z-index:2101}
