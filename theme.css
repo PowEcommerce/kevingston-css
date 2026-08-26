@@ -2257,10 +2257,10 @@ body.template-account-login .login-form-section .form-login-help-link.btn-link{c
    Overlay + panel 450px slide-in desde la derecha (spring al abrir, ease-in al cerrar).
    Form idéntico a la página /account/login.
    ============================================================ */
-.f2tn-auth-ov{position:fixed;inset:0;z-index:2100;background:rgba(0,0,0,.5);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .35s ease,visibility .35s ease}
+.f2tn-auth-ov{position:fixed;inset:0;z-index:2100;background:rgba(0,0,0,.5);opacity:0;visibility:hidden;pointer-events:none;transition:opacity 500ms var(--kv-modal-spring),visibility 500ms var(--kv-modal-spring)}
 .f2tn-auth-ov.f2tn-open{opacity:1;visibility:visible;pointer-events:auto}
-.f2tn-auth-panel{position:absolute;top:0;right:0;height:100%;width:450px;max-width:100%;background:#fff;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .35s ease-in;will-change:transform}
-.f2tn-auth-ov.f2tn-open .f2tn-auth-panel{transform:translateX(0);transition:transform .45s var(--kv-modal-spring)}
+.f2tn-auth-panel{position:absolute;top:0;right:0;height:100%;width:450px;max-width:100%;background:#fff;display:flex;flex-direction:column;transform:translateX(100%);transition:transform 500ms var(--kv-modal-spring);will-change:transform}
+.f2tn-auth-ov.f2tn-open .f2tn-auth-panel{transform:translateX(0)}
 /* Header */
 .f2tn-auth-ov .kv-login-header{display:flex;align-items:center;justify-content:space-between;height:60px;padding:16px 24px;box-sizing:border-box;border-bottom:1px solid #e9e7e2;flex:none}
 .f2tn-auth-ov .kv-login-title{font:500 18px/1.3 'Lato',sans-serif;color:#000}
