@@ -2910,3 +2910,10 @@ body.template-404 .hero .btn-secondary:hover{background:rgba(0,0,0,.35)!importan
 .login-form-section .btn-link:hover,.account-orders-section .btn-link:hover,.account-order-section .btn-link:hover,.account-info-section .btn-link:hover,.account-addresses-section .btn-link:hover,.account-address-section .btn-link:hover,
 .f2tn-auth-ov .login-password-help-link.btn-link:hover,.f2tn-auth-ov .form-login-help-link.btn-link:hover,
 body.template-account-login .login-form-section .login-password-help-link.btn-link:hover,body.template-account-login .login-form-section .form-login-help-link.btn-link:hover{text-decoration-color:transparent!important}
+
+/* Header sticky al scrollear en TODAS las páginas (antes: solo home fixed / ficha sticky).
+   El adbar (40px, presente en todo el sitio) scrollea y sale por arriba; la barra principal
+   queda pegada arriba. Aplica en todos los viewports. Home conserva su header fixed
+   transparente (selector .template-home .js-header = más específico, gana). */
+.js-header{position:sticky!important;top:-40px;z-index:1001}
+.js-header .js-head-main{background:#fff}
