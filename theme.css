@@ -2900,11 +2900,13 @@ body.template-404 .hero .btn-secondary:hover{background:rgba(0,0,0,.35)!importan
   .kv-pago-ico{width:72px}
 }
 
-/* Hover: quitar el subrayado a todos los .btn-link subrayados del sitio.
-   La 1ra regla cubre el caso general (gana a los underline !important de (0,2,0) por orden
-   de fuente); las mirrors ganan a los underline más específicos (login / auth modal). */
-.btn-link:hover{text-decoration:none!important}
+/* Hover: el subrayado de los .btn-link se DESVANECE con transición. text-decoration no es
+   animable, así que transicionamos text-decoration-color: currentColor -> transparent (la
+   línea sigue ahí pero invisible). La 1ra regla cubre el caso general (gana a los underline
+   !important de (0,2,0) por orden de fuente); las mirrors ganan a los más específicos. */
+.btn-link{transition:text-decoration-color .2s ease}
+.btn-link:hover{text-decoration-color:transparent!important}
 .kv-ship-calc .btn-link:hover,
 .login-form-section .btn-link:hover,.account-orders-section .btn-link:hover,.account-order-section .btn-link:hover,.account-info-section .btn-link:hover,.account-addresses-section .btn-link:hover,.account-address-section .btn-link:hover,
 .f2tn-auth-ov .login-password-help-link.btn-link:hover,.f2tn-auth-ov .form-login-help-link.btn-link:hover,
-body.template-account-login .login-form-section .login-password-help-link.btn-link:hover,body.template-account-login .login-form-section .form-login-help-link.btn-link:hover{text-decoration:none!important}
+body.template-account-login .login-form-section .login-password-help-link.btn-link:hover,body.template-account-login .login-form-section .form-login-help-link.btn-link:hover{text-decoration-color:transparent!important}
