@@ -288,7 +288,7 @@ html:not(.kv-preview) .section.section-slideshow .btn:hover,html:not(.kv-preview
 /* Contenido: header 84px + content pt-16 px-32 pb-32 (Figma 959-19260) */
 /* Fondo blanco del drawer (Panel 1) */
 .modal-nav-main.modal-nav-hamburger{background:#fff!important}
-.modal-nav-main>.modal-body{display:block;padding:16px 32px 32px;background:#fff}
+.modal-nav-main>.modal-body{display:block;padding:25px 32px 32px;background:#fff}
 /* nav-list = flex column, gap 12px DENTRO de cada grupo (Figma) */
 .modal-nav-main .nav-list{display:flex;flex-direction:column;gap:12px}
 /* Items base: Lato Regular 16px/1.3 */
