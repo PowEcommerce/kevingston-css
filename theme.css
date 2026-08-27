@@ -425,7 +425,7 @@ html:not(.kv-preview) .section.section-slideshow .btn:hover,html:not(.kv-preview
 .modal-nav-main .nav-hamburger-body:has(.nav-destacada)>.nav-item:has(> .nav-view-all){border-top:1px solid #F0F0F0!important;margin-top:12px!important;padding-top:18px!important}
 /* Divisor DEBAJO del banner (arriba del bloque de destacadas). Con el reorder flex la 1ra
    destacada (New Arrivals) va justo después del banner; le ponemos el border-top. */
-.modal-nav-main .nav-hamburger-body:has(.nav-panel-banners):has(.nav-destacada)>.nav-item:has(> .nav-view-all)+.nav-item:has(> .nav-destacada){border-top:1px solid #F0F0F0!important;padding-top:18px!important}
+.modal-nav-main .nav-hamburger-body:has(.nav-panel-banners):has(.nav-destacada)>.nav-item:has(> .nav-view-all)+.nav-item:has(> .nav-destacada){border-top:1px solid #F0F0F0!important;padding-top:8px!important}
 
 /* Sub-panel (Panel 2/3, desktop nested + mobile reparentado): ítems con hijas → flecha a la
    derecha, centrada verticalmente (el display:block dejaba el chevron desfasado arriba). */
