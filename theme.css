@@ -399,7 +399,7 @@ html:not(.kv-preview) .section.section-slideshow .btn:hover,html:not(.kv-preview
    Full = ancho completo apilado (Figma 02-btnimg / 05); mini = grid 2 col
    (Figma 04 nietas). Fase 3 (1ra pasada; full-bleed/pixel-fit pendiente).
    ============================================================ */
-.modal-nav-main .nav-hamburger-body .nav-panel-banners{display:flex;flex-wrap:wrap;gap:16px;margin:0 0 24px;width:100%}
+.modal-nav-main .nav-hamburger-body .nav-panel-banners{display:flex;flex-wrap:wrap;gap:16px;margin:0 0 18px;width:100%}
 .modal-nav-main .nav-panel-banner-full,.modal-nav-main .nav-panel-banner-mini{text-decoration:none;color:#000}
 .modal-nav-main .nav-panel-banner-full{flex:0 0 100%;max-width:100%}
 .modal-nav-main .nav-panel-banner-mini{flex:0 0 calc(50% - 8px);max-width:calc(50% - 8px)}
@@ -410,7 +410,7 @@ html:not(.kv-preview) .section.section-slideshow .btn:hover,html:not(.kv-preview
 /* Banner FULL-BLEED al tope del Panel 2/3 (desktop): escapa el padding del body (100/32/24)
    y sin radius (Figma 02-btnimg). Solo cuando es el primer bloque del panel. */
 @media (min-width:768px){
-  .modal-nav-main .nav-item.item-with-subitems>.modal .nav-hamburger-body>.nav-panel-banners:first-child{margin:-100px -32px 24px;width:auto!important}
+  .modal-nav-main .nav-item.item-with-subitems>.modal .nav-hamburger-body>.nav-panel-banners:first-child{margin:-100px -32px 18px;width:auto!important}
   .modal-nav-main .nav-item.item-with-subitems>.modal .nav-hamburger-body .nav-panel-banner-full .nav-banner-item-img{border-radius:0}
 }
 /* Divisor debajo del bloque de destacadas (New Arrivals/Colecciones) del Panel 2/3:
@@ -420,7 +420,7 @@ html:not(.kv-preview) .section.section-slideshow .btn:hover,html:not(.kv-preview
 .modal-nav-main .nav-hamburger-body>.nav-panel-banners{order:-2}
 .modal-nav-main .nav-hamburger-body>.nav-item:has(> .nav-destacada){order:-1}
 /* Divisor arriba de "Ver todo" (queda debajo del bloque de destacadas), solo si hay destacadas */
-.modal-nav-main .nav-hamburger-body:has(.nav-destacada)>.nav-item:has(> .nav-view-all){border-top:1px solid #F0F0F0!important;margin-top:6px!important;padding-top:18px!important}
+.modal-nav-main .nav-hamburger-body:has(.nav-destacada)>.nav-item:has(> .nav-view-all){border-top:1px solid #F0F0F0!important;margin-top:12px!important;padding-top:18px!important}
 /* Divisor DEBAJO del banner (arriba del bloque de destacadas). Con el reorder flex la 1ra
    destacada (New Arrivals) va justo después del banner; le ponemos el border-top. */
 .modal-nav-main .nav-hamburger-body:has(.nav-panel-banners):has(.nav-destacada)>.nav-item:has(> .nav-view-all)+.nav-item:has(> .nav-destacada){border-top:1px solid #F0F0F0!important;padding-top:18px!important}
@@ -448,7 +448,7 @@ html:not(.kv-preview) .section.section-slideshow .btn:hover,html:not(.kv-preview
   .modal-nav-hamburger:not(.modal-nav-main) .nav-hamburger-body{display:flex;flex-direction:column}
   .modal-nav-hamburger:not(.modal-nav-main) .nav-hamburger-body>.nav-panel-banners{order:-2}
   .modal-nav-hamburger:not(.modal-nav-main) .nav-hamburger-body>.nav-item:has(> .nav-destacada){order:-1}
-  .modal-nav-hamburger:not(.modal-nav-main) .nav-hamburger-body:has(.nav-destacada)>.nav-item:has(> .nav-view-all){border-top:1px solid #F0F0F0!important;margin-top:6px!important;padding-top:18px!important}
+  .modal-nav-hamburger:not(.modal-nav-main) .nav-hamburger-body:has(.nav-destacada)>.nav-item:has(> .nav-view-all){border-top:1px solid #F0F0F0!important;margin-top:12px!important;padding-top:18px!important}
   .modal-nav-hamburger:not(.modal-nav-main) .nav-hamburger-body:has(.nav-panel-banners):has(.nav-destacada)>.nav-item:has(> .nav-view-all)+.nav-item:has(> .nav-destacada){border-top:1px solid #F0F0F0!important;padding-top:18px!important}
 }
 
