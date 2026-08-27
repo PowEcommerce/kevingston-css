@@ -321,9 +321,11 @@ html:not(.kv-preview) .section.section-slideshow .btn:hover,html:not(.kv-preview
 /* Item 1 = badge "Hasta 30% OFF" (pill negro, Lato Bold 16px) */
 .modal-nav-main .nav-list-link.nav-badge{display:inline-flex!important;width:auto!important;align-items:center;justify-content:center;background:var(--badge-bg,#000)!important;color:var(--badge-fg,#fff)!important;font-weight:700;font-size:16px;line-height:1.3;border-radius:4px;padding:4px 8px;text-decoration:none!important}
 .modal-nav-main .nav-list-link.nav-badge .nav-list-arrow{display:none}
+/* Ítem destacado (bold) por config (bloque nav-badge variant=destacada) */
+.modal-nav-main .nav-list-link.nav-destacada{font-weight:700!important}
 /* Item 2 = "New Arrivals" bold, 18px desde el badge (gap 12 + 6) */
 .modal-nav-main .nav-list>.nav-item:nth-child(2){margin-top:6px}
-.modal-nav-main .nav-list>.nav-item:nth-child(2)>.nav-list-link{font-weight:700}
+/* bold de "destacada" ahora es por config (.nav-destacada), no por nth-child */
 /* Inicios de grupo (Hombre 3, Bóxers 6, Promociones 10, Cuenta 11): 18 + divisor + 18 */
 .modal-nav-main .nav-list>.nav-item:nth-child(3),
 .modal-nav-main .nav-list>.nav-item:nth-child(6),
