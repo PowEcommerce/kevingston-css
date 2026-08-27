@@ -409,6 +409,9 @@ html:not(.kv-preview) .section.section-slideshow .btn:hover,html:not(.kv-preview
 .modal-nav-main .nav-panel-banner-full .nav-banner-item-img{width:100%;height:auto;display:block;border-radius:8px}
 .modal-nav-main .nav-panel-banner-mini .nav-banner-item-img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block;border-radius:0}
 .modal-nav-main .nav-panel-banners .nav-banner-item-title{margin:8px 0 0;font:400 14px/1.3 "Lato",sans-serif;color:#000;text-align:center}
+/* Título de categoría dentro del panel: SOLO mobile (en desktop la categoría activa
+   se ve en el Panel 1). Oculto por defecto; el bloque mobile lo enciende. */
+.kv-panel-cat-title{display:none}
 /* Banner FULL-BLEED al tope del Panel 2/3 (desktop): escapa el padding del body (100/32/24)
    y sin radius (Figma 02-btnimg). Solo cuando es el primer bloque del panel. */
 @media (min-width:768px){
@@ -459,6 +462,19 @@ html:not(.kv-preview) .section.section-slideshow .btn:hover,html:not(.kv-preview
   .modal-nav-hamburger:not(.modal-nav-main) .nav-panel-banner-mini .nav-banner-item-img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:0;display:block}
   .modal-nav-hamburger:not(.modal-nav-main) .nav-panel-banner-full .nav-banner-item-img{width:100%;height:auto;display:block}
   .modal-nav-hamburger:not(.modal-nav-main) .nav-panel-banners .nav-banner-item-title{margin:8px 0 0;font:400 14px/1.3 "Lato",sans-serif;text-align:center;color:#000}
+  /* HEADER del sub-panel (reparentado a body): back(izq) + logo Kevingston(centro) + X(der).
+     El logo lo inyecta kv-color-picker.js; ocultamos el título nativo de categoría. */
+  .modal-nav-hamburger:not(.modal-nav-main) .modal-header{position:relative;display:flex!important;flex-direction:row!important;align-items:center;justify-content:space-between;padding:18px 16px!important;height:auto!important;min-height:0!important;border-bottom:none!important;background:#fff}
+  .modal-nav-hamburger:not(.modal-nav-main) .modal-header .modal-title{display:none!important}
+  .modal-nav-hamburger:not(.modal-nav-main) .modal-header .modal-back{order:1;position:relative;margin:0!important;padding:0!important;flex:none;top:auto!important;left:auto!important}
+  .modal-nav-hamburger:not(.modal-nav-main) .modal-header .modal-close:not(.modal-back){order:3;position:relative;margin:0!important;padding:0!important;flex:none;top:auto!important;right:auto!important}
+  .modal-nav-hamburger:not(.modal-nav-main) .modal-header .modal-close-icon{width:24px!important;height:24px!important;font-size:24px!important}
+  .modal-nav-hamburger:not(.modal-nav-main) .modal-header .kv-menu-logo{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;align-items:center;justify-content:center;order:2}
+  .modal-nav-hamburger:not(.modal-nav-main) .modal-header .kv-menu-logo img{height:17px;width:auto;max-width:180px;filter:none}
+  .modal-nav-hamburger:not(.modal-nav-main) .modal-header .kv-menu-logo .logo-text,
+  .modal-nav-hamburger:not(.modal-nav-main) .modal-header .kv-menu-logo{font:700 18px/1 "Lato",sans-serif;color:#000;text-decoration:none;letter-spacing:.02em}
+  /* Título de categoría en el CONTENIDO del sub-panel (Figma m2 "HOMBRE" / m4 "ACCESORIOS HOMBRE") */
+  .modal-nav-hamburger:not(.modal-nav-main) .kv-panel-cat-title{display:block;order:-3;margin:0 0 16px;padding:0;font:600 20px/1.2 "Lato",sans-serif;color:#000;text-transform:uppercase;letter-spacing:.02em}
 }
 
 /* ============================================================
