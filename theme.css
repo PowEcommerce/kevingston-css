@@ -413,7 +413,7 @@ html:not(.kv-preview) .section.section-slideshow .btn:hover,html:not(.kv-preview
 }
 /* Divisor debajo del bloque de destacadas (New Arrivals/Colecciones) del Panel 2/3:
    el primer ítem NO-destacado que sigue a un destacado lleva el divisor (Figma). */
-.modal-nav-main .nav-hamburger-body .nav-item:has(> .nav-destacada) + .nav-item:not(:has(> .nav-destacada)){border-top:1px solid #F0F0F0;margin-top:6px;padding-top:18px}
+.modal-nav-main .nav-hamburger-body .nav-item:has(> .nav-destacada) + .nav-item:not(:has(> .nav-destacada)){border-top:1px solid #F0F0F0!important;margin-top:6px!important;padding-top:18px!important}
 
 /* ============================================================
    MENÚ MOBILE (Figma 959-19822) — header logo+X, gap 16, px 16
