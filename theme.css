@@ -337,6 +337,8 @@ html:not(.kv-preview) .section.section-slideshow .btn:hover,html:not(.kv-preview
 .modal-nav-main .nav-list>.nav-item:nth-child(n+11)>.nav-list-link{color:#404040}
 /* Seccion inferior: menu secundario en gris #404040 */
 .modal-nav-main .nav-secondary{background:#fff;border:none;border-top:1px solid #F0F0F0;margin-top:12px;padding-top:18px}
+/* Si el menú secundario está vacío (los secundarios van en el principal), no mostrar la línea */
+.modal-nav-main .nav-secondary:empty{border-top:none!important;margin-top:0!important;padding-top:0!important}
 .modal-nav-main .nav-secondary .secondary-menu-link{padding:6px 0;font-size:16px;color:#404040}
 /* Footer de cuenta nativo oculto (usamos el secundario) */
 .modal-nav-main .modal-footer{display:none!important}
