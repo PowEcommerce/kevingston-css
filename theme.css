@@ -370,6 +370,16 @@ html:not(.kv-preview) .section.section-slideshow .btn:hover,html:not(.kv-preview
   }
   /* Padre con Panel 2 abierto: subrayado activo */
   .modal-nav-main .nav-item.item-with-subitems.kv-l2-open>.nav-list-link{text-decoration-color:currentColor}
+  /* Panel 3 (nivel 3): sub-modal anidado dentro de un nav-hamburger-body. position:fixed
+     a left:960 (relativo al drawer, que tiene transform) para escapar el overflow del Panel 2.
+     Se abre por CLICK en un subitem con hijas (kv-l3-open, seteado por initMenuClickNav). */
+  .modal-nav-main .nav-hamburger-body .nav-item.item-with-subitems>.modal.modal-nav-hamburger{
+    position:fixed!important;left:960px!important;top:0!important;
+  }
+  .modal-nav-main .nav-item.item-with-subitems.kv-l3-open>.modal.modal-nav-hamburger{
+    opacity:1!important;visibility:visible!important;pointer-events:auto!important;
+  }
+  .modal-nav-main .nav-item.item-with-subitems.kv-l3-open>.nav-list-link{text-decoration-color:currentColor}
   /* Header nativo del sub-panel (atrás/título/cerrar): oculto */
   .modal-nav-main .nav-item.item-with-subitems>.modal .modal-header{display:none}
   /* Cuerpo del sub-panel */
