@@ -462,10 +462,10 @@ html:not(.kv-preview) .section.section-slideshow .btn:hover,html:not(.kv-preview
   .modal-nav-hamburger:not(.modal-nav-main) .nav-hamburger-body>.nav-panel-banners{order:-2}
   .modal-nav-hamburger:not(.modal-nav-main) .nav-hamburger-body>.nav-item:has(> .nav-destacada){order:-1}
   .modal-nav-hamburger:not(.modal-nav-main) .nav-hamburger-body:has(.nav-destacada)>.nav-item:has(> .nav-view-all){border-top:1px solid #F0F0F0!important;margin-top:8px!important;padding-top:16px!important}
-  .modal-nav-hamburger:not(.modal-nav-main) .nav-hamburger-body:has(.nav-panel-banners):has(.nav-destacada)>.nav-item:has(> .nav-view-all)+.nav-item:has(> .nav-destacada){border-top:1px solid #F0F0F0!important;padding-top:16px!important}
+  .modal-nav-hamburger:not(.modal-nav-main) .nav-hamburger-body:has(.nav-panel-banners):has(.nav-destacada)>.nav-item:has(> .nav-view-all)+.nav-item:has(> .nav-destacada){border-top:1px solid #F0F0F0!important;padding-top:8px!important}
   /* Banners en sub-panel mobile (reparentado): full-bleed (escapan los 16px de lado).
      mini = grid 2-col ratio 179.5:120 (Figma m4); full = apilado. Título 8px debajo. */
-  .modal-nav-hamburger:not(.modal-nav-main) .nav-panel-banners{display:flex!important;flex-wrap:wrap;gap:16px;width:auto;margin:0 -16px 8px}
+  .modal-nav-hamburger:not(.modal-nav-main) .nav-panel-banners{display:flex!important;flex-wrap:wrap;gap:16px;width:auto;margin:0 -16px 16px}
   .modal-nav-hamburger:not(.modal-nav-main) .nav-mobile-banner-item{margin:0!important;padding:0!important}
   .modal-nav-hamburger:not(.modal-nav-main) .nav-banner-item{display:block;margin:0!important;padding:0!important}
   .modal-nav-hamburger:not(.modal-nav-main) .nav-panel-banner-full{flex:0 0 100%;max-width:100%}
