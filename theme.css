@@ -376,7 +376,7 @@ html:not(.kv-preview) .section.section-slideshow .btn:hover,html:not(.kv-preview
      a left:960 (relativo al drawer, que tiene transform) para escapar el overflow del Panel 2.
      Se abre por CLICK en un subitem con hijas (kv-l3-open, seteado por initMenuClickNav). */
   .modal-nav-main .nav-hamburger-body .nav-item.item-with-subitems>.modal.modal-nav-hamburger{
-    position:fixed!important;left:960px!important;top:0!important;
+    position:fixed!important;left:960px!important;top:0!important;border-left:none!important;
   }
   .modal-nav-main .nav-item.item-with-subitems.kv-l3-open>.modal.modal-nav-hamburger{
     opacity:1!important;visibility:visible!important;pointer-events:auto!important;
