@@ -422,6 +422,20 @@ html:not(.kv-preview) .section.section-slideshow .btn:hover,html:not(.kv-preview
 /* Divisor arriba de "Ver todo" (queda debajo del bloque de destacadas), solo si hay destacadas */
 .modal-nav-main .nav-hamburger-body:has(.nav-destacada)>.nav-item:has(> .nav-view-all){border-top:1px solid #F0F0F0!important;margin-top:6px!important;padding-top:18px!important}
 
+/* ===== MENU MOBILE: sub-paneles nivel 2/3 (drill-down nativo) =====
+   En mobile el drill-down NATIVO reparenta el sub-modal al body → los overrides
+   scopeados a .modal-nav-main NO llegan (quedaban uppercase, border-bottom 1px, fs 14,
+   sin reorder). Los re-aplicamos por .modal-nav-hamburger:not(.modal-nav-main). */
+@media (max-width:767px){
+  .modal-nav-hamburger:not(.modal-nav-main) .nav-item{border:none!important;margin:0!important}
+  .modal-nav-hamburger:not(.modal-nav-main) .nav-list-link{text-transform:none!important;border:none!important;font-family:"Lato",sans-serif!important;font-size:16px!important;font-weight:400!important;line-height:1.3!important;padding:8px 0!important;color:#000!important;letter-spacing:0!important}
+  .modal-nav-hamburger:not(.modal-nav-main) .nav-list-link.nav-destacada{font-weight:700!important}
+  .modal-nav-hamburger:not(.modal-nav-main) .nav-hamburger-body{display:flex;flex-direction:column}
+  .modal-nav-hamburger:not(.modal-nav-main) .nav-hamburger-body>.nav-panel-banners{order:-2}
+  .modal-nav-hamburger:not(.modal-nav-main) .nav-hamburger-body>.nav-item:has(> .nav-destacada){order:-1}
+  .modal-nav-hamburger:not(.modal-nav-main) .nav-hamburger-body:has(.nav-destacada)>.nav-item:has(> .nav-view-all){border-top:1px solid #F0F0F0!important;margin-top:6px!important;padding-top:18px!important}
+}
+
 /* ============================================================
    MENÚ MOBILE (Figma 959-19822) — header logo+X, gap 16, px 16
    ============================================================ */
