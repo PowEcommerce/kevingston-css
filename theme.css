@@ -450,6 +450,10 @@ html:not(.kv-preview) .section.section-slideshow .btn:hover,html:not(.kv-preview
   /* Body del sub-panel: 16px lados (Figma px-16), sin padding vertical propio
      (cada bloque maneja su spacing), pb-24 al final de la lista. */
   .modal-nav-hamburger:not(.modal-nav-main) .nav-hamburger-body{display:flex;flex-direction:column;padding:0 16px 24px!important;box-sizing:border-box}
+  /* CLAVE: los hijos del body NO deben encogerse (flex-shrink). El body es flex-column con
+     alto acotado; con 18 ítems + banner el contenido excede el alto y flex los COMPRIMÍA
+     (quedaban pegados). flex:0 0 auto => mantienen su alto natural y el body scrollea. */
+  .modal-nav-hamburger:not(.modal-nav-main) .nav-hamburger-body>*{flex:0 0 auto}
   /* Ítems: 16px de gap => label 20px + 8/8 padding = pitch 36 (Figma). Matamos el
      min-height/line-height nativo que inflaba el alto a 56. */
   .modal-nav-hamburger:not(.modal-nav-main) .nav-item{border:none!important;margin:0!important;padding:0!important;min-height:0!important}
@@ -461,7 +465,7 @@ html:not(.kv-preview) .section.section-slideshow .btn:hover,html:not(.kv-preview
   .modal-nav-hamburger:not(.modal-nav-main) .nav-hamburger-body:has(.nav-panel-banners):has(.nav-destacada)>.nav-item:has(> .nav-view-all)+.nav-item:has(> .nav-destacada){border-top:1px solid #F0F0F0!important;padding-top:16px!important}
   /* Banners en sub-panel mobile (reparentado): full-bleed (escapan los 16px de lado).
      mini = grid 2-col ratio 179.5:120 (Figma m4); full = apilado. Título 8px debajo. */
-  .modal-nav-hamburger:not(.modal-nav-main) .nav-panel-banners{display:flex!important;flex-wrap:wrap;gap:16px;width:auto;margin:16px -16px 8px}
+  .modal-nav-hamburger:not(.modal-nav-main) .nav-panel-banners{display:flex!important;flex-wrap:wrap;gap:16px;width:auto;margin:0 -16px 8px}
   .modal-nav-hamburger:not(.modal-nav-main) .nav-mobile-banner-item{margin:0!important;padding:0!important}
   .modal-nav-hamburger:not(.modal-nav-main) .nav-banner-item{display:block;margin:0!important;padding:0!important}
   .modal-nav-hamburger:not(.modal-nav-main) .nav-panel-banner-full{flex:0 0 100%;max-width:100%}
@@ -482,7 +486,10 @@ html:not(.kv-preview) .section.section-slideshow .btn:hover,html:not(.kv-preview
   .modal-nav-hamburger:not(.modal-nav-main) .modal-header .kv-menu-logo{font:700 18px/1 "Lato",sans-serif;color:#000;text-decoration:none;letter-spacing:.02em}
   /* Título de categoría en el CONTENIDO del sub-panel (Figma m2 "HOMBRE" / m4 "ACCESORIOS HOMBRE").
      Lato Bold 16/1.3, uppercase; pt-24 arriba, 16px gap -> divisor 1px (inset por el px-16 del body). */
-  .modal-nav-hamburger:not(.modal-nav-main) .kv-panel-cat-title{display:block;order:-3;margin:0;padding:24px 0 16px;font:700 16px/1.3 "Lato",sans-serif;color:#000;text-transform:uppercase;letter-spacing:0;border-bottom:1px solid #F0F0F0}
+  .modal-nav-hamburger:not(.modal-nav-main) .kv-panel-cat-title{display:block;order:-3;margin:0;padding:24px 0 16px;font:700 16px/1.3 "Lato",sans-serif;color:#000;text-transform:uppercase;letter-spacing:0}
+  /* Divisor bajo el título SOLO cuando NO hay banner (Figma m2 sin banner). Con banner (m2
+     variante Hombres) el título va sin línea y el banner arranca directo. */
+  .modal-nav-hamburger:not(.modal-nav-main) .nav-hamburger-body:not(:has(.nav-panel-banners)) .kv-panel-cat-title{border-bottom:1px solid #F0F0F0}
 }
 
 /* ============================================================
