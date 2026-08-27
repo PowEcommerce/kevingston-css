@@ -427,10 +427,15 @@ html:not(.kv-preview) .section.section-slideshow .btn:hover,html:not(.kv-preview
 
 /* Sub-panel (Panel 2/3, desktop nested + mobile reparentado): ítems con hijas → flecha a la
    derecha, centrada verticalmente (el display:block dejaba el chevron desfasado arriba). */
-.modal-nav-hamburger:not(.modal-nav-main) .nav-item.item-with-subitems>.nav-list-link{display:flex!important;align-items:center;justify-content:space-between;gap:12px;width:100%}
+.modal-nav-main .modal-nav-hamburger .nav-hamburger-body .nav-item.item-with-subitems>.nav-list-link,
+.modal-nav-hamburger:not(.modal-nav-main) .nav-item.item-with-subitems>.nav-list-link{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:12px;width:100%!important}
 .modal-nav-hamburger:not(.modal-nav-main) .nav-item.item-with-subitems>.nav-list-link .nav-list-arrow{flex:none;display:inline-flex;align-items:center}
 .modal-nav-hamburger:not(.modal-nav-main) .nav-item.item-with-subitems>.nav-list-link .nav-list-arrow svg,
 .modal-nav-hamburger:not(.modal-nav-main) .nav-item.item-with-subitems>.nav-list-link .nav-list-arrow .icon-inline{width:20px!important;height:20px!important;font-size:20px}
+
+/* Scroll sin barra visible en el menú (drawer + sub-paneles nested/reparentados) */
+.modal-nav-hamburger,.modal-nav-hamburger *{scrollbar-width:none;-ms-overflow-style:none}
+.modal-nav-hamburger::-webkit-scrollbar,.modal-nav-hamburger *::-webkit-scrollbar{width:0!important;height:0!important;display:none!important}
 
 /* ===== MENU MOBILE: sub-paneles nivel 2/3 (drill-down nativo) =====
    En mobile el drill-down NATIVO reparenta el sub-modal al body → los overrides
