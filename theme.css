@@ -376,14 +376,25 @@ html:not(.kv-preview) .section.section-slideshow .btn:hover,html:not(.kv-preview
   .modal-nav-main .nav-item.item-with-subitems>.modal .nav-hamburger-body{
     height:100%;overflow-y:auto;padding:100px 32px 24px;
   }
-  /* Títulos "New Arrivals" + "Colecciones" (no existen en el nativo) + LÍNEA divisora
-     entre los títulos y la lista de subcategorías (Figma 2128-13490). */
-  .modal-nav-main .nav-item.item-with-subitems>.modal .nav-hamburger-body::before{
-    content:"New Arrivals\A\A Colecciones";white-space:pre;display:block;
-    font-family:"Lato",sans-serif;font-weight:700;font-size:16px;line-height:1.3;
-    color:#000;border-bottom:1px solid #F0F0F0;padding-bottom:18px;margin-bottom:12px;
-  }
+  /* (DE-HARDCODE Fase 3) Los headers "New Arrivals"/"Colecciones" ya NO se inyectan
+     por ::before: ahora son subcategorías reales marcadas "destacada" desde el admin
+     (bloque "Estilo de ítem del menú"). Así el Panel 3 (Accesorios, etc.) no hereda
+     esos títulos fijos. */
 }
+
+/* ============================================================
+   MENU — Banners en panel (Panel 2/3 desktop + drill-down mobile).
+   Full = ancho completo apilado (Figma 02-btnimg / 05); mini = grid 2 col
+   (Figma 04 nietas). Fase 3 (1ra pasada; full-bleed/pixel-fit pendiente).
+   ============================================================ */
+.modal-nav-main .nav-hamburger-body .nav-panel-banners{display:flex;flex-wrap:wrap;gap:16px;margin:0 0 24px;width:100%}
+.modal-nav-main .nav-panel-banner-full,.modal-nav-main .nav-panel-banner-mini{text-decoration:none;color:#000}
+.modal-nav-main .nav-panel-banner-full{flex:0 0 100%;max-width:100%}
+.modal-nav-main .nav-panel-banner-mini{flex:0 0 calc(50% - 8px);max-width:calc(50% - 8px)}
+.modal-nav-main .nav-panel-banners .nav-banner-item{display:block;text-decoration:none;color:#000}
+.modal-nav-main .nav-panel-banner-full .nav-banner-item-img{width:100%;height:auto;display:block;border-radius:8px}
+.modal-nav-main .nav-panel-banner-mini .nav-banner-item-img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block;border-radius:8px}
+.modal-nav-main .nav-panel-banners .nav-banner-item-title{margin:8px 0 0;font:400 14px/1.3 "Lato",sans-serif;color:#000;text-align:center}
 
 /* ============================================================
    MENÚ MOBILE (Figma 959-19822) — header logo+X, gap 16, px 16
