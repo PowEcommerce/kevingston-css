@@ -447,21 +447,28 @@ html:not(.kv-preview) .section.section-slideshow .btn:hover,html:not(.kv-preview
    scopeados a .modal-nav-main NO llegan (quedaban uppercase, border-bottom 1px, fs 14,
    sin reorder). Los re-aplicamos por .modal-nav-hamburger:not(.modal-nav-main). */
 @media (max-width:767px){
-  .modal-nav-hamburger:not(.modal-nav-main) .nav-item{border:none!important;margin:0!important}
-  .modal-nav-hamburger:not(.modal-nav-main) .nav-list-link{text-transform:none!important;border:none!important;font-family:"Lato",sans-serif!important;font-size:16px!important;font-weight:400!important;line-height:1.3!important;padding:8px 0!important;color:#000!important;letter-spacing:0!important}
+  /* Body del sub-panel: 16px lados (Figma px-16), sin padding vertical propio
+     (cada bloque maneja su spacing), pb-24 al final de la lista. */
+  .modal-nav-hamburger:not(.modal-nav-main) .nav-hamburger-body{display:flex;flex-direction:column;padding:0 16px 24px!important;box-sizing:border-box}
+  /* Ítems: 16px de gap => label 20px + 8/8 padding = pitch 36 (Figma). Matamos el
+     min-height/line-height nativo que inflaba el alto a 56. */
+  .modal-nav-hamburger:not(.modal-nav-main) .nav-item{border:none!important;margin:0!important;padding:0!important;min-height:0!important}
+  .modal-nav-hamburger:not(.modal-nav-main) .nav-list-link{text-transform:none!important;border:none!important;min-height:0!important;height:auto!important;font-family:"Lato",sans-serif!important;font-size:16px!important;font-weight:400!important;line-height:1.3!important;padding:8px 0!important;color:#000!important;letter-spacing:0!important}
   .modal-nav-hamburger:not(.modal-nav-main) .nav-list-link.nav-destacada{font-weight:700!important}
-  .modal-nav-hamburger:not(.modal-nav-main) .nav-hamburger-body{display:flex;flex-direction:column}
   .modal-nav-hamburger:not(.modal-nav-main) .nav-hamburger-body>.nav-panel-banners{order:-2}
   .modal-nav-hamburger:not(.modal-nav-main) .nav-hamburger-body>.nav-item:has(> .nav-destacada){order:-1}
-  .modal-nav-hamburger:not(.modal-nav-main) .nav-hamburger-body:has(.nav-destacada)>.nav-item:has(> .nav-view-all){border-top:1px solid #F0F0F0!important;margin-top:12px!important;padding-top:18px!important}
-  .modal-nav-hamburger:not(.modal-nav-main) .nav-hamburger-body:has(.nav-panel-banners):has(.nav-destacada)>.nav-item:has(> .nav-view-all)+.nav-item:has(> .nav-destacada){border-top:1px solid #F0F0F0!important;padding-top:18px!important}
-  /* Banners en sub-panel mobile (reparentado): mini = grid 2-col; full = apilado */
-  .modal-nav-hamburger:not(.modal-nav-main) .nav-panel-banners{display:flex!important;flex-wrap:wrap;gap:16px;width:100%}
+  .modal-nav-hamburger:not(.modal-nav-main) .nav-hamburger-body:has(.nav-destacada)>.nav-item:has(> .nav-view-all){border-top:1px solid #F0F0F0!important;margin-top:8px!important;padding-top:16px!important}
+  .modal-nav-hamburger:not(.modal-nav-main) .nav-hamburger-body:has(.nav-panel-banners):has(.nav-destacada)>.nav-item:has(> .nav-view-all)+.nav-item:has(> .nav-destacada){border-top:1px solid #F0F0F0!important;padding-top:16px!important}
+  /* Banners en sub-panel mobile (reparentado): full-bleed (escapan los 16px de lado).
+     mini = grid 2-col ratio 179.5:120 (Figma m4); full = apilado. Título 8px debajo. */
+  .modal-nav-hamburger:not(.modal-nav-main) .nav-panel-banners{display:flex!important;flex-wrap:wrap;gap:16px;width:auto;margin:16px -16px 8px}
+  .modal-nav-hamburger:not(.modal-nav-main) .nav-mobile-banner-item{margin:0!important;padding:0!important}
+  .modal-nav-hamburger:not(.modal-nav-main) .nav-banner-item{display:block;margin:0!important;padding:0!important}
   .modal-nav-hamburger:not(.modal-nav-main) .nav-panel-banner-full{flex:0 0 100%;max-width:100%}
   .modal-nav-hamburger:not(.modal-nav-main) .nav-panel-banner-mini{flex:0 0 calc(50% - 8px);max-width:calc(50% - 8px)}
-  .modal-nav-hamburger:not(.modal-nav-main) .nav-panel-banner-mini .nav-banner-item-img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:0;display:block}
-  .modal-nav-hamburger:not(.modal-nav-main) .nav-panel-banner-full .nav-banner-item-img{width:100%;height:auto;display:block}
-  .modal-nav-hamburger:not(.modal-nav-main) .nav-panel-banners .nav-banner-item-title{margin:8px 0 0;font:400 14px/1.3 "Lato",sans-serif;text-align:center;color:#000}
+  .modal-nav-hamburger:not(.modal-nav-main) .nav-panel-banner-mini .nav-banner-item-img{width:100%;aspect-ratio:179.5/120;object-fit:cover;border-radius:0;display:block;margin:0!important}
+  .modal-nav-hamburger:not(.modal-nav-main) .nav-panel-banner-full .nav-banner-item-img{width:100%;height:auto;display:block;margin:0!important}
+  .modal-nav-hamburger:not(.modal-nav-main) .nav-banner-item-title{margin:8px 0 0!important;padding:0!important;font:400 14px/1.3 "Lato",sans-serif;text-align:center;color:#000}
   /* HEADER del sub-panel (reparentado a body): back(izq) + logo Kevingston(centro) + X(der).
      El logo lo inyecta kv-color-picker.js; ocultamos el título nativo de categoría. */
   .modal-nav-hamburger:not(.modal-nav-main) .modal-header{position:relative;display:flex!important;flex-direction:row!important;align-items:center;justify-content:space-between;padding:18px 16px!important;height:auto!important;min-height:0!important;border-bottom:none!important;background:#fff}
@@ -473,8 +480,9 @@ html:not(.kv-preview) .section.section-slideshow .btn:hover,html:not(.kv-preview
   .modal-nav-hamburger:not(.modal-nav-main) .modal-header .kv-menu-logo img{height:17px;width:auto;max-width:180px;filter:none}
   .modal-nav-hamburger:not(.modal-nav-main) .modal-header .kv-menu-logo .logo-text,
   .modal-nav-hamburger:not(.modal-nav-main) .modal-header .kv-menu-logo{font:700 18px/1 "Lato",sans-serif;color:#000;text-decoration:none;letter-spacing:.02em}
-  /* Título de categoría en el CONTENIDO del sub-panel (Figma m2 "HOMBRE" / m4 "ACCESORIOS HOMBRE") */
-  .modal-nav-hamburger:not(.modal-nav-main) .kv-panel-cat-title{display:block;order:-3;margin:0 0 16px;padding:0;font:600 20px/1.2 "Lato",sans-serif;color:#000;text-transform:uppercase;letter-spacing:.02em}
+  /* Título de categoría en el CONTENIDO del sub-panel (Figma m2 "HOMBRE" / m4 "ACCESORIOS HOMBRE").
+     Lato Bold 16/1.3, uppercase; pt-24 arriba, 16px gap -> divisor 1px (inset por el px-16 del body). */
+  .modal-nav-hamburger:not(.modal-nav-main) .kv-panel-cat-title{display:block;order:-3;margin:0;padding:24px 0 16px;font:700 16px/1.3 "Lato",sans-serif;color:#000;text-transform:uppercase;letter-spacing:0;border-bottom:1px solid #F0F0F0}
 }
 
 /* ============================================================
