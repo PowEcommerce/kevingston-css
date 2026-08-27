@@ -405,7 +405,7 @@ html:not(.kv-preview) .section.section-slideshow .btn:hover,html:not(.kv-preview
 .modal-nav-main .nav-panel-banner-mini{flex:0 0 calc(50% - 8px);max-width:calc(50% - 8px)}
 .modal-nav-main .nav-panel-banners .nav-banner-item{display:block;text-decoration:none;color:#000}
 .modal-nav-main .nav-panel-banner-full .nav-banner-item-img{width:100%;height:auto;display:block;border-radius:8px}
-.modal-nav-main .nav-panel-banner-mini .nav-banner-item-img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block;border-radius:8px}
+.modal-nav-main .nav-panel-banner-mini .nav-banner-item-img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block;border-radius:0}
 .modal-nav-main .nav-panel-banners .nav-banner-item-title{margin:8px 0 0;font:400 14px/1.3 "Lato",sans-serif;color:#000;text-align:center}
 /* Banner FULL-BLEED al tope del Panel 2/3 (desktop): escapa el padding del body (100/32/24)
    y sin radius (Figma 02-btnimg). Solo cuando es el primer bloque del panel. */
