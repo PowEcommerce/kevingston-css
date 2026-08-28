@@ -3068,3 +3068,7 @@ body.template-account-login .login-form-section .login-password-help-link.btn-li
 /* Newsletter footer: checkboxes ENTRE input y botón (Figma) — centrados, gap input→checkboxes 32, checkboxes→botón 16 */
 .footer-content .footer-newsletter-segments{justify-content:center;margin-top:32px!important;margin-bottom:0}
 .footer-content .newsletter-form-button.btn{margin-top:16px!important}
+
+/* Sello AFIP Data Fiscal inline en la fila legal (Figma: tras el © Copyright, antes de los logos) */
+.footer-content .footer-afip{display:inline-flex;align-items:center;margin-left:8px;line-height:0}
+.footer-content .footer-afip img,.footer-content .footer-afip .seal-afip img{height:33px!important;width:auto!important;display:block}
