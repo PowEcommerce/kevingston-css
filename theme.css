@@ -3037,7 +3037,7 @@ body.template-account-login .login-form-section .login-password-help-link.btn-li
 .footer-content .footer-legal-bar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px 24px}
 .footer-content .footer-legal-left{display:flex;align-items:center;flex-wrap:wrap;gap:0}
 .footer-content .footer-legal-right{display:flex;align-items:center;gap:15px}
-.footer-content .footer-legal-left .footer-legal-menu{display:flex;flex-wrap:wrap;align-items:center;gap:0;margin:0;padding:0;list-style:none;justify-content:flex-start}
+.footer-content .footer-legal-left .footer-legal-menu{display:flex!important;flex-direction:row!important;flex-wrap:wrap;align-items:center;gap:0;margin:0;padding:0;list-style:none;justify-content:flex-start}
 .footer-content .footer-legal-left .footer-legal-menu li{display:flex;align-items:center;margin:0}
 .footer-content .footer-legal-left .footer-legal-menu li a{font:400 10px/1.4 "Lato",sans-serif;color:#737373;text-decoration:none}
 .footer-content .footer-legal-left .footer-legal-menu li a:hover{text-decoration:underline}
