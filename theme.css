@@ -3050,8 +3050,10 @@ body.template-account-login .login-form-section .login-password-help-link.btn-li
 @media (min-width:768px){
   /* la fila legal va DENTRO del grid: fila 2, columnas 2→-1 (bajo los menús, Figma).
      Así queda pegada a las columnas (no la empuja el newsletter) y el divisor vertical la cubre. */
-  .footer-content .footer-main-info .footer-secondary-in-grid{grid-column:2 / -1;grid-row:2;margin-left:0;margin-top:0;align-self:start}
-  /* una sola línea en desktop (Figma): el grupo izq crece y NO wrapea */
+  .footer-content .footer-main-info .footer-secondary-in-grid{grid-column:2 / -1;grid-row:2;margin-left:0;margin-top:0;align-self:start;padding-left:0;padding-right:0}
+  /* una sola línea en desktop (Figma): el bar ocupa todo el ancho de la col derecha y NO wrapea */
+  .footer-content .footer-legal-container{width:100%}
+  .footer-content .footer-legal-bar{flex-wrap:nowrap;width:100%}
   .footer-content .footer-legal-left{flex:1 1 auto;min-width:0;flex-wrap:nowrap}
   .footer-content .footer-legal-left .footer-legal-menu{flex-wrap:nowrap}
   .footer-content .footer-legal-left .footer-legal-menu li a,
