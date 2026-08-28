@@ -64,10 +64,11 @@ body.kv-search-empty-on .section-main-products-grid{display:none!important}
 }
 /* facebook mas fino: stroke 1.5 en vez de 2 (Figma) — GLOBAL (mobile + desktop) */
 .footer-content .footer-social-link[href*="facebook"]{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2218%22%20height%3D%2218%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M18%202h-3a5%205%200%200%200-5%205v3H7v4h3v8h4v-8h3l1-4h-4V7a1%201%200%200%201%201-1h3z%22%2F%3E%3C%2Fsvg%3E")!important}
-/* TEMPORAL (hasta el fork): ocultar el legal AR "Defensa del consumidor" + copyright.
-   OJO: el aviso de defensa del consumidor es OBLIGATORIO en AR -> reponer antes de lanzar. */
+/* Aviso legal AR "Defensa del consumidor / arrepentimiento" (claim-link nativo): oculto,
+   porque el link "Defensa al consumidor" va como ítem del menú "Legal" (admin, Figma).
+   OJO legal AR: el botón de arrepentimiento debe quedar accesible -> incluirlo en el menú Legal.
+   El copyright AHORA se muestra en la fila legal (ver bloque "FOOTER — fila legal" al final). */
 .footer-content .claim-link{display:none!important}
-.footer-content .footer-copyright{display:none!important}
 
 /* Loader por card mientras carga la imagen (el JS pone/saca .kv-img-loading segun el load del <img>).
    Wordmark KEVINGSTON animado (GIF, loop infinito) centrado. */
@@ -3027,3 +3028,33 @@ body.template-account-login .login-form-section .login-password-help-link.btn-li
    transparente (selector .template-home .js-header = más específico, gana). */
 .js-header{position:sticky!important;top:-40px;z-index:1001}
 .js-header .js-head-main{background:#fff}
+
+/* ============================================================
+   FOOTER — fila legal inferior (Figma desktop 959-18218 / mobile 2587-29372).
+   Links legales + © Copyright (izq) | tiendanube + POW (der). Lato 10px #737373.
+   Va BAJO las columnas (offset ~485px desktop); mobile apilado y centrado.
+   ============================================================ */
+.footer-content .footer-legal-bar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px 24px}
+.footer-content .footer-legal-left{display:flex;align-items:center;flex-wrap:wrap;gap:0}
+.footer-content .footer-legal-right{display:flex;align-items:center;gap:15px}
+.footer-content .footer-legal-left .footer-legal-menu{display:flex;flex-wrap:wrap;align-items:center;gap:0;margin:0;padding:0;list-style:none;justify-content:flex-start}
+.footer-content .footer-legal-left .footer-legal-menu li{display:flex;align-items:center;margin:0}
+.footer-content .footer-legal-left .footer-legal-menu li a{font:400 10px/1.4 "Lato",sans-serif;color:#737373;text-decoration:none}
+.footer-content .footer-legal-left .footer-legal-menu li a:hover{text-decoration:underline}
+.footer-content .footer-legal-left .footer-legal-menu li+li::before{content:"|";margin:0 8px;color:#737373;font-size:10px}
+.footer-content .footer-legal-left .footer-legal-menu+.footer-copyright::before{content:"|";margin:0 8px;color:#737373;font-size:10px}
+.footer-content .footer-copyright{display:inline!important;font:400 10px/1.4 "Lato",sans-serif!important;color:#737373!important;margin:0}
+.footer-content .footer-powered-by{display:inline-flex;align-items:center;margin:0}
+.footer-content .footer-pow{display:inline-flex;align-items:center;line-height:0}
+.footer-content .footer-pow img{height:15px;width:auto;display:block}
+@media (min-width:768px){
+  /* la fila legal arranca alineada al inicio de la grilla de columnas (newsletter 437 + gap 48) */
+  .footer-content .footer-secondary-info{margin-left:485px}
+}
+@media (max-width:767px){
+  .footer-content .footer-secondary-info{margin-left:0}
+  .footer-content .footer-legal-bar{flex-direction:column;align-items:center;gap:16px;text-align:center}
+  .footer-content .footer-legal-left{justify-content:center}
+  .footer-content .footer-legal-left .footer-legal-menu{justify-content:center}
+  .footer-content .footer-legal-right{justify-content:center}
+}
