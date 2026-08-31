@@ -3149,3 +3149,18 @@ body.template-account-login .login-form-section .login-password-help-link.btn-li
   .js-products-list-slider .swiper-slide{width:283px!important}
   .js-products-list-slider .product-item{border-radius:8px!important;overflow:hidden!important}
 }
+
+/* ================================================================== */
+/* LANDING ESPECIAL — bloque image-with-text ("banner más info").      */
+/* QA: botón al tamaño estándar del sitio, contenido centrado en mobile */
+/* (izq en desktop), y sin el gap extra imagen↔info en mobile.          */
+/* ================================================================== */
+/* 6. Botón: sacar el btn-big (queda 44px / 14px como el resto del sitio) */
+.section-image-with-text .btn.btn-big{min-height:44px!important;height:44px!important;padding-top:0!important;padding-bottom:0!important;font-size:14px!important;display:inline-flex;align-items:center;justify-content:center}
+@media (max-width:767px){
+  /* 8. sin el gap de 24px entre la imagen y el bloque de info */
+  .section-image-with-text .media-grid{gap:0!important}
+  /* 7. contenido centrado en mobile (en desktop queda a la izquierda) */
+  .section-image-with-text .media-content-group,
+  .section-image-with-text .media-content{align-items:center!important;text-align:center!important}
+}
