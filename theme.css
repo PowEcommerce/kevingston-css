@@ -3585,3 +3585,12 @@ body.template-search .js-item-product .product-item-information{padding:11px 0!i
 /* Vista compacta (6 col / 3 mobile): ocultar los banners de la grilla (no hay planteados para esa vista) */
 .js-product-table.plp-compact-d .plp-grid-banner,
 .js-product-table.plp-compact-m .plp-grid-banner{display:none!important}
+
+/* Vista compacta (6 col / 3 mobile): card = solo imagen cuadrada, bordes redondeados completos, sin padding de info
+   (así las separaciones verticales quedan uniformes = grid gap 16). */
+body.template-category .js-product-table.plp-compact-d .product-item-information,
+body.template-search .js-product-table.plp-compact-d .product-item-information,
+body.template-category .js-product-table.plp-compact-m .product-item-information,
+body.template-search .js-product-table.plp-compact-m .product-item-information{padding:0!important;min-height:0!important}
+.js-product-table.plp-compact-d .product-item-image-container,
+.js-product-table.plp-compact-m .product-item-image-container{border-radius:8px!important;overflow:hidden}
