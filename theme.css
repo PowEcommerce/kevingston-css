@@ -3594,3 +3594,7 @@ body.template-category .js-product-table.plp-compact-m .product-item-information
 body.template-search .js-product-table.plp-compact-m .product-item-information{padding:0!important;min-height:0!important}
 .js-product-table.plp-compact-d .product-item-image-container,
 .js-product-table.plp-compact-m .product-item-image-container{border-radius:8px!important;overflow:hidden}
+
+/* Vista compacta: filas ajustadas al alto de la imagen cuadrada (si no, grid-auto-rows deja 16px vacíos por fila) */
+.js-product-table.plp-compact-d,
+.js-product-table.plp-compact-m{grid-auto-rows:max-content!important;align-items:start!important}
