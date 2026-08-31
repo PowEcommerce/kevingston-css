@@ -3181,3 +3181,33 @@ body.template-account-login .login-form-section .login-password-help-link.btn-li
 @media (max-width:767px){
   [id^="ns-section-"]:not(#ns-section-editorial_products):not(#ns-section-editorial_products_mujer) .js-products-list-slider{padding-left:16px!important;padding-right:0!important}
 }
+
+/* ===================== PLP ===================== */
+/* 01 · Hero de categoría — Figma 3010:31183 (con banner, 190px) / 4947:29540 (sin banner, 112px)
+   Título H2 Lato 32px, breadcrumb Lato 12px con separador "|" 14px. */
+.section-category-hero{margin:0}
+.category-hero .category-hero-title{font:400 32px/1 "Lato",sans-serif;margin:0;letter-spacing:0;color:inherit}
+/* Breadcrumb dentro del hero */
+.category-hero .breadcrumbs{display:flex;align-items:center;gap:4px;margin:0;font:400 12px/1 "Lato",sans-serif;flex-wrap:wrap}
+.category-hero .breadcrumbs .crumb{color:inherit;text-decoration:none;font-size:12px}
+.category-hero .breadcrumbs .separator{font-size:0;margin:0}
+.category-hero .breadcrumbs .separator::after{content:"|";font-size:14px;letter-spacing:1px;line-height:1}
+/* --- Con banner: breadcrumb arriba, título abajo, texto blanco --- */
+.category-hero--image .category-banner{position:relative;overflow:hidden}
+.category-hero--image .category-hero-content{
+  position:absolute;inset:0;z-index:2;
+  padding:24px 32px 32px;
+  display:flex;flex-direction:column;justify-content:space-between;
+  color:#fff}
+.category-hero--image .category-hero-content .breadcrumbs .crumb,
+.category-hero--image .category-hero-title{color:#fff}
+/* --- Sin banner: agrupados arriba (gap 8px), fondo claro, texto oscuro --- */
+.category-hero--no-image{background:#fff}
+.category-hero--no-image .category-hero-content{
+  padding:24px 32px;display:flex;flex-direction:column;gap:8px;color:#000}
+.category-hero--no-image .category-hero-content .breadcrumbs .crumb,
+.category-hero--no-image .category-hero-title{color:#000}
+@media (max-width:767px){
+  .category-hero--image .category-hero-content,
+  .category-hero--no-image .category-hero-content{padding:20px 16px}
+}
