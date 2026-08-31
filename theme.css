@@ -3095,8 +3095,9 @@ body.template-account-login .login-form-section .login-password-help-link.btn-li
 .kv-hotspot{position:absolute;transform:translate(-50%,-50%);pointer-events:auto}
 .kv-hotspot.open{z-index:6}
 /* Dot: círculo oscuro translúcido con "+" blanco (Figma) */
-.kv-hotspot-dot{display:block;width:28px;height:28px;border-radius:50%;background:rgba(0,0,0,.55);border:0;padding:0;cursor:pointer;position:relative;-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px);transition:background .2s ease}
-.kv-hotspot-dot:hover{background:rgba(0,0,0,.72)}
+.kv-hotspot-dot{display:block;width:28px;height:28px;border-radius:50%;background:rgba(0,0,0,.6);border:0;padding:0;cursor:pointer;position:relative;-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px);box-shadow:0 0 0 1.5px rgba(255,255,255,.6),0 2px 8px rgba(0,0,0,.35);transition:background .2s ease,box-shadow .2s ease}
+.kv-hotspot-dot:hover{background:rgba(0,0,0,.78)}
+.kv-hotspot.open .kv-hotspot-dot{background:#000}
 .kv-hotspot-dot::before,.kv-hotspot-dot::after{content:"";position:absolute;top:50%;left:50%;background:#fff;border-radius:2px;transform:translate(-50%,-50%);transition:transform .2s ease}
 .kv-hotspot-dot::before{width:12px;height:1.5px}
 .kv-hotspot-dot::after{width:1.5px;height:12px}
