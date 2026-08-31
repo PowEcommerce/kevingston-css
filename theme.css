@@ -3261,12 +3261,45 @@ body.template-category .featured-categories-section .category-item-text{font-siz
 /* Vistas de grilla: 2col desktop centrado (cards 506, max 1028) / 3col mobile. 4col y 1/2 ya existen. */
 @media (min-width:768px){
   .js-product-table.grid-md-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));max-width:1028px;margin-left:auto;margin-right:auto}
-  .js-product-table.plp-compact-d .product-item-information{display:none}
 }
 @media (max-width:767px){
   .js-product-table.grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
-  .js-product-table.plp-compact-m .product-item-information{display:none}
 }
+/* Vista compacta (6 col desktop / 3 col mobile) = solo imagen + botón vista rápida, SIN hover
+   (sin flechas de slider, sin 2da imagen), máximo 1 badge (doc animaciones "Animación 10"). */
+.js-product-table.plp-compact-d .product-item-name,
+.js-product-table.plp-compact-d .product-item-price-container,
+.js-product-table.plp-compact-d .product-item-installments,
+.js-product-table.plp-compact-d .product-installments,
+.js-product-table.plp-compact-d .product-item-colors-container,
+.js-product-table.plp-compact-d .kv-swatches,
+.js-product-table.plp-compact-d .product-item-payment-discount,
+.js-product-table.plp-compact-d .product-item-stock-notice,
+.js-product-table.plp-compact-m .product-item-name,
+.js-product-table.plp-compact-m .product-item-price-container,
+.js-product-table.plp-compact-m .product-item-installments,
+.js-product-table.plp-compact-m .product-installments,
+.js-product-table.plp-compact-m .product-item-colors-container,
+.js-product-table.plp-compact-m .kv-swatches,
+.js-product-table.plp-compact-m .product-item-payment-discount,
+.js-product-table.plp-compact-m .product-item-stock-notice{display:none!important}
+/* sin hover: sin flechas ni 2da imagen */
+.js-product-table.plp-compact-d .product-item-slider-controls-container,
+.js-product-table.plp-compact-d .product-item-prev-container,
+.js-product-table.plp-compact-d .product-item-next-container,
+.js-product-table.plp-compact-d .product-item-image-secondary,
+.js-product-table.plp-compact-m .product-item-slider-controls-container,
+.js-product-table.plp-compact-m .product-item-prev-container,
+.js-product-table.plp-compact-m .product-item-next-container,
+.js-product-table.plp-compact-m .product-item-image-secondary{display:none!important}
+/* máximo 1 badge */
+.js-product-table.plp-compact-d .product-labels>*:nth-child(n+2),
+.js-product-table.plp-compact-m .product-labels>*:nth-child(n+2){display:none!important}
+/* el "+" (vista rápida) queda sobre la imagen, esquina inferior derecha */
+.js-product-table.plp-compact-d .product-item-quick-shop-container,
+.js-product-table.plp-compact-m .product-item-quick-shop-container{position:absolute;bottom:100%;right:8px;top:auto;left:auto;margin:0 0 8px 0}
+.js-product-table.plp-compact-d .product-item-name,
+.js-product-table.plp-compact-m .product-item-name{padding-right:0}
 
 /* 03 toolbar mobile: mayor especificidad para ganarle al CSS nativo — count izq / views der */
 @media (max-width:767px){
