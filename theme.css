@@ -3215,7 +3215,7 @@ body.template-account-login .login-form-section .login-password-help-link.btn-li
 /* 02 · Pills de subcategorías — Figma 3010:31212: border .75px #000, pad 8/24, radius 50, Lato 12px */
 body.template-category .featured-categories-section .category-item-link{
   display:inline-flex;align-items:center;justify-content:center;
-  border:.75px solid #000;border-radius:50px;padding:8px 24px;
+  border:1px solid #000;border-radius:50px;padding:8px 24px;
   font:400 12px/1 "Lato",sans-serif;color:#000;white-space:nowrap;text-decoration:none}
 body.template-category .featured-categories-section .category-item-text{font-size:12px;line-height:1;color:#000}
 
@@ -3227,7 +3227,7 @@ body.template-category .featured-categories-section .category-item-text{font-siz
 .pagination-load-more{width:172px;margin:16px auto 24px}
 .pagination-load-more .btn,.pagination-load-more .btn-primary{
   display:flex;align-items:center;justify-content:center;gap:8px;width:100%;height:44px;
-  padding:12px 36px;border-radius:50px;background:#fff;color:#000;border:.75px solid #000;
+  padding:12px 36px;border-radius:50px;background:#fff;color:#000;border:1px solid #000;
   font:400 14px/1 "Lato",sans-serif;text-transform:capitalize;box-shadow:none}
 .pagination-load-more .btn:hover,.pagination-load-more .btn-primary:hover{background:#000;color:#fff}
 /* Paginación clásica prev/next: contador Lato 14px */
