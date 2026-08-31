@@ -3545,7 +3545,7 @@ body .plp-filter-cta{z-index:40!important}
 
 /* Loader de grilla (Asana 03, Figma 4947-28656): isotipo KVG centrado sobre la grilla hasta que cargan los productos */
 .plp-grid-wrap{position:relative}
-.plp-grid-loader{position:absolute;inset:0;z-index:6;display:flex;align-items:center;justify-content:center;background:#fff;transition:opacity .45s ease;min-height:340px}
+.plp-grid-loader{position:absolute;inset:0;z-index:30;background:#fff;transition:opacity .45s ease;min-height:360px}
 .plp-grid-loader.is-hidden{opacity:0;pointer-events:none}
-.plp-grid-loader-mark{width:108px;height:94px;display:block;animation:kvGridLoaderPulse 1.2s ease-in-out infinite}
+.plp-grid-loader-mark{position:absolute;left:50%;top:clamp(100px,24vh,260px);transform:translateX(-50%);width:108px;height:94px;display:block;animation:kvGridLoaderPulse 1.2s ease-in-out infinite}
 @keyframes kvGridLoaderPulse{0%,100%{opacity:1}50%{opacity:.35}}
