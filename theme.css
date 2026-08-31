@@ -3086,3 +3086,35 @@ body.template-account-login .login-form-section .login-password-help-link.btn-li
 /* Sello AFIP Data Fiscal inline en la fila legal (Figma: tras el © Copyright, antes de los logos) */
 .footer-content .footer-afip{display:inline-flex;align-items:center;margin-left:8px;line-height:0}
 .footer-content .footer-afip img,.footer-content .footer-afip .seal-afip img{height:33px!important;width:auto!important;display:block}
+
+/* ================================================================== */
+/* SHOP THE LOOK — hotspots (puntos de producto). Figma 1223-28843.    */
+/* Dot posicionado por X/Y (%) sobre el banner; click → card producto.  */
+/* ================================================================== */
+.banner-block .kv-hotspots{position:absolute;inset:0;z-index:4;pointer-events:none}
+.kv-hotspot{position:absolute;transform:translate(-50%,-50%);pointer-events:auto}
+.kv-hotspot.open{z-index:6}
+/* Dot: círculo oscuro translúcido con "+" blanco (Figma) */
+.kv-hotspot-dot{display:block;width:28px;height:28px;border-radius:50%;background:rgba(0,0,0,.55);border:0;padding:0;cursor:pointer;position:relative;-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px);transition:background .2s ease}
+.kv-hotspot-dot:hover{background:rgba(0,0,0,.72)}
+.kv-hotspot-dot::before,.kv-hotspot-dot::after{content:"";position:absolute;top:50%;left:50%;background:#fff;border-radius:2px;transform:translate(-50%,-50%);transition:transform .2s ease}
+.kv-hotspot-dot::before{width:12px;height:1.5px}
+.kv-hotspot-dot::after{width:1.5px;height:12px}
+.kv-hotspot.open .kv-hotspot-dot::after{transform:translate(-50%,-50%) rotate(90deg)}
+/* Card (popup del producto) — a la derecha del dot por defecto */
+.kv-hotspot-card{position:absolute;left:calc(100% + 14px);top:50%;transform:translateY(-50%);width:280px;max-width:74vw;background:#fff;border-radius:8px;box-shadow:0 6px 24px rgba(0,0,0,.18);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .2s ease,visibility .2s ease;z-index:5}
+.kv-hotspot.open .kv-hotspot-card{opacity:1;visibility:visible;pointer-events:auto}
+.kv-hotspot-card::before{content:"";position:absolute;right:100%;top:50%;transform:translateY(-50%);border:7px solid transparent;border-right-color:#fff}
+.kv-hotspot-card-in{display:flex;gap:12px;padding:10px;text-decoration:none;color:#000}
+.kv-hotspot-thumb{flex:none;width:60px;height:76px;border-radius:6px;overflow:hidden;background:#f2f1ef}
+.kv-hotspot-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.kv-hotspot-info{display:flex;flex-direction:column;justify-content:center;min-width:0}
+.kv-hotspot-name{font:400 14px/1.3 "Lato",sans-serif;color:#000;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.kv-hotspot-prices{display:flex;align-items:baseline;gap:6px;margin:4px 0 2px}
+.kv-hotspot-price{font:400 14px/1.2 "Lato",sans-serif;color:#000}
+.kv-hotspot-price.is-sale{color:#be0000}
+.kv-hotspot-compare{font:400 12px/1.2 "Lato",sans-serif;color:#737373;text-decoration:line-through}
+.kv-hotspot-cta{font:400 12px/1.2 "Lato",sans-serif;color:#000;text-decoration:underline;margin-top:2px}
+/* Flip: dot a la derecha → card a la izquierda */
+.kv-hotspot.kv-hs-left .kv-hotspot-card{left:auto;right:calc(100% + 14px)}
+.kv-hotspot.kv-hs-left .kv-hotspot-card::before{right:auto;left:100%;border-right-color:transparent;border-left-color:#fff}
