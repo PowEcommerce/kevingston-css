@@ -3602,3 +3602,7 @@ body.template-search .js-product-table.plp-compact-m .product-item-information{p
 /* Vista compacta: contenedor de imagen con aspect-ratio 1 definido (mata el overshoot de max-content que dejaba las filas en 232 en vez de 216) */
 .js-product-table.plp-compact-d .product-item-image-container,
 .js-product-table.plp-compact-m .product-item-image-container{aspect-ratio:1/1!important;height:auto!important}
+
+/* Vista compacta: card cuadrada con altura DEFINIDA (aspect-ratio) → mata el overshoot de max-content de la fila */
+.js-product-table.plp-compact-d .product-item,
+.js-product-table.plp-compact-m .product-item{aspect-ratio:1/1!important;overflow:hidden}
