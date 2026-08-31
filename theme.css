@@ -3339,3 +3339,146 @@ body.template-search .page-header .breadcrumbs .separator{display:none}
 .boxers-size-tab.is-active{background:#000;border-color:#000}
 .boxers-size-tab.is-active .boxers-size-num,.boxers-size-tab.is-active .boxers-size-letter{color:#fff}
 @media (max-width:767px){.boxers-sizes{padding:12px 16px 20px}}
+
+/* 07 · Filtros y Ordenar — Drawer PLP (Figma 3010-22993 desktop / 3041-11907 mobile)
+   Drawer docked-right 466px (desktop) / full (mobile). Header 60px, footer 92px.
+   Fuente Lato. Título sección 16px, opciones 14px, separadores #cccccc.
+   Scope: #modal-filters (+ .section-main-products-grid) para ganar al CSS nativo. */
+
+/* --- Ancho drawer 466px desktop (override modal-md-width-small=450) --- */
+@media (min-width:768px){
+  #modal-filters.modal{width:466px!important;max-width:466px!important}
+}
+@media (max-width:767px){
+  #modal-filters.modal{width:100%!important;max-width:100%!important;height:100%!important;max-height:100%!important}
+}
+
+/* --- Contenedor: columna con body scrollable + footer fijo --- */
+#modal-filters.modal{display:flex;flex-direction:column}
+#modal-filters .modal-body{flex:1 1 auto;overflow-y:auto;padding:0!important}
+
+/* --- Header 60px: "Filtros" 16px Lato + X 20px, borde inferior #cccccc --- */
+#modal-filters .modal-header{
+  flex:0 0 auto;min-height:60px;padding:16px 24px;
+  display:flex;align-items:center;
+  background:#fff;border-bottom:1px solid #cccccc;
+}
+#modal-filters .modal-title{
+  font-family:'Lato',sans-serif;font-weight:400;font-size:16px;line-height:1.2;
+  color:#000;text-align:left;flex:1 1 auto;margin:0;
+}
+#modal-filters .modal-header .modal-close{margin-left:auto;padding:0;background:none;border:0}
+#modal-filters .modal-close-icon{width:20px;height:20px;color:#000}
+
+/* --- Secciones (acordeones): padding 24px horiz, fila título ~42px, hairline --- */
+#modal-filters .modal-body>.filter-accordion,
+#modal-filters .filters-properties-container>.filter-accordion,
+#modal-filters .filters-categories-container.filter-accordion,
+#modal-filters .price-filter-container.filter-accordion,
+#modal-filters .plp-modal-sort{
+  padding:0 24px!important;margin:0!important;border:0!important;
+  border-bottom:1px solid #cccccc!important;
+}
+/* El wrapper de property-filters no debe cortar el borde de sus hijos */
+#modal-filters .filters-properties-container{padding:0!important;margin:0!important}
+
+/* --- Toggle del acordeón (fila título + chevron) --- */
+#modal-filters .accordion-toggle,
+#modal-filters .plp-modal-sort>.accordion-toggle{
+  display:grid;grid-template-columns:1fr auto;align-items:center;
+  padding:24px 0;min-height:42px;box-sizing:border-box;text-decoration:none;
+}
+#modal-filters .accordion-toggle-label{
+  margin:0;padding:0;
+  font-family:'Lato',sans-serif;font-weight:400;font-size:16px;line-height:1.2;
+  color:#000;text-transform:none!important;
+}
+#modal-filters .accordion-toggle-icon{margin:0;color:#000;display:flex;align-items:center}
+#modal-filters .accordion-toggle-icon .icon-inline{width:14px;height:14px;font-size:14px}
+/* chevron: abajo cerrado, arriba abierto */
+#modal-filters .js-accordion-private-toggle-active .icon-inline{transform:rotate(180deg)}
+
+/* --- Contenido expandido de cada acordeón --- */
+#modal-filters .filters-options-accordion,
+#modal-filters .plp-modal-sort-content{
+  margin:0!important;padding:0 0 24px!important;
+}
+
+/* --- Ordenar por: radios circulares 14px, gap 8px, filas 36px --- */
+#modal-filters .plp-modal-sort-content .sort-by-options{gap:22px}
+#modal-filters .sort-by-options .radio-button{padding:0}
+#modal-filters .sort-by-options .radio-button-content{
+  display:flex;align-items:center;gap:8px;position:relative;
+}
+#modal-filters .sort-by-options .radio-button-icons-container{
+  position:static;flex:0 0 14px;width:14px;height:14px;display:block;
+}
+#modal-filters .sort-by-options .radio-button-icon{
+  width:14px;height:14px;box-sizing:border-box;
+}
+#modal-filters .sort-by-options .radio-button-icon.unchecked{
+  background:#fff;border:1px solid #000;border-radius:50%;
+}
+#modal-filters .sort-by-options .radio-button-icon.checked{
+  position:absolute;top:4px;left:4px;width:0;height:0;border-radius:50%;
+  background:#000;transition:all .15s;
+}
+#modal-filters .sort-by-options .radio-button.selected .radio-button-content .checked,
+#modal-filters .sort-by-options .radio-button input:checked+.radio-button-content .checked{
+  top:3px;left:3px;width:8px;height:8px;
+}
+#modal-filters .sort-by-options .radio-button-label{
+  flex:1;font-family:'Lato',sans-serif;font-weight:400;font-size:14px;line-height:1.3;color:#000;
+}
+
+/* --- Categorías: lista de links 14px --- */
+#modal-filters .filters-categories-container .filters-options-accordion{list-style:none}
+#modal-filters .filters-categories-container .category-item{margin:0 0 12px}
+#modal-filters .filters-categories-container .category-item:last-child{margin-bottom:0}
+#modal-filters .filters-categories-container .category-item a{
+  font-family:'Lato',sans-serif;font-weight:400;font-size:14px;line-height:1.3;color:#000;text-decoration:none;
+}
+
+/* --- Checkboxes (Talles/Colores/props): texto 14px, cuadro 14px --- */
+#modal-filters .checkbox-container .checkbox{margin:0 0 12px;padding-left:22px}
+#modal-filters .checkbox-container .checkbox-icon{width:14px;height:14px;border:1px solid #000;border-radius:2px}
+#modal-filters .checkbox-container .checkbox-text{
+  margin-top:0;font-family:'Lato',sans-serif;font-weight:400;font-size:14px;line-height:1.3;color:#000;
+}
+#modal-filters .checkbox-container input:checked~.checkbox .checkbox-icon{background:#000}
+#modal-filters .checkbox-container input:checked~.checkbox .checkbox-icon:after{border-color:#fff}
+#modal-filters .checkbox-container .checkbox-color{width:14px;height:14px;border:1px solid #cccccc;border-radius:50%}
+#modal-filters .accordion-show-more{
+  font-family:'Lato',sans-serif;font-size:12px;color:#737373;text-decoration:underline;margin-top:4px;
+}
+#modal-filters .filters-overlay{border-radius:0}
+
+/* --- Precios: inputs Desde/Hasta --- */
+#modal-filters .price-filter-container .price-filter-label{
+  font-family:'Lato',sans-serif;font-weight:400;font-size:16px;color:#000;
+}
+#modal-filters .price-filter-container .form-label{font-family:'Lato',sans-serif;font-size:12px;color:#737373}
+#modal-filters .price-filter-container .filter-input-price{font-family:'Lato',sans-serif;font-size:14px}
+#modal-filters .price-filter-btn{font-family:'Lato',sans-serif;font-size:14px}
+
+/* --- Footer fijo 92px: Limpiar (borde) + Aplicar (negro) pills 44px --- */
+#modal-filters .modal-footer{
+  flex:0 0 auto;padding:24px;background:#fff;border-top:1px solid #cccccc;
+}
+#modal-filters .plp-filters-actions{display:flex;gap:21px;align-items:center}
+#modal-filters .plp-filters-clear,
+#modal-filters .plp-filters-apply{
+  flex:1 1 0;height:44px;display:inline-flex;align-items:center;justify-content:center;
+  font-family:'Lato',sans-serif;font-weight:400;font-size:14px;line-height:1;
+  border-radius:50px;cursor:pointer;text-decoration:none;box-sizing:border-box;padding:0 16px;
+  transition:background .15s ease,color .15s ease;
+}
+#modal-filters .plp-filters-clear{background:#fff;border:1px solid #000;color:#000}
+#modal-filters .plp-filters-clear:hover{background:#f6f5f3}
+#modal-filters .plp-filters-apply{background:#000;border:1px solid #000;color:#fff}
+#modal-filters .plp-filters-apply:hover{background:#1d1d1b}
+
+/* --- Ocultar badge/heading nativos que no van en el Figma --- */
+#modal-filters .filters-applied-heading,
+#modal-filters .filters-desktop-heading{display:none}
+
