@@ -3533,7 +3533,7 @@ body.template-search .page-header .breadcrumbs .separator{display:none}
 /* 02 · Ocultamiento del botón flotante al footer por OCLUSIÓN (sin animar el botón).
    Orden de apilamiento: contenido + botón (z40) -> gradiente (::before del footer) -> footer (z45).
    Gradiente 80px pegado al borde superior del footer, blanco->transparente 87%, pointer-events:none. */
-.plp-filter-cta{z-index:40}
+body .plp-filter-cta{z-index:40!important}
 .section-footer{position:relative;z-index:45}
 .section-footer::before{content:"";position:absolute;left:0;right:0;bottom:100%;height:80px;
   background:linear-gradient(to top,#fff 0%,rgba(255,255,255,0) 87%);pointer-events:none;z-index:1}
