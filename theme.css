@@ -3175,3 +3175,9 @@ body.template-account-login .login-form-section .login-password-help-link.btn-li
   [id^="ns-section-"]:not(#ns-section-editorial_products):not(#ns-section-editorial_products_mujer) .js-products-list-slider{padding-left:0!important;padding-right:0!important}
   [id^="ns-section-"]:not(#ns-section-editorial_products):not(#ns-section-editorial_products_mujer) .js-products-list-slider > .d-flex.flex-column > .group-block{padding-left:32px!important;padding-right:32px!important}
 }
+
+/* Carruseles de productos en MOBILE como los de home: sin padding a la derecha
+   (sangra al borde = peek) y 16px a la izquierda (título + 1ra card alineados a 16). */
+@media (max-width:767px){
+  [id^="ns-section-"]:not(#ns-section-editorial_products):not(#ns-section-editorial_products_mujer) .js-products-list-slider{padding-left:16px!important;padding-right:0!important}
+}
