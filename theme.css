@@ -3515,3 +3515,30 @@ body.template-search .page-header .breadcrumbs .separator{display:none}
 #modal-filters .filters-applied-heading,
 #modal-filters .filters-desktop-heading{display:none}
 
+
+/* ===================== 07b · Animación panel de filtros (doc animaciones 01 / M01 / 02) ===================== */
+/* PANEL: entra/sale con translateX (lo setea el theme via modal-md-docked-right / modal-right), SIN fade.
+   Apertura 450ms spring (crítico, sin overshoot ≈ cubic-bezier .22,1,.36,1). Cierre 350ms ease-in. */
+.plp-filters-modal{opacity:1!important;transition:transform 350ms ease-in!important}
+.plp-filters-modal.modal-visible{transition:transform 450ms cubic-bezier(.22,1,.36,1)!important}
+/* OVERLAY: fade #000 50% (ya venía 0.45s spring); cierre 350ms ease-in */
+.modal-overlay[data-overlay-id="#modal-filters"]{background:rgba(0,0,0,.5);transition:opacity 350ms ease-in!important}
+.plp-filters-modal.modal-visible ~ .modal-overlay[data-overlay-id="#modal-filters"]{transition:opacity 450ms cubic-bezier(.22,1,.36,1)!important}
+/* MOBILE: modal full-screen, SIN overlay, apertura 300ms ease-out */
+@media (max-width:767px){
+  .plp-filters-modal.modal-visible{transition:transform 300ms ease-out!important}
+  .modal-overlay[data-overlay-id="#modal-filters"]{display:none!important}
+}
+
+/* 02 · Ocultamiento del botón flotante al footer por OCLUSIÓN (sin animar el botón).
+   Orden de apilamiento: contenido + botón (z40) -> gradiente (::before del footer) -> footer (z45).
+   Gradiente 80px pegado al borde superior del footer, blanco->transparente 87%, pointer-events:none. */
+.plp-filter-cta{z-index:40}
+.section-footer{position:relative;z-index:45}
+.section-footer::before{content:"";position:absolute;left:0;right:0;bottom:100%;height:80px;
+  background:linear-gradient(to top,#fff 0%,rgba(255,255,255,0) 87%);pointer-events:none;z-index:1}
+/* cuando el botón está totalmente ocluido, JS le pone .plp-cta-hidden => no clickeable */
+.plp-filter-cta.plp-cta-hidden{pointer-events:none}
+/* Botones del footer del panel deshabilitados por defecto (se habilitan al cambiar un filtro) */
+.plp-filters-actions .plp-filters-clear.is-disabled,
+.plp-filters-actions .plp-filters-apply.is-disabled{opacity:.4;pointer-events:none;cursor:default}
