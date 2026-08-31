@@ -3577,3 +3577,7 @@ body .plp-filter-cta{z-index:40!important}
   /* grilla: 24px entre el toolbar (count) y la primera fila de cards (Figma) */
   .section-main-products-grid .plp-grid-wrap{margin-top:24px}
 }
+
+/* PLP: padding de la info de la card 11px 0 (solo category/search) */
+body.template-category .js-item-product .product-item-information,
+body.template-search .js-item-product .product-item-information{padding:11px 0!important}
