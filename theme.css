@@ -3228,7 +3228,7 @@ body.template-category .featured-categories-section .category-item-text{font-siz
 .pagination-load-more .btn,.pagination-load-more .btn-primary{
   display:flex;align-items:center;justify-content:center;gap:8px;width:100%;height:44px;
   padding:12px 36px;border-radius:50px;background:#fff;color:#000;border:.75px solid #000;
-  font:400 14px/1 "Lato",sans-serif;text-transform:none;box-shadow:none}
+  font:400 14px/1 "Lato",sans-serif;text-transform:capitalize;box-shadow:none}
 .pagination-load-more .btn:hover,.pagination-load-more .btn-primary:hover{background:#000;color:#fff}
 /* Paginación clásica prev/next: contador Lato 14px */
 .pagination-nav .pagination-counter{font:400 14px/1 "Lato",sans-serif;color:#000}
@@ -3573,4 +3573,7 @@ body .plp-filter-cta{z-index:40!important}
   .products-grid .plp-grid-banner-title,.section-main-products-grid .plp-grid-banner-title{font-size:40px!important}
   .products-grid .plp-grid-banner-link,.section-main-products-grid .plp-grid-banner-link{font-size:14px!important}
   .section-main-products-grid .loadmore-progress-count{margin-bottom:0!important}
+  .category-hero .category-hero-content{gap:18px}
+  /* grilla: 24px entre el toolbar (count) y la primera fila de cards (Figma) */
+  .section-main-products-grid .plp-grid-wrap{margin-top:24px}
 }
