@@ -3581,3 +3581,7 @@ body .plp-filter-cta{z-index:40!important}
 /* PLP: padding de la info de la card 11px 0 (solo category/search) */
 body.template-category .js-item-product .product-item-information,
 body.template-search .js-item-product .product-item-information{padding:11px 0!important}
+
+/* Vista compacta (6 col / 3 mobile): ocultar los banners de la grilla (no hay planteados para esa vista) */
+.js-product-table.plp-compact-d .plp-grid-banner,
+.js-product-table.plp-compact-m .plp-grid-banner{display:none!important}
