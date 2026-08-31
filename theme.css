@@ -3295,3 +3295,19 @@ body.template-category .product-item-price-container:has(.js-compare-price-displ
 body.template-search .product-item-price-container:has(.js-compare-price-display:not([style*="none"])) .js-price-display{color:#be0000}
 body.template-category .kv-swatches,body.template-search .kv-swatches{gap:6px}
 body.template-category .kv-swatch,body.template-search .kv-swatch{width:16px;height:16px}
+
+/* 04 · Banner en grilla — Figma 1115:20861. Imagen cover + overlay bottom-left (tagline 14 / título 32 / Ver Todo 12 subrayado), radius 8, span 1|2 cards. Se estira a la altura de la fila (grid stretch). */
+.plp-grid-banner{position:relative;display:block;grid-column:span 2;border-radius:8px;overflow:hidden;text-decoration:none;min-height:100%}
+.plp-grid-banner--span-1{grid-column:span 1}
+.plp-grid-banner--span-2{grid-column:span 2}
+.plp-grid-banner-img,.plp-grid-banner-img img,.plp-grid-banner-placeholder{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.plp-grid-banner-placeholder{background:#c4c4c4}
+.plp-grid-banner-scrim{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.55),transparent 55%);z-index:1}
+.plp-grid-banner-content{position:absolute;left:24px;right:24px;bottom:24px;z-index:2;display:flex;flex-direction:column;gap:4px;color:#fff}
+.plp-grid-banner-tagline{margin:0;font:400 14px/1.3 "Lato",sans-serif;color:#fff}
+.plp-grid-banner-title{margin:0;font:400 32px/1 "Lato",sans-serif;color:#fff}
+.plp-grid-banner-link{display:inline-block;margin-top:4px;font:400 12px/1 "Lato",sans-serif;color:#fff;text-decoration:underline;text-underline-offset:3px}
+@media (max-width:767px){
+  .plp-grid-banner-content{left:16px;right:16px;bottom:16px}
+  .plp-grid-banner-title{font-size:24px}
+}
