@@ -3246,7 +3246,7 @@ body.template-category .featured-categories-section .category-item-text{font-siz
 
 /* 03 · Toolbar + selector de vistas — Figma 3010:31845 / 2350:21863.
    Mobile: count izq + views der (flex). Desktop: views centro + count der (grid 1fr auto 1fr). Sin sort. */
-.plp-toolbar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:8px 16px}
+.plp-toolbar{display:flex!important;align-items:center;justify-content:space-between!important;gap:16px;padding:8px 16px}
 .plp-toolbar-count{font:400 12px/1 "Lato",sans-serif;color:#000;white-space:nowrap}
 .plp-toolbar-views{display:flex;align-items:center;gap:16px}
 .plp-view-btn{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;padding:0;border:0;background:none;color:#8f8f8f;cursor:pointer;transition:color .2s ease}
@@ -3254,9 +3254,9 @@ body.template-category .featured-categories-section .category-item-text{font-siz
 .plp-view-btn.active{color:#000}
 .plp-toolbar-sort{display:none!important}
 @media (min-width:768px){
-  .plp-toolbar{display:grid;grid-template-columns:1fr auto 1fr;padding:16px 32px}
-  .plp-toolbar-count{grid-column:3;justify-self:end}
-  .plp-toolbar-views{grid-column:2;justify-self:center}
+  .plp-toolbar{justify-content:center!important;position:relative;padding:16px 32px}
+  .plp-toolbar-views{margin:0 auto}
+  .plp-toolbar-count{position:absolute;right:32px;top:50%;transform:translateY(-50%)}
 }
 /* Vistas de grilla: 2col desktop centrado (cards 506, max 1028) / 3col mobile. 4col y 1/2 ya existen. */
 @media (min-width:768px){
