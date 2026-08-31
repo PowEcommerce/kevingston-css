@@ -3327,3 +3327,15 @@ body.template-search .page-header .breadcrumbs{font:400 12px/1 "Lato",sans-serif
 body.template-search .page-header .breadcrumbs .crumb{color:#000;text-decoration:none;font-size:12px}
 body.template-search .page-header .breadcrumbs a.crumb,
 body.template-search .page-header .breadcrumbs .separator{display:none}
+
+/* 08 · Boxers · Selector de talle — Figma 965:11533. Título 14px centrado + size-tabs (número 20 + letra 12) centradas. */
+.boxers-sizes{padding:16px 32px 24px;text-align:center;background:#fff}
+.boxers-sizes-title{margin:0 0 16px;font:400 14px/1 "Lato",sans-serif;color:#000;text-align:center}
+.boxers-sizes-tabs{display:flex;flex-wrap:wrap;justify-content:center;gap:16px}
+.boxers-size-tab{display:inline-flex;align-items:center;justify-content:center;gap:4px;min-width:74px;height:36px;padding:8px 16px;border:.75px solid #000;border-radius:50px;background:#fff;text-decoration:none;transition:background .15s ease}
+.boxers-size-num{font:400 20px/1 "Lato",sans-serif;color:#000}
+.boxers-size-letter{font:400 12px/1 "Lato",sans-serif;color:#6f6f6f}
+.boxers-size-tab:hover{background:#e6e6e6}
+.boxers-size-tab.is-active{background:#000;border-color:#000}
+.boxers-size-tab.is-active .boxers-size-num,.boxers-size-tab.is-active .boxers-size-letter{color:#fff}
+@media (max-width:767px){.boxers-sizes{padding:12px 16px 20px}}
