@@ -3160,7 +3160,10 @@ body.template-account-login .login-form-section .login-password-help-link.btn-li
 @media (max-width:767px){
   /* 8. sin el gap de 24px entre la imagen y el bloque de info */
   .section-image-with-text .media-grid{gap:0!important}
-  /* 7. contenido centrado en mobile (en desktop queda a la izquierda) */
-  .section-image-with-text .media-content-group,
-  .section-image-with-text .media-content{align-items:center!important;text-align:center!important}
+  /* 7. contenido centrado en mobile (en desktop queda a la izquierda). La alineación
+     real la maneja text-group en .group-block/.group-content con align-items-start. */
+  .section-image-with-text .group-block,
+  .section-image-with-text .group-content{align-items:center!important;text-align:center!important}
+  .section-image-with-text .group-content *{text-align:center!important}
+  .section-image-with-text .group-content .btn{margin-left:auto!important;margin-right:auto!important}
 }
