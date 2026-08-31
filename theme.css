@@ -3325,5 +3325,5 @@ body.template-search .page-header-title-inner{margin:0}
 body.template-search .page-header-title{font:400 24px/1 "Lato",sans-serif!important;color:#000;margin:0}
 body.template-search .page-header .breadcrumbs{font:400 12px/1 "Lato",sans-serif;display:flex;align-items:center;gap:4px;margin:0}
 body.template-search .page-header .breadcrumbs .crumb{color:#000;text-decoration:none;font-size:12px}
-body.template-search .page-header .breadcrumbs>.crumb:first-child,
-body.template-search .page-header .breadcrumbs>.separator:first-of-type{display:none}
+body.template-search .page-header .breadcrumbs a.crumb,
+body.template-search .page-header .breadcrumbs .separator{display:none}
