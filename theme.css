@@ -3246,9 +3246,9 @@ body.template-category .featured-categories-section .category-item-text{font-siz
 
 /* 03 · Toolbar + selector de vistas — Figma 3010:31845 / 2350:21863.
    Mobile: count izq + views der (flex). Desktop: views centro + count der (grid 1fr auto 1fr). Sin sort. */
-.plp-toolbar{display:flex!important;align-items:center;justify-content:space-between!important;gap:16px;padding:8px 16px}
+.plp-toolbar{display:flex!important;width:100%;align-items:center;justify-content:space-between!important;gap:16px;padding:8px 16px}
 .plp-toolbar-count{font:400 12px/1 "Lato",sans-serif;color:#000;white-space:nowrap}
-.plp-toolbar-views{display:flex;align-items:center;gap:16px}
+.plp-toolbar-views{display:flex;align-items:center;gap:16px;margin-left:auto}
 .plp-view-btn{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;padding:0;border:0;background:none;color:#8f8f8f;cursor:pointer;transition:color .2s ease}
 .plp-view-btn svg{width:18px;height:18px;display:block}
 .plp-view-btn.active{color:#000}
