@@ -3549,3 +3549,11 @@ body .plp-filter-cta{z-index:40!important}
 .plp-grid-loader.is-hidden{opacity:0;pointer-events:none}
 .plp-grid-loader-mark{position:absolute;left:50%;top:clamp(100px,24vh,260px);transform:translateX(-50%);width:108px;height:94px;display:block;animation:kvGridLoaderPulse 1.2s ease-in-out infinite}
 @keyframes kvGridLoaderPulse{0%,100%{opacity:1}50%{opacity:.35}}
+
+/* PLP grilla desktop: 32px a los costados hasta el borde de la ventana (venía ~46 por el container "page").
+   Full-width + 32px gutter, alineado con las pills. Toolbar sin doble-padding (count a 32). Mobile sin cambios. */
+@media (min-width:768px){
+  .section-main-products-grid>.container{max-width:none!important;width:100%!important;margin:0!important;padding-left:32px!important;padding-right:32px!important}
+  .section-main-products-grid .plp-toolbar{padding-left:0!important;padding-right:0!important}
+  .section-main-products-grid .plp-toolbar-count{right:0!important}
+}
