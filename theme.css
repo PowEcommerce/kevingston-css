@@ -3606,3 +3606,9 @@ body.template-search .js-product-table.plp-compact-m .product-item-information{p
 /* Vista compacta: card cuadrada con altura DEFINIDA (aspect-ratio) → mata el overshoot de max-content de la fila */
 .js-product-table.plp-compact-d .product-item,
 .js-product-table.plp-compact-m .product-item{aspect-ratio:1/1!important;overflow:hidden}
+
+/* Vista compacta: anular el grid-template-rows explícito del theme (232px) con especificidad alta */
+body.template-category .products-grid .js-product-table.plp-compact-d,
+body.template-category .products-grid .js-product-table.plp-compact-m,
+body.template-search .products-grid .js-product-table.plp-compact-d,
+body.template-search .products-grid .js-product-table.plp-compact-m{grid-template-rows:none!important;grid-auto-rows:auto!important}
