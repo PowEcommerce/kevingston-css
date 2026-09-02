@@ -3541,6 +3541,11 @@ body.template-search .page-header .breadcrumbs .separator{display:none}
 #modal-filters .filters-applied-heading,
 #modal-filters .filters-desktop-heading{display:none}
 
+/* 09 · Filtros SOLO en el drawer (der), nunca sidebar izquierdo (Figma desktop + búsqueda).
+   El theme nativo ya lo oculta en categoría (template-category); esto lo cubre también en
+   búsqueda (template-search), donde salía a la izquierda. El drawer se abre con el CTA flotante. */
+.section-main-products-grid .filters-controls-content{display:none!important}
+
 
 /* ===================== 07b · Animación panel de filtros (doc animaciones 01 / M01 / 02) ===================== */
 /* PANEL: entra/sale con translateX (lo setea el theme via modal-md-docked-right / modal-right), SIN fade.
