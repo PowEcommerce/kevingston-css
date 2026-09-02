@@ -3612,3 +3612,8 @@ body.template-category .products-grid .js-product-table.plp-compact-d,
 body.template-category .products-grid .js-product-table.plp-compact-m,
 body.template-search .products-grid .js-product-table.plp-compact-d,
 body.template-search .products-grid .js-product-table.plp-compact-m{grid-template-rows:none!important;grid-auto-rows:auto!important}
+
+/* QA Footer: tipografía del menú a 12px (desktop + mobile) */
+.section-footer .footer-menu-title,.footer-content .footer-menu-title,
+.section-footer .footer-menu-list,.footer-content .footer-menu-list,
+.section-footer .footer-menu-list a,.footer-content .footer-menu-list a{font-size:12px!important}
