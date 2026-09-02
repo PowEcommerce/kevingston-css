@@ -12,7 +12,14 @@ body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
 /* Listas en contenido de usuario: interlineado 18px, sin margen inferior */
 .user-content ul li,.user-content ol li{line-height:18px!important;margin-bottom:0!important}
 
-#ns-section-top_banner{display:none!important}
+/* 00 · Top banner cross-categoría (Figma 3995-32353 = bar ~60px). Antes lo ocultábamos por
+   estar VACÍO; el cliente ya subió imagen → visible. El aspect custom (24:1 desktop / 6:1
+   mobile) NO rinde vía el var nativo (padding-top queda 0) → padding-hack explícito como
+   #ns-section-facilitators / #ns-section-shop_the_look. 100/24≈4.17% (=60px@1440) / 100/6≈16.67%. */
+#ns-section-top_banner .banner-image-container-cropped-custom{padding-bottom:16.67%!important}
+@media (min-width:768px){
+  #ns-section-top_banner .banner-image-container-cropped-custom{padding-bottom:4.17%!important}
+}
 
 /* Búsqueda SIN RESULTADOS -> hero de error (Figma 3572-32152). El JS agrega   */
 /* body.kv-search-empty-on + inyecta .kv-search-empty; se oculta lo nativo.     */
