@@ -3641,3 +3641,9 @@ body.template-search .products-grid .js-product-table.plp-compact-m{grid-templat
 .f2tn-auth-ov .kv-login-body .has-error input,
 .f2tn-auth-ov .kv-login-body .field-error input,
 body[class*="template-account"] input:user-invalid{border-color:#cc0000!important}
+
+/* QA Shop the Look: recuadro CENTRADO respecto al punto y por debajo (no a der/izq) + SIN pico.
+   Si el punto está muy abajo (kv-hs-up) el recuadro va arriba para no cortarse (mobile). */
+.kv-hotspot-card{left:50%!important;right:auto!important;top:calc(100% + 14px)!important;bottom:auto!important;transform:translateX(-50%)!important}
+.kv-hotspot.kv-hs-up .kv-hotspot-card{top:auto!important;bottom:calc(100% + 14px)!important}
+.kv-hotspot-card::before{display:none!important}
