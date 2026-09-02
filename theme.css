@@ -3099,13 +3099,14 @@ body.template-account-login .login-form-section .login-password-help-link.btn-li
    ACTIVO: el punto blanco CRECE a ⌀29px (r=14.37), el central queda ⌀8px, y
    aparece el HALO ⌀48px blanco 20% detrás. El central es ::before de tamaño fijo,
    así que no escala aunque crezca el dot. */
-.kv-hotspot-dot{display:block;width:24px;height:24px;border-radius:50%;background:#fff;border:0;padding:0;cursor:pointer;position:relative;z-index:1;box-shadow:0 2px 8px rgba(0,0,0,.28);transition:width .3s cubic-bezier(.22,1,.36,1),height .3s cubic-bezier(.22,1,.36,1)}
+.kv-hotspot-dot{display:block;width:24px;height:24px;border-radius:50%;background:#fff;border:0;padding:0;cursor:pointer;position:relative;z-index:1;box-shadow:0 2px 8px rgba(0,0,0,.28);transition:width .6s ease-out,height .6s ease-out}
 .kv-hotspot.open .kv-hotspot-dot{width:29px;height:29px}
 .kv-hotspot-dot::before{content:"";position:absolute;top:50%;left:50%;width:8px;height:8px;border-radius:50%;background:#686560;transform:translate(-50%,-50%)}
 /* Halo detrás del dot (::before del contenedor → se pinta antes que el botón).
-   Entra escalando+fundiéndose una vez y SE QUEDA (sin pulse/loop). */
-.kv-hotspot::before{content:"";position:absolute;top:50%;left:50%;width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.2);transform:translate(-50%,-50%) scale(.5);opacity:0;pointer-events:none;transition:opacity .3s ease,transform .3s cubic-bezier(.22,1,.36,1)}
-.kv-hotspot.open::before{opacity:1;transform:translate(-50%,-50%) scale(1)}
+   Spec prototipo Figma: Animation=Dissolve, Easing=Ease out, Duration=600ms →
+   FUNDIDO PURO por opacidad (sin escala), 600ms ease-out. Aparece y SE QUEDA. */
+.kv-hotspot::before{content:"";position:absolute;top:50%;left:50%;width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.2);transform:translate(-50%,-50%);opacity:0;pointer-events:none;transition:opacity .6s ease-out}
+.kv-hotspot.open::before{opacity:1}
 /* Card (popup del producto) — a la derecha del dot por defecto */
 .kv-hotspot-card{position:absolute;left:calc(100% + 14px);top:50%;transform:translateY(-50%);width:280px;max-width:74vw;background:#fff;border-radius:8px;box-shadow:0 6px 24px rgba(0,0,0,.18);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .2s ease,visibility .2s ease;z-index:5}
 .kv-hotspot.open .kv-hotspot-card{opacity:1;visibility:visible;pointer-events:auto}
