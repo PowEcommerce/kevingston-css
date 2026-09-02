@@ -3666,3 +3666,14 @@ body[class*="template-account"] input:user-invalid{border-color:#cc0000!importan
 .f2tn-auth-ov textarea.kv-input-error,
 .kv-login-body input.kv-input-error,
 body[class*="template-account"] input.kv-input-error{border-color:#cc0000!important}
+
+/* QA botón disabled — basado en tokens del kit (disabled = #8f8f8f). Aplica a modales de cuenta.
+   NOTA: el nodo 959-17361 sólo trae el legend; confirmar el diseño exacto contra los botones del kit. */
+.f2tn-auth-ov .btn:disabled,.f2tn-auth-ov .btn[disabled],
+.f2tn-auth-ov button[type="submit"]:disabled,.f2tn-auth-ov button[type="submit"][disabled],
+.f2tn-auth-ov .btn.is-disabled{
+  background:#e6e6e6!important;color:#8f8f8f!important;border-color:#e6e6e6!important;
+  cursor:not-allowed;box-shadow:none!important;opacity:1!important}
+.f2tn-auth-ov .btn-tertiary:disabled,.f2tn-auth-ov .btn-outline:disabled,
+.f2tn-auth-ov .btn-secondary:disabled{
+  background:transparent!important;border:1px solid #8f8f8f!important;color:#8f8f8f!important}
