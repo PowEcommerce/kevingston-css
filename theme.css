@@ -3631,3 +3631,13 @@ body.template-search .products-grid .js-product-table.plp-compact-m{grid-templat
 .footer-newsletter-segment input[type="checkbox"]:checked::after{transform:scale(1)}
 .footer-newsletter-segment input[type="checkbox"]:checked{background:transparent!important}
 .footer-newsletter-segment span{font:400 12px/1 "Lato",sans-serif;color:#000}
+
+/* QA modales: input en error -> el trazo del recuadro también se pone rojo (además del texto) */
+.f2tn-auth-ov .kv-login-body input:user-invalid,
+.f2tn-auth-ov .kv-login-body input.error,
+.f2tn-auth-ov .kv-login-body input.has-error,
+.f2tn-auth-ov .kv-login-body input.is-invalid,
+.f2tn-auth-ov .kv-login-body input[aria-invalid="true"],
+.f2tn-auth-ov .kv-login-body .has-error input,
+.f2tn-auth-ov .kv-login-body .field-error input,
+body[class*="template-account"] input:user-invalid{border-color:#cc0000!important}
