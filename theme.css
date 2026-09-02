@@ -3306,11 +3306,13 @@ body.template-category .featured-categories-section .category-item-text{font-siz
 .js-product-table.plp-compact-d .product-item-name,
 .js-product-table.plp-compact-m .product-item-name{padding-right:0}
 
-/* 03 toolbar mobile: mayor especificidad para ganarle al CSS nativo — count izq / views der */
+/* 03 toolbar mobile (Figma 2350:21863): count IZQUIERDA / views DERECHA pegado al borde.
+   El views quedaba position:absolute (regla nativa) → lo forzamos a static para que vuelva
+   al flujo flex y margin-left:auto lo empuje a la derecha. Mayor especificidad + !important. */
 @media (max-width:767px){
   .section-main-products-grid .plp-toolbar{display:flex!important;justify-content:space-between!important;align-items:center!important;padding:8px 0!important;gap:8px!important;width:100%!important}
-  .section-main-products-grid .plp-toolbar-count{position:static!important;font-size:12px}
-  .section-main-products-grid .plp-toolbar-views{margin-left:auto!important}
+  .section-main-products-grid .plp-toolbar-count{position:static!important;margin:0!important;font-size:12px}
+  .section-main-products-grid .plp-toolbar .plp-toolbar-views{position:static!important;top:auto!important;left:auto!important;right:auto!important;transform:none!important;margin-left:auto!important;margin-right:0!important}
 }
 
 /* 03 · Card de producto PLP — Figma new-card 4947:29479. Scopeado a category/search (no toca home).
