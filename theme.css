@@ -3659,3 +3659,10 @@ body[class*="template-account"] input:user-invalid{border-color:#cc0000!importan
 
 /* QA shop the look: el halo del punto aparece al HOVER (animado) y queda visible al click (.open) */
 .kv-hotspot:hover::before{opacity:1;transform:translate(-50%,-50%) scale(1)}
+
+/* QA modales: input marcado por JS (initModalInputError) al submitear con error -> trazo rojo */
+.f2tn-auth-ov input.kv-input-error,
+.f2tn-auth-ov select.kv-input-error,
+.f2tn-auth-ov textarea.kv-input-error,
+.kv-login-body input.kv-input-error,
+body[class*="template-account"] input.kv-input-error{border-color:#cc0000!important}
