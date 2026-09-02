@@ -3677,3 +3677,14 @@ body[class*="template-account"] input.kv-input-error{border-color:#cc0000!import
 .f2tn-auth-ov .btn-tertiary:disabled,.f2tn-auth-ov .btn-outline:disabled,
 .f2tn-auth-ov .btn-secondary:disabled{
   background:transparent!important;border:1px solid #8f8f8f!important;color:#8f8f8f!important}
+
+/* QA botón disabled — colores EXACTOS del kit Figma 959-17465: lleno bg #cccccc + texto #8f8f8f; outline borde+texto #8f8f8f */
+.f2tn-auth-ov .btn:disabled,.f2tn-auth-ov .btn[disabled],
+.f2tn-auth-ov button[type="submit"]:disabled,.f2tn-auth-ov button[type="submit"][disabled],
+.f2tn-auth-ov .btn.is-disabled,
+.plp-filters-apply.is-disabled{
+  background:#cccccc!important;color:#8f8f8f!important;border-color:#cccccc!important;
+  cursor:not-allowed;box-shadow:none!important;opacity:1!important}
+.f2tn-auth-ov .btn-tertiary:disabled,.f2tn-auth-ov .btn-outline:disabled,
+.plp-filters-clear.is-disabled{
+  background:transparent!important;border:1px solid #8f8f8f!important;color:#8f8f8f!important;opacity:1!important}
