@@ -3647,3 +3647,12 @@ body[class*="template-account"] input:user-invalid{border-color:#cc0000!importan
 .kv-hotspot-card{left:50%!important;right:auto!important;top:calc(100% + 14px)!important;bottom:auto!important;transform:translateX(-50%)!important}
 .kv-hotspot.kv-hs-up .kv-hotspot-card{top:auto!important;bottom:calc(100% + 14px)!important}
 .kv-hotspot-card::before{display:none!important}
+
+/* QA botón link (shop the look + modales): subrayado despegado del texto + hover mantiene negro (no gris) */
+.kv-hotspot-cta,
+#ns-section-shop_the_look_header .btn-tertiary{text-underline-offset:3px!important}
+.kv-hotspot-cta:hover,
+.kv-hotspot-card-in:hover .kv-hotspot-cta,
+.kv-hotspot-card-in:hover .kv-hotspot-name,
+#ns-section-shop_the_look_header .btn-tertiary:hover,
+.f2tn-auth-ov .kv-login-body a:hover{color:#000!important;text-decoration:underline!important}
