@@ -3617,3 +3617,17 @@ body.template-search .products-grid .js-product-table.plp-compact-m{grid-templat
 .section-footer .footer-menu-title,.footer-content .footer-menu-title,
 .section-footer .footer-menu-list,.footer-content .footer-menu-list,
 .section-footer .footer-menu-list a,.footer-content .footer-menu-list a{font-size:12px!important}
+
+/* QA Footer: checkbox del newsletter idéntico a Figma — recuadro con borde negro (sin fondo blanco),
+   al chequear aparece un cuadrado negro más chico adentro (animación de escala). No usa checkmark. */
+.footer-newsletter-segment{display:inline-flex;align-items:center;gap:8px;cursor:pointer}
+.footer-newsletter-segment input[type="checkbox"]{
+  appearance:none;-webkit-appearance:none;-moz-appearance:none;margin:0;flex:none;
+  width:16px;height:16px;border:1px solid #000;border-radius:2px;background:transparent!important;
+  display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
+.footer-newsletter-segment input[type="checkbox"]::after{
+  content:"";width:8px;height:8px;background:#000;border-radius:1px;
+  transform:scale(0);transition:transform .15s ease-out}
+.footer-newsletter-segment input[type="checkbox"]:checked::after{transform:scale(1)}
+.footer-newsletter-segment input[type="checkbox"]:checked{background:transparent!important}
+.footer-newsletter-segment span{font:400 12px/1 "Lato",sans-serif;color:#000}
